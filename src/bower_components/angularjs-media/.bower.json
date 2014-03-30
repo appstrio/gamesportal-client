@@ -1,0 +1,36 @@
+{
+  "name": "angularjs-media",
+  "homepage": "https://github.com/angleman/angularjs-media",
+  "description": "AngularJS directives for simply embed media player such as flash, twitch, justin.",
+  "main": "app/lib/angularjs.media.directives.js",
+  "keywords": [
+    "angular",
+    "angularjs",
+    "youtube",
+    "twitch",
+    "justin",
+    "twitch",
+    "flash"
+  ],
+  "dependencies": {
+    "angular": "~1.0.7"
+  },
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "_release": "e7bcd10366",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "e7bcd10366b58d9cac8d40e7ea807ed551223976"
+  },
+  "_source": "git://github.com/angleman/angularjs-media.git",
+  "_target": "*",
+  "_originalSource": "angularjs-media",
+  "_direct": true
+}

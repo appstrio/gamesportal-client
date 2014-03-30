@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="google" content="notranslate">
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400" rel="stylesheet" type="text/css">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="./js/vendor/jquery.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script src="./js/vendor/angular.min.js"></script>
+    <script src="./js/vendor/angular-ui-router.js"></script>
+    <script src="./js/vendor/angular-sanitize.js"></script>
+    <script src="./js/vendor/async.js"></script>
+    <script src="./js/vendor/masonry.pkgd.min.js"></script>
+    <script src="./js/imageLoaded.js"></script>
+    <script src="./js/vendor/angular-masonry.js"></script>
+    <script src="./js/vendor/firebase.js"></script>
+    <script src="./js/vendor/firebase-simple-login.js"></script>
+    <script src="./js/vendor/angularjs.media.directives.js"></script>
+    <script src="./js/vendor/ng-infinite-scroll.min.js"></script>
+    <script src="./js/vendor/underscore-min.js"></script><!-- build:js(src) ./js/app.min.js -->
+    <script src="./js/common/analytics.js"></script>
+    <script src="./js/settings/constants.js"></script>
+    <script src="./js/main/counter.js"></script>
+    <script src="./js/main/main.js"></script>
+    <script src="./js/main/win.js"></script>
+    <script src="./js/main/leaderboard.js"></script>
+    <script src="./js/main/games.js"></script>
+    <script src="./js/main/firebaseService.js"></script>
+    <script src="./js/app.js"></script><!-- endbuild -->
+    <title>GamesPortal</title>
+  </head>
+  <body ng-controller="MainCtrl"></body>
+  <header>
+    <div ng-click="goHome()" class="logo"><img src="./img/bizibizi.logo.png"></div>
+    <div ng-show="userData &amp;&amp; !userData.user" class="user-info-guest"><span class="glyphicon glyphicon-user"></span><span class="guest">Guest</span></div>
+    <div ng-show="userData.user" class="user-info"><span class="profile-pic"><img ng-src="{{userData.user.info.profilePic}}"></span><span class="name">{{userData.user.info.displayName || userData.user.info.name}}</span></div>
+    <div ng-show="userData &amp;&amp; userData.user" class="coins"><span class="coin-img"><img src="./img/coins.png"></span><span aio-counter="{{userData.user.points}}" class="amount"></span></div>
+    <div ng-show="userData &amp;&amp; !userData.user" class="coins"><span class="coin-img"><img src="./img/coins.png"></span><span class="amount">{{10000}}</span></div>
+    <div ng-show="userData.user" class="cup"><a href="#" ng-click="openMainOverlay('LEADERBOARD')" class="cup-img"><img src="./img/cup.png"></a></div>
+    <div ng-show="userData &amp;&amp; !userData.user" class="join">
+      <button type="button" ng-click="login()" class="btn btn-success">CONNECT</button>
+    </div><span class="right-part pull-right">
+      <div ng-show="userData.user" class="logout">
+        <button type="button" ng-click="logout()" class="btn btn-success">LOGOUT</button>
+      </div></span>
+  </header>
+  <div ui-view class="main"></div>
+  <div ng-if="overlayID=='WIN_COINS'" ng-click="closeOverlay('WIN_COINS')" ng-controller="WinCtrl" class="modal-overlay-fade win-coins">
+    <div class="modal-dialog">
+      <h1>Win Coins!</h1>
+    </div>
+  </div>
+  <div ng-if="overlayID=='LEADERBOARD'" ng-click="closeOverlay('LEADERBOARD')" ng-controller="LeaderboardCtrl" class="modal-overlay-fade leaderboard">
+    <div class="modal-dialog">
+      <h1>Leaderboard</h1>
+      <table>
+        <tr ng-repeat="user in leaderboardData.value">
+          <td class="profile-pic"><img ng-src="{{user.profilePic}}" class="profile-pic"></td>
+          <td class="name">{{user.displayName}}</td>
+          <td class="points">{{user.points | number}}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</html>

@@ -1,0 +1,105 @@
+.modal-overlay-fade{
+  background: rgba(0,0,0,0.75);
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  z-index:100000;
+  overflow:hidden;
+  .modal-dialog{
+    width:600px;
+    height:420px;
+    background: url(../img/bg1.png) repeat;
+    border-radius: 12px;
+    border:5px white solid;
+    margin: 150px auto;
+    h1{
+      font-size: 45px;
+      text-align: center;
+      color:white;
+      font-weight:bold;
+    }
+  }
+}
+
+
+.modal-overlay-fade.premium-game-modal{
+  .modal-dialog{
+    .price-wrapper{
+      margin: 22px auto;
+      text-align: center;
+      .price{
+        margin-left:20px;
+        font-size: 38px;
+        font-weight: bold;
+        color:white;
+      }
+      img{
+
+      }
+    }
+    .game-wrapper{
+      h2.game-name{
+        text-align: center;
+        color: rgb(129, 40, 40);
+        font-weight: bold;
+      }
+      .game-thumbnail{
+        width:100px;
+        height:100px;
+        margin:0 auto;
+        img{
+          width:100px;
+          height:100px;
+
+        }
+      }
+    }
+    .unlock-button-wrapper{
+      text-align: center;
+    }
+    .no-funds{
+      text-align: center;
+      h3{
+        font-size:14px;
+      }
+    }
+  }
+}
+
+
+
+.modal-overlay-fade.leaderboard{
+  .modal-dialog{
+    table{
+      margin:0 auto;
+      width:400px;
+      list-style: none;
+      tr{
+        height:45px;
+        td.profile-pic{
+          img{
+            width:30px;
+            height:30px;
+            border-radius: 8px;
+          }
+        }
+        td.name{
+          font-size:20px;
+
+        }
+
+        td.points{
+          font-size:20px;
+
+        }
+
+        &:first-child{
+          color: rgb(165, 22, 22);
+        }
+
+      }
+    }
+  }
+}

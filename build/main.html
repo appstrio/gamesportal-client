@@ -1,0 +1,10 @@
+
+<div masonry="masonryOptions" load-images="false" infinite-scroll="loadMore()" class="masonry-container">
+  <div ng-repeat="game in games" ng-class="{premium : (game.premium), new : (game.new), hot : (game.hot), promoted : (game.promoted &amp;&amp; game.largeThumbnail)}" class="div masonry-brick"><a ng-click="runGame(game, $event)">
+      <div class="badge-overlay new-overlay"></div>
+      <div class="badge-overlay hot-overlay"></div>
+      <div class="badge-overlay premium-overlay"></div><img ng-src="{{game.largeThumbnail.url || game.thumbnails[0].url}}" class="game-thumbnail"/>
+      <div class="name">
+        <div>{{game.name}} {{game.priority}}</div>
+      </div></a></div>
+</div>

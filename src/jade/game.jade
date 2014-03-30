@@ -1,0 +1,61 @@
+.game-wrppaer
+    .top-ad-unit
+        img(src="./img/728x90.png")
+
+    .game-embed-container
+        .header
+            .back-button
+                a(type="button",class="btn btn-warning", ui-sref="main")
+                    i(class="glyphicon glyphicon-chevron-left")
+            .game-name
+                {{game.name}}
+        .main
+            .left
+                .left-ad-unit
+                    img(src="./img/160x600.png")
+            .middle
+
+                .embedding(ng-style="{width : game.width + 'px', height : game.height + 'px'}")
+                    div.loader
+                    div.include(ng-include="'embed-' + game.source + '.html'",ng-if="game")
+            .right
+                .right-ad-unit
+                    img(src="./img/160x600.png")
+        .bottom
+            .more-games
+                .game(ng-repeat="game in moreGames")
+                    a(ui-sref="game({gameID: game.id})")
+                        img(class="game-thumbnail", ng-src="{{game.thumbnails[0].url}}")
+                        div.name
+                            div {{game.name}}
+
+
+    .bottom-ad-unit
+        img(src="./img/728x90.png")
+
+.modal-overlay-fade.premium-game-modal(ng-if="overlayUnlockGame")
+    .modal-dialog
+        h1 Unlock Premium Game
+        .game-wrapper
+            h2.game-name {{lockedGame.name}}
+            div.game-thumbnail
+                img(ng-src="{{lockedGame.thumbnail.url}}")
+        .price-wrapper
+            img(src="./img/coins.png")
+            span.price {{lockedGame.price | number}} COINS
+
+        div.unlock-button-wrapper(ng-show="userData.user.points >= lockedGame.price")
+            button(type="button", class="btn btn-warning", ng-click="goHome()") Go Back
+            button(type="button", class="btn btn-success", ng-click="unlockGame(lockedGame)") Unlock
+
+        div.no-funds(ng-show="userData.user && userData.user.points < lockedGame.price")
+            h3 You don't have enough coins
+            button(type="button", class="btn btn-warning", ng-click="goHome()") Go Back
+            button(type="button", class="btn btn-success", ng-click="goHome('WIN_COINS')") Win Coins
+        div.no-funds(ng-show="!userData.user")
+            h3 Please connect in order to unlock this game
+            button(type="button", class="btn btn-warning", ng-click="goHome()") Go Back
+            button(type="button", class="btn btn-success", ng-click="login()") Connect
+
+
+

@@ -1,0 +1,91 @@
+
+<div ng-show="game" class="edit-game-wrapper container">
+  <h1>({{gameIndex}}) Edit Game :<strong> {{game.name}}</strong></h1>
+  <div ng-repeat="thumb in game.thumbnails" class="img">
+    <div style="text-align:center">{{thumb.width}} x {{thumb.height}}</div>
+    <div style="text-align:center"><img ng-src="{{thumb.url}}"/></div>
+  </div>
+  <div style="text-align:center;margin:10px;"></div>
+  <div ng-style="{width : game.width + 'px', height : game.height + 'px', margin: '10px auto'}" ng-if="playTheGame" class="embedding">
+    <div ng-include="'embed-' + game.source + '.html'" ng-if="game" class="include"></div>
+  </div>
+  <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label>
+          <input type="checkbox" ng-model="game.premium"/> Is Premium ?
+        </label>
+      </div>
+      <div ng-show="game.premium" class="form-group">
+        <label for="">Price</label>
+        <input type="text" ng-model="game.price" class="form-control"/>
+      </div>
+      <div class="form-group">
+        <label>
+          <input type="checkbox" ng-model="game.hot"/> Is HOT ?
+        </label>
+      </div>
+      <div class="form-group">
+        <label for="">Priority</label>
+        <input type="text" ng-model="game.priority" class="form-control"/><span>The lowest the better<br/>(good game < 100, bad game > 1000)</span>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <p><b>Category :</b><span> {{game.category}}</span></p>
+      <p><b>Author :</b><span> {{game.author}}</span></p>
+    </div>
+  </div>
+  <div style="text-align:center;margin:20px 0;" class="row">
+    <div style="text-align:center;" class="col-md-6 col-md-offset-2">
+      <button ng-click="playTheGame=true" ng-show="!playTheGame" class="btn btn-lg btn-default">Show Game</button>
+      <button ng-click="nextAndSave()" class="btn btn-lg btn-success">Next & Save</button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="">ID</label>
+        <input type="text" ng-model="game.id" class="form-control"/>
+      </div>
+      <div class="form-group">
+        <label for="">UUID</label>
+        <input type="text" ng-model="game.uuid" class="form-control"/>
+      </div>
+      <div class="form-group">
+        <label for="">Name</label>
+        <input type="text" ng-model="game.name" class="form-control"/>
+      </div>
+      <div class="form-group">
+        <label for="">Source</label>
+        <input type="text" ng-model="game.source" class="form-control"/>
+      </div>
+      <div class="form-group">
+        <label for="">Category</label>
+        <input type="text" ng-model="game.category" class="form-control"/>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="">Instructions</label>
+        <textarea type="text" ng-model="game.instructions" rows="3" class="form-control"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="">Description</label>
+        <textarea type="text" ng-model="game.description" rows="3" class="form-control"></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4 col-md-offset-4">
+      <button ng-click="previousGame()" class="btn btn-danger">Previous</button>
+      <button ng-click="nextAndSave()" class="btn btn-success">Next & Save</button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <p>Raw Data</p>
+      <textarea rows="8" class="form-control">{{game}}</textarea>
+    </div>
+  </div>
+</div>

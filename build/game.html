@@ -1,0 +1,57 @@
+
+<div class="game-wrppaer">
+  <div class="top-ad-unit"><img src="./img/728x90.png"/></div>
+  <div class="game-embed-container">
+    <div class="header">
+      <div class="back-button"><a type="button" ui-sref="main" class="btn btn-warning"><i class="glyphicon glyphicon-chevron-left"></i></a></div>
+      <div class="game-name">{{game.name}}</div>
+    </div>
+    <div class="main">
+      <div class="left">
+        <div class="left-ad-unit"><img src="./img/160x600.png"/></div>
+      </div>
+      <div class="middle">
+        <div ng-style="{width : game.width + 'px', height : game.height + 'px'}" class="embedding">
+          <div class="loader"></div>
+          <div ng-include="'embed-' + game.source + '.html'" ng-if="game" class="include"></div>
+        </div>
+      </div>
+      <div class="right">
+        <div class="right-ad-unit"><img src="./img/160x600.png"/></div>
+      </div>
+    </div>
+    <div class="bottom">
+      <div class="more-games">
+        <div ng-repeat="game in moreGames" class="game"><a ui-sref="game({gameID: game.id})"><img ng-src="{{game.thumbnails[0].url}}" class="game-thumbnail"/>
+            <div class="name">
+              <div>{{game.name}}</div>
+            </div></a></div>
+      </div>
+    </div>
+  </div>
+  <div class="bottom-ad-unit"><img src="./img/728x90.png"/></div>
+</div>
+<div ng-if="overlayUnlockGame" class="modal-overlay-fade premium-game-modal">
+  <div class="modal-dialog">
+    <h1>Unlock Premium Game</h1>
+    <div class="game-wrapper">
+      <h2 class="game-name">{{lockedGame.name}}</h2>
+      <div class="game-thumbnail"><img ng-src="{{lockedGame.thumbnail.url}}"/></div>
+    </div>
+    <div class="price-wrapper"><img src="./img/coins.png"/><span class="price">{{lockedGame.price | number}} COINS</span></div>
+    <div ng-show="userData.user.points &gt;= lockedGame.price" class="unlock-button-wrapper">
+      <button type="button" ng-click="goHome()" class="btn btn-warning">Go Back</button>
+      <button type="button" ng-click="unlockGame(lockedGame)" class="btn btn-success">Unlock</button>
+    </div>
+    <div ng-show="userData.user &amp;&amp; userData.user.points &lt; lockedGame.price" class="no-funds">
+      <h3>You don't have enough coins</h3>
+      <button type="button" ng-click="goHome()" class="btn btn-warning">Go Back</button>
+      <button type="button" ng-click="goHome('WIN_COINS')" class="btn btn-success">Win Coins</button>
+    </div>
+    <div ng-show="!userData.user" class="no-funds">
+      <h3>Please connect in order to unlock this game</h3>
+      <button type="button" ng-click="goHome()" class="btn btn-warning">Go Back</button>
+      <button type="button" ng-click="login()" class="btn btn-success">Connect</button>
+    </div>
+  </div>
+</div>
