@@ -193,10 +193,10 @@ header{
       .badge-overlay{
         position:absolute;
         top:0;left:0;
-        width:100%;
-        height:100%;
         background-size:contain;
         cursor:pointer;
+        color:red;
+        display: none;
       }
 
       img.game-thumbnail{
@@ -229,20 +229,21 @@ header{
     &.premium{
       .premium-overlay{
         display:block;
-        background: url(../img/premium100x100.png);
+        top:20px;
       }
     }
 
     &.new{
       .new-overlay{
         display:block;
-        background: url(../img/new100x100.png);
+        top:40px;
       }
     }
 
     &.hot{
       .hot-overlay{
         display:block;
+        top:0px;
         background: url(../img/hot100x100.png);
       }
     }

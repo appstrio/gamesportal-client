@@ -139,7 +139,7 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http','Firebase', func
                     if(access){
                         // access granted - play game
                         $scope.game = game;
-                        GamesHelpers.raisePoints(game, game.premium ? pointsPerGame*2 : pointsPerGame);
+                        GamesHelpers.raisePointsForGame(game);
                     }else{
                         // no access - show overlay
                         $scope.lockedGame = game;
@@ -256,7 +256,7 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http','Firebase', func
 
         }
 
-    ]).factory('GamesHelpers', ['Games','Firebase', function(Games, Firebase){
+    ]).factory('GamesHelpers', ['Games','Firebase','Config', function(Games, Firebase, Config){
 
 
 
@@ -321,15 +321,35 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http','Firebase', func
         /**
          * Raise user's points for playing a game
          */
-        var raisePoints = function(game, amount){
+        var raisePointsForGame = function(game, options){
+            var amount = 0;
+
+            if(options.specialReward){
+                amount = Config.POINTS[options.specialReward];
+            }else if(game.premium){
+                amount = Config.POINTS.PLAY_PREMIUM_GAME;
+            }else if(game.hot){
+                amount = Config.POINTS.PLAY_HOT_GAME;
+            }else if(game.new){
+                amount = Config.POINTS.PLAY_NEW_GAME;
+            }else{
+                amount = CONFIG.POINTS.PLAY_REGULAR_GAME;
+            }
+
+            if(options.boost){
+                amount = amount * parseInt(Config.POINTS.BOOST_FACTOR)
+            }
+
             Firebase.raisePoints(amount);
         };
 
         return {
-            findGameById : findGameById,
-            findNextGameById : findNextGameById,
-            findPreviousGameById : findPreviousGameById,
-            raisePoints : raisePoints,
-            getGameIndex : getGameIndex
-        }
+                        findGameById : findGameById,
+                    findNextGameById : findNextGameById,
+                findPreviousGameById : findPreviousGameById,
+                  raisePointsForGame : raisePointsForGame,
+                        getGameIndex : getGameIndex
+        };
+
+
     }]);

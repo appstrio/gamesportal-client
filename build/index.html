@@ -8,6 +8,7 @@
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
+    <link href="https://chrome.google.com/webstore/detail/heplncibihkggagnaaoigdhkgjmmllme" rel="chrome-webstore-item">
     <script src="./js/vendor/jquery.min.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
     <script src="./js/vendor/angular.min.js"></script>
@@ -26,10 +27,14 @@
     <script src="./js/settings/constants.js"></script>
     <script src="./js/main/counter.js"></script>
     <script src="./js/main/main.js"></script>
-    <script src="./js/main/win.js"></script>
     <script src="./js/main/leaderboard.js"></script>
     <script src="./js/main/games.js"></script>
-    <script src="./js/main/firebaseService.js"></script>
+    <script src="./js/user/win.js"></script>
+    <script src="./js/user/firebaseService.js"></script>
+    <script src="./js/user/facebookService.js"></script>
+    <script src="./js/user/chromeService.js"></script>
+    <script src="./js/config/configModule.js"></script>
+    <script src="./js/common/common.js"></script>
     <script src="./js/app.js"></script><!-- endbuild -->
     <title>GamesPortal</title>
   </head>
@@ -49,12 +54,24 @@
       </div></span>
   </header>
   <div ui-view class="main"></div>
-  <div ng-if="overlayID=='WIN_COINS'" ng-click="closeOverlay('WIN_COINS')" ng-controller="WinCtrl" class="modal-overlay-fade win-coins">
+  <div ng-if="overlayID=='WIN_COINS'" ng-controller="WinCtrl" overlay="'WIN_COINS'" class="modal-overlay-fade win-coins">
     <div class="modal-dialog">
       <h1>Win Coins!</h1>
+      <div>
+        <button ng-click="inviteFBFriends()" class="btn btn-success">Invite Friends = 50000</button>
+      </div>
+      <div>
+        <button ng-click="installChromeApp()" class="btn btn-success">Add BiziGames to Chrome = 100000</button>
+      </div>
+      <div>
+        <button class="btn btn-success">Play a Game = 10000</button>
+      </div>
+      <div>
+        <button class="btn btn-success">Install Android App = 100000</button>
+      </div>
     </div>
   </div>
-  <div ng-if="overlayID=='LEADERBOARD'" ng-click="closeOverlay('LEADERBOARD')" ng-controller="LeaderboardCtrl" class="modal-overlay-fade leaderboard">
+  <div ng-if="overlayID=='LEADERBOARD'" ng-controller="LeaderboardCtrl" overlay="'WIN_COINS'" class="modal-overlay-fade leaderboard">
     <div class="modal-dialog">
       <h1>Leaderboard</h1>
       <table>

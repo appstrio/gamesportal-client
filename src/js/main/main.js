@@ -1,13 +1,14 @@
 var mainModule = mainModule || angular.module('aio.main', []);
 
-mainModule.controller('MainCtrl', ['$scope', '$log', '$q', '$timeout', '$http', 'Firebase', 'Games', '$state', '$stateParams',
-    function ($scope, $log, $q, $timeout, $http, Firebase, Games, $state, $stateParams) {
+mainModule.controller('MainCtrl', ['$scope', '$log', '$q', '$timeout', '$http', 'Firebase', 'Games', '$state', '$stateParams', 'Facebook',
+    function ($scope, $log, $q, $timeout, $http, Firebase, Games, $state, $stateParams, Facebook) {
 
         var allGames,                       // hold all the games
             gamesPerFirstPage = 50,        // amount of games for the first page
             gamesPerPage=50,              // amount of games for load more games
             page= 0,                     //  hold current page
             loaded=false;               // whether the app was already loaded
+
 
 
 
@@ -65,7 +66,7 @@ mainModule.controller('MainCtrl', ['$scope', '$log', '$q', '$timeout', '$http', 
 
         // login user
         $scope.login = function(){
-            Firebase.login();
+            Facebook.login();
         };
 
 

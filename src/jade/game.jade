@@ -39,7 +39,7 @@
         .game-wrapper
             h2.game-name {{lockedGame.name}}
             div.game-thumbnail
-                img(ng-src="{{lockedGame.thumbnail.url}}")
+                img(ng-src="{{lockedGame.thumbnails[0].url}}")
         .price-wrapper
             img(src="./img/coins.png")
             span.price {{lockedGame.price | number}} COINS

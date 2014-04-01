@@ -36,7 +36,7 @@
     <h1>Unlock Premium Game</h1>
     <div class="game-wrapper">
       <h2 class="game-name">{{lockedGame.name}}</h2>
-      <div class="game-thumbnail"><img ng-src="{{lockedGame.thumbnail.url}}"/></div>
+      <div class="game-thumbnail"><img ng-src="{{lockedGame.thumbnails[0].url}}"/></div>
     </div>
     <div class="price-wrapper"><img src="./img/coins.png"/><span class="price">{{lockedGame.price | number}} COINS</span></div>
     <div ng-show="userData.user.points &gt;= lockedGame.price" class="unlock-button-wrapper">

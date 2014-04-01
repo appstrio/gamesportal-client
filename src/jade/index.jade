@@ -9,6 +9,8 @@ html
         link(href='//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css', rel='stylesheet')
         link(href='//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css', rel='stylesheet')
         link(href='css/style.css', rel='stylesheet')
+        link(href='https://chrome.google.com/webstore/detail/heplncibihkggagnaaoigdhkgjmmllme', rel='chrome-webstore-item')
+
         //- load vendor
         script(src='./js/vendor/jquery.min.js')
         script(src='//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js')
@@ -38,10 +40,14 @@ html
         script(src='./js/settings/constants.js')
         script(src='./js/main/counter.js')
         script(src='./js/main/main.js')
-        script(src='./js/main/win.js')
         script(src='./js/main/leaderboard.js')
         script(src='./js/main/games.js')
-        script(src='./js/main/firebaseService.js')
+        script(src='./js/user/win.js')
+        script(src='./js/user/firebaseService.js')
+        script(src='./js/user/facebookService.js')
+        script(src='./js/user/chromeService.js')
+        script(src='./js/config/configModule.js')
+        script(src='./js/common/common.js')
         script(src='./js/app.js')
         <!-- endbuild -->
 
@@ -79,10 +85,18 @@ html
 
 
 
-    .modal-overlay-fade.win-coins(ng-if="overlayID=='WIN_COINS'",ng-click="closeOverlay('WIN_COINS')", ng-controller="WinCtrl")
+    .modal-overlay-fade.win-coins(ng-if="overlayID=='WIN_COINS'", ng-controller="WinCtrl", overlay="'WIN_COINS'")
         .modal-dialog
             h1 Win Coins!
-    .modal-overlay-fade.leaderboard(ng-if="overlayID=='LEADERBOARD'",ng-click="closeOverlay('LEADERBOARD')", ng-controller="LeaderboardCtrl")
+            div
+                button.btn.btn-success(ng-click="inviteFBFriends()") Invite Friends = 50000
+            div
+                button.btn.btn-success(ng-click="installChromeApp()") Add BiziGames to Chrome = 100000
+            div
+                button.btn.btn-success Play a Game = 10000
+            div
+                button.btn.btn-success Install Android App = 100000
+    .modal-overlay-fade.leaderboard(ng-if="overlayID=='LEADERBOARD'", ng-controller="LeaderboardCtrl", overlay="'WIN_COINS'")
         .modal-dialog
             h1 Leaderboard
             table
