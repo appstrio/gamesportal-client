@@ -57,6 +57,6 @@ configModule.factory('Config', function(){
     if(isDevelopment){
        return developmentConfig();
     }else{
-       return productionConfig()();
+       return productionConfig();
     }
 });

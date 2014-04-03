@@ -15,6 +15,7 @@ winModule.controller('WinCtrl', ['$scope', 'Facebook','Win', function($scope,Fac
         Win.winChromeApp().then(function(){
             alert('success');
         }).catch(function(msg){
+                console.log('error:', msg);
                 alert('error:' + msg);
             });
     };

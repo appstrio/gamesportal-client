@@ -1,10 +1,20 @@
 var chromeModule = chromeModule || angular.module('aio.chrome', []);
 
-chromeModule.factory('Chrome', ['$rootScope','Config','$http', function($rootScope,Config,$http){
+chromeModule.factory('Chrome', ['$rootScope','Config','$http','$q', function($rootScope,Config,$http,$q){
+    var isAppInstalled, CHROME_ID;
 
-    var CHROME_ID = Config.CHOMRE_APP_ID;
+    var init = function(){
+        CHROME_ID = Config.CHROME_APP_ID;
+        checkIfAppInstalled().then(function(){
+            isAppInstalled = true;
+        }, function(){
+            isAppInstalled = false;
+        });
+    };
 
-    var isAppInstalled = function(){
+
+
+    var checkIfAppInstalled = function(){
         var newtabURL = "chrome-extension://" + CHROME_ID + "/newtab.html";
         return $http.get(newtabURL);
     };
@@ -17,25 +27,31 @@ chromeModule.factory('Chrome', ['$rootScope','Config','$http', function($rootSco
 
 
     var installApp = function(){
-        return isAppInstalled().then(function(){
-            var defer = $q.defer();
-            if(Config.IS_CHROME){
-                chrome.webstore.install(chromeAppURL(CHROME_ID), function(){
-                    defer.resolve();
-                }, function(){
-                    defer.reject();
-                });
-            }else{
-                defer.reject();
-            }
+        var defer = $q.defer();
+        if(!isAppInstalled && Config.IS_CHROME){
+            console.log(chromeAppURL(CHROME_ID));
+            chrome.webstore.install(chromeAppURL(CHROME_ID), function(){
+                defer.resolve();
+            }, function(e){
+                console.error(e);
+                defer.reject('chrome web store error');
+            });
+        }else{
+            defer.reject('not chrome or app was already installed');
+        }
 
-            return defer.promise;
-        });
+        return defer.promise;
     };
+
+    init();
+
 
     return {
 
-        isAppInstalled : isAppInstalled,
+        checkIfAppInstalled : checkIfAppInstalled,
+        isAppInstalled : function(){
+            return isAppInstalled;
+        },
         installApp : installApp
 
 
