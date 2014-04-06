@@ -15,8 +15,8 @@ body,html{
 }
 
 body{
-  background: url(../img/bg1.png) repeat;
-  padding:60px 0;
+  background: url(../img/bg.png) repeat;
+  padding:170px 0;
 }
 
 button{
@@ -24,7 +24,7 @@ button{
 }
 
 header{
-  height: 50px;
+  height: 170px;
   margin:0;
   padding:0;
   width:100%;
@@ -33,152 +33,22 @@ header{
   z-index: 10000;
   top:0;
   left:0;
-  background: #f9c667; /* Old browsers */
-  background: -moz-linear-gradient(top,  #f9c667 0%, #efa721 50%, #f79621 53%, #f79621 100%); /* FF3.6+ */
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f9c667), color-stop(50%,#efa721), color-stop(53%,#f79621), color-stop(100%,#f79621)); /* Chrome,Safari4+ */
-  background: -webkit-linear-gradient(top,  #f9c667 0%,#efa721 50%,#f79621 53%,#f79621 100%); /* Chrome10+,Safari5.1+ */
-  background: -o-linear-gradient(top,  #f9c667 0%,#efa721 50%,#f79621 53%,#f79621 100%); /* Opera 11.10+ */
-  background: -ms-linear-gradient(top,  #f9c667 0%,#efa721 50%,#f79621 53%,#f79621 100%); /* IE10+ */
-  background: linear-gradient(to bottom,  #f9c667 0%,#efa721 50%,#f79621 53%,#f79621 100%); /* W3C */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f9c667', endColorstr='#f79621',GradientType=0 ); /* IE6-9 */
-  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.4);
   > div{
     float:left;
-    border-left: 1px solid rgba(233, 233, 233, 0.57);
-    border-right: 1px solid rgba(94, 94, 94, 0.46);
-    &:first-child{
-      border-left:0;
-    }
-    &:last-child{
-      border-right: 0;
-    }
   }
-
   .logo{
     height: 100%;
     padding: 8px 20px;
     img{
-      height: 35px;
-    }
-
-  }
-
-  .user-info{
-    height: 100%;
-    padding: 8px 26px;
-    span.profile-pic{
-      width:30px;height:30px;
-      margin-right: 11px;
-      border-radius: 6px;
-      overflow: hidden;
-      img{
-        width: 30px;
-        height: 30px;
-        border-radius: 6px;
-        vertical-align: top;
-      }
-    }
-    span.name{
-      color: white;
-      font-size: 20px;
-      line-height: 31px;
     }
   }
-  .user-info-guest{
-    height: 100%;
-    padding: 8px 26px;
-    span.glyphicon-user{
-      color: white;
-      font-size: 20px;
-      margin-right: 11px;
-      line-height: 31px;
-    }
-    span.guest{
-      color: white;
-      font-size: 20px;
-      line-height: 31px;
-    }
-
-  }
-
   .coins{
-    height: 100%;
-    padding: 8px 26px;
-    span.coin-img{
-      height: 23px;
-      display: inline-block;
-      float: left;
-      margin-right: 10px;
-      margin-top: 4px;
-      img{
-        height: 28px;
-        display: inline-block;
-        float: left;
-        margin-right: 10px;
-        margin-top: 2px;
-      }
-    }
-
-    span.amount{
-        color:white;
-        font-size: 24px;
-        font-weight: bold;
-        &.counting{
-          /* Chrome, Safari, Opera */
-          -webkit-animation-name: counting;
-          -webkit-animation-duration: 1.5s;
-          -webkit-animation-timing-function: linear;
-          -webkit-animation-iteration-count: 1;
-          -webkit-animation-direction: alternate;
-          -webkit-animation-play-state: running;
-          /* Standard syntax */
-          animation-name: counting;
-          animation-duration: 1.5s;
-          animation-timing-function: linear;
-          animation-iteration-count: 1;
-          animation-direction: alternate;
-          animation-play-state: running;
-
-        }
-      }
-  }
-
-  .cup{
-    height: 100%;
-    padding: 8px 20px;
-    span.cup-img{
-      height: 20px;
-      display: inline-block;
-      float: left;
-      margin-top: 5px;
-      img{
-        height: 20px;
-        display: inline-block;
-        float: left;
-        margin-top: 2px;
-      }
-    }
-
-  }
-
-  .join{
-    padding:8px;
-    button{
-      margin-right:10px;
-    }
-  }
-
-  .right-part{
-    .logout{
-      float:right;
-      padding:8px;
-      button{
-        margin-right:10px;
-      }
-
-    }
+    width:545px;
+    height:170px;
+    background: url(../img/coins_bg.png);
   }
 }
+
 
 
 .masonry-container{

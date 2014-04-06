@@ -41,17 +41,30 @@
   <body ng-controller="MainCtrl"></body>
   <header>
     <div ng-click="goHome()" class="logo"><img src="./img/bizibizi.logo.png"></div>
-    <div ng-show="userData &amp;&amp; !userData.user" class="user-info-guest"><span class="glyphicon glyphicon-user"></span><span class="guest">Guest</span></div>
-    <div ng-show="userData.user" class="user-info"><span class="profile-pic"><img ng-src="{{userData.user.info.profilePic}}"></span><span class="name">{{userData.user.info.displayName || userData.user.info.name}}</span></div>
-    <div ng-show="userData &amp;&amp; userData.user" class="coins"><span class="coin-img"><img src="./img/coins.png"></span><span aio-counter="{{userData.user.points}}" class="amount"></span></div>
-    <div ng-show="userData &amp;&amp; !userData.user" class="coins"><span class="coin-img"><img src="./img/coins.png"></span><span class="amount">{{10000}}</span></div>
-    <div ng-show="userData.user" class="cup"><a href="#" ng-click="openMainOverlay('LEADERBOARD')" class="cup-img"><img src="./img/cup.png"></a></div>
-    <div ng-show="userData &amp;&amp; !userData.user" class="join">
-      <button type="button" ng-click="login()" class="btn btn-success">CONNECT</button>
-    </div><span class="right-part pull-right">
-      <div ng-show="userData.user" class="logout">
-        <button type="button" ng-click="logout()" class="btn btn-success">LOGOUT</button>
-      </div></span>
+    <div class="coins"></div>
+    <!--div.user-info-guest(ng-show="userData && !userData.user")-->
+    <!--    span.glyphicon.glyphicon-user-->
+    <!--    span.guest Guest-->
+    <!--div.user-info(ng-show="userData.user")-->
+    <!--    span.profile-pic-->
+    <!--        img(ng-src="{{userData.user.info.profilePic}}")-->
+    <!--    span.name {{userData.user.info.displayName || userData.user.info.name}}-->
+    <!--div.coins(ng-show="userData && userData.user")-->
+    <!--    span.coin-img-->
+    <!--        img(src="./img/coins.png")-->
+    <!--    span.amount(aio-counter="{{userData.user.points}}")-->
+    <!--div.coins(ng-show="userData && !userData.user")-->
+    <!--    span.coin-img-->
+    <!--        img(src="./img/coins.png")-->
+    <!--    span.amount {{10000}}-->
+    <!--div.cup(ng-show="userData.user")-->
+    <!--    a.cup-img(href="#", ng-click="openMainOverlay('LEADERBOARD')")-->
+    <!--        img(src="./img/cup.png")-->
+    <!--div.join(ng-show="userData && !userData.user")-->
+    <!--    button(type="button", class="btn btn-success", ng-click="login()") CONNECT-->
+    <!--span.right-part.pull-right-->
+    <!--    div.logout(ng-show="userData.user")-->
+    <!--        button(type="button", class="btn btn-success", ng-click="logout()") LOGOUT-->
   </header>
   <div ui-view class="main"></div>
   <div ng-if="overlayID=='WIN_COINS'" ng-controller="WinCtrl" overlay="'WIN_COINS'" class="modal-overlay-fade win-coins">

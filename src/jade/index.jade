@@ -58,29 +58,30 @@ html
     header
         div.logo(ng-click="goHome()")
             img(src="./img/bizibizi.logo.png")
-        div.user-info-guest(ng-show="userData && !userData.user")
-            span.glyphicon.glyphicon-user
-            span.guest Guest
-        div.user-info(ng-show="userData.user")
-            span.profile-pic
-                img(ng-src="{{userData.user.info.profilePic}}")
-            span.name {{userData.user.info.displayName || userData.user.info.name}}
-        div.coins(ng-show="userData && userData.user")
-            span.coin-img
-                img(src="./img/coins.png")
-            span.amount(aio-counter="{{userData.user.points}}")
-        div.coins(ng-show="userData && !userData.user")
-            span.coin-img
-                img(src="./img/coins.png")
-            span.amount {{10000}}
-        div.cup(ng-show="userData.user")
-            a.cup-img(href="#", ng-click="openMainOverlay('LEADERBOARD')")
-                img(src="./img/cup.png")
-        div.join(ng-show="userData && !userData.user")
-            button(type="button", class="btn btn-success", ng-click="login()") CONNECT
-        span.right-part.pull-right
-            div.logout(ng-show="userData.user")
-                button(type="button", class="btn btn-success", ng-click="logout()") LOGOUT
+        div.coins
+        //div.user-info-guest(ng-show="userData && !userData.user")
+        //    span.glyphicon.glyphicon-user
+        //    span.guest Guest
+        //div.user-info(ng-show="userData.user")
+        //    span.profile-pic
+        //        img(ng-src="{{userData.user.info.profilePic}}")
+        //    span.name {{userData.user.info.displayName || userData.user.info.name}}
+        //div.coins(ng-show="userData && userData.user")
+        //    span.coin-img
+        //        img(src="./img/coins.png")
+        //    span.amount(aio-counter="{{userData.user.points}}")
+        //div.coins(ng-show="userData && !userData.user")
+        //    span.coin-img
+        //        img(src="./img/coins.png")
+        //    span.amount {{10000}}
+        //div.cup(ng-show="userData.user")
+        //    a.cup-img(href="#", ng-click="openMainOverlay('LEADERBOARD')")
+        //        img(src="./img/cup.png")
+        //div.join(ng-show="userData && !userData.user")
+        //    button(type="button", class="btn btn-success", ng-click="login()") CONNECT
+        //span.right-part.pull-right
+        //    div.logout(ng-show="userData.user")
+        //        button(type="button", class="btn btn-success", ng-click="logout()") LOGOUT
     .main(ui-view)
 
 
