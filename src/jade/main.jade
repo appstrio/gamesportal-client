@@ -3,8 +3,8 @@
         a(ng-click="runGame(game, $event)")
             .badge-overlay.new-overlay New
             .badge-overlay.hot-overlay Hot
-            .badge-overlay.premium-overlay Premium
+            .badge-overlay.premium-overlay
+                .badge-text Premium
             img(class="game-thumbnail", ng-src="{{game.largeThumbnail.url || game.thumbnails[0].url}}")
             div.name
                 div {{game.name}} {{game.priority}} {{game.premium}}
-

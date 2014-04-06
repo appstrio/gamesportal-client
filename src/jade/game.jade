@@ -1,20 +1,17 @@
 .game-wrppaer
     .top-ad-unit
         img(src="./img/728x90.png")
-
     .game-embed-container
         .header
             .back-button
                 a(type="button",class="btn btn-warning", ui-sref="main")
                     i(class="glyphicon glyphicon-chevron-left")
-            .game-name
-                {{game.name}}
+            .game-name(ng-bind="game.name")
         .main
             .left
                 .left-ad-unit
                     img(src="./img/160x600.png")
             .middle
-
                 .embedding(ng-style="{width : game.width + 'px', height : game.height + 'px'}")
                     div.loader
                     div.include(ng-include="'embed-' + game.source + '.html'",ng-if="game")
@@ -27,8 +24,7 @@
                     a(ui-sref="game({gameID: game.id})")
                         img(class="game-thumbnail", ng-src="{{game.thumbnails[0].url}}")
                         div.name
-                            div {{game.name}}
-
+                            div(ng-bind="game.name")
 
     .bottom-ad-unit
         img(src="./img/728x90.png")
@@ -56,6 +52,3 @@
             h3 Please connect in order to unlock this game
             button(type="button", class="btn btn-warning", ng-click="goHome()") Go Back
             button(type="button", class="btn btn-success", ng-click="login()") Connect
-
-
-

@@ -27,10 +27,11 @@ var awsPublisher = awspublish.create({
     secret: awsDetails.secret,
     bucket: awsDetails.bucket
 });
-var awsHeaders = { 'Cache-Control': 'max-age=315360000, no-transform, public' };
+var awsHeaders = {
+    'Cache-Control': 'max-age=315360000, no-transform, public'
+};
 
 var pkg;
-
 
 //get paths from config file
 var paths = config.paths;
@@ -38,7 +39,7 @@ var bowerPackages = config.bowerPackages;
 var vendorPackages = config.vendorPackages;
 var libs = bowerPackages.concat(vendorPackages);
 
-var getPackageJson = function () {
+var getPackageJson = function() {
     var fs = require('fs');
     pkg = JSON.parse(fs.readFileSync('./package.json', 'utf8'));
     return pkg;
@@ -49,7 +50,7 @@ var getPackageJson = function () {
 var isProduction = Boolean(gutil.env.production);
 
 //jade -> html
-gulp.task('jade', function () {
+gulp.task('jade', function() {
     return gulp.src(paths.origin.jade)
         .pipe(flatten())
         .pipe(jade({
@@ -58,12 +59,12 @@ gulp.task('jade', function () {
         .pipe(gulp.dest(paths.build));
 });
 
-gulp.task('usemin', ['jade', 'libs'], function () {
+gulp.task('usemin', ['jade', 'libs'], function() {
     if (!isProduction) {
         gulp.start('scripts');
         return;
     }
-    gulp.src(['build/popup.html','build/background.html'])
+    gulp.src(['build/popup.html', 'build/background.html'])
         .pipe(usemin({
             jsmin: uglify()
         }))
@@ -71,36 +72,34 @@ gulp.task('usemin', ['jade', 'libs'], function () {
 });
 
 //less -> css
-gulp.task('less', function () {
+gulp.task('less', function() {
     return gulp.src(paths.origin.less)
         .pipe(less())
         .pipe(cssmin())
         .pipe(gulp.dest(paths.dist.less));
 });
 
-
 // copy & uglify js scripts
-gulp.task('scripts', function () {
-    if(!isProduction){
+gulp.task('scripts', function() {
+    if (!isProduction) {
         return gulp.src(paths.origin.js)
             .pipe(gulp.dest(paths.dist.js));
-    }else{
+    } else {
         return gulp.src(paths.origin.js)
             .pipe(uglify())
             .pipe(gulp.dest(paths.dist.js));
     }
 });
 
-
 //clean build folder
-gulp.task('clean', function () {
+gulp.task('clean', function() {
     return gulp.src(paths.build, {
         read: false
     }).pipe(clean());
 });
 
 //bump versions on package/bower/manifest
-gulp.task('bump', function () {
+gulp.task('bump', function() {
     //reget package
     var _pkg = getPackageJson();
     //increment version
@@ -117,20 +116,20 @@ gulp.task('bump', function () {
 });
 
 //handle assets
-gulp.task('assets', function () {
+gulp.task('assets', function() {
     //copy regular assets
     gulp.src(paths.origin.assets)
         .pipe(gulp.dest(paths.build));
 });
 
 //copy libs
-gulp.task('libs', function () {
+gulp.task('libs', function() {
     return gulp.src(libs)
         .pipe(gulp.dest(paths.dist.libs));
 });
 
 //use alongside with chrome extension reload-extension
-gulp.task('reloadExtension', function () {
+gulp.task('reloadExtension', function() {
     gulp.src('README.md')
         .pipe(gulpOpen('', {
             url: 'http://reload.extensions',
@@ -139,8 +138,8 @@ gulp.task('reloadExtension', function () {
 });
 
 //all tasks are watch -> bump patch version -> reload extension (globally enabled)
-gulp.task('watch', function () {
-    if(isProduction) return;
+gulp.task('watch', function() {
+    if (isProduction) return;
     var afterTasks = [];
 
     gulp.watch(libs, ['libs'].concat(afterTasks));
@@ -151,17 +150,15 @@ gulp.task('watch', function () {
 });
 
 //default task
-gulp.task('default', ['clean'], function () {
+gulp.task('default', ['clean'], function() {
     gulp.start('assets', 'jade', 'libs', 'less', 'usemin', 'watch');
 });
 
-
 // aws
-gulp.task('deploy', function(){
+gulp.task('deploy', function() {
     return gulp.src('./build/**')
         .pipe(awsPublisher.publish(awsHeaders))
-        .pipe(awsPublisher.sync())  // sync local directory with bucket
-        //.pipe(awsPublisher.cache()) // create a cache file to speed up next uploads
-        .pipe(awspublish.reporter()); // print upload updates to console
+        .pipe(awsPublisher.sync()) // sync local directory with bucket
+    //.pipe(awsPublisher.cache()) // create a cache file to speed up next uploads
+    .pipe(awspublish.reporter()); // print upload updates to console
 });
-

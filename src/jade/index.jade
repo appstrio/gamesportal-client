@@ -25,14 +25,7 @@ html
         script(src='./js/vendor/firebase-simple-login.js')
         script(src='./js/vendor/angularjs.media.directives.js')
         script(src='./js/vendor/ng-infinite-scroll.min.js')
-
-
-
-
-
-
         script(src='./js/vendor/underscore-min.js')
-
 
         <!-- build:js(src) ./js/app.min.js -->
         //- load commons
@@ -50,7 +43,6 @@ html
         script(src='./js/common/common.js')
         script(src='./js/app.js')
         <!-- endbuild -->
-
 
         title GamesPortal
         //----------------
@@ -84,8 +76,6 @@ html
         //        button(type="button", class="btn btn-success", ng-click="logout()") LOGOUT
     .main(ui-view)
 
-
-
     .modal-overlay-fade.win-coins(ng-if="overlayID=='WIN_COINS'", ng-controller="WinCtrl", overlay="'WIN_COINS'")
         .modal-dialog
             h1 Win Coins!
@@ -104,5 +94,3 @@ html
                         img.profile-pic(ng-src="{{user.profilePic}}")
                     td.name {{user.displayName}}
                     td.points {{user.points | number}}
-
-

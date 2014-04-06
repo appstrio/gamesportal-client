@@ -39,7 +39,9 @@ header{
   .logo{
     height: 100%;
     padding: 8px 20px;
+    cursor:pointer;
     img{
+        cursor:pointer;
     }
   }
   .coins{
@@ -49,8 +51,6 @@ header{
   }
 }
 
-
-
 .masonry-container{
   margin:0 auto;
 
@@ -58,6 +58,7 @@ header{
     overflow: hidden;
     margin: 10px 0;
     cursor:pointer;
+    box-shadow: -1px 1px 12px -2px #000000;
     a{
 
       .badge-overlay{
@@ -73,6 +74,7 @@ header{
         width:120px;
         height:120px;
         cursor:pointer;
+        border:3px solid #F7FFFF;
       }
 
       .name{
@@ -92,7 +94,6 @@ header{
           bottom:0;
         }
       }
-
 
     }
 
@@ -117,8 +118,6 @@ header{
         background: url(../img/hot100x100.png);
       }
     }
-
-
 
     &.promoted{
       img.game-thumbnail{
@@ -154,12 +153,9 @@ header{
 
     }
 
-
-
   }
 
 }
-
 
 /* Chrome, Safari, Opera */
 @-webkit-keyframes counting
