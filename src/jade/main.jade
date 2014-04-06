@@ -1,5 +1,5 @@
 .masonry-container(masonry="masonryOptions", load-images="false", infinite-scroll="loadMore()")
-    .div(class="masonry-brick", ng-repeat="game in games", ng-class="{premium: game.premium, new :game.new, hot :game.hot, promoted: (game.promoted && game.largeThumbnail)}")
+    .div(class="masonry-brick", ng-repeat="game in games", ng-class="{'rotated-right': ($index +1) % 21 === 0, 'rotated-left': ($index+1) % 18 === 0, premium: game.premium, new :game.new, hot :game.hot, promoted : (game.promoted && game.largeThumbnail)}")
         a(ng-click="runGame(game, $event)")
             .badge-overlay.new-overlay New
             .badge-overlay.hot-overlay

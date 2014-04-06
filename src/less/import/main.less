@@ -169,6 +169,23 @@ header{
         margin: 10px 0;
         cursor:pointer;
         box-shadow: -1px 1px 12px -2px #000000;
+        -webkit-backface-visibility: hidden;
+
+        &.rotated-right {
+            transform: rotate(4deg) ;
+            -webkit-transform: rotate(4deg) ;
+            -moz-transform: rotate(4deg) ;
+            -o-transform: rotate(4deg) ;
+            -ms-transform: rotate(4deg) ;
+        }
+        &.rotated-left {
+            transform: rotate(-4deg) ;
+            -webkit-transform: rotate(-4deg) ;
+            -moz-transform: rotate(-4deg) ;
+            -o-transform: rotate(-4deg) ;
+            -ms-transform: rotate(-4deg) ;
+        }
+
         a{
             .badge-overlay{
                 position:absolute;

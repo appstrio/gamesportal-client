@@ -34,6 +34,14 @@ mainModule.controller('MainCtrl', ['$scope', '$log', '$q', '$timeout', '$http', 
 
         });
 
+        $scope.getRightChance = function() {
+            return Math.random() > 0.98;
+        };
+
+        $scope.getLeftChance = function() {
+            return Math.random() < 0.02;
+        };
+
         // init - init user data object
         Firebase.initting().then(function() {
             $scope.userData = Firebase.userData();
