@@ -50,7 +50,6 @@ html
     header
         div.logo(ng-click="goHome()")
             img(src="./img/bizibizi.logo.png")
-        div.coins
         //div.user-info-guest(ng-show="userData && !userData.user")
         //    span.glyphicon.glyphicon-user
         //    span.guest Guest
@@ -62,10 +61,16 @@ html
         //    span.coin-img
         //        img(src="./img/coins.png")
         //    span.amount(aio-counter="{{userData.user.points}}")
-        //div.coins(ng-show="userData && !userData.user")
-        //    span.coin-img
-        //        img(src="./img/coins.png")
-        //    span.amount {{10000}}
+
+        //- user isn't logged in.
+        .coins(ng-if="!userData.user")
+            .coin-container
+                .top-text coins collected
+                .amount
+                    span.coin-img
+                        img(src="./img/coins.png")
+                    span.amount-text {{1000}}
+
         //div.cup(ng-show="userData.user")
         //    a.cup-img(href="#", ng-click="openMainOverlay('LEADERBOARD')")
         //        img(src="./img/cup.png")

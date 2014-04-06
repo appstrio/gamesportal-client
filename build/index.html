@@ -41,7 +41,6 @@
   <body ng-controller="MainCtrl"></body>
   <header>
     <div ng-click="goHome()" class="logo"><img src="./img/bizibizi.logo.png"></div>
-    <div class="coins"></div>
     <!--div.user-info-guest(ng-show="userData && !userData.user")-->
     <!--    span.glyphicon.glyphicon-user-->
     <!--    span.guest Guest-->
@@ -53,10 +52,12 @@
     <!--    span.coin-img-->
     <!--        img(src="./img/coins.png")-->
     <!--    span.amount(aio-counter="{{userData.user.points}}")-->
-    <!--div.coins(ng-show="userData && !userData.user")-->
-    <!--    span.coin-img-->
-    <!--        img(src="./img/coins.png")-->
-    <!--    span.amount {{10000}}-->
+    <div ng-if="!userData.user" class="coins">
+      <div class="coin-container">
+        <div class="top-text">coins collected</div>
+        <div class="amount"><span class="coin-img"><img src="./img/coins.png"></span><span class="amount-text">{{1000}}</span></div>
+      </div>
+    </div>
     <!--div.cup(ng-show="userData.user")-->
     <!--    a.cup-img(href="#", ng-click="openMainOverlay('LEADERBOARD')")-->
     <!--        img(src="./img/cup.png")-->
