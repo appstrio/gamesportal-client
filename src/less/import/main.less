@@ -16,6 +16,23 @@ body{
     background: url(../img/bg.png) repeat;
     padding:170px 0;
 }
+.ribbon-mixin {
+    overflow: hidden;
+    white-space: nowrap;
+    position: absolute;
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    -webkit-box-shadow: 0 0 10px #888;
+    -moz-box-shadow: 0 0 10px #888;
+    box-shadow: 0 0 10px #888;
+    display: block;
+    left: -30px;
+    top: 10px;
+}
+
 button{
     outline:none;
 }
@@ -88,20 +105,8 @@ header{
         &.premium {
             .premium-overlay {
                 background-color: #C7CF00;
-                overflow: hidden;
-                white-space: nowrap;
-                position: absolute;
-                left: -30px;
-                top: 10px;
-                -webkit-transform: rotate(-45deg);
-                -moz-transform: rotate(-45deg);
-                -ms-transform: rotate(-45deg);
-                -o-transform: rotate(-45deg);
-                transform: rotate(-45deg);
-                -webkit-box-shadow: 0 0 10px #888;
-                -moz-box-shadow: 0 0 10px #888;
-                box-shadow: 0 0 10px #888;
-                display: block;
+                .ribbon-mixin();
+
                 .ribbon-text {
                     border: 1px solid #F5FF00;
                     color: #fff;
@@ -123,22 +128,9 @@ header{
         }
         &.hot{
             .hot-overlay{
-                display:block;
+                .ribbon-mixin();
                 background-color: #a00;
-                overflow: hidden;
-                white-space: nowrap;
-                position: absolute;
-                left: -30px;
-                top: 10px;
-                -webkit-transform: rotate(-45deg);
-                -moz-transform: rotate(-45deg);
-                -ms-transform: rotate(-45deg);
-                -o-transform: rotate(-45deg);
-                transform: rotate(-45deg);
-                -webkit-box-shadow: 0 0 10px #888;
-                -moz-box-shadow: 0 0 10px #888;
-                box-shadow: 0 0 10px #888;
-                display: block;
+
                 .ribbon-text {
                     border: 1px solid #faa;
                     color: #fff;
