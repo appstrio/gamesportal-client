@@ -92,4 +92,4 @@ html
                     td.profile-pic
                         img.profile-pic(ng-src="{{user.profilePic}}")
                     td.name {{user.displayName}}
-                    td.points {{user.points | number}}
+                    td.points {{user.points | number:0}}

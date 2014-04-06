@@ -77,7 +77,7 @@
         <tr ng-repeat="user in leaderboardData.value">
           <td class="profile-pic"><img ng-src="{{user.profilePic}}" class="profile-pic"></td>
           <td class="name">{{user.displayName}}</td>
-          <td class="points">{{user.points | number}}</td>
+          <td class="points">{{user.points | number:0}}</td>
         </tr>
       </table>
     </div>

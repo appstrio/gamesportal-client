@@ -1,264 +1,248 @@
 var gamesModule = gamesModule || angular.module('aio.games', []);
 
-gamesModule.service('Games', ['$log', '$q', '$timeout', '$http','Firebase', function($log, $q, $timeout, $http, Firebase){
+gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
+    function($log, $q, $timeout, $http, Firebase) {
 
         var localStorageKey = 'games';
-        var oldTimeout = 1000*3600*24;
-        var veryOldTimeout = 1000*3600*24*7;
+        var oldTimeout = 1000 * 3600 * 24;
+        var veryOldTimeout = 1000 * 3600 * 24 * 7;
         var initting = $q.defer();
 
-
-        var initLocalStorage = function(){
-            try{
-                if(isLocalStorage()){
+        var initLocalStorage = function() {
+            try {
+                if (isLocalStorage()) {
                     var str = localStorage.getItem(localStorageKey);
                     var obj = JSON.parse(str);
-                    if(obj.games && obj.games){
-                        if(isVeryOld(obj.timestamp)){
-                        }else if(isOld(obj.timestamp)){
+                    if (obj.games && obj.games) {
+                        if (isVeryOld(obj.timestamp)) {} else if (isOld(obj.timestamp)) {
                             refreshFirebase();
                             return initting.resolve(obj.games);
-                        }else{
+                        } else {
                             return initting.resolve(obj.games);
                         }
                     }
 
-
                 }
 
                 initFirebase();
-            }catch(e){
+            } catch (e) {
                 initFirebase();
             }
         };
 
-
-        var refreshFirebase = function(){
-            Firebase.getGames().then(function(games){
+        var refreshFirebase = function() {
+            Firebase.getGames().then(function(games) {
                 storeGames(games);
             });
         };
 
-
-        var initFirebase = function(){
+        var initFirebase = function() {
             console.log('initFirebase');
-            Firebase.getGames().then(function(games){
+            Firebase.getGames().then(function(games) {
                 initting.resolve(games);
                 storeGames(games);
-            }).catch(function(){
-                    initting.reject();
-                });
+            }).
+            catch (function() {
+                initting.reject();
+            });
         };
 
-        var storeGames = function(array){
-            if(isLocalStorage()){
-                var obj = {timestamp : Date.now(), games : array};
-                try{
+        var storeGames = function(array) {
+            if (isLocalStorage()) {
+                var obj = {
+                    timestamp: Date.now(),
+                    games: array
+                };
+                try {
                     var str = JSON.stringify(obj);
                     localStorage.setItem(localStorageKey, str);
-                }catch(e){
+                } catch (e) {
                     console.error(e);
                 }
             }
         };
 
-        var isLocalStorage = function(){
+        var isLocalStorage = function() {
             return localStorage && localStorage.getItem;
         };
 
-        var isOld = function(timestamp){
+        var isOld = function(timestamp) {
             return (Date.now() - parseInt(timestamp) >= oldTimeout);
         };
 
-
-        var isVeryOld = function(timestamp){
+        var isVeryOld = function(timestamp) {
             return (Date.now() - parseInt(timestamp) >= veryOldTimeout);
         };
 
-        if(isLocalStorage()){
+        if (isLocalStorage()) {
             initLocalStorage();
-        }else{
+        } else {
             initFirebase();
         };
 
-
-
         return initting.promise;
-//    return $http.get('bizigames.json?rnd=' + Date.now()).then(function(data){
-//        return data.data;
-//    });
-    }]).controller('GameCtrl', ['$scope', '$log', '$q', '$timeout', '$http', '$stateParams', '$state', 'Firebase', 'Games', 'GamesHelpers',
+        //    return $http.get('bizigames.json?rnd=' + Date.now()).then(function(data){
+        //        return data.data;
+        //    });
+    }
+]).controller('GameCtrl', ['$scope', '$log', '$q', '$timeout', '$http', '$stateParams', '$state', 'Firebase', 'Games', 'GamesHelpers',
 
-        function ($scope, $log, $q, $timeout, $http, $stateParams, $state,Firebase, Games, GamesHelpers) {
-            var pointsPerGame = 100;
+    function($scope, $log, $q, $timeout, $http, $stateParams, $state, Firebase, Games, GamesHelpers) {
+        var pointsPerGame = 100;
 
-            /**
-             * initializes the service.
-             * extract the game ID from the url params
-             * and find it in the games DB.
-             * if no game found, redirect back to home page.
-             * if game was found, check whether it is a premium game
-             * and if yes whether game is unlocked.
-             * if game isn't unlocked, offer to unlock the game
-             */
-            var init = function(){
-                // get game ID
-                var gameId = $stateParams.gameID;
-                // check if game ID is ok
-                if(!gameId) $state.go('main');
+        /**
+         * initializes the service.
+         * extract the game ID from the url params
+         * and find it in the games DB.
+         * if no game found, redirect back to home page.
+         * if game was found, check whether it is a premium game
+         * and if yes whether game is unlocked.
+         * if game isn't unlocked, offer to unlock the game
+         */
+        var init = function() {
+            // get game ID
+            var gameId = $stateParams.gameID;
+            // check if game ID is ok
+            if (!gameId) $state.go('main');
 
-                // find game in the games DB
-                GamesHelpers.findGameById(gameId).then(function(game){
-                    // check if found game
-                    if(!game){
-                        return $state.go('main');
-                    }
-                    if(game.source === 'miniclip'){
-                        $scope.miniclipURL = "http://www.miniclip.com/games/" + game.data_game_name + "/en/webgame.php?bodybg=1&width=" +game.width+ "&height=" + game.height;
-                    }
-                    // check access
-                    checkPremium(game);
-                });
-
-                // get more games
-                Games.then(function(games){
-                    $scope.moreGames = _.shuffle(games).slice(0,14);
-                });
-            };
-
-
-
-
-            /**
-             * check if game is premium, and if user unlocked the game
-             * @param game
-             */
-            var checkPremium = function(game){
+            // find game in the games DB
+            GamesHelpers.findGameById(gameId).then(function(game) {
+                // check if found game
+                if (!game) {
+                    return $state.go('main');
+                }
+                if (game.source === 'miniclip') {
+                    $scope.miniclipURL = "http://www.miniclip.com/games/" + game.data_game_name + "/en/webgame.php?bodybg=1&width=" + game.width + "&height=" + game.height;
+                }
                 // check access
-                Firebase.checkAccessToGame(game).then(function(access){
-                    if(access){
-                        // access granted - play game
-                        $scope.game = game;
-                        GamesHelpers.raisePointsForGame(game);
-                    }else{
-                        // no access - show overlay
-                        $scope.lockedGame = game;
-                        $scope.overlayUnlockGame = true;
-                    }
-                }).catch(function(){
-                        alert('Error check premium');
-                    })
-            };
+                checkPremium(game);
+            });
 
+            // get more games
+            Games.then(function(games) {
+                $scope.moreGames = _.shuffle(games).slice(0, 14);
+            });
+        };
 
-
-
-
-
-
-
-
-
-            /**
-             * unlock the game by paying coins
-             * @param game
-             */
-            $scope.unlockGame = function(game){
-                Firebase.unlockGame(game).then(function(){
+        /**
+         * check if game is premium, and if user unlocked the game
+         * @param game
+         */
+        var checkPremium = function(game) {
+            // check access
+            Firebase.checkAccessToGame(game).then(function(access) {
+                if (access) {
+                    // access granted - play game
                     $scope.game = game;
-                    $scope.lockedGame = null;
-                    $scope.overlayUnlockGame = false;
-                }, function(){
-
-                });
-            };
-
-
-
-
-            init();
-
-        }
-
-    ]).controller('EditGameCtrl', ['$scope', '$log', '$q', '$timeout', '$http', '$stateParams', '$state', 'Firebase', 'Games', 'GamesHelpers',
-
-        function ($scope, $log, $q, $timeout, $http, $stateParams, $state,Firebase, Games, GamesHelpers) {
-
-
-            /**
-             * initializes the service.
-             * extract the game ID from the url params
-             * and find it in the games DB.
-             * use game number instead if provided
-             */
-            var init = function(){
-                // get game ID
-                var gameId = $stateParams.gameID;
-                // check if game ID is ok
-                if(!gameId){
-                    alert('No game id. Cannot continue :(');
-                }else{
-                    var gamePromise = GamesHelpers.findGameById(gameId)
+                    GamesHelpers.raisePointsForGame(game);
+                } else {
+                    // no access - show overlay
+                    $scope.lockedGame = game;
+                    $scope.overlayUnlockGame = true;
                 }
+            }).
+            catch (function() {
+                alert('Error check premium');
+            });
+        };
 
-                // find game in the games DB
-                if(gamePromise){
-                    gamePromise.then(function(game){
-                        // check if found game
-                        if(!game){
-                            alert('Cant find the game with game id' + gameId);
-                        }else{
-                            $scope.game=game;
-                            GamesHelpers.getGameIndex(game.id).then(function(index){
-                                $scope.gameIndex = index;
-                            });
+        /**
+         * unlock the game by paying coins
+         * @param game
+         */
+        $scope.unlockGame = function(game) {
+            Firebase.unlockGame(game).then(function() {
+                $scope.game = game;
+                $scope.lockedGame = null;
+                $scope.overlayUnlockGame = false;
+            }, function() {
 
-                        }
+            });
+        };
 
-                    }).catch(function(){
-                            alert('Cant find the game with game id' + gameId);
-                    });
-                }
+        init();
 
-            };
+    }
 
+]).controller('EditGameCtrl', ['$scope', '$log', '$q', '$timeout', '$http', '$stateParams', '$state', 'Firebase', 'Games', 'GamesHelpers',
 
-            $scope.nextAndSave = function(){
-                var game = $scope.game;
-                game.priority = game.priority || 1000;
-                Firebase.setGameWithPriority(game, function(){
-                    GamesHelpers.findNextGameById(game.id).then(function(newGame){
-                        if(newGame){
-                            $state.go('editGame', {gameID : newGame.id});
-                        }else{
-                            alert('cant find next game :(');
-                        }
+    function($scope, $log, $q, $timeout, $http, $stateParams, $state, Firebase, Games, GamesHelpers) {
 
-                    });
+        /**
+         * initializes the service.
+         * extract the game ID from the url params
+         * and find it in the games DB.
+         * use game number instead if provided
+         */
+        var init = function() {
+            // get game ID
+            var gameId = $stateParams.gameID;
+            // check if game ID is ok
+            if (!gameId) {
+                alert('No game id. Cannot continue :(');
+            } else {
+                var gamePromise = GamesHelpers.findGameById(gameId);
+            }
+
+            // find game in the games DB
+            if (gamePromise) {
+                gamePromise.then(function(game) {
+                    // check if found game
+                    if (!game) {
+                        alert('Cant find the game with game id' + gameId);
+                    } else {
+                        $scope.game = game;
+                        GamesHelpers.getGameIndex(game.id).then(function(index) {
+                            $scope.gameIndex = index;
+                        });
+
+                    }
+
+                }).
+                catch (function() {
+                    alert('Cant find the game with game id' + gameId);
                 });
+            }
 
-            };
+        };
 
-            $scope.previousGame = function(){
-                var game = $scope.game;
-                GamesHelpers.findPreviousGameById(game.id).then(function(newGame){
-                    if(newGame)
-                        $state.go('editGame', {gameID : newGame.id});
-                    else
-                        alert('cant find previous game');
+        $scope.nextAndSave = function() {
+            var game = $scope.game;
+            game.priority = game.priority || 1000;
+            Firebase.setGameWithPriority(game, function() {
+                GamesHelpers.findNextGameById(game.id).then(function(newGame) {
+                    if (newGame) {
+                        $state.go('editGame', {
+                            gameID: newGame.id
+                        });
+                    } else {
+                        alert('cant find next game :(');
+                    }
+
                 });
+            });
 
-            };
+        };
 
+        $scope.previousGame = function() {
+            var game = $scope.game;
+            GamesHelpers.findPreviousGameById(game.id).then(function(newGame) {
+                if (newGame)
+                    $state.go('editGame', {
+                        gameID: newGame.id
+                    });
+                else
+                    alert('cant find previous game');
+            });
 
+        };
 
-            init();
+        init();
 
-        }
+    }
 
-    ]).factory('GamesHelpers', ['Games','Firebase','Config', function(Games, Firebase, Config){
-
-
+]).factory('GamesHelpers', ['Games', 'Firebase', 'Config',
+    function(Games, Firebase, Config) {
 
         var gamesArr;
 
@@ -267,89 +251,92 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http','Firebase', func
          * @param gameID
          * @returns {*}
          */
-        var findGameById = function(gameID){
-            return Games.then(function(games){
-                return _.findWhere(games, {id : gameID});
+        var findGameById = function(gameID) {
+            return Games.then(function(games) {
+                return _.findWhere(games, {
+                    id: gameID
+                });
             });
         };
-
-
 
         /**
          * find next game by game ID
          * @param gameID
          * @returns {*}
          */
-        var findNextGameById = function(gameID){
-            return Games.then(function(games){
+        var findNextGameById = function(gameID) {
+            return Games.then(function(games) {
                 gamesArr = gamesArr || _.toArray(games);
-                var current = _.findWhere(gamesArr, {id : gameID});
+                var current = _.findWhere(gamesArr, {
+                    id: gameID
+                });
                 var index = gamesArr.indexOf(current);
                 return gamesArr[++index];
             });
         };
-
 
         /**
          * find prev game by game ID
          * @param gameID
          * @returns {*}
          */
-        var findPreviousGameById = function(gameID){
-            return Games.then(function(games){
+        var findPreviousGameById = function(gameID) {
+            return Games.then(function(games) {
                 gamesArr = gamesArr || _.toArray(games);
-                var current = _.findWhere(gamesArr, {id : gameID});
+                var current = _.findWhere(gamesArr, {
+                    id: gameID
+                });
                 var index = gamesArr.indexOf(current);
-                index = (index === 0) ? gamesArr.length - 1 : index-1;
+                index = (index === 0) ? gamesArr.length - 1 : index - 1;
                 console.log(index);
                 return gamesArr[index];
             });
         };
 
-
-        var getGameIndex = function(gameID){
-            return Games.then(function(games){
+        var getGameIndex = function(gameID) {
+            return Games.then(function(games) {
                 gamesArr = gamesArr || _.toArray(games);
-                var current = _.findWhere(gamesArr, {id : gameID});
+                var current = _.findWhere(gamesArr, {
+                    id: gameID
+                });
                 var index = gamesArr.indexOf(current);
                 return index;
             });
         };
 
-
-
         /**
          * Raise user's points for playing a game
          */
-        var raisePointsForGame = function(game, options){
+        var raisePointsForGame = function(game, options) {
             var amount = 0;
+            options = options || {};
 
-            if(options.specialReward){
+            if (options.specialReward) {
                 amount = Config.POINTS[options.specialReward];
-            }else if(game.premium){
+            } else if (game.premium) {
                 amount = Config.POINTS.PLAY_PREMIUM_GAME;
-            }else if(game.hot){
+            } else if (game.hot) {
                 amount = Config.POINTS.PLAY_HOT_GAME;
-            }else if(game.new){
+            } else if (game.new) {
                 amount = Config.POINTS.PLAY_NEW_GAME;
-            }else{
-                amount = CONFIG.POINTS.PLAY_REGULAR_GAME;
+            } else {
+                amount = Config.POINTS.PLAY_REGULAR_GAME;
             }
 
-            if(options.boost){
-                amount = amount * parseInt(Config.POINTS.BOOST_FACTOR)
+            if (options.boost) {
+                amount = amount * parseInt(Config.POINTS.BOOST_FACTOR);
             }
 
             Firebase.raisePoints(amount);
         };
 
         return {
-                        findGameById : findGameById,
-                    findNextGameById : findNextGameById,
-                findPreviousGameById : findPreviousGameById,
-                  raisePointsForGame : raisePointsForGame,
-                        getGameIndex : getGameIndex
+            findGameById: findGameById,
+            findNextGameById: findNextGameById,
+            findPreviousGameById: findPreviousGameById,
+            raisePointsForGame: raisePointsForGame,
+            getGameIndex: getGameIndex
         };
 
-
-    }]);
+    }
+]);
