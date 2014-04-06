@@ -53,32 +53,30 @@ html
         //div.user-info-guest(ng-show="userData && !userData.user")
         //    span.glyphicon.glyphicon-user
         //    span.guest Guest
-        //div.user-info(ng-show="userData.user")
-        //    span.profile-pic
-        //        img(ng-src="{{userData.user.info.profilePic}}")
-        //    span.name {{userData.user.info.displayName || userData.user.info.name}}
-        //div.coins(ng-show="userData && userData.user")
-        //    span.coin-img
-        //        img(src="./img/coins.png")
-        //    span.amount(aio-counter="{{userData.user.points}}")
 
         //- user isn't logged in.
-        .coins(ng-if="!userData.user")
+        .coins
             .coin-container
                 .top-text coins collected
                 .amount
                     span.coin-img
-                        img(src="./img/coins.png")
-                    span.amount-text {{1000}}
+                        img(src="./img/coins2.png")
+                    span.amount-text(ng-if="!userData.user") {{10000 | number:0 }}
+                    span.amount-text(ng-if="userData.user", aio-counter="{{userData.user.points}}")
+
+        .user-info
+            span.details
+                .username(ng-if="userData.user.info") {{userData.user.info.displayName || userData.user.info.name}}
+                .username.connect(ng-if="!userData.user.info", ng-click="login()") Connect
+                .action(ng-click="logout()", ng-if="userData.user.info") Sign Out
+            span.profile-pic
+                img(ng-if="userData.user.info", ng-src="{{userData.user.info.profilePic}}")
+                //- dummy picture
+                img.connect(ng-if="!userData.user.info", src="./img/anonymous.png", ng-click="login()")
 
         //div.cup(ng-show="userData.user")
         //    a.cup-img(href="#", ng-click="openMainOverlay('LEADERBOARD')")
         //        img(src="./img/cup.png")
-        //div.join(ng-show="userData && !userData.user")
-        //    button(type="button", class="btn btn-success", ng-click="login()") CONNECT
-        //span.right-part.pull-right
-        //    div.logout(ng-show="userData.user")
-        //        button(type="button", class="btn btn-success", ng-click="logout()") LOGOUT
     .main(ui-view)
 
     .modal-overlay-fade.win-coins(ng-if="overlayID=='WIN_COINS'", ng-controller="WinCtrl", overlay="'WIN_COINS'")

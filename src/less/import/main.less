@@ -61,6 +61,55 @@ header{
             max-height:60px;
         }
     }
+
+    .user-info {
+        width: 213px;
+        height: 60px;
+        float: right;
+        margin-right: 20px;
+        position: relative;
+        .details{
+            float:left;
+            vertical-align: middle;
+            width: 150px;
+            height: 100%;
+            text-align:right;
+            .username{
+                margin-top:5px;
+                font-family: cursive;
+                font-size:18px;
+                color: white;
+                text-shadow: 1px 1px 1px rgba(0,0,0,0.23);
+                &.connect {
+                    cursor:pointer;
+                    margin-top:14px;
+                }
+            }
+            .action {
+                cursor:pointer;
+                margin-top:2px;
+                font-family: cursive;
+                font-size:12px;
+                color: white;
+                text-shadow: 1px 1px 1px rgba(0,0,0,0.23);
+                text-decoration: underline;
+            }
+        }
+        .profile-pic {
+            margin-top:2px;
+            float:right;
+            img {
+                border-radius:50px;
+                width:55px;
+                height:55px;
+                &.connect {
+                    cursor:pointer;
+                }
+            }
+
+        }
+    }
+
     .coins{
         width:545px;
         height:60px;
@@ -92,10 +141,12 @@ header{
 
                 .coin-img  {
                     position: absolute;
-                    left:0;
-                    top:5px;
+                    left:-14px;
+                    top:1px;
 
                     img{
+                        width:100px;
+                        height:60px;
                     }
                 }
                 .amount-text{
