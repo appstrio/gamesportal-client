@@ -13,10 +13,6 @@ firebaseModule.factory('Firebase', ['$rootScope', '$log', '$q', '$timeout', '$ht
         leaderboardData = {},                                 // leaderboard data
         gamesRef;
 
-
-
-
-
         // init auth ref and callback
         var auth = new FirebaseSimpleLogin(ref, function(error, user) {
             $rootScope.$apply(function(){
@@ -38,11 +34,6 @@ firebaseModule.factory('Firebase', ['$rootScope', '$log', '$q', '$timeout', '$ht
                 }
             });
         });
-
-
-
-
-
 
         /**
          * on successful login callback
@@ -83,10 +74,7 @@ firebaseModule.factory('Firebase', ['$rootScope', '$log', '$q', '$timeout', '$ht
 
             });
 
-
         };
-
-
 
         /**
          * build user's info object from user login object
@@ -112,10 +100,6 @@ firebaseModule.factory('Firebase', ['$rootScope', '$log', '$q', '$timeout', '$ht
             }
         };
 
-
-
-
-
         /**
          * on logout, reset user object
          */
@@ -127,9 +111,7 @@ firebaseModule.factory('Firebase', ['$rootScope', '$log', '$q', '$timeout', '$ht
             }
         }
 
-
         return {
-
 
             /**
              * return init promise
@@ -139,10 +121,6 @@ firebaseModule.factory('Firebase', ['$rootScope', '$log', '$q', '$timeout', '$ht
                return initting.promise;
            },
 
-
-
-
-
             /**
              * return basic ref
              * @returns {Firebase}
@@ -150,10 +128,6 @@ firebaseModule.factory('Firebase', ['$rootScope', '$log', '$q', '$timeout', '$ht
            ref : function(){
                return ref;
            },
-
-
-
-
 
             /**
              * initiate login, opens the popup
@@ -166,10 +140,6 @@ firebaseModule.factory('Firebase', ['$rootScope', '$log', '$q', '$timeout', '$ht
                });
            },
 
-
-
-
-
             /**
              * log the user out
              * @returns {*}
@@ -178,10 +148,6 @@ firebaseModule.factory('Firebase', ['$rootScope', '$log', '$q', '$timeout', '$ht
                return auth.logout();
            },
 
-
-
-
-
             /**
              * returns user data object
              * @returns {{}}
@@ -189,10 +155,6 @@ firebaseModule.factory('Firebase', ['$rootScope', '$log', '$q', '$timeout', '$ht
            userData : function(){
                return data;
            },
-
-
-
-
 
             /**
              * raise points by amount
@@ -210,10 +172,6 @@ firebaseModule.factory('Firebase', ['$rootScope', '$log', '$q', '$timeout', '$ht
                });
            },
 
-
-
-
-
             /**
              * check if user has access to premium game
              * @param game
@@ -224,11 +182,6 @@ firebaseModule.factory('Firebase', ['$rootScope', '$log', '$q', '$timeout', '$ht
                     return (!game.premium ||  data.user && data.user.info && (data.user.unlockedGames && data.user.unlockedGames.indexOf(game.id) >= 0));
                 });
            },
-
-
-
-
-
 
             /**
              * unlock game and substract the amount of coins from the user's points
@@ -264,7 +217,6 @@ firebaseModule.factory('Firebase', ['$rootScope', '$log', '$q', '$timeout', '$ht
                return defer.promise;
            },
 
-
             /**
              * initializes the leaderboard listener
              */
@@ -286,14 +238,12 @@ firebaseModule.factory('Firebase', ['$rootScope', '$log', '$q', '$timeout', '$ht
                 return defer.promise;
             },
 
-
             /**
              * close the leaderboard listener
              */
             closeLeaderboard : function(){
                 leaderboardRef && leaderboardRef.off('value');
             },
-
 
             /**
              * get games list
