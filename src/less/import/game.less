@@ -1,18 +1,19 @@
-.game-wrppaer{
+.game-wrapper{
     .top-ad-unit{
         width:728px;
         height:90px;
         margin:10px auto;
-        background: #00008b;
+        background: #EDECEF;
     }
     .game-embed-container{
-        width:1262px;
-        margin:0 auto;
-        border: 1px solid rgba(0,0,0,0.3);
+        width: 1263px;
+        margin: 0 auto;
         border-radius: 8px;
+        box-sizing: content-box;
         .header{
             height:90px;
             background: #395277; /* Old browsers */
+            border: 1px solid rgba(66,94,136,.23);
             /* background: -moz-linear-gradient(top,  #f9c667 0%, #efa721 50%, #f79621 53%, #f79621 100%); [> FF3.6+ <] */
             /* background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f9c667), color-stop(50%,#efa721), color-stop(53%,#f79621), color-stop(100%,#f79621)); [> Chrome,Safari4+ <] */
             /* background: -webkit-linear-gradient(top,  #f9c667 0%,#efa721 50%,#f79621 53%,#f79621 100%); [> Chrome10+,Safari5.1+ <] */
@@ -42,18 +43,21 @@
             }
         }
         .main{
-            background: #FFC457;
-            height:650px;
-            border-bottom: 1px solid rgba(0,0,0,0.3);
+            background: #6189C7;
+            height:670px;
+            border: 1px solid rgba(66,94,136,.23);
+            margin:0 auto;
+            width:100%;
             clear:both;
             > div{
                 float:left;
             }
             .left{
-                padding:10px;
+                padding: 10px 10px 0 10px;
                 .left-ad-unit{
                     width:160px;
                     height:600px;
+                    background: #EDECEF;
                 }
             }
             .middle{
@@ -62,7 +66,7 @@
                     padding:0;
                     max-width:850px;
                     max-height:620px;
-                    margin:30px auto 0;
+                    margin:10px auto 0;
                     position:relative;
                     overflow:hidden;
                     background:#222;
@@ -88,16 +92,16 @@
                 }
             }
             .right{
-                padding:10px;
+                padding: 10px 10px 0 10px;
                 .right-ad-unit{
                     width:160px;
                     height:600px;
+                    background: #EDECEF;
                 }
             }
         }
         .bottom{
             height:110px;
-            background: #8F8E38;
             border-radius: 0 0 8px 8px;
             padding:15px;
             .more-games{
@@ -106,25 +110,39 @@
                 clear:both;
                 .game{
                     overflow: hidden;
-                    margin-right: 10px;
-                    float:left;
-                    position: relative;
+                    margin: 10px 10px;
                     cursor:pointer;
+                    box-shadow: -1px 1px 12px -2px #000000;
+                    -webkit-backface-visibility: hidden;
+                    float:left;
+                    position:relative;
+                    &:nth-child(4n+3) {
+                        transform: rotate(-4deg) ;
+                        -webkit-transform: rotate(-4deg) ;
+                        -moz-transform: rotate(-4deg) ;
+                        -o-transform: rotate(-4deg) ;
+                        -ms-transform: rotate(-4deg) ;
+                    }
                     a{
                         img.game-thumbnail{
-                            width:75px;
-                            height:75px;
+                            width:120px;
+                            height:120px;
+                            cursor:pointer;
+                            border:3px solid #F7FFFF;
                         }
                         .name{
-                            position:absolute;
-                            text-transform:uppercase;
-                            background:rgba(0,0,0,0.75);
-                            bottom:-100px;
                             -webkit-transition: bottom 0.5s ease;
-                            max-height:60px;
-                            width:100%;
+                            background: rgba(0,0,0,0.75);
+                            text-shadow: 1px 1px 4px rgba(255, 237, 105, 0.61);
+                            bottom: -100px;
+                            color: white;
+                            font-size: 15px;
+                            max-height: 70px;
+                            padding: 2px;
+                            position: absolute;
                             text-align: center;
-                            color:white;
+                            text-transform: uppercase;
+                            width: 100%;
                         }
                         &:hover{
                             .name{
@@ -141,6 +159,6 @@
         width:728px;
         height:90px;
         margin:10px auto;
-        background: #00008b;
+        background: #EDECEF;
     }
 }

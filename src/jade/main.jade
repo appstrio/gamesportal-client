@@ -1,10 +1,10 @@
 .masonry-container(masonry="masonryOptions", load-images="false", infinite-scroll="loadMore()")
-    .div(class="masonry-brick", ng-repeat="game in games", ng-class="{'rotated-right': ($index +1) % 21 === 0, 'rotated-left': ($index+1) % 18 === 0, premium: game.premium, new :game.new, hot :game.hot, promoted : (game.promoted && game.largeThumbnail)}")
+    .masonry-brick(ng-repeat="game in games", ng-class="{'rotated-right': ($index +1) % 21 === 0, 'rotated-left': ($index+1) % 18 === 0, premium: game.premium, new :game.new, hot :game.hot, promoted : (game.promoted && game.largeThumbnail)}")
         a(ng-click="runGame(game, $event)")
             .badge-overlay.new-overlay New
             .badge-overlay.hot-overlay
                 .ribbon-text Hot
             .badge-overlay.premium-overlay
                 .ribbon-text Premium
-            img(class="game-thumbnail", ng-src="{{game.largeThumbnail.url || game.thumbnails[0].url}}")
-            div.name(ng-bind="game.name")
+            img.game-thumbnail(ng-src="{{game.largeThumbnail.url || game.thumbnails[0].url}}")
+            .name(ng-bind="game.name")
