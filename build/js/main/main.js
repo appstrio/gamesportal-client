@@ -1,7 +1,10 @@
 var mainModule = mainModule || angular.module('aio.main', []);
 
-mainModule.controller('MainCtrl', ['$scope', '$log', '$q', '$timeout', '$http', 'Firebase', 'Games', '$state', '$stateParams', 'Facebook',
-    function ($scope, $log, $q, $timeout, $http, Firebase, Games, $state, $stateParams, Facebook) {
+mainModule.controller('MainCtrl', [
+    '$scope', '$log', '$q', '$timeout', '$http', 'Firebase',
+    'Games', '$state', '$stateParams', 'Facebook', 'Chrome', 'Config',
+    function ($scope, $log, $q, $timeout, $http, Firebase,
+        Games, $state, $stateParams, Facebook, Chrome, Config) {
 
         var allGames, // hold all the games
             gamesPerFirstPage = 50, // amount of games for the first page
@@ -29,8 +32,8 @@ mainModule.controller('MainCtrl', ['$scope', '$log', '$q', '$timeout', '$http', 
                     }
                 });
             });
-            $scope.games = allGames.slice(0, gamesPerFirstPage);
 
+            $scope.games = allGames.slice(0, gamesPerFirstPage);
         });
 
         // init - init user data object
@@ -66,14 +69,28 @@ mainModule.controller('MainCtrl', ['$scope', '$log', '$q', '$timeout', '$http', 
             $scope.games = allGames.slice(0, gamesPerFirstPage + (page * gamesPerPage));
         }, 2000);
 
+        var loadGame = function (gameId) {
+            $state.go('game', {
+                gameID: gameId
+            });
+        };
+
         // load game
         $scope.runGame = function (game, e) {
             e.stopPropagation();
             e.preventDefault();
-            console.log(game);
-            $state.go('game', {
-                gameID: game.id
-            });
+            //if app isn't installed, and this is a first time user
+            console.log(!Chrome.isAppInstalled(), !Config.RETURN_USER);
+            if (!Chrome.isAppInstalled() && !Config.RETURN_USER) {
+                console.log('offer to download extension');
+                Chrome.installApp()['finally'](function () {
+                    loadGame(game.id);
+                    localStorage.returnUser = true;
+                    Config.RETURN_USER = true;
+                });
+            } else {
+                loadGame(game.id);
+            }
         };
 
         //open overlay

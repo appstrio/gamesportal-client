@@ -37,10 +37,10 @@ configModule.factory('Config', function () {
     };
 
     //first time user by default
-    var firstTimeUser = true;
-    if (isLocalStorage() && localStorage.firstTimeUser) {
+    var returnUser = false;
+    if (isLocalStorage() && localStorage.returnUser === 'undefined') {
         //if we have the key
-        firstTimeUser = false;
+        returnUser = true;
     }
 
     var baseConfig = {
@@ -51,7 +51,7 @@ configModule.factory('Config', function () {
         // CHROME_APP_ID: 'heplncibihkggagnaaoigdhkgjmmllme',
         CHROME_APP_ID: 'amlhfkalaoikfbpoolhpdhignhjhlhko',
         IS_CHROME: (typeof chrome !== 'undefined' && chrome.webstore),
-        FIRST_TIME_USER: firstTimeUser
+        RETURN_USER: returnUser
     };
 
     var developmentConfig = function () {
