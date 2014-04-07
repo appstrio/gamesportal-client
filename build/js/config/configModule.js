@@ -1,8 +1,8 @@
 var configModule = configModule || angular.module('aio.config', []);
 
-configModule.factory('Config', function() {
-    var REALM = "http://www.bizigames.com";
-    var APP_NAME = "BiziGames";
+configModule.factory('Config', function () {
+    var REALM = 'http://www.bizigames.com';
+    var APP_NAME = 'BiziGames';
 
     var POINTS = {
         GIVE_AWAY: 20000,
@@ -14,17 +14,17 @@ configModule.factory('Config', function() {
         PLAY_NEW_GAME: 999
     };
 
-    var INVITE_FRIENDS_POST = function() {
+    var INVITE_FRIENDS_POST = function () {
         return {
-            NAME: "Let's play together fun games on " + APP_NAME,
-            CAPTION: "Win coins, win cool prizes!",
+            NAME: 'Let\'s play together fun games on ' + APP_NAME,
+            CAPTION: 'Win coins, win cool prizes!',
             DESCRIPTION: (
                 'A small JavaScript library that allows you to harness ' +
                 'the power of Facebook, bringing the user\'s identity, ' +
                 'social graph and distribution power to your site.'
             ),
             LINK: REALM,
-            PICTURE: ""
+            PICTURE: ''
         };
     };
 
@@ -33,13 +33,13 @@ configModule.factory('Config', function() {
         APP_NAME: APP_NAME,
         FIREBASE_URL: 'https://bizibizi.firebaseio.com',
         POINTS: POINTS,
-        // CHROME_APP_ID: "heplncibihkggagnaaoigdhkgjmmllme",
-        CHROME_APP_ID: "amlhfkalaoikfbpoolhpdhignhjhlhko",
+        // CHROME_APP_ID: 'heplncibihkggagnaaoigdhkgjmmllme',
+        CHROME_APP_ID: 'amlhfkalaoikfbpoolhpdhignhjhlhko',
         IS_CHROME: (typeof chrome !== 'undefined' && chrome.webstore)
     };
 
-    var developmentConfig = function() {
-        REALM = "http://localhost:63342/gamesportal/client/build/index.html#/";
+    var developmentConfig = function () {
+        REALM = 'http://localhost:63342/gamesportal/client/build/index.html#/';
 
         return angular.extend(baseConfig, {
             FACEBOOK_APP_ID: '638964789507220',
@@ -47,7 +47,7 @@ configModule.factory('Config', function() {
         });
     };
 
-    var productionConfig = function() {
+    var productionConfig = function () {
         return angular.extend(baseConfig, {
             FACEBOOK_APP_ID: '224435141079794',
             INVITE_FRIENDS_POST: INVITE_FRIENDS_POST()

@@ -1,27 +1,28 @@
 var gamesModule = gamesModule || angular.module('aio.games', []);
 
 gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
-    function($log, $q, $timeout, $http, Firebase) {
+    function ($log, $q, $timeout, $http, Firebase) {
 
         var localStorageKey = 'games';
         var oldTimeout = 1000 * 3600 * 24;
         var veryOldTimeout = 1000 * 3600 * 24 * 7;
         var initting = $q.defer();
 
-        var initLocalStorage = function() {
+        var initLocalStorage = function () {
             try {
                 if (isLocalStorage()) {
                     var str = localStorage.getItem(localStorageKey);
                     var obj = JSON.parse(str);
                     if (obj.games && obj.games) {
-                        if (isVeryOld(obj.timestamp)) {} else if (isOld(obj.timestamp)) {
+                        if (isVeryOld(obj.timestamp)) {
+
+                        } else if (isOld(obj.timestamp)) {
                             refreshFirebase();
                             return initting.resolve(obj.games);
                         } else {
                             return initting.resolve(obj.games);
                         }
                     }
-
                 }
 
                 initFirebase();
@@ -30,24 +31,24 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
             }
         };
 
-        var refreshFirebase = function() {
-            Firebase.getGames().then(function(games) {
+        var refreshFirebase = function () {
+            Firebase.getGames().then(function (games) {
                 storeGames(games);
             });
         };
 
-        var initFirebase = function() {
+        var initFirebase = function () {
             console.log('initFirebase');
-            Firebase.getGames().then(function(games) {
+            Firebase.getGames().then(function (games) {
                 initting.resolve(games);
                 storeGames(games);
             }).
-            catch (function() {
+            catch (function () {
                 initting.reject();
             });
         };
 
-        var storeGames = function(array) {
+        var storeGames = function (array) {
             if (isLocalStorage()) {
                 var obj = {
                     timestamp: Date.now(),
@@ -62,15 +63,15 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
             }
         };
 
-        var isLocalStorage = function() {
+        var isLocalStorage = function () {
             return localStorage && localStorage.getItem;
         };
 
-        var isOld = function(timestamp) {
+        var isOld = function (timestamp) {
             return (Date.now() - parseInt(timestamp) >= oldTimeout);
         };
 
-        var isVeryOld = function(timestamp) {
+        var isVeryOld = function (timestamp) {
             return (Date.now() - parseInt(timestamp) >= veryOldTimeout);
         };
 
@@ -87,7 +88,7 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
     }
 ]).controller('GameCtrl', ['$scope', '$log', '$q', '$timeout', '$http', '$stateParams', '$state', 'Firebase', 'Games', 'GamesHelpers',
 
-    function($scope, $log, $q, $timeout, $http, $stateParams, $state, Firebase, Games, GamesHelpers) {
+    function ($scope, $log, $q, $timeout, $http, $stateParams, $state, Firebase, Games, GamesHelpers) {
         var pointsPerGame = 100;
 
         /**
@@ -99,14 +100,14 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
          * and if yes whether game is unlocked.
          * if game isn't unlocked, offer to unlock the game
          */
-        var init = function() {
+        var init = function () {
             // get game ID
             var gameId = $stateParams.gameID;
             // check if game ID is ok
             if (!gameId) $state.go('main');
 
             // find game in the games DB
-            GamesHelpers.findGameById(gameId).then(function(game) {
+            GamesHelpers.findGameById(gameId).then(function (game) {
                 // check if found game
                 if (!game) {
                     return $state.go('main');
@@ -119,7 +120,7 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
             });
 
             // get more games
-            Games.then(function(games) {
+            Games.then(function (games) {
                 $scope.moreGames = _.shuffle(games).slice(0, 14);
             });
         };
@@ -128,9 +129,9 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
          * check if game is premium, and if user unlocked the game
          * @param game
          */
-        var checkPremium = function(game) {
+        var checkPremium = function (game) {
             // check access
-            Firebase.checkAccessToGame(game).then(function(access) {
+            Firebase.checkAccessToGame(game).then(function (access) {
                 if (access) {
                     // access granted - play game
                     $scope.game = game;
@@ -141,7 +142,7 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
                     $scope.overlayUnlockGame = true;
                 }
             }).
-            catch (function() {
+            catch (function () {
                 alert('Error check premium');
             });
         };
@@ -150,12 +151,12 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
          * unlock the game by paying coins
          * @param game
          */
-        $scope.unlockGame = function(game) {
-            Firebase.unlockGame(game).then(function() {
+        $scope.unlockGame = function (game) {
+            Firebase.unlockGame(game).then(function () {
                 $scope.game = game;
                 $scope.lockedGame = null;
                 $scope.overlayUnlockGame = false;
-            }, function() {
+            }, function () {
 
             });
         };
@@ -166,7 +167,7 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
 
 ]).controller('EditGameCtrl', ['$scope', '$log', '$q', '$timeout', '$http', '$stateParams', '$state', 'Firebase', 'Games', 'GamesHelpers',
 
-    function($scope, $log, $q, $timeout, $http, $stateParams, $state, Firebase, Games, GamesHelpers) {
+    function ($scope, $log, $q, $timeout, $http, $stateParams, $state, Firebase, Games, GamesHelpers) {
 
         /**
          * initializes the service.
@@ -174,7 +175,7 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
          * and find it in the games DB.
          * use game number instead if provided
          */
-        var init = function() {
+        var init = function () {
             // get game ID
             var gameId = $stateParams.gameID;
             var gamePromise;
@@ -187,31 +188,31 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
 
             // find game in the games DB
             if (gamePromise) {
-                gamePromise.then(function(game) {
+                gamePromise.then(function (game) {
                     // check if found game
                     if (!game) {
                         alert('Cant find the game with game id' + gameId);
                     } else {
                         $scope.game = game;
-                        GamesHelpers.getGameIndex(game.id).then(function(index) {
+                        GamesHelpers.getGameIndex(game.id).then(function (index) {
                             $scope.gameIndex = index;
                         });
 
                     }
 
                 }).
-                catch (function() {
+                catch (function () {
                     alert('Cant find the game with game id' + gameId);
                 });
             }
 
         };
 
-        $scope.nextAndSave = function() {
+        $scope.nextAndSave = function () {
             var game = $scope.game;
             game.priority = game.priority || 1000;
-            Firebase.setGameWithPriority(game, function() {
-                GamesHelpers.findNextGameById(game.id).then(function(newGame) {
+            Firebase.setGameWithPriority(game, function () {
+                GamesHelpers.findNextGameById(game.id).then(function (newGame) {
                     if (newGame) {
                         $state.go('editGame', {
                             gameID: newGame.id
@@ -225,9 +226,9 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
 
         };
 
-        $scope.previousGame = function() {
+        $scope.previousGame = function () {
             var game = $scope.game;
-            GamesHelpers.findPreviousGameById(game.id).then(function(newGame) {
+            GamesHelpers.findPreviousGameById(game.id).then(function (newGame) {
                 if (newGame)
                     $state.go('editGame', {
                         gameID: newGame.id
@@ -243,7 +244,7 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
     }
 
 ]).factory('GamesHelpers', ['Games', 'Firebase', 'Config',
-    function(Games, Firebase, Config) {
+    function (Games, Firebase, Config) {
 
         var gamesArr;
 
@@ -252,8 +253,8 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
          * @param gameID
          * @returns {*}
          */
-        var findGameById = function(gameID) {
-            return Games.then(function(games) {
+        var findGameById = function (gameID) {
+            return Games.then(function (games) {
                 return _.findWhere(games, {
                     id: gameID
                 });
@@ -265,8 +266,8 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
          * @param gameID
          * @returns {*}
          */
-        var findNextGameById = function(gameID) {
-            return Games.then(function(games) {
+        var findNextGameById = function (gameID) {
+            return Games.then(function (games) {
                 gamesArr = gamesArr || _.toArray(games);
                 var current = _.findWhere(gamesArr, {
                     id: gameID
@@ -281,8 +282,8 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
          * @param gameID
          * @returns {*}
          */
-        var findPreviousGameById = function(gameID) {
-            return Games.then(function(games) {
+        var findPreviousGameById = function (gameID) {
+            return Games.then(function (games) {
                 gamesArr = gamesArr || _.toArray(games);
                 var current = _.findWhere(gamesArr, {
                     id: gameID
@@ -294,8 +295,8 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
             });
         };
 
-        var getGameIndex = function(gameID) {
-            return Games.then(function(games) {
+        var getGameIndex = function (gameID) {
+            return Games.then(function (games) {
                 gamesArr = gamesArr || _.toArray(games);
                 var current = _.findWhere(gamesArr, {
                     id: gameID
@@ -308,7 +309,7 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
         /**
          * Raise user's points for playing a game
          */
-        var raisePointsForGame = function(game, options) {
+        var raisePointsForGame = function (game, options) {
             var amount = 0;
             options = options || {};
 
