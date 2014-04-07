@@ -1,6 +1,4 @@
-
 var analyticsModule = analyticsModule || angular.module('aio.analytics', []);
-
 
 //global
 var _gaq = _gaq || [];
@@ -39,7 +37,7 @@ analyticsModule.factory('Analytics', ['$rootScope', '$log', '$q', 'Constants', '
 
             _gaq.push(['_setDomainName', 'none']);
             //track pageview
-            if(trackPageview) _gaq.push(['_trackPageview']);
+            if (trackPageview) _gaq.push(['_trackPageview']);
             //report app_load
             reportEvent(501, {
                 label: C.APP_VERSION
@@ -55,16 +53,16 @@ analyticsModule.factory('Analytics', ['$rootScope', '$log', '$q', 'Constants', '
                 category: 'app_load',
                 action: 'load'
             },
-            601 : {
+            601: {
                 category: 'select_provider'
             },
-            701 : {
+            701: {
                 category: 'update',
                 action: 'remote_json'
             },
-            702 : {
-                category : 'install',
-                action   : 'install'
+            702: {
+                category: 'install',
+                action: 'install'
             }
         };
 
@@ -96,7 +94,6 @@ analyticsModule.factory('Analytics', ['$rootScope', '$log', '$q', 'Constants', '
             _event.label = typeof params.label !== 'undefined' ? String(params.label) : '';
             //report action as string
             _event.action = typeof params.action !== 'undefined' ? String(params.action) : _event.action;
-
 
             switch (eventId) {
 
