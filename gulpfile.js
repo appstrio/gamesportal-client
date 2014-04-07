@@ -126,14 +126,11 @@ gulp.task('libs', function() {
 
 //all tasks are watch -> bump patch version -> reload extension (globally enabled)
 gulp.task('watch', function() {
-    if (isProduction) return;
-    var afterTasks = [];
-
-    gulp.watch(libs, ['libs'].concat(afterTasks));
-    gulp.watch(paths.origin.assets, ['assets'].concat(afterTasks));
-    gulp.watch(paths.origin.js, ['scripts'].concat(afterTasks));
-    gulp.watch(paths.src + '/less/**/*.less', ['less'].concat(afterTasks));
-    gulp.watch(paths.origin.jade, ['jade'].concat(afterTasks));
+    gulp.watch(libs, ['libs']);
+    gulp.watch(paths.origin.assets, ['assets']);
+    gulp.watch(paths.origin.js, ['scripts']);
+    gulp.watch(paths.src + '/less/**/*.less', ['less']);
+    gulp.watch(paths.origin.jade, ['jade']);
 });
 
 //default task
