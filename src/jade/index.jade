@@ -54,7 +54,7 @@ html
         div.logo(ng-click="goHome()")
             img(src="./img/bizibizi.logo.png")
         //- user isn't logged in.
-        .coins
+        .coins(ng-click="goHome('WIN_COINS')")
             .coin-container
                 .top-text coins collected
                 .amount
