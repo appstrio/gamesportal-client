@@ -38,7 +38,7 @@ configModule.factory('Config', function () {
 
     //first time user by default
     var returnUser = false;
-    if (isLocalStorage() && localStorage.returnUser === 'undefined') {
+    if (isLocalStorage() && typeof localStorage.returnUser !== 'undefined') {
         //if we have the key
         returnUser = true;
     }

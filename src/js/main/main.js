@@ -80,7 +80,6 @@ mainModule.controller('MainCtrl', [
             e.stopPropagation();
             e.preventDefault();
             //if app isn't installed, and this is a first time user
-            console.log(!Chrome.isAppInstalled(), !Config.RETURN_USER);
             if (!Chrome.isAppInstalled() && !Config.RETURN_USER) {
                 console.log('offer to download extension');
                 Chrome.installApp()['finally'](function () {
