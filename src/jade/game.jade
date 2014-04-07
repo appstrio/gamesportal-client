@@ -1,23 +1,24 @@
 .game-wrppaer
     .top-ad-unit
-        img(src="./img/728x90.png")
+        img(src="./img/728x90.png", width="728", height="90", alt="Your ad here top placeholder")
+
     .game-embed-container
         .header
-            .back-button
-                a(type="button",class="btn btn-warning", ui-sref="main")
-                    i(class="glyphicon glyphicon-chevron-left")
+            //- .back-button
+                //- a(type="button",class="btn btn-warning", ui-sref="main")
+                    //- i(class="glyphicon glyphicon-chevron-left")
             .game-name(ng-bind="game.name")
         .main
             .left
                 .left-ad-unit
-                    img(src="./img/160x600.png")
+                    img(src="./img/160x600.png", width="160", height="600", alt="Your ad here placeholder")
             .middle
                 .embedding(ng-style="{width : game.width + 'px', height : game.height + 'px'}")
                     div.loader
                     div.include(ng-include="'embed-' + game.source + '.html'", ng-if="game")
             .right
                 .right-ad-unit
-                    img(src="./img/160x600.png")
+                    img(src="./img/160x600.png", width="160", height="600", alt="Your ad here placeholder")
         .bottom
             .more-games
                 .game(ng-repeat="game in moreGames")
@@ -25,7 +26,6 @@
                         img(class="game-thumbnail", ng-src="{{game.thumbnails[0].url}}")
                         div.name
                             div(ng-bind="game.name")
-
     .bottom-ad-unit
         img(src="./img/728x90.png")
 
