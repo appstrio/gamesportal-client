@@ -78,6 +78,8 @@ mainModule.controller('MainCtrl', ['$scope', '$log', '$q', '$timeout', '$http', 
         $scope.runGame = function(game, e) {
             e.stopPropagation();
             e.preventDefault();
+            console.log(game);
+            return;
             $state.go('game', {
                 gameID: game.id
             });

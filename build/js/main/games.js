@@ -24,9 +24,9 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
                         }
                     }
                 }
-
-                initFirebase();
             } catch (e) {
+                console.warn('Ran into', e);
+            } finally {
                 initFirebase();
             }
         };

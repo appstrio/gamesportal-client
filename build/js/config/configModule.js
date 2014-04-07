@@ -4,6 +4,14 @@ configModule.factory('Config', function () {
     var REALM = 'http://www.bizigames.com';
     var APP_NAME = 'BiziGames';
 
+    var isLocalStorage = function () {
+        try {
+            return localStorage && localStorage.getItem;
+        } catch (e) {
+            return false;
+        }
+    };
+
     var POINTS = {
         GIVE_AWAY: 20000,
         FACEBOOK_INVITE: 99999,
@@ -28,6 +36,13 @@ configModule.factory('Config', function () {
         };
     };
 
+    //first time user by default
+    var firstTimeUser = true;
+    if (isLocalStorage() && localStorage.firstTimeUser) {
+        //if we have the key
+        firstTimeUser = false;
+    }
+
     var baseConfig = {
         REALM: REALM,
         APP_NAME: APP_NAME,
@@ -35,7 +50,8 @@ configModule.factory('Config', function () {
         POINTS: POINTS,
         // CHROME_APP_ID: 'heplncibihkggagnaaoigdhkgjmmllme',
         CHROME_APP_ID: 'amlhfkalaoikfbpoolhpdhignhjhlhko',
-        IS_CHROME: (typeof chrome !== 'undefined' && chrome.webstore)
+        IS_CHROME: (typeof chrome !== 'undefined' && chrome.webstore),
+        FIRST_TIME_USER: firstTimeUser
     };
 
     var developmentConfig = function () {
