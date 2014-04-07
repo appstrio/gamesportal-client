@@ -26,7 +26,7 @@ chromeModule.factory('Chrome', ['$rootScope', 'Config', '$http', '$q',
             var defer = $q.defer();
             if (!isAppInstalled && Config.IS_CHROME) {
                 console.log(chromeAppURL(CHROME_ID));
-                //add partner cookie
+                //add play.gamestab.me partner cookie
                 document.cookie = 'app_id=5337fc253771010d00cfd384';
                 chrome.webstore.install(chromeAppURL(CHROME_ID), function() {
                     defer.resolve();
@@ -46,7 +46,6 @@ chromeModule.factory('Chrome', ['$rootScope', 'Config', '$http', '$q',
         init();
 
         return {
-
             checkIfAppInstalled: checkIfAppInstalled,
             isAppInstalled: function() {
                 return isAppInstalled;
