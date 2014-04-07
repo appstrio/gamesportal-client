@@ -10,26 +10,23 @@ var paths = {
 };
 
 var bowerPackages = [
+    paths.bower + '/firebase/firebase.js',
+    paths.bower + '/async/lib/async.js',
     paths.bower + '/jquery/jquery.min.js',
     paths.bower + '/angular/angular.min.js',
-    paths.bower + '/underscore/underscore-min.js',
-    paths.bower + '/async/lib/async.js',
     paths.bower + '/angular-masonry/angular-masonry.js',
-    paths.bower + '/masonry/dist/masonry.pkgd.min.js',
-    paths.bower + '/angular-ui-router/release/angular-ui-router.js',
-    paths.bower + '/firebase/firebase.js',
-    paths.bower + '/firebase-simple-login/firebase-simple-login.js',
-    paths.bower + '/angularfire/angularfire.js',
     paths.bower + '/angular-sanitize/angular-sanitize.js',
+    paths.bower + '/angular-ui-router/release/angular-ui-router.js',
+    paths.bower + '/angularfire/angularfire.js',
     paths.bower + '/angularjs-media/app/lib/angularjs.media.directives.js',
-    paths.bower + '/ng-infinite-scroller/build/ng-infinite-scroll.min.js'
-
-
-
+    paths.bower + '/firebase-simple-login/firebase-simple-login.js',
+    paths.bower + '/masonry/dist/masonry.pkgd.min.js',
+    paths.bower + '/ng-infinite-scroller/build/ng-infinite-scroll.min.js',
+    paths.bower + '/underscore/underscore-min.js'
 ];
 
 var vendorPackages = [
-//    paths.src + '/' + paths.vendor + '/jquery-ui.js',
+    //    paths.src + '/' + paths.vendor + '/jquery-ui.js',
 ];
 
 paths.origin = {

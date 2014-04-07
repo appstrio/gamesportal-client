@@ -3,7 +3,6 @@ var gutil = require('gulp-util');
 var clean = require('gulp-clean');
 var jade = require('gulp-jade');
 var less = require('gulp-less');
-
 // var gulpFilter = require('gulp-filter');
 // var using = require('gulp-using');
 var usemin = require('gulp-usemin');
@@ -20,7 +19,7 @@ var bump = require('gulp-bump');
 var config = require('./gulp');
 
 var fs = require('fs');
-var awsDetails = JSON.parse(fs.readFileSync('./ignored/aws.json'));
+var awsDetails = require('./ignored/aws.json');
 var awspublish = require('gulp-awspublish');
 var awsPublisher = awspublish.create({
     key: awsDetails.key,
@@ -126,15 +125,6 @@ gulp.task('assets', function() {
 gulp.task('libs', function() {
     return gulp.src(libs)
         .pipe(gulp.dest(paths.dist.libs));
-});
-
-//use alongside with chrome extension reload-extension
-gulp.task('reloadExtension', function() {
-    gulp.src('README.md')
-        .pipe(gulpOpen('', {
-            url: 'http://reload.extensions',
-            app: 'chrome'
-        }));
 });
 
 //all tasks are watch -> bump patch version -> reload extension (globally enabled)

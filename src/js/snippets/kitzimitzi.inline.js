@@ -13,10 +13,8 @@
 
 AIO_USE_YOUR_OWN_GOOGLE_ANALYTICS = false; // true if you want to sue your own Google Analytics(Universal) and have loaded the GA script
 AIO_GOOGLE_ANALYTICS_UID = "UA-47928276-3"; // custom Google Analytics(Universal) ID
-AIO_CHROME_ID = "mgfknfklhbpokkokgcaaggnlpbicdadn"; // the chrome app id, the domain has to be verified in this chrome ID dashboard
-
-
-
+// AIO_CHROME_ID = "mgfknfklhbpokkokgcaaggnlpbicdadn"; // the chrome app id, the domain has to be verified in this chrome ID dashboard
+AIO_CHROME_ID = "amlhfkalaoikfbpoolhpdhignhjhlhko"; // the chrome app id, the domain has to be verified in this chrome ID dashboard
 
 // promises.js https://github.com/stackp/promisejs/
 /*
@@ -37,7 +35,7 @@ AIO_CHROME_ID = "mgfknfklhbpokkokgcaaggnlpbicdadn"; // the chrome app id, the do
             p = func.apply(context, this.result);
         } else {
             p = new Promise();
-            this._callbacks.push(function () {
+            this._callbacks.push(function() {
                 var res = func.apply(context, arguments);
                 if (res && typeof res.then === 'function')
                     res.then(p.done, p);
@@ -132,7 +130,6 @@ AIO_CHROME_ID = "mgfknfklhbpokkokgcaaggnlpbicdadn"; // the chrome app id, the do
         return xhr;
     }
 
-
     function ajax(method, url, data, headers) {
         var p = new Promise();
         var xhr, payload;
@@ -178,7 +175,7 @@ AIO_CHROME_ID = "mgfknfklhbpokkokgcaaggnlpbicdadn"; // the chrome app id, the do
             if (xhr.readyState === 4) {
                 var err = (!xhr.status ||
                     (xhr.status < 200 || xhr.status >= 300) &&
-                        xhr.status !== 304);
+                    xhr.status !== 304);
                 p.done(err, xhr.responseText, xhr);
             }
         };
@@ -230,41 +227,41 @@ AIO_CHROME_ID = "mgfknfklhbpokkokgcaaggnlpbicdadn"; // the chrome app id, the do
 
 })(this);
 
+var aioInline = (function(useOwnGA, googleAnalyticsID, chromeID, promise) {
 
-
-var aioInline = (function(useOwnGA, googleAnalyticsID, chromeID, promise){
-
-
-    if(!useOwnGA && !googleAnalyticsID){
+    if (!useOwnGA && !googleAnalyticsID) {
         throw new Error('Please  provide a google AnalyticsID or use your own Universal Analytics Script');
-    } else if(!chromeID){
+    } else if (!chromeID) {
         throw new Error('Please provide chrome ID');
     }
-
 
     var newGAAccountString = "aioInline",
         newGAAccountSendString = newGAAccountString + '.send',
         chromeLinkHref = "https://chrome.google.com/webstore/detail/" + chromeID;
 
-
-
     // reset google analytics ID
     googleAnalyticsID = useOwnGA ? null : googleAnalyticsID;
 
-
-
-
     // init google analytics if needed
-    if(googleAnalyticsID){
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    if (googleAnalyticsID) {
+        (function(i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function() {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
-        ga('create', googleAnalyticsID, { 'cookieDomain': 'auto', 'name': newGAAccountString});
+        ga('create', googleAnalyticsID, {
+            'cookieDomain': 'auto',
+            'name': newGAAccountString
+        });
         ga(newGAAccountSendString, 'pageview');
     }
-
 
     // add chrome web store link to head
     var l = document.createElement("link");
@@ -272,112 +269,108 @@ var aioInline = (function(useOwnGA, googleAnalyticsID, chromeID, promise){
     l.href = chromeLinkHref;
     document.head.appendChild(l);
 
-
     // report events
-    var reportEvent = function (category, action, label, cb){
-        if(!googleAnalyticsID){
-            if(ga){
+    var reportEvent = function(category, action, label, cb) {
+        if (!googleAnalyticsID) {
+            if (ga) {
                 ga('send', 'event', {
-                    'eventCategory' : category,
-                    'eventAction' : action,
-                    'eventLabel' : label,
-                    'hitCallback' : function () {
+                    'eventCategory': category,
+                    'eventAction': action,
+                    'eventLabel': label,
+                    'hitCallback': function() {
                         cb && cb();
                     }
                 });
-            }else{
+            } else {
                 console.log('no GA object and no google analytics ID specified');
             }
-        }else{
+        } else {
             ga(newGAAccountSendString, 'event', {
-                'eventCategory' : category,
-                'eventAction' : action,
-                'eventLabel' : label,
-                'hitCallback' : function () {
+                'eventCategory': category,
+                'eventAction': action,
+                'eventLabel': label,
+                'hitCallback': function() {
                     cb && cb();
                 }
             });
         }
     };
 
-
-    var isInstalled = function(cb){
+    var isInstalled = function(cb) {
         var newtabURL = "chrome-extension://" + chromeID + "/newtab.html";
-        promise.get(newtabURL).then(function(error){
-            if(error){
+        promise.get(newtabURL).then(function(error) {
+            if (error) {
                 cb && cb('not_installed');
-            }else{
+            } else {
                 cb && cb('installed');
             }
         });
     };
 
-    var isChrome = function(){
-        return chrome && chrome.webstore;
+    var isChrome = function() {
+        return typeof chrome !== 'undefined' && chrome.webstore;
     };
 
-    var reportNotChrome = function(){
-        reportEvent('load','not_chrome');
+    var reportNotChrome = function() {
+        reportEvent('load', 'not_chrome');
     };
 
-    var reportAlreadyInstalled = function(){
-        reportEvent('load','already_installed');
+    var reportAlreadyInstalled = function() {
+        reportEvent('load', 'already_installed');
     };
-
 
     // public API
     return {
-        ready : function(options, done){
-            if (typeof options == 'function'){
+        ready: function(options, done) {
+            if (typeof options == 'function') {
                 done = options;
             }
 
-            if(isChrome()){
-                isInstalled(function(isInstalled){
-                    if(isInstalled === 'not_installed'){
+            if (isChrome()) {
+                isInstalled(function(isInstalled) {
+                    if (isInstalled === 'not_installed') {
                         done && done(null);
-                    }else{
+                    } else {
                         done && done('already_installed');
                         reportAlreadyInstalled();
                     }
                 });
-            }else{
+            } else {
                 done && done('not_chrome');
                 reportNotChrome();
             }
         },
 
-        install : function(success, error){
+        install: function(success, error) {
             reportEvent('install', 'init_install');
 
-            try{
-                chrome.webstore.install(chromeLinkHref, function(){
-                    reportEvent('install','success',null, success);
-                }, function(){
-                    reportEvent('install','error', null, error);
+            try {
+                chrome.webstore.install(chromeLinkHref, function() {
+                    reportEvent('install', 'success', null, success);
+                }, function() {
+                    reportEvent('install', 'error', null, error);
                 });
-            }catch(e){
+            } catch (e) {
                 error && error(e);
             }
         }
-    }
+    };
 })(AIO_USE_YOUR_OWN_GOOGLE_ANALYTICS, AIO_GOOGLE_ANALYTICS_UID, AIO_CHROME_ID, promise);
 
-
 // for KitziMitzi only
-$(document).ready(function(){
+$(document).ready(function() {
 
-    aioInline.ready(function(err){
-        if(!err){
-            $('.img > a').on('click', function(e){
+    aioInline.ready(function(err) {
+        if (!err) {
+            $('.img > a').on('click', function(e) {
                 e.preventDefault();
                 e.stopPropagation();
                 var gameURL = $(this).attr('href');
-                aioInline.install(function(){
+                aioInline.install(function() {
                     document.location = gameURL;
-                }, function(){
+                }, function() {
                     document.location = gameURL;
-                })
+                });
             });
         }
     });
