@@ -78,7 +78,7 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
             initLocalStorage();
         } else {
             initFirebase();
-        };
+        }
 
         return initting.promise;
         //    return $http.get('bizigames.json?rnd=' + Date.now()).then(function(data){
@@ -177,11 +177,12 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
         var init = function() {
             // get game ID
             var gameId = $stateParams.gameID;
+            var gamePromise;
             // check if game ID is ok
             if (!gameId) {
                 alert('No game id. Cannot continue :(');
             } else {
-                var gamePromise = GamesHelpers.findGameById(gameId);
+                gamePromise = GamesHelpers.findGameById(gameId);
             }
 
             // find game in the games DB

@@ -26,7 +26,14 @@ angular.module('myApp', ['aio.main', 'aio.settings', 'aio.analytics', 'aio.games
                 'self',
                 'http://**',
                 // Allow loading from our assets domain.  Notice the difference between * and **.
-                'http://swf.gamedistribution.com/**', 'http://www.myplayyard.com/**', 'http://external.kongregate-games.com/**', 'http://cdn1.kongcdn.com/**', 'http://external.kongregate-games.com/**', 'http://e.miniclip.com/**', 'http://static.miniclip.com/**', 'http://www.miniclip.com/**'
+                'http://swf.gamedistribution.com/**',
+                'http://www.myplayyard.com/**',
+                'http://external.kongregate-games.com/**',
+                'http://cdn1.kongcdn.com/**',
+                'http://external.kongregate-games.com/**',
+                'http://e.miniclip.com/**',
+                'http://static.miniclip.com/**',
+                'http://www.miniclip.com/**'
             ]);
 
         }
