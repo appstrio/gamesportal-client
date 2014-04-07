@@ -3,21 +3,21 @@
  */
 angular.module('myApp', ['aio.main', 'aio.settings', 'aio.analytics', 'aio.games', 'aio.firebase', 'wu.masonry', 'ui.router', 'ngSanitize', 'aio.counter', 'angularjs.media.directives', 'infinite-scroll', 'aio.win', 'aio.leaderboard', 'aio.facebook', 'aio.config', 'aio.chrome', 'aio.common'])
     .config(['$stateProvider', '$urlRouterProvider', '$sceDelegateProvider',
-        function($stateProvider, $urlRouterProvider, $sceDelegateProvider) {
-            $urlRouterProvider.otherwise("/");
+        function ($stateProvider, $urlRouterProvider, $sceDelegateProvider) {
+            $urlRouterProvider.otherwise('/');
 
             $stateProvider
                 .state('main', {
-                    url: "/:overlayID",
-                    templateUrl: "main.html"
+                    url: '/:overlayID',
+                    templateUrl: 'main.html'
                 })
                 .state('game', {
-                    url: "/games/:gameID",
-                    templateUrl: "game.html",
+                    url: '/games/:gameID',
+                    templateUrl: 'game.html',
                     controller: 'GameCtrl'
                 }).state('editGame', {
-                    url: "/games/:gameID/edit",
-                    templateUrl: "edit-game.html",
+                    url: '/games/:gameID/edit',
+                    templateUrl: 'edit-game.html',
                     controller: 'EditGameCtrl'
                 });
 
@@ -40,7 +40,7 @@ angular.module('myApp', ['aio.main', 'aio.settings', 'aio.analytics', 'aio.games
     ]);
 
 //first boot angular
-angular.element(document).ready(function() {
+angular.element(document).ready(function () {
     //bootstrap
     angular.bootstrap(document, ['myApp']);
 });
