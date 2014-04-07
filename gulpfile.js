@@ -21,11 +21,8 @@ var config = require('./gulp');
 var fs = require('fs');
 var awsDetails = require('./ignored/aws.json');
 var awspublish = require('gulp-awspublish');
-var awsPublisher = awspublish.create({
-    key: awsDetails.key,
-    secret: awsDetails.secret,
-    bucket: awsDetails.bucket
-});
+var awsPublisher = awspublish.create(awsDetails);
+
 var awsHeaders = {
     'Cache-Control': 'max-age=315360000, no-transform, public'
 };

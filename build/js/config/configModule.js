@@ -33,7 +33,8 @@ configModule.factory('Config', function() {
         APP_NAME: APP_NAME,
         FIREBASE_URL: 'https://bizibizi.firebaseio.com',
         POINTS: POINTS,
-        CHROME_APP_ID: "heplncibihkggagnaaoigdhkgjmmllme",
+        // CHROME_APP_ID: "heplncibihkggagnaaoigdhkgjmmllme",
+        CHROME_APP_ID: "amlhfkalaoikfbpoolhpdhignhjhlhko",
         IS_CHROME: (typeof chrome !== 'undefined' && chrome.webstore)
     };
 
