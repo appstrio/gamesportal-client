@@ -77,7 +77,8 @@ html
                 img.connect(ng-if="!userData.user.info", src="./img/anonymous.png", ng-click="login()")
 
         .top-right-icons
-            iframe(src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Ffacebook.com%2Fkizi&amp;send=false&amp;layout=button_count&amp;width=90&amp;show_faces=false&amp;font&amp;colorscheme=light&amp;action=like&amp;height=21&amp;appId=144148175670416&amp;locale=en_US", scrolling="no", frameborder="0", style="border:none; overflow:hidden; width:90px; height:21px;margin-top:5px;", allowtransparency="true")
+            //- div(style="width:90px;height:21px;")
+                //- iframe(src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fplay.gamestab.me&width=100&layout=button_count&action=like&show_faces=false&share=false&height=21&appId=24751036751", scrolling="no", frameborder="0", style="border:none; overflow:hidden; width:100px; height:21px;", allowTransparency="true")
             a(href="#", ng-click="goHome('contact')")
                 img(src="./img/envelope.png", alt="contact us link")
             a(href="#", ng-click="goHome('privacy')")
