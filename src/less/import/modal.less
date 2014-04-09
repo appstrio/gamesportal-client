@@ -7,7 +7,6 @@
     height:100%;
     z-index:100000;
     overflow:hidden;
-
     .modal-dialog{
         .close-button {
             background-size: 52px 52px;
@@ -20,155 +19,152 @@
             transition: background linear 0.5s;
             width: 52px;
             z-index: 999;
-
             &:hover {
                 background-size: 52px 52px;
                 background: url(../img/cancel-button-red.png) no-repeat 0 0;
                 transition: background linear 0.5s;
             }
         }
-
         background: url(../img/bg.png) repeat;
         border-radius: 12px;
         border:5px white solid;
         height:420px;
         margin: 150px auto;
         width:600px;
+              * {
+                  font-family: Lobster, cursive;
+              }
+              .win-coins-top-offer {
+                  width: 500px;
+                  height: 100px;
+                  margin: 0 auto;
+                  border: 4px solid #FFFFFF;
+                  border-radius: 10px;
+                  background: -moz-linear-gradient(top,  rgba(252,255,76,1) 0%, rgba(255,123,13,1) 100%); /* FF3.6+ */
+                  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(252,255,76,1)), color-stop(100%,rgba(255,123,13,1))); /* Chrome,Safari4+ */
+                  background: -webkit-linear-gradient(top,  rgba(252,255,76,1) 0%,rgba(255,123,13,1) 100%); /* Chrome10+,Safari5.1+ */
+                  background: -o-linear-gradient(top,  rgba(252,255,76,1) 0%,rgba(255,123,13,1) 100%); /* Opera 11.10+ */
+                  background: -ms-linear-gradient(top,  rgba(252,255,76,1) 0%,rgba(255,123,13,1) 100%); /* IE10+ */
+                  background: linear-gradient(to bottom,  rgba(252,255,76,1) 0%,rgba(255,123,13,1) 100%); /* W3C */
+                  .connect-with-action {
+                      float: left;
+                      margin-top: 12px;
+                      text-align: center;
+                      margin-left: 20px;
+                      button {
+                          background: rgb(204,0,0); /* Old browsers */
+                          background: -moz-linear-gradient(top,  rgba(204,0,0,1) 0%, rgba(204,0,0,1) 100%); /* FF3.6+ */
+                          background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(204,0,0,1)), color-stop(100%,rgba(204,0,0,1))); /* Chrome,Safari4+ */
+                          background: -webkit-linear-gradient(top,  rgba(204,0,0,1) 0%,rgba(204,0,0,1) 100%); /* Chrome10+,Safari5.1+ */
+                          background: -o-linear-gradient(top,  rgba(204,0,0,1) 0%,rgba(204,0,0,1) 100%); /* Opera 11.10+ */
+                          background: -ms-linear-gradient(top,  rgba(204,0,0,1) 0%,rgba(204,0,0,1) 100%); /* IE10+ */
+                          background: linear-gradient(to bottom,  rgba(204,0,0,1) 0%,rgba(204,0,0,1) 100%); /* W3C */
+                          filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cc0000', endColorstr='#cc0000',GradientType=0 ); /* IE6-9 */
+                          height: 68px;
+                          color: #FFFFFF;
+                          font-size: 26px;
+                          border: 3px solid #861d00;
+                          border-radius: 10px;
+                          cursor: pointer;
+                          padding: 0 50px;
+                      }
+                  }
+                  .connect-with-offer {
+                      color: #992d00;
+                      float:right;
+                      margin: 0 10px 0 0;
+                      .top-text {
+                          text-align:center;
+                          white-space: nowrap;
+                          font-size:32px;
+                      }
+                      .coin-img {
+                          img {
+                              width:100px;
+                              height:80px;
+                          }
+                      }
+                      .coin-award {
+                          font-size: 35px;
+                          color: #FFFFFF;
+                      }
+                  }
+              }
+              h1{
+                  font-size: 55px;
+                  text-align: center;
+                  color:white;
+                  letter-spacing: 2px;
+              }
+          }
+      }
 
-        .win-coins-top-offer {
-            width: 500px;
-            height: 100px;
-            margin: 0 auto;
-            border: 4px solid #FFFFFF;
-            border-radius: 10px;
-
-            background: -moz-linear-gradient(top,  rgba(252,255,76,1) 0%, rgba(255,123,13,1) 100%); /* FF3.6+ */
-            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(252,255,76,1)), color-stop(100%,rgba(255,123,13,1))); /* Chrome,Safari4+ */
-            background: -webkit-linear-gradient(top,  rgba(252,255,76,1) 0%,rgba(255,123,13,1) 100%); /* Chrome10+,Safari5.1+ */
-            background: -o-linear-gradient(top,  rgba(252,255,76,1) 0%,rgba(255,123,13,1) 100%); /* Opera 11.10+ */
-            background: -ms-linear-gradient(top,  rgba(252,255,76,1) 0%,rgba(255,123,13,1) 100%); /* IE10+ */
-            background: linear-gradient(to bottom,  rgba(252,255,76,1) 0%,rgba(255,123,13,1) 100%); /* W3C */
-
-            .connect-with-action {
-                float: left;
-                margin-top: 12px;
-                text-align: center;
-                margin-left: 40px;
-                button {
-                    background: rgb(204,0,0); /* Old browsers */
-                    background: -moz-linear-gradient(top,  rgba(204,0,0,1) 0%, rgba(204,0,0,1) 100%); /* FF3.6+ */
-                    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(204,0,0,1)), color-stop(100%,rgba(204,0,0,1))); /* Chrome,Safari4+ */
-                    background: -webkit-linear-gradient(top,  rgba(204,0,0,1) 0%,rgba(204,0,0,1) 100%); /* Chrome10+,Safari5.1+ */
-                    background: -o-linear-gradient(top,  rgba(204,0,0,1) 0%,rgba(204,0,0,1) 100%); /* Opera 11.10+ */
-                    background: -ms-linear-gradient(top,  rgba(204,0,0,1) 0%,rgba(204,0,0,1) 100%); /* IE10+ */
-                    background: linear-gradient(to bottom,  rgba(204,0,0,1) 0%,rgba(204,0,0,1) 100%); /* W3C */
-                    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cc0000', endColorstr='#cc0000',GradientType=0 ); /* IE6-9 */
-                    height: 68px;
-                    color: #FFFFFF;
-                    font-size: 26px;
-                    border: 3px solid #861d00;
-                    border-radius: 10px;
-                    cursor: pointer;
-                    padding: 0 50px;
-                }
-            }
-            .connect-with-offer {
-                font-size: 21px;
-                color: #992d00;
-                float:right;
-                margin: 5px 20px 0 0;
-                .coin-award {
-                    font-size: 43px;
-                    color: #FFFFFF;
-                }
-            }
-        }
-
-        h1{
-            font-size: 45px;
-            text-align: center;
-            color:white;
-            font-weight:bold;
-        }
-    }
-}
-
-.modal-overlay-fade.premium-game-modal{
-    .modal-dialog{
-        .price-wrapper{
-            margin: 22px auto;
-            text-align: center;
-            .price{
-                margin-left:20px;
-                font-size: 38px;
-                font-weight: bold;
-                color:white;
-            }
-            img{
-
-            }
-        }
-        .game-wrapper{
-            h2.game-name{
-                text-align: center;
-                color: rgb(129, 40, 40);
-                font-weight: bold;
-            }
-            .game-thumbnail{
-                width:100px;
-                height:100px;
-                margin:0 auto;
-                img{
-                    width:100px;
-                    height:100px;
-
-                }
-            }
-        }
-        .unlock-button-wrapper{
-            text-align: center;
-        }
-        .no-funds{
-            text-align: center;
-            h3{
-                font-size:14px;
-            }
-        }
-    }
-}
-
-
-
-.modal-overlay-fade.leaderboard{
-    .modal-dialog{
-        table{
-            margin:0 auto;
-            width:400px;
-            list-style: none;
-            tr{
-                height:45px;
-                td.profile-pic{
-                    img{
-                        width:30px;
-                        height:30px;
-                        border-radius: 8px;
-                    }
-                }
-                td.name{
-                    font-size:20px;
-
-                }
-
-                td.points{
-                    font-size:20px;
-
-                }
-
-                &:first-child{
-                    color: rgb(165, 22, 22);
-                }
-
-            }
-        }
-    }
-}
+      .modal-overlay-fade.premium-game-modal{
+          .modal-dialog{
+              .price-wrapper{
+                  margin: 22px auto;
+                  text-align: center;
+                  .price{
+                      margin-left:20px;
+                      font-size: 38px;
+                      font-weight: bold;
+                      color:white;
+                  }
+                  img{
+                  }
+              }
+              .game-wrapper{
+                  h2.game-name{
+                      text-align: center;
+                      color: rgb(129, 40, 40);
+                      font-weight: bold;
+                  }
+                  .game-thumbnail{
+                      width:100px;
+                      height:100px;
+                      margin:0 auto;
+                      img{
+                          width:100px;
+                          height:100px;
+                      }
+                  }
+              }
+              .unlock-button-wrapper{
+                  text-align: center;
+              }
+              .no-funds{
+                  text-align: center;
+                  h3{
+                      font-size:14px;
+                  }
+              }
+          }
+      }
+      .modal-overlay-fade.leaderboard{
+          .modal-dialog{
+              table{
+                  margin:0 auto;
+                  width:400px;
+                  list-style: none;
+                  tr{
+                      height:45px;
+                      td.profile-pic{
+                          img{
+                              width:30px;
+                              height:30px;
+                              border-radius: 8px;
+                          }
+                      }
+                      td.name{
+                          font-size:20px;
+                      }
+                      td.points{
+                          font-size:20px;
+                      }
+                      &:first-child{
+                          color: rgb(165, 22, 22);
+                      }
+                  }
+              }
+          }
+      }
