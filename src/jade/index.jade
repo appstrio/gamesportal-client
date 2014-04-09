@@ -84,7 +84,7 @@ html
     .main(ui-view)
     .modal-overlay-fade.win-coins(ng-if="overlayID=='WIN_COINS'", ng-controller="WinCtrl", overlay="'WIN_COINS'")
         .modal-dialog
-            .close-button
+            .close-button(ng-click="closeOverlay('WIN_COINS')")
             h1 Win Free Coins!
             .win-coins-top-offer
                 .connect-with-action
