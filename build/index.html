@@ -56,12 +56,12 @@
     <!--div.cup(ng-show="userData.user")-->
     <!--    a.cup-img(href="#", ng-click="openMainOverlay('LEADERBOARD')")-->
     <!--        img(src="./img/cup.png")-->
-    <div class="banner">
-      <div class="bg-banner">
-        <div class="bg-ad"></div>
-      </div>
-    </div>
   </header>
+  <div class="banner">
+    <div class="bg-banner">
+      <div class="bg-ad"></div>
+    </div>
+  </div>
   <div ui-view class="main"></div>
   <div ng-if="overlayID=='WIN_COINS'" ng-controller="WinCtrl" overlay="'WIN_COINS'" class="modal-overlay-fade win-coins">
     <div class="modal-dialog">
