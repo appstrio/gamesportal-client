@@ -46,7 +46,6 @@ html
         script(src='./js/user/firebaseService.js')
         script(src='./js/user/win.js')
         script(src='./js/app.js')
-
         <!-- endbuild -->
 
         title GamesPortal
@@ -77,6 +76,11 @@ html
                 //- dummy picture
                 img.connect(ng-if="!userData.user.info", src="./img/anonymous.png", ng-click="login()")
 
+        .top-right-icons
+            a(href="#", ng-click="goHome('contact')")
+                img(src="./img/envelope.png", alt="contact us link")
+            a(href="#", ng-click="goHome('privacy')")
+                img(src="./img/shield_grey.png", alt="privacy link")
         //div.cup(ng-show="userData.user")
         //    a.cup-img(href="#", ng-click="openMainOverlay('LEADERBOARD')")
         //        img(src="./img/cup.png")
