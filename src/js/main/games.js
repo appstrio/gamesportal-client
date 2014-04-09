@@ -123,8 +123,10 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
             Games.then(function (games) {
                 var howMany = 8;
                 $scope.moreGames = _.shuffle(games).slice(0, howMany);
+                $scope.evenMoreGames = _.shuffle(games).slice(0, howMany/2);
             });
         };
+
 
         /**
          * check if game is premium, and if user unlocked the game

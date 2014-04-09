@@ -1,7 +1,4 @@
 .game-wrapper
-    .top-ad-unit
-        img(src="./img/728x90.png", width="728", height="90", alt="Your ad here top placeholder")
-
     .game-embed-container
         .header
             //- .back-button
@@ -10,8 +7,13 @@
             .game-name(ng-bind="game.name")
         .main
             .left
-                .left-ad-unit
-                    img(src="./img/160x600.png", width="160", height="600", alt="Your ad here placeholder")
+                //.left-ad-unit
+                .more-games-left
+                    .game(ng-repeat="game in evenMoreGames | limitTo:4 " style="margin:15px 20px")
+                        a(ui-sref="game({gameID: game.id})")
+                            img.game-thumbnail(ng-src="{{game.thumbnails[0].url}}")
+                            div.name
+                                div(ng-bind="game.name")
             .middle
                 .embedding(ng-style="{width : game.width + 'px', height : game.height + 'px'}")
                     div.loader
@@ -20,14 +22,12 @@
                 .right-ad-unit
                     img(src="./img/160x600.png", width="160", height="600", alt="Your ad here placeholder")
         .bottom
-            .more-games
+            .more-games-bottom
                 .game(ng-repeat="game in moreGames")
                     a(ui-sref="game({gameID: game.id})")
                         img.game-thumbnail(ng-src="{{game.thumbnails[0].url}}")
                         div.name
                             div(ng-bind="game.name")
-    .bottom-ad-unit
-        img(src="./img/728x90.png")
 
 .modal-overlay-fade.premium-game-modal(ng-if="overlayUnlockGame")
     .modal-dialog
