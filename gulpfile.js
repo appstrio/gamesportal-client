@@ -74,7 +74,7 @@ gulp.task('serve', ['build'], function () {
     });
 });
 
-gulp.task('livereload', function () {
+gulp.task('livereload', ['build'], function () {
     $gulp.connect.reload();
 });
 
@@ -133,7 +133,7 @@ gulp.task('default', function () {
 
 // aws
 gulp.task('deploy', ['build'], function () {
-    return gulp.src('./build/**')
+    return gulp.src('./build/**/*')
         .pipe(awsPublisher.publish(awsHeaders))
         .pipe(awsPublisher.sync()) // sync local directory with bucket
     //.pipe(awsPublisher.cache()) // create a cache file to speed up next uploads
