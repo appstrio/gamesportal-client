@@ -4,7 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="google" content="notranslate">
-    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400" rel="stylesheet" type="text/css">
+    <!--link(href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400', rel='stylesheet', type='text/css')-->
+    <link href="//fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
@@ -40,7 +41,7 @@
   </head>
   <body ng-controller="MainCtrl"></body>
   <header>
-    <div ng-click="goHome()" class="logo"><img src="./img/bizibizi.logo.png"></div>
+    <div ng-click="goHome()" class="logo"><img src="./img/logo.png"></div>
     <div ng-click="goHome('WIN_COINS')" class="coins">
       <div class="coin-container">
         <div class="top-text">coins collected</div>
@@ -55,6 +56,11 @@
     <!--    a.cup-img(href="#", ng-click="openMainOverlay('LEADERBOARD')")-->
     <!--        img(src="./img/cup.png")-->
   </header>
+  <div class="banner">
+    <div class="bg-banner">
+      <div class="bg-ad"></div>
+    </div>
+  </div>
   <div ui-view class="main"></div>
   <div ng-if="overlayID=='WIN_COINS'" ng-controller="WinCtrl" overlay="'WIN_COINS'" class="modal-overlay-fade win-coins">
     <div class="modal-dialog">
