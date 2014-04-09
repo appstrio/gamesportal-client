@@ -30,9 +30,56 @@
         border:5px white solid;
         height:420px;
         margin: 150px auto;
+        overflow:hidden;
         width:600px;
               * {
                   font-family: Lobster, cursive;
+              }
+              ul.offers {
+                  position:relative;
+                  list-style:none;
+                  margin:0;
+                  padding:0;
+                  display:inline-block;
+
+                  li.offer-box {
+                      width: 160px;
+                      display: inline-block;
+                      height: 195px;
+                      text-align: center;
+                      border: 3px solid rgba(16, 49, 84, 0.68);
+                      border-radius: 10px;
+                      background: url(http://cdn0.kizi.com/assets/popups/play_now_container-6d9e6c2788c05089f73cb2dc1a5f5183.png) repeat-x;
+                      vertical-align: middle;
+                      position:relative;
+                      margin-left:8px;
+                      &:first-child {
+                          margin-left: 43px;
+                      }
+                      .top-offer {
+                          font-size:22px;
+                          color: yellow;
+                          min-height: 60px;
+                      }
+                      .win-size {
+                          font-size: 20px;
+                          color: white;
+                      }
+                      .coin-img {
+                          img {
+                              width:65px;
+                              height:45px;
+                          }
+                      }
+                      .action {
+                          position:absolute;
+                          bottom: 10px;
+                          text-align: center;
+                          margin: 0 auto;
+                          left: 0;
+                          right: 0;
+                      }
+                  }
               }
               .win-coins-top-offer {
                   width: 500px;
@@ -46,6 +93,7 @@
                   background: -o-linear-gradient(top,  rgba(252,255,76,1) 0%,rgba(255,123,13,1) 100%); /* Opera 11.10+ */
                   background: -ms-linear-gradient(top,  rgba(252,255,76,1) 0%,rgba(255,123,13,1) 100%); /* IE10+ */
                   background: linear-gradient(to bottom,  rgba(252,255,76,1) 0%,rgba(255,123,13,1) 100%); /* W3C */
+
                   .connect-with-action {
                       float: left;
                       margin-top: 12px;
@@ -80,8 +128,8 @@
                       }
                       .coin-img {
                           img {
-                              width:100px;
-                              height:80px;
+                              width:87px;
+                              height:65px;
                           }
                       }
                       .coin-award {
