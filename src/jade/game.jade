@@ -31,24 +31,28 @@
 
 .modal-overlay-fade.premium-game-modal(ng-if="overlayUnlockGame")
     .modal-dialog
+        .close-button(ng-click="goHome();")
         h1 Unlock Premium Game
-        .game-wrapper
-            h2.game-name {{lockedGame.name}}
-            div.game-thumbnail
+
+        .game-to-unlock
+            h2.game-name(ng-bind="lockedGame.name")
+            .game-thumbnail
                 img(ng-src="{{lockedGame.thumbnails[0].url}}")
+
         .price-wrapper
-            img(src="./img/coins.png")
+            img(src="./img/coins2.png")
             span.price {{lockedGame.price | number}} COINS
 
-        div.unlock-button-wrapper(ng-show="userData.user.points >= lockedGame.price")
+        .unlock-button-wrapper(ng-if="userData.user.points >= lockedGame.price")
             button(type="button", class="btn btn-warning", ng-click="goHome()") Go Back
             button(type="button", class="btn btn-success", ng-click="unlockGame(lockedGame)") Unlock
 
-        div.no-funds(ng-show="userData.user && userData.user.points < lockedGame.price")
-            h3 You don't have enough coins
-            button(type="button", class="btn btn-warning", ng-click="goHome()") Go Back
+        .no-funds(ng-if="userData.user && userData.user.points < lockedGame.price")
+            h4 You don't have enough coins
+            button(type="button", class="btn btn-primary", ng-click="goHome()") Go Back
             button(type="button", class="btn btn-success", ng-click="goHome('WIN_COINS')") Win Coins
-        div.no-funds(ng-show="!userData.user")
-            h3 Please connect in order to unlock this game
-            button(type="button", class="btn btn-warning", ng-click="goHome()") Go Back
+
+        .no-funds(ng-if="!userData.user")
+            h4 Please connect in order to unlock this game
+            button(type="button", class="btn btn-primary", ng-click="goHome()") Go Back
             button(type="button", class="btn btn-success", ng-click="login()") Connect
