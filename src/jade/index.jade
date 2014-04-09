@@ -84,6 +84,7 @@ html
     .main(ui-view)
     .modal-overlay-fade.win-coins(ng-if="overlayID=='WIN_COINS'", ng-controller="WinCtrl", overlay="'WIN_COINS'")
         .modal-dialog
+            .close-button
             h1 Win Free Coins!
             .win-coins-top-offer
                 .connect-with-action
@@ -96,21 +97,21 @@ html
             ul.offers
                 li.offer-box
                     .top-offer Invite Friends
-                    .win-size And Get {{ points.fbInvite | number}}
+                    .win-size Get {{ points.fbInvite | number}}
                     span.coin-img
                         img(src="./img/smaller_coins.png")
                     .action
                         button.btn.btn-success(ng-click="inviteFBFriends()") Get Coins
                 li.offer-box
                     .top-offer Play On Chrome
-                    .win-size And Get {{ points.chromeInstall | number}}
+                    .win-size Get {{ points.chromeInstall | number}}
                     span.coin-img
                         img(src="./img/smaller_coins.png")
                     .action
                         button.btn.btn-success(ng-click="installChromeApp()") Get Coins
                 li.offer-box
                     .top-offer Play Another Game
-                    .win-size And Get {{ points.newGame | number }}
+                    .win-size Get {{ points.newGame | number }}
                     span.coin-img
                         img(src="./img/smaller_coins.png")
                     .action

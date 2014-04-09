@@ -65,6 +65,7 @@
   <div ui-view class="main"></div>
   <div ng-if="overlayID=='WIN_COINS'" ng-controller="WinCtrl" overlay="'WIN_COINS'" class="modal-overlay-fade win-coins">
     <div class="modal-dialog">
+      <div class="close-button"></div>
       <h1>Win Free Coins!</h1>
       <div class="win-coins-top-offer">
         <div class="connect-with-action">
@@ -77,21 +78,21 @@
       <ul class="offers">
         <li class="offer-box">
           <div class="top-offer">Invite Friends</div>
-          <div class="win-size">And Get {{ points.fbInvite | number}}</div><span class="coin-img"><img src="./img/smaller_coins.png"></span>
+          <div class="win-size">Get {{ points.fbInvite | number}}</div><span class="coin-img"><img src="./img/smaller_coins.png"></span>
           <div class="action">
             <button ng-click="inviteFBFriends()" class="btn btn-success">Get Coins</button>
           </div>
         </li>
         <li class="offer-box">
           <div class="top-offer">Play On Chrome</div>
-          <div class="win-size">And Get {{ points.chromeInstall | number}}</div><span class="coin-img"><img src="./img/smaller_coins.png"></span>
+          <div class="win-size">Get {{ points.chromeInstall | number}}</div><span class="coin-img"><img src="./img/smaller_coins.png"></span>
           <div class="action">
             <button ng-click="installChromeApp()" class="btn btn-success">Get Coins</button>
           </div>
         </li>
         <li class="offer-box">
           <div class="top-offer">Play Another Game</div>
-          <div class="win-size">And Get {{ points.newGame | number }}</div><span class="coin-img"><img src="./img/smaller_coins.png"></span>
+          <div class="win-size">Get {{ points.newGame | number }}</div><span class="coin-img"><img src="./img/smaller_coins.png"></span>
           <div class="action">
             <button ng-click="installChromeApp()" class="btn btn-success">Get Coins</button>
           </div>
