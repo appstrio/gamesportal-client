@@ -1,6 +1,11 @@
 .game-wrapper{
+    background: rgba(0,0,0,.16);
+    padding-top:15px;
+    box-shadow: 0 -2px 6px #21465F;
+
     .game-embed-container{
-        width: 1263px;
+        width: 1260px;
+        height: 720px;
         margin: 0 auto;
         border-radius: 8px;
         box-sizing: content-box;
@@ -15,7 +20,7 @@
             /* background: -ms-linear-gradient(top,  #f9c667 0%,#efa721 50%,#f79621 53%,#f79621 100%); [> IE10+ <] */
             /* background: linear-gradient(to bottom,  #f9c667 0%,#efa721 50%,#f79621 53%,#f79621 100%); [> W3C <] */
             /* filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f9c667', endColorstr='#f79621',GradientType=0 ); [> IE6-9 <] */
-            width:100%;
+//            width:100%;
             margin:0;
             > div{
                 height: 100%;
@@ -26,20 +31,21 @@
             }
             .game-name{
                 margin-left: 20px;
-                color:#DEE02F;
+                color: rgb( 255, 234, 0 );
                 font-size:30px;
-                font-weight:700;
+//                font-weight:700;
                 line-height: 70px;
-                text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
-                font-family:cursive;
-                text-transform: uppercase;
+//                text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+                text-shadow: 0.5px 0.866px 0px rgb( 0, 0, 0 );
+                font-family: 'Lobster', cursive;
+//                text-transform: uppercase;
                 min-width:200px;
             }
         }
         .main{
-            background: #6189C7;
-            min-height:620px;
-            border: 1px solid rgba(66,94,136,.23);
+//            background: #6189C7;
+            min-height:720px;
+//            border: 1px solid rgba(66,94,136,.23);
             margin:0 auto;
             width:100%;
             clear:both;
@@ -47,7 +53,7 @@
                 float:left;
             }
             .left{
-                padding: 10px 10px 0 10px;
+//                padding: 10px 10px 0 10px;
                 .left-ad-unit{
                     width:160px;
                     height:600px;
@@ -61,7 +67,8 @@
                 }
             }
             .middle{
-                width:900px;
+                width:640px;
+                margin: 0 150px;
                 .embedding{
                     padding:0;
                     max-width:850px;
@@ -92,7 +99,8 @@
                 }
             }
             .right{
-                padding: 10px 10px 0 10px;
+//                padding: 10px 10px 0 10px;
+                margin-top:10px;
                 .right-ad-unit{
                     width:160px;
                     height:600px;
@@ -109,6 +117,16 @@
                 width:1190px;
                 clear:both;
             }
+        }
+
+        .straighten{
+            margin: 6px 6px;
+            border: 0;
+            transform: rotate(0deg);
+            -webkit-transform: rotate(0deg);
+            -moz-transform: rotate(0deg);
+            -o-transform: rotate(0deg);
+            -ms-transform: rotate(0deg);
         }
 
         .game{
