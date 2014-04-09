@@ -5,11 +5,13 @@
                 //- a(type="button",class="btn btn-warning", ui-sref="main")
                     //- i(class="glyphicon glyphicon-chevron-left")
             .game-name(ng-bind="game.name")
+            .pull-right
+                img(src="../img/x.png" style="margin:20px 25px;")
         .main
             .left
                 //.left-ad-unit
                 .more-games-left
-                    .game(ng-repeat="game in evenMoreGames | limitTo:4 " style="margin:15px 20px")
+                    .game(ng-repeat="game in evenMoreGames | limitTo:4")
                         a(ui-sref="game({gameID: game.id})")
                             img.game-thumbnail(ng-src="{{game.thumbnails[0].url}}")
                             div.name
