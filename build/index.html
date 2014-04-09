@@ -48,6 +48,7 @@
         <div class="amount"><span class="coin-img"><img src="./img/coins2.png"></span><span ng-if="!userData.user" class="amount-text">{{10000 | number:0 }}</span><span ng-if="userData.user" aio-counter="{{userData.user.points}}" class="amount-text"></span></div>
       </div>
     </div>
+    <div id="rays"></div>
     <div class="user-info"><span class="details">
         <div ng-if="userData.user.info" class="username">{{userData.user.info.displayName || userData.user.info.name}}</div>
         <div ng-if="!userData.user.info" ng-click="login()" class="username connect">Connect</div>
