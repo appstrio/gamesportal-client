@@ -19,7 +19,7 @@ mainModule.controller('MainCtrl', [
                 return parseInt(game.priority);
             });
 
-            var i, repeatLargeThumbnailsEvery = 20,
+            var repeatLargeThumbnailsEvery = 20,
                 lastLargeThumbnailIndex = 0;
             angular.forEach(allGames, function (game, index) {
                 angular.forEach(game.thumbnails, function (thumbnail) {

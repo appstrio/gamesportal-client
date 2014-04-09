@@ -55,7 +55,6 @@ html
     header
         div.logo(ng-click="goHome()")
             img(src="./img/logo.png")
-        //- user isn't logged in.
         .coins(ng-click="goHome('WIN_COINS')")
             .coin-container
                 .top-text coins collected
@@ -93,25 +92,25 @@ html
                     .top-text Sign In To Get
                     span.coin-img
                         img(src="./img/smaller_coins.png")
-                    span.coin-award 30,000
+                    span.coin-award {{ points.fbConnect | number}}
             ul.offers
                 li.offer-box
                     .top-offer Invite Friends
-                    .win-size And Get 50,000
+                    .win-size And Get {{ points.fbInvite | number}}
                     span.coin-img
                         img(src="./img/smaller_coins.png")
                     .action
                         button.btn.btn-success(ng-click="inviteFBFriends()") Get Coins
                 li.offer-box
                     .top-offer Play On Chrome
-                    .win-size And Get 100,000
+                    .win-size And Get {{ points.chromeInstall | number}}
                     span.coin-img
                         img(src="./img/smaller_coins.png")
                     .action
                         button.btn.btn-success(ng-click="installChromeApp()") Get Coins
                 li.offer-box
                     .top-offer Play Another Game
-                    .win-size And Get 5,000
+                    .win-size And Get {{ points.newGame | number }}
                     span.coin-img
                         img(src="./img/smaller_coins.png")
                     .action

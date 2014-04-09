@@ -71,27 +71,27 @@
           <button ng-click="login()" class="join-now">Join Now</button>
         </div>
         <div class="connect-with-offer">
-          <div class="top-text">Sign In To Get</div><span class="coin-img"><img src="./img/smaller_coins.png"></span><span class="coin-award">30,000</span>
+          <div class="top-text">Sign In To Get</div><span class="coin-img"><img src="./img/smaller_coins.png"></span><span class="coin-award">{{ points.fbConnect | number}}</span>
         </div>
       </div>
       <ul class="offers">
         <li class="offer-box">
           <div class="top-offer">Invite Friends</div>
-          <div class="win-size">And Get 50,000</div><span class="coin-img"><img src="./img/smaller_coins.png"></span>
+          <div class="win-size">And Get {{ points.fbInvite | number}}</div><span class="coin-img"><img src="./img/smaller_coins.png"></span>
           <div class="action">
             <button ng-click="inviteFBFriends()" class="btn btn-success">Get Coins</button>
           </div>
         </li>
         <li class="offer-box">
           <div class="top-offer">Play On Chrome</div>
-          <div class="win-size">And Get 100,000</div><span class="coin-img"><img src="./img/smaller_coins.png"></span>
+          <div class="win-size">And Get {{ points.chromeInstall | number}}</div><span class="coin-img"><img src="./img/smaller_coins.png"></span>
           <div class="action">
             <button ng-click="installChromeApp()" class="btn btn-success">Get Coins</button>
           </div>
         </li>
         <li class="offer-box">
           <div class="top-offer">Play Another Game</div>
-          <div class="win-size">And Get 5,000</div><span class="coin-img"><img src="./img/smaller_coins.png"></span>
+          <div class="win-size">And Get {{ points.newGame | number }}</div><span class="coin-img"><img src="./img/smaller_coins.png"></span>
           <div class="action">
             <button ng-click="installChromeApp()" class="btn btn-success">Get Coins</button>
           </div>
