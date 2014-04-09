@@ -1,46 +1,62 @@
 var winModule = winModule || angular.module('aio.win', []);
 
-winModule.controller('WinCtrl', ['$scope', 'Facebook', 'Win',
-    function ($scope, Facebook, Win) {
+winModule.controller('WinCtrl', ['$scope', 'Facebook', 'Win', 'Chrome',
+    function ($scope, Facebook, Win, Chrome) {
 
         $scope.inviteFBFriends = function () {
             Win.winFacebookInvite().then(function () {
-                alert('success');
+                console.log('succesfully shared to friends');
             }).
             catch (function (msg) {
-                alert('error:' + msg);
+                console.warn('Problem sharing to friends', msg);
             });
         };
 
+        //true if user has app installed
+        $scope.isChromeInstalled = Chrome.isAppInstalled();
+
+        //expose point amounts to scope
+        $scope.points = Win.points;
+
         $scope.installChromeApp = function () {
-            Win.winChromeApp().then(function () {
-                alert('success');
-            }).
-            catch (function (msg) {
-                console.log('error:', msg);
-                alert('error:' + msg);
-            });
+            //make sure app isn't installed safety
+            if (!$scope.isChromeInstalled) {
+                console.log('offer to download extension');
+                //install app then add points
+                Win.winChromeApp().then(function () {
+                    console.log('success install');
+                }, function (e) {
+                    console.warn('error install', e);
+                });
+            }
         };
 
     }
 ]).factory('Win', ['$rootScope', 'Facebook', 'Firebase', 'Config', 'Chrome',
     function ($rootScope, Facebook, Firebase, Config, Chrome) {
-        var FACEBOOK_INVITE_POINTS = Config.POINTS.FACEBOOK_INVITE,
-            CHROME_APP_INSTALL_POINTS = Config.POINTS.CHROME_APP_INSTALL;
+        var points = {
+            fbInvite: Config.POINTS.FACEBOOK_INVITE,
+            chromeInstall: Config.POINTS.CHROME_APP_INSTALL,
+            newGame: Config.POINTS.PLAY_NEW_GAME,
+            fbConnect: Config.POINTS.FACEBOOK_CONNET
+        };
 
         return {
+            points: points,
+            winPlayAnotherGame: function () {
+                return Firebase.raisePoints(points.newGame);
+            },
             winFacebookInvite: function () {
-                return Facebook.inviteFriends().then(function (response) {
-                    return Firebase.raisePoints(FACEBOOK_INVITE_POINTS);
+                return Facebook.inviteFriends().then(function () {
+                    return Firebase.raisePoints(points.fbInvite);
                 });
             },
 
             winChromeApp: function () {
                 return Chrome.installApp().then(function () {
-                    return Firebase.raisePoints(CHROME_APP_INSTALL_POINTS);
+                    return Firebase.raisePoints(points.chromeInstall);
                 });
             }
-
         };
     }
 ]);

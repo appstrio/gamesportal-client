@@ -55,7 +55,6 @@ html
     header
         div.logo(ng-click="goHome()")
             img(src="./img/logo.png")
-        //- user isn't logged in.
         .coins(ng-click="goHome('WIN_COINS')")
             .coin-container
                 .top-text coins collected
@@ -85,21 +84,38 @@ html
     .main(ui-view)
     .modal-overlay-fade.win-coins(ng-if="overlayID=='WIN_COINS'", ng-controller="WinCtrl", overlay="'WIN_COINS'")
         .modal-dialog
-            h1 Win Coins!
+            .close-button(ng-click="closeOverlay('WIN_COINS')")
+            h1 Win Free Coins!
             .win-coins-top-offer
                 .connect-with-action
-                    button.join-now(ng-click="") Join Now
+                    button.join-now(ng-click="login()") Join Now
                 .connect-with-offer
-                    .top-text Sign In To Get:
+                    .top-text Sign In To Get
                     span.coin-img
-                        img(src="./img/coins2.png")
-                    span.coin-award 30,000
-            div
-                button.btn.btn-success(ng-click="inviteFBFriends()") Invite Friends = 50000
-            div
-                button.btn.btn-success(ng-click="installChromeApp()") Add BiziGames to Chrome = 100000
-            div
-                button.btn.btn-success Play a Game = 10000
+                        img(src="./img/smaller_coins.png")
+                    span.coin-award {{ points.fbConnect | number}}
+            ul.offers
+                li.offer-box
+                    .top-offer Invite Friends
+                    .win-size Get {{ points.fbInvite | number}}
+                    span.coin-img
+                        img(src="./img/smaller_coins.png")
+                    .action
+                        button.btn.btn-success(ng-click="inviteFBFriends()") Get Coins
+                li.offer-box
+                    .top-offer Play On Chrome
+                    .win-size Get {{ points.chromeInstall | number}}
+                    span.coin-img
+                        img(src="./img/smaller_coins.png")
+                    .action
+                        button.btn.btn-success(ng-click="installChromeApp()") Get Coins
+                li.offer-box
+                    .top-offer Play Another Game
+                    .win-size Get {{ points.newGame | number }}
+                    span.coin-img
+                        img(src="./img/smaller_coins.png")
+                    .action
+                        button.btn.btn-success(ng-click="installChromeApp()") Get Coins
     .modal-overlay-fade.leaderboard(ng-if="overlayID==='LEADERBOARD'", ng-controller="LeaderboardCtrl", overlay="'WIN_COINS'")
         .modal-dialog
             h1 Leaderboard

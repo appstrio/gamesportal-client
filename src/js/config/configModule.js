@@ -13,13 +13,14 @@ configModule.factory('Config', function () {
     };
 
     var POINTS = {
-        GIVE_AWAY: 20000,
-        FACEBOOK_INVITE: 99999,
         CHROME_APP_INSTALL: 499999,
-        PLAY_REGULAR_GAME: 499,
-        PLAY_PREMIUM_GAME: 2000,
+        FACEBOOK_CONNET: 30000,
+        FACEBOOK_INVITE: 99999,
+        GIVE_AWAY: 20000,
         PLAY_HOT_GAME: 1500,
-        PLAY_NEW_GAME: 999
+        PLAY_NEW_GAME: 999,
+        PLAY_PREMIUM_GAME: 2000,
+        PLAY_REGULAR_GAME: 499
     };
 
     var INVITE_FRIENDS_POST = function () {

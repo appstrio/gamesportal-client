@@ -65,24 +65,39 @@
   <div ui-view class="main"></div>
   <div ng-if="overlayID=='WIN_COINS'" ng-controller="WinCtrl" overlay="'WIN_COINS'" class="modal-overlay-fade win-coins">
     <div class="modal-dialog">
-      <h1>Win Coins!</h1>
+      <div ng-click="closeOverlay('WIN_COINS')" class="close-button"></div>
+      <h1>Win Free Coins!</h1>
       <div class="win-coins-top-offer">
         <div class="connect-with-action">
-          <button ng-click="" class="join-now">Join Now</button>
+          <button ng-click="login()" class="join-now">Join Now</button>
         </div>
         <div class="connect-with-offer">
-          <div class="top-text">Sign In To Get:</div><span class="coin-img"><img src="./img/coins2.png"></span><span class="coin-award">30,000</span>
+          <div class="top-text">Sign In To Get</div><span class="coin-img"><img src="./img/smaller_coins.png"></span><span class="coin-award">{{ points.fbConnect | number}}</span>
         </div>
       </div>
-      <div>
-        <button ng-click="inviteFBFriends()" class="btn btn-success">Invite Friends = 50000</button>
-      </div>
-      <div>
-        <button ng-click="installChromeApp()" class="btn btn-success">Add BiziGames to Chrome = 100000</button>
-      </div>
-      <div>
-        <button class="btn btn-success">Play a Game = 10000</button>
-      </div>
+      <ul class="offers">
+        <li class="offer-box">
+          <div class="top-offer">Invite Friends</div>
+          <div class="win-size">Get {{ points.fbInvite | number}}</div><span class="coin-img"><img src="./img/smaller_coins.png"></span>
+          <div class="action">
+            <button ng-click="inviteFBFriends()" class="btn btn-success">Get Coins</button>
+          </div>
+        </li>
+        <li class="offer-box">
+          <div class="top-offer">Play On Chrome</div>
+          <div class="win-size">Get {{ points.chromeInstall | number}}</div><span class="coin-img"><img src="./img/smaller_coins.png"></span>
+          <div class="action">
+            <button ng-click="installChromeApp()" class="btn btn-success">Get Coins</button>
+          </div>
+        </li>
+        <li class="offer-box">
+          <div class="top-offer">Play Another Game</div>
+          <div class="win-size">Get {{ points.newGame | number }}</div><span class="coin-img"><img src="./img/smaller_coins.png"></span>
+          <div class="action">
+            <button ng-click="installChromeApp()" class="btn btn-success">Get Coins</button>
+          </div>
+        </li>
+      </ul>
     </div>
   </div>
   <div ng-if="overlayID==='LEADERBOARD'" ng-controller="LeaderboardCtrl" overlay="'WIN_COINS'" class="modal-overlay-fade leaderboard">
