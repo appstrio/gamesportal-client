@@ -5,7 +5,8 @@ html
         meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
         meta(name='google', content='notranslate')
 
-        link(href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400', rel='stylesheet', type='text/css')
+        //link(href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400', rel='stylesheet', type='text/css')
+        link(href='//fonts.googleapis.com/css?family=Lobster', rel='stylesheet', type='text/css')
         link(href='//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css', rel='stylesheet')
         link(href='//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css', rel='stylesheet')
         link(href='css/style.css', rel='stylesheet')
@@ -50,9 +51,10 @@ html
         title GamesPortal
         //----------------
     body(ng-controller="MainCtrl")
+
     header
         div.logo(ng-click="goHome()")
-            img(src="./img/bizibizi.logo.png")
+            img(src="./img/logo.png")
         //- user isn't logged in.
         .coins(ng-click="goHome('WIN_COINS')")
             .coin-container
@@ -76,9 +78,11 @@ html
         //div.cup(ng-show="userData.user")
         //    a.cup-img(href="#", ng-click="openMainOverlay('LEADERBOARD')")
         //        img(src="./img/cup.png")
+    .banner
+        .bg-banner
+            .bg-ad
     .main(ui-view)
-
-    .modal-overlay-fade.win-coins(ng-if="overlayID==='WIN_COINS'", ng-controller="WinCtrl", overlay="'WIN_COINS'")
+    .modal-overlay-fade.win-coins(ng-if="overlayID=='WIN_COINS'", ng-controller="WinCtrl", overlay="'WIN_COINS'")
         .modal-dialog
             h1 Win Coins!
             .win-coins-top-offer

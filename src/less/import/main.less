@@ -15,7 +15,6 @@ body,html{
 }
 body{
     background: url(../img/bg.png) repeat;
-    padding:70px 0;
 }
 .ribbon-mixin {
     overflow: hidden;
@@ -37,28 +36,56 @@ body{
 button{
     outline:none;
 }
+
+.banner{
+    margin:150px 50px 30px 50px;
+
+    .bg-banner{
+        width: 100%;
+        background: url(../img/banner.back.png) repeat;
+        height: 114px;
+        position:relative;
+        -webkit-box-shadow: 1px 0 1px #222, -1px 0 1px #222;
+        -moz-box-shadow: 1px 0 1px #222, -1px 0 1px #222;
+        box-shadow: 1px 0 1px #222, -1px 0 1px #222;
+    }
+
+    .bg-ad {
+        width: 728px;
+        height: 90px;
+        background-color: rgba(237,236,239, 1.2);
+        margin:auto;
+        position:relative;
+        top:12px;
+        -webkit-box-shadow: 1px 0 20px #222, -1px 0 20px #222;
+        -moz-box-shadow: 1px 0 20px #222, -1px 0 20px #222;
+        box-shadow: 1px 0 20px #222, -1px 0 20px #222;
+    }
+}
+
 header{
-    height: 60px;
+    //    height: 110px;
     margin:0;
-    padding:0;
+    padding:30px 20px 30px 50px;
     width:100%;
-    /* min-width: 1000px; */
     position:fixed;
     z-index: 10000;
     top:0;
     left:0;
-    background: rgba(104, 163, 236, 0.90);
-    border-bottom: 1px solid rgba(104, 143,236, 0.5);
+    background: url(../img/bg.png) repeat;
+    opacity:0.95;
+    border-top: 10px solid;
+    border-color: rgba(137, 184, 242, 0.95);
     > div{
         float:left;
     }
     .logo{
         height: 100%;
-        padding: 8px 20px;
+        //        padding: 8px 20px;
         cursor:pointer;
         img{
             cursor:pointer;
-            max-height:60px;
+            max-height:95px;
         }
     }
 
@@ -111,55 +138,61 @@ header{
     }
 
     .coins{
-        /* width:545px; */
-        height:60px;
-        background: url(../img/coins_bg.png);
-        background-position: -60px;
+        //        height:60px;
+        //        background: url(../img/coins_bg.png);
+        //        background-position: -60px;
+
+        left:144px;
         position:absolute;
         * {
             cursor:pointer;
         }
-        left:90px;
         .coin-container {
             position:absolute;
-            left:150px;
-            width:200px;
+            left:230px;
+            width:220px;
             .top-text {
-                position:absolute;
-                top:-2px;
-                left:36px;
-                font-family:cursive;
-                font-size:14px;
+                font-size: 10.626px;
+                font-family: 'Lobster', cursive;
                 color:white;
-                text-shadow: 1px 1px 1px rgba(0,0,0,0.23);
+                position:absolute;
+                top:5px;
+                left:101px;
+                -moz-transform: matrix( 1.37869920670793,0,0,1.37948476363979,0,0);
+                -webkit-transform: matrix( 1.37869920670793,0,0,1.37948476363979,0,0);
+                -ms-transform: matrix( 1.37869920670793,0,0,1.37948476363979,0,0);
+
             }
             .amount {
                 background: rgba(0, 0, 0, 0.2);
                 position: absolute;
-                top: 15px;
-                width: 200px;
-                height: 40px;
+                top: 24px;
+                width: 220px;
+                height: 50px;
                 border-radius: 10px;
                 border: 2px solid rgba(0, 0, 0, 0.05);
                 text-align: center;
+                font-family: 'Lobster', cursive;
 
                 .coin-img  {
                     position: absolute;
-                    left:-14px;
-                    top:1px;
+                    left:-20px;
+                    top:-15px;
 
                     img{
-                        width:100px;
-                        height:60px;
+                        height:75px;
                     }
                 }
                 .amount-text{
                     color:white;
-                    text-align:right;
-                    font-family:sans-serif;
-                    font-size:28px;
-                    padding-left:40px;
-                    text-shadow: 1px 1px 1px rgba(0,0,0,0.23);
+                    font-family: 'Lobster', cursive;
+                    font-size:35px;
+                    padding-left:75px;
+                    line-height: 1.25;
+                    -moz-transform: matrix( 3.13804168285631,0,0,3.13982968011084,0,0);
+                    -webkit-transform: matrix( 3.13804168285631,0,0,3.13982968011084,0,0);
+                    -ms-transform: matrix( 3.13804168285631,0,0,3.13982968011084,0,0);
+
                 }
             }
         }
