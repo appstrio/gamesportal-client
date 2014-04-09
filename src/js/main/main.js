@@ -52,12 +52,12 @@ mainModule.controller('MainCtrl', [
 
         // login user
         $scope.login = function () {
-            Facebook.login();
+            return Facebook.login();
         };
 
         // logout user
         $scope.logout = function () {
-            Firebase.logout();
+            return Firebase.logout();
         };
 
         // render more games

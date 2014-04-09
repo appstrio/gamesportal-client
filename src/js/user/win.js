@@ -3,20 +3,27 @@ var winModule = winModule || angular.module('aio.win', []);
 winModule.controller('WinCtrl', ['$scope', 'Facebook', 'Win', 'Chrome',
     function ($scope, Facebook, Win, Chrome) {
 
+        //true if user has app installed
+        $scope.isChromeInstalled = Chrome.isAppInstalled();
+
+        //expose point amounts to scope
+        $scope.points = Win.points;
+
         $scope.inviteFBFriends = function () {
             Win.winFacebookInvite().then(function () {
                 console.log('succesfully shared to friends');
             }).
             catch (function (msg) {
                 console.warn('Problem sharing to friends', msg);
+                $scope.closeOverlay('WIN_COINS');
             });
         };
 
-        //true if user has app installed
-        $scope.isChromeInstalled = Chrome.isAppInstalled();
-
-        //expose point amounts to scope
-        $scope.points = Win.points;
+        $scope.connectNow = function () {
+            $scope.login().then(function () {
+                $scope.closeOverlay('WIN_COINS');
+            });
+        };
 
         $scope.installChromeApp = function () {
             //make sure app isn't installed safety
@@ -27,6 +34,7 @@ winModule.controller('WinCtrl', ['$scope', 'Facebook', 'Win', 'Chrome',
                     console.log('success install');
                 }, function (e) {
                     console.warn('error install', e);
+                    $scope.closeOverlay('WIN_COINS');
                 });
             }
         };

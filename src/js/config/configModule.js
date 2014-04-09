@@ -25,12 +25,10 @@ configModule.factory('Config', function () {
 
     var INVITE_FRIENDS_POST = function () {
         return {
-            NAME: 'Let\'s play together fun games on ' + APP_NAME,
+            NAME: 'Let\'s play fun games on ' + APP_NAME,
             CAPTION: 'Win coins, win cool prizes!',
             DESCRIPTION: (
-                'A small JavaScript library that allows you to harness ' +
-                'the power of Facebook, bringing the user\'s identity, ' +
-                'social graph and distribution power to your site.'
+                'Playing free games and collecting coins. Come and compete in our leaderboard!'
             ),
             LINK: REALM,
             PICTURE: ''
