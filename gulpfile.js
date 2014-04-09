@@ -107,7 +107,8 @@ gulp.task('assets', function () {
     gulp.src('./src/assets/**/*')
         .pipe(gulp.dest('./build/assets'));
 
-    return gulp.src('./src/img/**/*')
+    //copy images
+    return gulp.src('./src/img/**/*.{jpeg,jpg,gif,bmp,png,webp}')
         .pipe(gulp.dest('./build/img'));
 });
 

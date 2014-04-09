@@ -86,13 +86,21 @@ html
     .modal-overlay-fade.win-coins(ng-if="overlayID=='WIN_COINS'", ng-controller="WinCtrl", overlay="'WIN_COINS'")
         .modal-dialog
             h1 Win Coins!
+            .win-coins-top-offer
+                .connect-with-action
+                    button.join-now(ng-click="") Join Now
+                .connect-with-offer
+                    .top-text Sign In To Get:
+                    span.coin-img
+                        img(src="./img/coins2.png")
+                    span.coin-award 30,000
             div
                 button.btn.btn-success(ng-click="inviteFBFriends()") Invite Friends = 50000
             div
                 button.btn.btn-success(ng-click="installChromeApp()") Add BiziGames to Chrome = 100000
             div
                 button.btn.btn-success Play a Game = 10000
-    .modal-overlay-fade.leaderboard(ng-if="overlayID=='LEADERBOARD'", ng-controller="LeaderboardCtrl", overlay="'WIN_COINS'")
+    .modal-overlay-fade.leaderboard(ng-if="overlayID==='LEADERBOARD'", ng-controller="LeaderboardCtrl", overlay="'WIN_COINS'")
         .modal-dialog
             h1 Leaderboard
             table
