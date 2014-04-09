@@ -5,8 +5,6 @@
                 //- a(type="button",class="btn btn-warning", ui-sref="main")
                     //- i(class="glyphicon glyphicon-chevron-left")
             .game-name(ng-bind="game.name")
-            .pull-right
-                img(src="../img/x.png" style="margin:20px 25px;")
         .main
             .left
                 //.left-ad-unit
@@ -17,7 +15,7 @@
                             div.name
                                 div(ng-bind="game.name")
             .middle
-                .embedding(ng-style="{width : game.width + 'px', height : game.height + 'px'}")
+                .embedding(ng-style="{width : '640px', height : '480px'}")
                     div.loader
                     div.include(ng-include="'embed-' + game.source + '.html'", ng-if="game")
             .right

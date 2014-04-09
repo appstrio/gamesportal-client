@@ -113,7 +113,8 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
                     return $state.go('main');
                 }
                 if (game.source === 'miniclip') {
-                    $scope.miniclipURL = 'http://www.miniclip.com/games/' + game.data_game_name + "/en/webgame.php?bodybg=1&width=" + game.width + "&height=" + game.height;
+//                    $scope.miniclipURL = 'http://www.miniclip.com/games/' + game.data_game_name + "/en/webgame.php?bodybg=1&width=" + game.width + "&height=" + game.height;
+                    $scope.miniclipURL = 'http://www.miniclip.com/games/' + game.data_game_name + "/en/webgame.php?bodybg=1&width=640px&height=480px";
                 }
                 // check access
                 checkPremium(game);
