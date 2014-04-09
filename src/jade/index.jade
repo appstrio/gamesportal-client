@@ -46,7 +46,6 @@ html
         script(src='./js/user/firebaseService.js')
         script(src='./js/user/win.js')
         script(src='./js/app.js')
-
         <!-- endbuild -->
 
         title GamesPortal
@@ -77,6 +76,13 @@ html
                 //- dummy picture
                 img.connect(ng-if="!userData.user.info", src="./img/anonymous.png", ng-click="login()")
 
+        .top-right-icons
+            //- div(style="width:90px;height:21px;")
+                //- iframe(src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fplay.gamestab.me&width=100&layout=button_count&action=like&show_faces=false&share=false&height=21&appId=24751036751", scrolling="no", frameborder="0", style="border:none; overflow:hidden; width:100px; height:21px;", allowTransparency="true")
+            a(href="#", ng-click="goHome('contact')")
+                img(src="./img/envelope.png", alt="contact us link")
+            a(href="#", ng-click="goHome('privacy')")
+                img(src="./img/shield_grey.png", alt="privacy link")
         //div.cup(ng-show="userData.user")
         //    a.cup-img(href="#", ng-click="openMainOverlay('LEADERBOARD')")
         //        img(src="./img/cup.png")
