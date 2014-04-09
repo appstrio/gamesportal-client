@@ -28,7 +28,7 @@
         background: url(../img/bg.png) repeat;
         border-radius: 12px;
         border:5px white solid;
-        height:420px;
+        height:430px;
         margin: 150px auto;
         overflow:hidden;
         width:600px;
@@ -120,6 +120,11 @@
                           border-radius: 10px;
                           cursor: pointer;
                           padding: 0 50px;
+                          transition: 0.1s ease background;
+                          &:hover {
+                              transition: 0.1s ease background;
+                              background: linear-gradient(to bottom,#C00202 0,#830000 100%);
+                          }
                       }
                   }
                   .connect-with-offer {

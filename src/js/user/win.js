@@ -1,25 +1,31 @@
 var winModule = winModule || angular.module('aio.win', []);
 
-winModule.controller('WinCtrl', ['$scope', 'Facebook', 'Win',
-    function ($scope, Facebook, Win) {
+winModule.controller('WinCtrl', ['$scope', 'Facebook', 'Win', 'Chrome',
+    function ($scope, Facebook, Win, Chrome) {
 
         $scope.inviteFBFriends = function () {
             Win.winFacebookInvite().then(function () {
                 alert('success');
             }).
             catch (function (msg) {
-                alert('error:' + msg);
+                console.warn('Problem sharing to friends', msg);
             });
         };
 
+        //true if user has app installed
+        $scope.isChromeInstalled = Chrome.isAppInstalled();
+
         $scope.installChromeApp = function () {
-            Win.winChromeApp().then(function () {
-                alert('success');
-            }).
-            catch (function (msg) {
-                console.log('error:', msg);
-                alert('error:' + msg);
-            });
+            //make sure app isn't installed safety
+            if (!$scope.isChromeInstalled) {
+                console.log('offer to download extension');
+                //install app then add points
+                Win.winChromeApp().then(function () {
+                    console.log('success install');
+                }, function (e) {
+                    console.warn('error install', e);
+                });
+            }
         };
 
     }
@@ -30,7 +36,7 @@ winModule.controller('WinCtrl', ['$scope', 'Facebook', 'Win',
 
         return {
             winFacebookInvite: function () {
-                return Facebook.inviteFriends().then(function (response) {
+                return Facebook.inviteFriends().then(function () {
                     return Firebase.raisePoints(FACEBOOK_INVITE_POINTS);
                 });
             },
@@ -40,7 +46,6 @@ winModule.controller('WinCtrl', ['$scope', 'Facebook', 'Win',
                     return Firebase.raisePoints(CHROME_APP_INSTALL_POINTS);
                 });
             }
-
         };
     }
 ]);
