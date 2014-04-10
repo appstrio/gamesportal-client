@@ -2,9 +2,9 @@ var mainModule = mainModule || angular.module('aio.main', []);
 
 mainModule.controller('MainCtrl', [
     '$scope', '$log', '$q', '$timeout', '$http', 'Firebase',
-    'Games', '$state', '$stateParams', 'Facebook', 'Chrome', 'Config',
+    'Games', '$state', '$stateParams', 'Facebook', 'Chrome', 'Config', '$window',
     function ($scope, $log, $q, $timeout, $http, Firebase,
-        Games, $state, $stateParams, Facebook, Chrome, Config) {
+        Games, $state, $stateParams, Facebook, Chrome, Config, $window) {
 
         var allGames, // hold all the games
             gamesPerFirstPage = 50, // amount of games for the first page
@@ -12,6 +12,15 @@ mainModule.controller('MainCtrl', [
             page = 0, //  hold current page
             loaded = false; // whether the app was already loaded
 
+
+            // var changeHeader = _.debounce(function(e){
+                // console.log($window.scrollTop());
+
+
+
+            // }, 10);
+
+        // angular.element($window).on('scroll', changeHeader);
         // init - get all games from games db
         Games.then(function (games) {
 
