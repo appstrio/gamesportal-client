@@ -13,7 +13,7 @@ mainModule.controller('MainCtrl', [
             loaded = false; // whether the app was already loaded
 
         //make header small
-        var changeHeader = _.debounce(function (e) {
+        var changeHeader = _.debounce(function () {
             $('header').toggleClass('smaller', $window.scrollY > 10);
         }, 10);
 
