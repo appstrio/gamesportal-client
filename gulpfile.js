@@ -4,17 +4,6 @@ var $gulp = require('gulp-load-plugins')({
 });
 var semver = require('semver');
 var config = require('./gulp');
-
-/*
- * AWS Configuration
- */
-var awsDetails = require('./ignored/aws.json');
-var awsPublisher = $gulp.awspublish.create(awsDetails);
-var awsHeaders = {
-    'Cache-Control': 'max-age=315360000, no-transform, public'
-};
-
-//get paths from config file
 var paths = config.paths;
 var bowerPackages = config.bowerPackages;
 var vendorPackages = config.vendorPackages;
@@ -119,9 +108,17 @@ gulp.task('default', function() {
 
 // aws
 gulp.task('deploy', ['build'], function() {
+    /*
+     * AWS Configuration
+     */
+    var awsDetails = require('./ignored/aws.json');
+    var awsPublisher = $gulp.awspublish.create(awsDetails);
+    var awsHeaders = {
+        'Cache-Control': 'max-age=315360000, no-transform, public'
+    };
+
     return gulp.src('./build/**/*')
         .pipe(awsPublisher.publish(awsHeaders))
         .pipe(awsPublisher.sync()) // sync local directory with bucket
-    //.pipe(awsPublisher.cache()) // create a cache file to speed up next uploads
     .pipe($gulp.awspublish.reporter()); // print upload updates to console
 });
