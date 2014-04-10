@@ -14,7 +14,8 @@
 AIO_USE_YOUR_OWN_GOOGLE_ANALYTICS = false; // true if you want to sue your own Google Analytics(Universal) and have loaded the GA script
 AIO_GOOGLE_ANALYTICS_UID = "UA-47928276-3"; // custom Google Analytics(Universal) ID
 // AIO_CHROME_ID = "mgfknfklhbpokkokgcaaggnlpbicdadn"; // the chrome app id, the domain has to be verified in this chrome ID dashboard
-AIO_CHROME_ID = "amlhfkalaoikfbpoolhpdhignhjhlhko"; // the chrome app id, the domain has to be verified in this chrome ID dashboard
+// AIO_CHROME_ID = "amlhfkalaoikfbpoolhpdhignhjhlhko"; // the chrome app id, the domain has to be verified in this chrome ID dashboard
+AIO_CHROME_ID = "fmpeljkajhongibcmcnigfcjcgaopfid"; // the chrome app id, the domain has to be verified in this chrome ID dashboard
 
 // promises.js https://github.com/stackp/promisejs/
 /*
