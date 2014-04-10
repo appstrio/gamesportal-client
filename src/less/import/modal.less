@@ -4,21 +4,50 @@
     top:0;
     left:0;
     width:100%;
-    height:100%;
-    z-index:100000;
-    overflow:hidden;
-    .modal-dialog{
+    height: 100%;
+    z-index: 100000;
+    overflow: hidden;
+    .modal-dialog {
         background: url(../img/win_bg.png) repeat;
         border-radius: 12px;
         border:5px white solid;
-        height:450px;
+        height: 450px;
         margin: 150px auto;
-        width:650px;
+        width: 650px;
+        
+        &.privacy {
+            height: 620px;
+        }
 
+        .privacy-container {
+            padding: 15px;
+            width: 100%;
+            max-height: 520px;
+            overflow-y: auto;
+            overflow-x: hidden;
+            a {
+                color: yellow;
+                cursor:pointer;
+                &:hover {
+                    color:red;
+                }
+                &:active {
+                    color:pink;
+                }
+            }
+            * {
+                font-family: sans-serif;
+            }
+            h3 {
+                color:white;
+            }
+            p {
+                text-align:justify;
+            }
+        }
         * {
             font-family: Lobster, cursive;
         }
-
         .close-button {
             background-size: 52px 52px;
             background: url(../img/close-button-sprite.png) no-repeat 0 0;
@@ -93,11 +122,6 @@
             margin: 0 auto;
             border: 4px solid #FFFFFF;
             border-radius: 10px;
-            background: -moz-linear-gradient(top,  rgba(252,255,76,1) 0%, rgba(255,123,13,1) 100%); /* FF3.6+ */
-            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(252,255,76,1)), color-stop(100%,rgba(255,123,13,1))); /* Chrome,Safari4+ */
-            background: -webkit-linear-gradient(top,  rgba(252,255,76,1) 0%,rgba(255,123,13,1) 100%); /* Chrome10+,Safari5.1+ */
-            background: -o-linear-gradient(top,  rgba(252,255,76,1) 0%,rgba(255,123,13,1) 100%); /* Opera 11.10+ */
-            background: -ms-linear-gradient(top,  rgba(252,255,76,1) 0%,rgba(255,123,13,1) 100%); /* IE10+ */
             background: linear-gradient(to bottom,  rgba(252,255,76,1) 0%,rgba(255,123,13,1) 100%); /* W3C */
             .connect-with-action {
                 float: left;
@@ -172,12 +196,14 @@
             }
         }
         .game-to-unlock{
-            h2.game-name{
-                font-family: sans-serif;
-                text-align: center;
-                color: #EEFF71;
-                margin-top:5px;
-                font-weight: bold;
+            h2 {
+                &.game-name{
+                    font-family: sans-serif;
+                    text-align: center;
+                    color: #EEFF71;
+                    margin-top:5px;
+                    font-weight: bold;
+                }
             }
             .game-thumbnail{
                 overflow: hidden;
@@ -216,23 +242,28 @@
             margin:0 auto;
             width:400px;
             list-style: none;
+
             tr{
                 height:45px;
-                td.profile-pic{
-                    img{
-                        width:30px;
-                        height:30px;
-                        border-radius: 8px;
-                    }
-                }
-                td.name{
-                    font-size:20px;
-                }
-                td.points{
-                    font-size:20px;
-                }
+
                 &:first-child{
                     color: rgb(165, 22, 22);
+                }
+
+                td {
+                    &.profile-pic{
+                        img{
+                            width:30px;
+                            height:30px;
+                            border-radius: 8px;
+                        }
+                    }
+                    &.name{
+                        font-size:20px;
+                    }
+                    &.points{
+                        font-size:20px;
+                    }
                 }
             }
         }
