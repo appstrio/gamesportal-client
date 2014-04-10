@@ -25,7 +25,7 @@ var libs = bowerPackages.concat(vendorPackages);
 var isProduction = Boolean($gulp.util.env.production);
 
 //jade -> html
-gulp.task('jade', function () {
+gulp.task('jade', function() {
     return gulp.src(paths.origin.jade)
         .pipe($gulp.flatten())
         .pipe($gulp.jade({
@@ -34,7 +34,7 @@ gulp.task('jade', function () {
         .pipe(gulp.dest(paths.build));
 });
 
-gulp.task('usemin', ['jade', 'libs'], function () {
+gulp.task('usemin', ['jade', 'libs'], function() {
     if (!isProduction) {
         gulp.start('scripts');
         return;
@@ -47,15 +47,16 @@ gulp.task('usemin', ['jade', 'libs'], function () {
 });
 
 //less -> css
-gulp.task('less', function () {
+gulp.task('less', function() {
     return gulp.src(paths.origin.less)
         .pipe($gulp.less())
+        .pipe($gulp.autoprefixer())
         .pipe($gulp.cssmin())
         .pipe(gulp.dest(paths.dist.less));
 });
 
 // copy & uglify js scripts
-gulp.task('scripts', function () {
+gulp.task('scripts', function() {
     if (!isProduction) {
         return gulp.src(paths.origin.js)
             .pipe(gulp.dest(paths.dist.js));
@@ -66,7 +67,7 @@ gulp.task('scripts', function () {
     }
 });
 
-gulp.task('serve', ['build'], function () {
+gulp.task('serve', ['build'], function() {
     $gulp.connect.server({
         root: 'build',
         port: 8080,
@@ -74,19 +75,19 @@ gulp.task('serve', ['build'], function () {
     });
 });
 
-gulp.task('livereload', ['build'], function () {
+gulp.task('livereload', ['build'], function() {
     $gulp.connect.reload();
 });
 
 //clean build folder
-gulp.task('clean', function () {
+gulp.task('clean', function() {
     return gulp.src(paths.build, {
         read: false
     }).pipe($gulp.clean());
 });
 
 //bump versions on package/bower/manifest
-gulp.task('bump', function () {
+gulp.task('bump', function() {
     //reget package
     var _pkg = require('package.json');
     //increment version
@@ -102,7 +103,7 @@ gulp.task('bump', function () {
 });
 
 //handle assets
-gulp.task('assets', function () {
+gulp.task('assets', function() {
     //copy regular assets
     gulp.src('./src/assets/**/*')
         .pipe(gulp.dest('./build/assets'));
@@ -113,27 +114,27 @@ gulp.task('assets', function () {
 });
 
 //copy libs
-gulp.task('libs', function () {
+gulp.task('libs', function() {
     return gulp.src(libs)
         .pipe(gulp.dest(paths.dist.libs));
 });
 
 //all tasks are watch -> bump patch version -> reload extension (globally enabled)
-gulp.task('watch', function () {
+gulp.task('watch', function() {
     gulp.watch('./src/**/*', ['build', 'livereload']);
 });
 
-gulp.task('build', ['clean'], function () {
+gulp.task('build', ['clean'], function() {
     gulp.start('assets', 'libs', 'jade', 'less', 'scripts', 'usemin');
 });
 
 //default task
-gulp.task('default', function () {
+gulp.task('default', function() {
     gulp.start('build', 'serve', 'watch');
 });
 
 // aws
-gulp.task('deploy', ['build'], function () {
+gulp.task('deploy', ['build'], function() {
     return gulp.src('./build/**/*')
         .pipe(awsPublisher.publish(awsHeaders))
         .pipe(awsPublisher.sync()) // sync local directory with bucket
