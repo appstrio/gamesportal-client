@@ -95,6 +95,46 @@ html
         .bg-banner
             .bg-ad
     .main(ui-view)
+    .modal-overlay-fade.contact(ng-if="overlayID=='contact'", overlay="'contact'")
+        .modal-dialog.contact
+            .close-button(ng-click="closeOverlay('contact')")
+            h1 Contact Mojo-Games
+            h4 Send us a message and we will get back to you
+            hr
+            .contact-form-wrapper
+                form.form-horizontal(method="post", action="//forms.brace.io/mojogamesportal@gmail.com")
+                    fieldset
+                        input(type="hidden", name="_next", value="//www.mojo-games.com")
+                        .form-group
+                            label.col-md-4.control-label(for='name-input') Name
+                            .col-md-5
+                                input.form-control.input-md(name='name-input', type='text', placeholder='Your name...')
+                        // Text input
+                        .form-group
+                            label.col-md-4.control-label(for='_replyto') Email
+                            .col-md-5
+                                input.form-control.input-md(name='_replyto', type='email', placeholder='Your email...')
+                        // Select Basic
+                        .form-group
+                            label.col-md-4.control-label(for='subject-input') Subject
+                            .col-md-5
+                                select.form-control(name='subject-input')
+                                    option(value='game') Game
+                                    option(value='advertising') Advertising
+                                    option(value='terms') Terms
+                                    option(value='question') Question
+                                    option(value='other') Other
+                        // Textarea
+                        .form-group
+                            label.col-md-4.control-label(for='message-input') Message
+                            .col-md-5
+                                textarea.form-control(name='message-input', placeholder="Your message...")
+                        // Button (Double)
+                        .form-group
+                            label.col-md-4.control-label(for='button1id')
+                            .col-md-8
+                                button#button1id.btn.btn-primary(name='button1id', type="submit") Submit
+                                button#button2id.btn.btn-default(name='button2id', type="reset") Reset
     .modal-overlay-fade.privacy(ng-if="overlayID=='tos'", overlay="'tos'")
         .modal-dialog.privacy
             .close-button(ng-click="closeOverlay('tos')")
