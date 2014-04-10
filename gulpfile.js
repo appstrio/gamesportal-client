@@ -20,10 +20,6 @@ var bowerPackages = config.bowerPackages;
 var vendorPackages = config.vendorPackages;
 var libs = bowerPackages.concat(vendorPackages);
 
-//to set production env use --production in command line
-//production will minify & concat scripts/libs
-var isProduction = Boolean($gulp.util.env.production);
-
 //jade -> html
 gulp.task('jade', function() {
     return gulp.src(paths.origin.jade)
@@ -49,14 +45,9 @@ gulp.task('less', function() {
 
 // copy & uglify js scripts
 gulp.task('scripts', function() {
-    if (!isProduction) {
-        return gulp.src(paths.origin.js)
-            .pipe(gulp.dest(paths.dist.js));
-    } else {
-        return gulp.src(paths.origin.js)
-            .pipe($gulp.uglify())
-            .pipe(gulp.dest(paths.dist.js));
-    }
+    return gulp.src(paths.origin.js)
+        .pipe($gulp.uglify())
+        .pipe(gulp.dest(paths.dist.js));
 });
 
 gulp.task('serve', ['build'], function() {
@@ -75,7 +66,8 @@ gulp.task('livereload', ['build'], function() {
 gulp.task('clean', function() {
     return gulp.src(paths.build, {
         read: false
-    }).pipe($gulp.clean());
+    })
+        .pipe($gulp.clean());
 });
 
 //bump versions on package/bower/manifest
