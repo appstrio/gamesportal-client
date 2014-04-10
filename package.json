@@ -35,7 +35,8 @@
     "gulp-zip": "~0.1.2",
     "mocha": "~1.17.1",
     "semver": "~2.2.1",
-    "gulp-load-plugins": "^0.5.0"
+    "gulp-load-plugins": "^0.5.0",
+    "gulp-autoprefixer": "0.0.7"
   },
   "engines": {
     "node": ">=0.8.0"
