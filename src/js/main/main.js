@@ -12,15 +12,13 @@ mainModule.controller('MainCtrl', [
             page = 0, //  hold current page
             loaded = false; // whether the app was already loaded
 
+        //make header small
+        var changeHeader = _.debounce(function (e) {
+            $('header').toggleClass('smaller', $window.scrollY > 10);
+        }, 10);
 
-            // var changeHeader = _.debounce(function(e){
-                // console.log($window.scrollTop());
+        angular.element($window).on('scroll', changeHeader);
 
-
-
-            // }, 10);
-
-        // angular.element($window).on('scroll', changeHeader);
         // init - get all games from games db
         Games.then(function (games) {
 

@@ -3,7 +3,7 @@ var counterModule = counterModule || angular.module('aio.counter', []);
 counterModule.directive('aioCounter', ['$filter',
     function ($filter) {
         return function (scope, element, attrs) {
-            var oldVal, countingInterval = 10,
+            var oldVal, countingInterval = 8,
                 subAmount = 1,
                 countingDuration = 1000;
 
@@ -51,8 +51,6 @@ counterModule.directive('aioCounter', ['$filter',
                     applyVal(newVal);
                 }
             });
-
-        }
-
+        };
     }
 ]);
