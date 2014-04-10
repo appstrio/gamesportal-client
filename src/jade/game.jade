@@ -18,6 +18,7 @@
                 .embedding(ng-style="{width : '640px', height : '480px'}")
                     div.loader
                     div.include(ng-include="'embed-' + game.source + '.html'", ng-if="game")
+                .game-description(ng-bind-html="game.description", style="")
             .right
                 .right-ad-unit
                     img(src="./img/160x600.png", width="160", height="600", alt="Your ad here placeholder")
