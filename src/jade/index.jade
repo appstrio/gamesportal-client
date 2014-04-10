@@ -72,7 +72,8 @@ html
         #rays
 
         .corner-toolbox-icons
-            span.glyphicon.glyphicon-lock
+            span.glyphicon.glyphicon-lock(ng-click="goHome('privacy')")
+            span.glyphicon.glyphicon-envelope(ng-click="goHome('contact')")
 
         .user-info
             span.details
@@ -106,7 +107,7 @@ html
             .contact-form-wrapper
                 form.form-horizontal(method="post", action="//forms.brace.io/mojogamesportal@gmail.com")
                     fieldset
-                        input(type="hidden", name="_next", value="//www.mojo-games.com")
+                        //- input(type="hidden", name="_next", value="//www.mojo-games.com")
                         .form-group
                             label.col-md-4.control-label(for='name-input') Name
                             .col-md-5
