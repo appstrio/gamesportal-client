@@ -4,7 +4,6 @@ html
         meta(charset="utf-8")
         meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
         meta(name='google', content='notranslate')
-
         link(rel="shortcut icon", href="./img/favicon.ico")
 
         //link(href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400', rel='stylesheet', type='text/css')
@@ -32,6 +31,7 @@ html
         script(src='./js/vendor/angularjs.media.directives.js')
         script(src='./js/vendor/ng-infinite-scroll.min.js')
         script(src='./js/vendor/underscore-min.js')
+        script(src='//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-534644e35a88a9ba')
 
         <!-- build:js(src) ./js/app.min.js -->
         //- load commons
@@ -48,11 +48,17 @@ html
         script(src='./js/user/firebaseService.js')
         script(src='./js/user/win.js')
         script(src='./js/app.js')
-        script(type='text/javascript', src='//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-534644e35a88a9ba')
         <!-- endbuild -->
 
         <!-- Go to http://www.addthis.com/get/smart-layers to customize -->
-        script(type='text/javascript') addthis.layers({theme : 'transparent', share : {services: 'facebook,twitter,google_plusone_share,email', position : 'left'}});
+        script.
+            addthis.layers({
+                theme : 'transparent',
+                share : {
+                    services: 'facebook,twitter,google_plusone_share,email',
+                    position : 'left'
+                }
+            });
 
         title GamesPortal
         //----------------
