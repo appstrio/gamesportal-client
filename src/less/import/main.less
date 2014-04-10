@@ -4,14 +4,14 @@ body,html{
     font-family: sans-serif, Arial, Verdana;
 }
 *{
+    -moz-user-select: none;
+    -webkit-font-smoothing: antialiased;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
-    -moz-user-select: none;
-    user-select: none;
+    box-sizing: border-box;
     cursor:default;
     font-family: "Source Sans Pro", sans-serif, arial, helvetica;
-    box-sizing: border-box;
-    -webkit-font-smoothing: antialiased;
+    user-select: none;
 }
 body{
     background: url(../img/bg.png) repeat;
@@ -20,13 +20,7 @@ body{
     overflow: hidden;
     white-space: nowrap;
     position: absolute;
-    -webkit-transform: rotate(-45deg);
-    -moz-transform: rotate(-45deg);
-    -ms-transform: rotate(-45deg);
-    -o-transform: rotate(-45deg);
     transform: rotate(-45deg);
-    -webkit-box-shadow: 0 0 10px #888;
-    -moz-box-shadow: 0 0 10px #888;
     box-shadow: 0 0 10px #888;
     display: block;
     left: -30px;
@@ -62,7 +56,7 @@ button{
 header{
     //    height: 110px;
     margin:0;
-    padding:30px 20px 30px 50px;
+    padding:30px 20px 14px 50px;
     width:100%;
     position:fixed;
     z-index: 10000;
@@ -160,7 +154,7 @@ header{
         to { transform: rotate(360deg); }
     }
 
-    #rays	{ /* with animation properties */
+    #rays{ /* with animation properties */
         background: url(../../img/rays-3.png) 0 0 no-repeat;
         background-size: 400px 250px;
         position: absolute;
@@ -249,17 +243,9 @@ header{
 
                  &.rotated-right {
                      transform: rotate(4deg) ;
-                     -webkit-transform: rotate(4deg) ;
-                     -moz-transform: rotate(4deg) ;
-                     -o-transform: rotate(4deg) ;
-                     -ms-transform: rotate(4deg) ;
                  }
                  &.rotated-left {
                      transform: rotate(-4deg) ;
-                     -webkit-transform: rotate(-4deg) ;
-                     -moz-transform: rotate(-4deg) ;
-                     -o-transform: rotate(-4deg) ;
-                     -ms-transform: rotate(-4deg) ;
                  }
 
                  a{
