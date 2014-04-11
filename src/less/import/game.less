@@ -4,12 +4,14 @@
     background: rgba(0, 0, 0, .16);
     padding-top: 15px;
     box-shadow: 0 -2px 6px #21465F;
+    overflow: auto;
+    position: relative;
+    min-height: 740px;
 
     .game-embed-container {
         min-height:720px;
         background: #395277;
         padding-top:15px;
-        overflow:auto;
         min-width:1260px;
         position:absolute;
         .header {
@@ -37,6 +39,7 @@
                 float: left;
             }
             .left {
+                border-right: 10px rgb(104, 144, 195) solid;
                 .more-games-left {
                     background: @game-background;
                     margin: 0 auto;
@@ -50,8 +53,8 @@
             }
             .middle {
                 min-height:600px;
+                min-width:920px;
                 padding: 0 140px;
-                margin: 0 10px;
                 .game-description {
                     color: white;
                     text-align: center;
@@ -89,6 +92,7 @@
                 }
             }
             .right {
+                border-left: 10px rgb(104, 144, 195) solid;
                 .right-ad-unit {
                     width: 160px;
                     min-height:600px;
