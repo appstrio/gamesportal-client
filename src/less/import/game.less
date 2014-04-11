@@ -1,4 +1,4 @@
-@game-background:#EDECEF;
+@game-background:#395277;
 
 .game-wrapper {
     background: rgba(0, 0, 0, .16);
@@ -6,23 +6,19 @@
     box-shadow: 0 -2px 6px #21465F;
 
     .game-embed-container {
-        width: 1280px;
-        height: 700px;
-        margin: 0 auto;
-        border-radius: 8px;
-        box-sizing: content-box;
+        min-height:720px;
+        background: #395277;
+        padding-top:15px;
+        overflow:auto;
+        min-width:1260px;
+        position:absolute;
         .header {
             height: 90px;
             padding:10px;
-            background: #395277; /* Old browsers */
+            background: @game-background;
             border-bottom: 10px rgb(104, 144, 195) solid;
-            margin: 0;
             > div {
-                height: 100%;
                 float: left;
-            }
-            .back-button {
-                padding: 8px;
             }
             .game-name {
                 color: rgb(255, 234, 0);
@@ -36,27 +32,16 @@
             }
         }
         .main {
-            background: #395277;
-            min-height: 600px;
-            margin: 0 auto;
-            width: 100%;
-            clear: both;
+            clear:both;
             > div {
                 float: left;
             }
             .left {
-                //                padding: 10px 10px 0 10px;
-                border-right: 10px rgb(104, 144, 195) solid;
-                .left-ad-unit {
-                    width: 160px;
-                    height: 600px;
-                    background: @game-background;
-                }
                 .more-games-left {
+                    background: @game-background;
                     margin: 0 auto;
                     width: 160px;
-                    height: 600px;
-                    clear: both;
+                    min-height: 600px;
                     .game {
                         transform: rotate(0deg);
                         margin: 10px 0 20px 20px;
@@ -64,10 +49,9 @@
                 }
             }
             .middle {
-                width: 760px;
-                margin: 10px 90px;
-                min-height:576px;
-                position:relative;
+                min-height:600px;
+                padding: 0 140px;
+                margin: 0 10px;
                 .game-description {
                     color: white;
                     text-align: center;
@@ -79,8 +63,6 @@
 
                 .embedding {
                     padding: 0;
-                    max-width: 850px;
-                    max-height: 600px;
                     margin: 10px auto 0;
                     position: relative;
                     overflow: hidden;
@@ -107,18 +89,14 @@
                 }
             }
             .right {
-                border-left: 10px rgb(104, 144, 195) solid;
                 .right-ad-unit {
                     width: 160px;
-                    height:600px;
-                    background: @game-background;
+                    min-height:600px;
+                    background: #EDECEF;
                 }
             }
         }
         .bottom {
-            height: 110px;
-            border-radius: 0 0 8px 8px;
-            padding: 15px;
             .more-games-bottom {
                 margin: 0 auto;
                 width: 1190px;

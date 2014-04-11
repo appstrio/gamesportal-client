@@ -1,13 +1,9 @@
 .game-wrapper
     .game-embed-container
         .header
-            //- .back-button
-                //- a(type="button",class="btn btn-warning", ui-sref="main")
-                    //- i(class="glyphicon glyphicon-chevron-left")
             .game-name(ng-bind="game.name")
         .main
             .left
-                //.left-ad-unit
                 .more-games-left
                     .game(ng-repeat="game in evenMoreGames | limitTo:4")
                         a(ui-sref="game({gameID: game.id})")
