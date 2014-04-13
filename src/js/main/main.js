@@ -15,7 +15,10 @@ mainModule.controller('MainCtrl', [
 
         //make header small
         var changeHeader = _.debounce(function () {
-            $('header').toggleClass('smaller', $scope.fixedHeader && $window.scrollY > 10);
+            if (!$scope.fixedHeader) {
+                return;
+            }
+            $('header').toggleClass('smaller', $window.scrollY > 10);
         }, 10);
 
         angular.element($window).on('scroll', changeHeader);
