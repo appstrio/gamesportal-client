@@ -1,9 +1,12 @@
 .game-wrapper
     .game-embed-container
-        .header
+
+        //.header
             .game-name(ng-bind="game.name")
+
         .main
             .left
+                .header
                 .more-games-left
                     .game(ng-repeat="game in evenMoreGames | limitTo:4")
                         a(ui-sref="game({gameID: game.id})")
@@ -11,11 +14,13 @@
                             div.name
                                 div(ng-bind="game.name")
             .middle
-                .embedding(ng-style="{width : game.width + 'px', height : game.height + 'px'}")
+                .header
+                .embedding
                     div.loader
                     div.include(ng-include="'embed-' + game.source + '.html'", ng-if="game")
                 .game-description(ng-bind-html="game.description", style="")
             .right
+                .header
                 .right-ad-unit
                     img(src="./img/160x600.png", width="160", height="600", alt="Your ad here placeholder")
         .bottom

@@ -1,4 +1,4 @@
-@game-background:#395277;
+@game-background: #395277;
 
 .game-wrapper {
     background: rgba(0, 0, 0, .16);
@@ -6,115 +6,102 @@
     box-shadow: 0 -2px 6px #21465F;
     overflow: auto;
     position: absolute;
-    width:100%;
-    height:100%;
+    width: 100%;
+    height: 100%;
 
     .game-embed-container {
-        min-height:720px;
-        padding-top:15px;
-//        min-width:1260px;
-        position:absolute;
-        .header {
-            height: 90px;
-            padding:10px;
-            background: @game-background;
-            border-bottom: 10px rgb(104, 144, 195) solid;
-            > div {
-                float: left;
-            }
-            .game-name {
-                color: #ffea00;
-                float: none;
-                font-family: Lobster, cursive;
-                font-size: 29px;
-                line-height: 48px;
-                text-align: center;
-                text-shadow: .5px .866px 0 #000;
-                vertical-align: middle;
-            }
-        }
+        width: 1177px;
+        margin: 0 auto;
+
         .main {
-            background: #395277;
-            width:100%;
-            clear:both;
-            overflow: auto;
-            > div {
-                float: left;
-            }
             .left {
-                border-right: 10px rgb(104, 144, 195) solid;
-                .left-ad-unit {
-                    width: 160px;
-                    height: 600px;
-                    background: #EDECEF;
+                float: left;
+                .header {
+                    line-height: 44px;
+                    font-size: 14px;
+                    border-radius: 10px 0px 0px 0px;
+                    height: 45px;
+                    background: url("http://cdn1.kizi.com/assets/games/gamepage_top_bgs-f1e622099a39775a63b58e2c3a5b7615.png") repeat-x #003d68;
+                    border: 1px solid #084973;
+                    border-right: 1px solid #103154;
+                    width: 125px;
                 }
                 .more-games-left {
-                    background: @game-background;
-                    margin: 0 auto;
-                    width: 160px;
-                    min-height: 600px;
+                    background: #023048;
+                    display: block;
+                    padding-top: 2px;
+                    height: 628px;
+                    border-radius: 0 0 0px 10px;
+                    width: 126px;
+                    border-right: 1px solid #025e83;
                     .game {
                         transform: rotate(0deg);
-                        margin: 10px 0 20px 20px;
+                        margin: auto;
                     }
                 }
             }
+
             .middle {
-                padding: 0 140px 20px 140px;
-                border-right: 10px rgb(104, 144, 195) solid;
-                border-left: 10px rgb(104, 144, 195) solid;
+                float: left;
+                width: 825px;
+                .header{
+                    width: 825px;
+                    height: 45px;
+                    background: url("http://cdn1.kizi.com/assets/games/gamepage_top_bgs-f1e622099a39775a63b58e2c3a5b7615.png") repeat-x #003d68;
+                    border-top: 1px solid #084973;
+                    border-bottom: 1px solid #084973;
+                }
+                .embedding{
+                    width: 825px;
+                    height: 588px;
+                    background-color: #023048;
+                    .loader{
+
+                    }
+                    .include{
+                        border: none;
+                        padding-top: 14px;
+                        margin: 0 auto;
+//                        width: 800px;
+//                        height: 600px;
+                        width: 100%;
+                        height: 100%;
+                        overflow: hidden;
+                        text-align: center;
+                    }
+                }
                 .game-description {
                     color: white;
+                    background-color: #023048;
                     text-align: center;
-                    width:640px;
-                    bottom:0;
+                    bottom: 0;
                     font-family: cursive, sans-serif;
                     margin: auto;
                 }
-
-                .embedding {
-                    padding: 0;
-                    margin: 10px auto 0;
-                    position: relative;
-                    overflow: hidden;
-                    background: #222;
-                    .loader {
-                        position: absolute;
-                        top: 0;
-                        left: 0;
-                        z-index: 0;
-                        width: 100%;
-                        height: 100%;
-                        color: white;
-                        text-align: center;
-                        padding-top: 100px;
-                    }
-                    .include {
-                        position: absolute;
-                        top: 0;
-                        left: 0;
-                        z-index: 2;
-                        width: 100%;
-                        height: 100%;
-                    }
-                }
             }
+
             .right {
-                .right-ad-unit {
-                    width: 160px;
-                    min-height:600px;
-                    background: #EDECEF;
-                }
-            }
-        }
-        .bottom {
-            height: 110px;
-            margin-top: 10px;
+                float: left;
+                width: 160px;
+                .header{
+                    line-height: 44px;
+                    font-size: 14px;
+                    border-radius: 0px 10px 0px 0px;
+                    height: 45px;
+                    background: url("http://cdn1.kizi.com/assets/games/gamepage_top_bgs-f1e622099a39775a63b58e2c3a5b7615.png") repeat-x #003d68;
+                    border: 1px solid #084973;
+                    border-right: 1px solid #103154;
 
-            .more-games-bottom {
-                margin: 0 auto;
-                width: 1190px;
-                clear: both;
+                }
+                .right-ad-unit{
+                    height:600px;
+//                    padding: 15px 5px;
+                    background: #023048;
+                    display: block;
+                    padding-top: 2px;
+                    border-radius: 0 0 10px 0px;
+                    border-right: 1px solid #025e83;
+                }
             }
         }
 
