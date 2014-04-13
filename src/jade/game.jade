@@ -16,11 +16,10 @@
             .middle
                 .header
                     .game-name(ng-bind="game.name")
-                //.embedding(ng-style="{width: game.width, height :game.height, zoom: getGameZoom(game)}")
-                .embedding
+                .embedding(ng-style="{zoom: getGameZoom(game)}")
                     div.loader
                     div.include(ng-include="'embed-' + game.source + '.html'", ng-if="game")
-                .game-description(ng-bind-html="game.description", style="")
+                .game-description(ng-bind-html="game.description")
             .right
                 .header
                 .right-ad-unit

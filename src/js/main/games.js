@@ -151,8 +151,9 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
         };
 
         $scope.getGameZoom = function (game) {
-            var factor = Math.min(1, 640 / game.width);
-            return factor;
+            var widthFactor = Math.min(1, 640 / game.width);
+            var heightFactor = Math.min(1, 480 / game.height);
+            return Math.min(widthFactor,heightFactor);
         };
 
         /**
