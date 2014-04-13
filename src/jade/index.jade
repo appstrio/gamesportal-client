@@ -58,7 +58,7 @@ html
     body(ng-controller="MainCtrl")
     #fb-root(style="display:none;visibility:hidden;")
 
-    header
+    header(ng-style="{ position: fixedHeader ? 'fixed' : 'static'}")
         div.logo(ng-click="goHome()")
             img(src="./img/logo.png")
         .coins(ng-click="goHome('WIN_COINS')")

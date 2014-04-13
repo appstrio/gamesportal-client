@@ -10,10 +10,10 @@
         border-radius: 8px;
         box-sizing: content-box;
         .header {
-            height: 90px;
-            padding:10px;
             background: #395277; /* Old browsers */
             border-bottom: 10px rgb(104, 144, 195) solid;
+            border-radius: 10px;
+            height: 60px;
             margin: 0;
             > div {
                 height: 100%;
@@ -23,14 +23,14 @@
                 padding: 8px;
             }
             .game-name {
-                color: rgb(255, 234, 0);
-                font-size: 50px;
-                line-height: 53px;
-                text-shadow: 0.5px 0.866px 0px rgb(0, 0, 0);
-                font-family: 'Lobster', cursive;
-                min-width: 200px;
-                text-align: center;
+                color: #ffea00;
                 float: none;
+                font-family: Lobster, cursive;
+                font-size: 29px;
+                line-height: 48px;
+                text-align: center;
+                text-shadow: .5px .866px 0 #000;
+                vertical-align: middle;
             }
         }
         .main {
@@ -43,7 +43,6 @@
                 float: left;
             }
             .left {
-                //                padding: 10px 10px 0 10px;
                 border-right: 10px rgb(104, 144, 195) solid;
                 .left-ad-unit {
                     width: 160px;
@@ -128,10 +127,6 @@
             margin: 6px 6px;
             border: 0;
             transform: rotate(0deg);
-            -webkit-transform: rotate(0deg);
-            -moz-transform: rotate(0deg);
-            -o-transform: rotate(0deg);
-            -ms-transform: rotate(0deg);
         }
 
         .game {
@@ -153,9 +148,7 @@
                     border: 3px solid #F7FFFF;
                 }
                 .name {
-                    -webkit-transition: bottom 0.5s ease;
                     background: rgba(0, 0, 0, 0.75);
-                    text-shadow: 1px 1px 4px rgba(255, 237, 105, 0.61);
                     bottom: -100px;
                     color: white;
                     font-size: 15px;
@@ -163,7 +156,9 @@
                     padding: 2px;
                     position: absolute;
                     text-align: center;
+                    text-shadow: 1px 1px 4px rgba(255, 237, 105, 0.61);
                     text-transform: uppercase;
+                    transition: bottom 0.5s ease;
                     width: 100%;
                 }
                 &:hover {

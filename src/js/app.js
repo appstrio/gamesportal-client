@@ -6,7 +6,7 @@ angular.module('myApp', [
     'ui.router', 'ngSanitize', 'aio.counter', 'angularjs.media.directives', 'infinite-scroll',
     'aio.win', 'aio.leaderboard', 'aio.facebook', 'aio.config', 'aio.chrome', 'aio.common'
 ]).config(['$stateProvider', '$urlRouterProvider', '$sceDelegateProvider',
-    function ($stateProvider, $urlRouterProvider, $sceDelegateProvider) {
+    function($stateProvider, $urlRouterProvider, $sceDelegateProvider) {
         $urlRouterProvider.otherwise('/');
 
         $stateProvider
@@ -29,20 +29,20 @@ angular.module('myApp', [
             'self',
             'http://**',
             // Allow loading from our assets domain.  Notice the difference between * and **.
-            'http://swf.gamedistribution.com/**',
-            'http://www.myplayyard.com/**',
-            'http://external.kongregate-games.com/**',
             'http://cdn1.kongcdn.com/**',
-            'http://external.kongregate-games.com/**',
             'http://e.miniclip.com/**',
+            'http://external.kongregate-games.com/**',
+            'http://external.kongregate-games.com/**',
             'http://static.miniclip.com/**',
-            'http://www.miniclip.com/**'
+            'http://swf.gamedistribution.com/**',
+            'http://www.miniclip.com/**',
+            'http://www.myplayyard.com/**'
         ]);
     }
 ]);
 
 //first boot angular
-angular.element(document).ready(function () {
+angular.element(document).ready(function() {
     //bootstrap
     angular.bootstrap(document, ['myApp']);
 });

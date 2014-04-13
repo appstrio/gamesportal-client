@@ -1,10 +1,10 @@
 var configModule = configModule || angular.module('aio.config', []);
 
-configModule.factory('Config', function() {
+configModule.factory('Config', function () {
     var REALM = 'http://www.bizigames.com';
     var APP_NAME = 'BiziGames';
 
-    var isLocalStorage = function() {
+    var isLocalStorage = function () {
         try {
             return localStorage && localStorage.getItem;
         } catch (e) {
@@ -23,7 +23,7 @@ configModule.factory('Config', function() {
         PLAY_REGULAR_GAME: 499
     };
 
-    var INVITE_FRIENDS_POST = function() {
+    var INVITE_FRIENDS_POST = function () {
         return {
             NAME: 'Let\'s play fun games on ' + APP_NAME,
             CAPTION: 'Win coins, win cool prizes!',
@@ -47,6 +47,8 @@ configModule.factory('Config', function() {
         REALM: REALM,
         APP_NAME: APP_NAME,
         FIREBASE_URL: 'https://bizibizi.firebaseio.com',
+        GAMES_PER_FIRSTPAGE: 50, // amount of games for the first page
+        GAMES_PER_PAGE: 50, // amount of games for load more games
         POINTS: POINTS,
         // CHROME_APP_ID: 'heplncibihkggagnaaoigdhkgjmmllme', bizigames
         // CHROME_APP_ID: 'amlhfkalaoikfbpoolhpdhignhjhlhko', gamestab
@@ -56,7 +58,7 @@ configModule.factory('Config', function() {
         RETURN_USER: returnUser
     };
 
-    var developmentConfig = function() {
+    var developmentConfig = function () {
         REALM = 'http://localhost:63342/gamesportal/client/build/index.html#/';
 
         return angular.extend(baseConfig, {
@@ -65,7 +67,7 @@ configModule.factory('Config', function() {
         });
     };
 
-    var productionConfig = function() {
+    var productionConfig = function () {
         return angular.extend(baseConfig, {
             FACEBOOK_APP_ID: '224435141079794',
             INVITE_FRIENDS_POST: INVITE_FRIENDS_POST()
