@@ -66,12 +66,17 @@
                 min-height:576px;
                 position:relative;
                 .game-description {
-                    color: white;
-                    text-align: center;
-                    width:100%;
+                    bottom: 0;
+                    color: #fff;
+                    font-family: cursive,sans-serif;
+                    max-height: 63px;
+                    overflow: hidden;
                     position: absolute;
-                    bottom:0;
-                    font-family: cursive, sans-serif;
+                    text-align: center;
+                    text-overflow: ellipsis;
+                    white-space: pre-wrap;
+                    width: 100%;
+                    word-wrap: break-word;
                 }
 
                 .embedding {
@@ -114,8 +119,8 @@
         }
         .bottom {
             height: 110px;
-            border-radius: 0 0 8px 8px;
-            padding: 15px;
+            margin-top: 10px;
+
             .more-games-bottom {
                 margin: 0 auto;
                 width: 1190px;
