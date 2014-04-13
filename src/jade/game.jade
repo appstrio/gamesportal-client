@@ -15,6 +15,7 @@
                                 div(ng-bind="game.name")
             .middle
                 .header
+                    .game-name(ng-bind="game.name")
                 .embedding
                     div.loader
                     div.include(ng-include="'embed-' + game.source + '.html'", ng-if="game")
