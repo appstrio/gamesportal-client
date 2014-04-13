@@ -79,7 +79,7 @@ html
         //div.cup(ng-show="userData.user")
         //    a.cup-img(href="#", ng-click="openMainOverlay('LEADERBOARD')")
         //        img(src="./img/cup.png")
-    .banner
+    .banner(ng-class="{ 'in-game': !fixedHeader }")
         .bg-banner
             .bg-ad
     .main(ui-view)

@@ -15,7 +15,7 @@
                             div.name
                                 div(ng-bind="game.name")
             .middle
-                .embedding(ng-style="{width : '640px', height : '480px'}")
+                .embedding(ng-style="{width: game.width, height :game.height, zoom: getGameZoom(game)}")
                     div.loader
                     div.include(ng-include="'embed-' + game.source + '.html'", ng-if="game")
                 .game-description(ng-bind-html="game.description", style="")

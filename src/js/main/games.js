@@ -150,6 +150,11 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
             });
         };
 
+        $scope.getGameZoom = function (game) {
+            var factor = Math.min(1, 640 / game.width);
+            return factor;
+        };
+
         /**
          * unlock the game by paying coins
          * @param game
@@ -168,8 +173,8 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
 
     }
 
-]).controller('EditGameCtrl', ['$scope', '$log', '$q', '$timeout', '$http', '$stateParams', '$state', 'Firebase', 'Games', 'GamesHelpers',
-
+]).controller('EditGameCtrl', ['$scope', '$log', '$q', '$timeout',
+    '$http', '$stateParams', '$state', 'Firebase', 'Games', 'GamesHelpers',
     function ($scope, $log, $q, $timeout, $http, $stateParams, $state, Firebase, Games, GamesHelpers) {
 
         /**
