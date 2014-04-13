@@ -124,7 +124,7 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
             Games.then(function (games) {
                 var howMany = 8;
                 $scope.moreGames = _.shuffle(games).slice(0, howMany);
-                $scope.evenMoreGames = _.shuffle(games).slice(0, 4);
+                $scope.evenMoreGames = _.shuffle(games).slice(0, 5);
             });
         };
 

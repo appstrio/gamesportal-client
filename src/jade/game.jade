@@ -8,7 +8,7 @@
             .left
                 .header
                 .more-games-left
-                    .game(ng-repeat="game in evenMoreGames | limitTo:4")
+                    .game(ng-repeat="game in evenMoreGames | limitTo:5")
                         a(ui-sref="game({gameID: game.id})")
                             img.game-thumbnail(ng-src="{{game.thumbnails[0].url}}")
                             div.name
