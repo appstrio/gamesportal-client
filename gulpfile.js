@@ -14,6 +14,7 @@ gulp.task('main', function () {
     //create scripts stream
     var scripts = gulp.src(['./src/js/**/*.js', '!./src/js/{snippets,vendor}/*.js'])
         .pipe($gulp.uglify())
+        .pipe($gulp.concat('scripts.min.js'))
         .pipe(gulp.dest(paths.dist.js));
 
     //process jades
