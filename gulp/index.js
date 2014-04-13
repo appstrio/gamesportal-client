@@ -24,7 +24,8 @@ var bowerPackages = [
     'firebase-simple-login/firebase-simple-login.js',
     'masonry/dist/masonry.pkgd.min.js',
     'ng-infinite-scroller/build/ng-infinite-scroll.min.js',
-    'underscore/underscore-min.js'
+    'underscore/underscore-min.js',
+    'underscore/underscore-min.map'
 ].map(function (src) {
     return path.join(paths.bower, src);
 });

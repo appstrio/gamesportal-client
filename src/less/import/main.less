@@ -32,13 +32,17 @@ button{
 }
 
 .banner{
-    margin: 20px 50px 30px 50px;
+    margin: 128px 50px 30px 50px;
+
+    &.in-game {
+        margin-top: 1px;
+    }
 
     .bg-banner{
         width: 100%;
         background: url(../img/banner.back.png) repeat;
         height: 114px;
-        position:relative;
+        position: relative;
         box-shadow: 1px 0 1px #222, -1px 0 1px #222;
     }
 
@@ -46,50 +50,50 @@ button{
         width: 728px;
         height: 90px;
         background-color: rgba(237,236,239, 1.2);
-        margin:auto;
-        position:relative;
-        top:12px;
+        margin: auto;
+        position: relative;
+        top: 12px;
         box-shadow: 1px 0 20px #222, -1px 0 20px #222;
     }
 }
 
 header{
-    margin:0;
-    padding:30px 20px 14px 50px;
-    width:100%;
-    position:fixed;
-    z-index: 10000;
-    top:0;
-    left:0;
     background: url(../img/bg.png) repeat;
-    opacity:1;
-    border-top: 10px solid;
-    border-color: rgba(137, 184, 242, 0.95);
+    border-top: 5px solid rgba(137, 184, 242, 0.95);
+    left: 0;
+    margin: 0;
+    opacity: 1;
+    overflow: hidden;
+    padding: 30px 20px 14px 50px;
+    position: fixed;
+    top: 0;
     transition: padding 500ms cubic-bezier(0.550, 0.055, 0.675, 0.190); /* easeInCubic */
-    overflow:hidden;
-
+    width: 100%;
+    z-index: 10000;
     &.smaller {
         padding: 0 20px 0 50px;
     }
     > div{
-        float:left;
+        float: left;
     }
     .logo{
         height: 100%;
-        cursor:pointer;
+        cursor: pointer;
         img{
-            cursor:pointer;
-            max-height:95px;
+            cursor: pointer;
+            max-height: 95px;
+            max-width: 320px;
         }
     }
     .corner-toolbox-icons {
         position: absolute;
         top: 5px;
-        right: 5px;
+        right: 10px;
+        float: none;
         span {
-            margin-right:10px;
+            margin-right: 10px;
             color: white;
-            cursor:pointer;
+            cursor: pointer;
             transition: color ease 0.3s;
             &:hover {
                 color: rgb(224, 224, 224);
@@ -104,13 +108,13 @@ header{
         top: 0;
 
         a {
-            margin-right:10px;
-            cursor:pointer;
+            margin-right: 10px;
+            cursor: pointer;
             img {
                 width: 30px;
-                height:30px;
-                cursor:pointer;
-                border-radius:18px;
+                height: 30px;
+                cursor: pointer;
+                border-radius: 18px;
                 transition: background ease 0.2s;
                 &:hover {
                     background: rgba(255, 255, 255, 0.14);
@@ -121,53 +125,53 @@ header{
 
     .toolbar-icons {
         float: right;
-        position:relative;
-        margin-top:38px;
+        position: relative;
+        margin-top: 28px;
     }
 
     .user-info {
-        width: 213px;
-        height: 60px;
         float: right;
-        margin-top:18px;
+        height: 60px;
         margin-right: 45px;
+        margin-top: 8px;
         position: relative;
+
         .details{
-            float:left;
+            float: left;
             vertical-align: middle;
-            width: 150px;
+            min-width: 100px;
             height: 100%;
-            text-align:right;
+            text-align: right;
             .username{
-                margin-top:5px;
-                font-family: cursive;
-                font-size:18px;
+                margin-top: 5px;
+                font-family: cursive, sans-serif;
+                font-size: 18px;
                 color: white;
                 text-shadow: 1px 1px 1px rgba(0,0,0,0.23);
                 &.connect {
-                    cursor:pointer;
-                    margin-top:14px;
+                    cursor: pointer;
+                    margin-top: 14px;
                 }
             }
             .action {
-                cursor:pointer;
-                margin-top:2px;
+                cursor: pointer;
+                margin-top: 2px;
                 font-family: cursive, sans-serif;
-                font-size:12px;
+                font-size: 12px;
                 color: white;
                 text-shadow: 1px 1px 1px rgba(0,0,0,0.23);
                 text-decoration: underline;
             }
         }
         .profile-pic {
-            margin-top:2px;
-            float:right;
+            margin-top: 2px;
+            float: right;
             img {
-                border-radius:50px;
-                width:55px;
-                height:55px;
+                border-radius: 50px;
+                width: 55px;
+                height: 55px;
                 &.connect {
-                    cursor:pointer;
+                    cursor: pointer;
                 }
             }
 
@@ -184,7 +188,7 @@ header{
         background-size: 400px 250px;
         position: absolute;
         top: -35px;
-        left: 360px;
+        left: 300px;
         width: 490px;
         height: 335px;
         z-index: 1;
@@ -205,196 +209,197 @@ header{
     }
 
     .coins{
-        z-index:2;
-        left:144px;
-        position:absolute;
-                 * {
-                     cursor:pointer;
-                 }
-                 .coin-container {
-                     position:absolute;
-                     left:310px;
-                     width:220px;
-                     .top-text {
-                         font-size: 15px;
-                         font-family: 'Lobster', cursive;
-                         color:white;
-                         position:absolute;
-                         top:5px;
-                         left:101px;
-                     }
-                     .amount {
-                         background: rgba(0, 0, 0, 0.2);
-                         position: absolute;
-                         top: 24px;
-                         width: 220px;
-                         height: 50px;
-                         border-radius: 10px;
-                         border: 2px solid rgba(0, 0, 0, 0.05);
-                         text-align: center;
-                         font-family: 'Lobster', cursive;
+        z-index: 2;
+        left: 84px;
+        position: absolute;
+                  * {
+                      cursor: pointer;
+                  }
+                  .coin-container {
+                      position: absolute;
+                      left: 310px;
+                      width: 220px;
+                      .top-text {
+                          font-size: 15px;
+                          font-family: 'Lobster', cursive, sans-serif;
+                          color: white;
+                          position: absolute;
+                          top: -3px;
+                          left: 101px;
+                      }
+                      .amount {
+                          background: rgba(0, 0, 0, 0.2);
+                          position: absolute;
+                          top: 15px;
+                          width: 220px;
+                          height: 50px;
+                          border-radius: 10px;
+                          border: 2px solid rgba(0, 0, 0, 0.05);
+                          text-align: center;
+                          font-family: 'Lobster', cursive, sans-serif;
 
-                         .coin-img  {
-                             position: absolute;
-                             left:-20px;
-                             top:-15px;
+                          .coin-img  {
+                              position: absolute;
+                              left: -20px;
+                              top: -15px;
 
-                             img{
-                                 height:75px;
-                             }
-                         }
-                         .amount-text{
-                             color:white;
-                             font-family: 'Lobster', cursive;
-                             font-size:35px;
-                             padding-left:75px;
-                             line-height: 1.25;
-                             -moz-transform: matrix( 3.13804168285631,0,0,3.13982968011084,0,0);
-                             -webkit-transform: matrix( 3.13804168285631,0,0,3.13982968011084,0,0);
-                             -ms-transform: matrix( 3.13804168285631,0,0,3.13982968011084,0,0);
-                         }
-                     }
-                 }
-             }
-         }
-         .masonry-container{
-             margin:0 auto;
-             .masonry-brick{
-                 overflow: hidden;
-                 margin: 10px 0;
-                 cursor:pointer;
-                 box-shadow: -1px 1px 12px -2px #000000;
-                 -webkit-backface-visibility: hidden;
+                              img{
+                                  height: 75px;
+                              }
+                          }
+                          .amount-text{
+                              color: white;
+                              font-family: 'Lobster', cursive, sans-serif;
+                              font-size: 35px;
+                              padding-left: 75px;
+                              line-height: 1.25;
+                              -moz-transform: matrix( 3.13804168285631,0,0,3.13982968011084,0,0);
+                              -webkit-transform: matrix( 3.13804168285631,0,0,3.13982968011084,0,0);
+                              -ms-transform: matrix( 3.13804168285631,0,0,3.13982968011084,0,0);
+                          }
+                      }
+                  }
+              }
+          }
+          .masonry-container{
+              margin: 0 auto;
+              .masonry-brick{
+                  overflow: hidden;
+                  margin: 10px 0;
+                  cursor: pointer;
+                  box-shadow: -1px 1px 12px -2px #000000;
+                  -webkit-backface-visibility: hidden;
 
-                 &.rotated-right {
-                     transform: rotate(4deg) ;
-                 }
-                 &.rotated-left {
-                     transform: rotate(-4deg) ;
-                 }
+                  &.rotated-right {
+                      transform: rotate(4deg) ;
+                  }
+                  &.rotated-left {
+                      transform: rotate(-4deg) ;
+                  }
 
-                 a{
-                     .badge-overlay{
-                         position:absolute;
-                         top:0;left:0;
-                         background-size:contain;
-                         cursor:pointer;
-                         color:red;
-                         display: none;
-                     }
-                     img.game-thumbnail{
-                         width:120px;
-                         height:120px;
-                         cursor:pointer;
-                         border:3px solid #F7FFFF;
-                     }
-                     .name{
-                         -webkit-transition: bottom 0.5s ease;
-                         background: rgba(0,0,0,0.75);
-                         text-shadow: 1px 1px 4px rgba(255, 237, 105, 0.61);
-                         bottom: -100px;
-                         color: white;
-                         font-size: 15px;
-                         max-height: 70px;
-                         padding: 2px;
-                         position: absolute;
-                         text-align: center;
-                         text-transform: uppercase;
-                         width: 100%;
-                     }
-                     &:hover{
-                         .name{
-                             bottom:0;
-                             cursor:pointer;
-                         }
-                     }
-                 }
-                 &.premium {
-                     .premium-overlay {
-                         background-color: #C7CF00;
-                         .ribbon-mixin();
+                  a{
+                      .badge-overlay{
+                          position: absolute;
+                          top: 0;
+                          left: 0;
+                          background-size: contain;
+                          cursor: pointer;
+                          color: red;
+                          display: none;
+                      }
+                      img.game-thumbnail{
+                          width: 120px;
+                          height: 120px;
+                          cursor: pointer;
+                          border: 3px solid #F7FFFF;
+                      }
+                      .name{
+                          -webkit-transition: bottom 0.5s ease;
+                          background: rgba(0,0,0,0.75);
+                          text-shadow: 1px 1px 4px rgba(255, 237, 105, 0.61);
+                          bottom: -100px;
+                          color: white;
+                          font-size: 15px;
+                          max-height: 70px;
+                          padding: 2px;
+                          position: absolute;
+                          text-align: center;
+                          text-transform: uppercase;
+                          width: 100%;
+                      }
+                      &:hover{
+                          .name{
+                              bottom: 0;
+                              cursor: pointer;
+                          }
+                      }
+                  }
+                  &.premium {
+                      .premium-overlay {
+                          background-color: #C7CF00;
+                          .ribbon-mixin();
 
-                         .ribbon-text {
-                             border: 1px solid #F5FF00;
-                             color: #fff;
-                             display: block;
-                             font-weight: 400;
-                             margin: 1px 0;
-                             padding: 0 30px;
-                             text-align: center;
-                             text-decoration: none;
-                             text-shadow: 0 0 5px #444;
-                         }
-                     }
-                 }
-                 &.new{
-                     .new-overlay{
-                         display:block;
-                         top:40px;
-                     }
-                 }
-                 &.hot{
-                     .hot-overlay{
-                         .ribbon-mixin();
-                         background-color: #a00;
+                          .ribbon-text {
+                              border: 1px solid #F5FF00;
+                              color: #fff;
+                              display: block;
+                              font-weight: 400;
+                              margin: 1px 0;
+                              padding: 0 30px;
+                              text-align: center;
+                              text-decoration: none;
+                              text-shadow: 0 0 5px #444;
+                          }
+                      }
+                  }
+                  &.new{
+                      .new-overlay{
+                          display: block;
+                          top: 40px;
+                      }
+                  }
+                  &.hot{
+                      .hot-overlay{
+                          .ribbon-mixin();
+                          background-color: #a00;
 
-                         .ribbon-text {
-                             border: 1px solid #faa;
-                             color: #fff;
-                             display: block;
-                             font-weight: 400;
-                             margin: 1px 0;
-                             padding: 0 37px;
-                             text-align: center;
-                             text-decoration: none;
-                             text-shadow: 0 0 5px #444;
-                             /* background: url(../img/hot200x200.png); */
-                         }
-                     }
-                 }
-                 &.promoted{
-                     img.game-thumbnail{
-                         width:260px;
-                         height:260px;
-                     }
-                     .name{
-                         font-size:18px;
-                     }
-                     &.premium{
-                         .premium-overlay{
-                             /* background: red; */
-                             display:block;
-                             /* background: url(../img/premium200x200.png); */
-                         }
-                     }
-                     &.new{
-                         .new-overlay{
-                             display:block;
-                             /* background: url(../img/new200x200.png); */
-                         }
-                     }
-                     &.hot{
-                         .hot-overlay{
-                             display:block;
-                             .ribbon-text {
-                                 display: block;
-                             }
-                         }
-                     }
-                 }
-             }
-         }
-         /* Chrome, Safari, Opera */
-         @-webkit-keyframes counting
-         {
-             0%   {color: white;}
-             50% {color: #ffd11e;}
-             100%   {color: white;}
-         }
-         /* Standard syntax */
-         @keyframes counting
-         {
-             0%   {color: white;}
-             50% {color: #ffd11e;}
-             100%   {color: white;}
-         }
+                          .ribbon-text {
+                              border: 1px solid #faa;
+                              color: #fff;
+                              display: block;
+                              font-weight: 400;
+                              margin: 1px 0;
+                              padding: 0 37px;
+                              text-align: center;
+                              text-decoration: none;
+                              text-shadow: 0 0 5px #444;
+                              /* background: url(../img/hot200x200.png); */
+                          }
+                      }
+                  }
+                  &.promoted{
+                      img.game-thumbnail{
+                          width: 260px;
+                          height: 260px;
+                      }
+                      .name{
+                          font-size: 18px;
+                      }
+                      &.premium{
+                          .premium-overlay{
+                              /* background: red; */
+                              display: block;
+                              /* background: url(../img/premium200x200.png); */
+                          }
+                      }
+                      &.new{
+                          .new-overlay{
+                              display: block;
+                              /* background: url(../img/new200x200.png); */
+                          }
+                      }
+                      &.hot{
+                          .hot-overlay{
+                              display: block;
+                              .ribbon-text {
+                                  display: block;
+                              }
+                          }
+                      }
+                  }
+              }
+          }
+          /* Chrome, Safari, Opera */
+          @-webkit-keyframes counting
+          {
+              0%   {color: white;}
+              50% {color: #ffd11e;}
+              100%   {color: white;}
+          }
+          /* Standard syntax */
+          @keyframes counting
+          {
+              0%   {color: white;}
+              50% {color: #ffd11e;}
+              100%   {color: white;}
+          }

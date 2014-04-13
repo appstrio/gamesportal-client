@@ -4,7 +4,7 @@
 angular.module('myApp', [
     'aio.main', 'aio.settings', 'aio.analytics', 'aio.games', 'aio.firebase', 'wu.masonry',
     'ui.router', 'ngSanitize', 'aio.counter', 'angularjs.media.directives', 'infinite-scroll',
-    'aio.win', 'aio.leaderboard', 'aio.facebook', 'aio.config', 'aio.chrome', 'aio.common'
+    'aio.win', 'aio.leaderboard', 'aio.facebook', 'aio.config', 'aio.chrome', 'aio.common', 'ui.bootstrap'
 ]).config(['$stateProvider', '$urlRouterProvider', '$sceDelegateProvider',
     function ($stateProvider, $urlRouterProvider, $sceDelegateProvider) {
         $urlRouterProvider.otherwise('/');
