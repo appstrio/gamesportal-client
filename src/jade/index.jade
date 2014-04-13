@@ -24,7 +24,7 @@ html
         script(src='./js/vendor/angular-sanitize.js')
         script(src='./js/vendor/async.js')
         script(src='./js/vendor/masonry.pkgd.min.js')
-        script(src='./js/imageLoaded.js')
+        script(src='./js/vendor/imageLoaded.js')
         script(src='./js/vendor/angular-masonry.js')
         script(src='./js/vendor/firebase.js')
         script(src='./js/vendor/firebase-simple-login.js')
@@ -36,25 +36,10 @@ html
             var addthis_config = addthis_config||{};
             addthis_config.data_track_addressbar = false;
 
-        <!-- build:js(src) ./js/app.min.js -->
-        //- load commons
-        script(src='./js/common/analytics.js')
-        script(src='./js/common/common.js')
-        script(src='./js/config/configModule.js')
-        script(src='./js/main/counter.js')
-        script(src='./js/main/games.js')
-        script(src='./js/main/leaderboard.js')
-        script(src='./js/main/main.js')
-        script(src='./js/settings/constants.js')
-        script(src='./js/user/chromeService.js')
-        script(src='./js/user/facebookService.js')
-        script(src='./js/user/firebaseService.js')
-        script(src='./js/user/win.js')
-        script(src='./js/app.js')
-        <!-- endbuild -->
+        <!-- inject:js -->
+        <!-- endinject -->
 
         title Mojo-Games
-        //----------------
     body(ng-controller="MainCtrl")
     #fb-root(style="display:none;visibility:hidden;")
 

@@ -10,21 +10,34 @@ var vendorPackages = config.vendorPackages;
 var libs = bowerPackages.concat(vendorPackages);
 
 //jade -> html
-gulp.task('jade', function() {
-    return gulp.src(paths.origin.jade)
+gulp.task('main', function () {
+    //create scripts stream
+    var scripts = gulp.src(['./src/js/**/*.js', '!./src/js/{snippets,vendor}/*.js'])
+        .pipe($gulp.uglify())
+        .pipe(gulp.dest(paths.dist.js));
+
+    //process jades
+    gulp.src(paths.origin.jade)
         .pipe($gulp.flatten())
         .pipe($gulp.jade({
-            pretty: false
+            pretty: true
         }))
         .pipe(gulp.dest(paths.build))
         .pipe($gulp.sitemap({
             siteUrl: 'http://www.mojo-games.com'
         }))
         .pipe(gulp.dest(paths.build));
+
+    //inject scripts to index.html
+    scripts.pipe($gulp.inject('./build/index.html', {
+        addRootSlash: false,
+        ignorePath: 'build'
+    }))
+        .pipe(gulp.dest('./build/'));
 });
 
 //less -> css
-gulp.task('less', function() {
+gulp.task('less', function () {
     return gulp.src(paths.origin.less)
         .pipe($gulp.less())
         .pipe($gulp.autoprefixer())
@@ -32,14 +45,7 @@ gulp.task('less', function() {
         .pipe(gulp.dest(paths.dist.less));
 });
 
-// copy & uglify js scripts
-gulp.task('scripts', function() {
-    return gulp.src(paths.origin.js)
-        .pipe($gulp.uglify())
-        .pipe(gulp.dest(paths.dist.js));
-});
-
-gulp.task('serve', ['build'], function() {
+gulp.task('serve', ['build'], function () {
     $gulp.connect.server({
         root: 'build',
         port: 8080,
@@ -47,12 +53,12 @@ gulp.task('serve', ['build'], function() {
     });
 });
 
-gulp.task('livereload', ['build'], function() {
+gulp.task('livereload', ['build'], function () {
     $gulp.connect.reload();
 });
 
 //clean build folder
-gulp.task('clean', function() {
+gulp.task('clean', function () {
     return gulp.src(paths.build, {
         read: false
     })
@@ -60,7 +66,7 @@ gulp.task('clean', function() {
 });
 
 //bump versions on package/bower/manifest
-gulp.task('bump', function() {
+gulp.task('bump', function () {
     //reget package
     var _pkg = require('package.json');
     //increment version
@@ -76,7 +82,7 @@ gulp.task('bump', function() {
 });
 
 //handle assets
-gulp.task('assets', function() {
+gulp.task('assets', function () {
     //copy regular assets
     gulp.src('./src/assets/**/*')
         .pipe(gulp.dest('./build/assets'));
@@ -87,27 +93,27 @@ gulp.task('assets', function() {
 });
 
 //copy libs
-gulp.task('libs', function() {
+gulp.task('libs', function () {
     return gulp.src(libs)
         .pipe(gulp.dest(paths.dist.libs));
 });
 
 //all tasks are watch -> bump patch version -> reload extension (globally enabled)
-gulp.task('watch', function() {
+gulp.task('watch', function () {
     gulp.watch('./src/**/*', ['build', 'livereload']);
 });
 
-gulp.task('build', ['clean'], function() {
-    gulp.start('assets', 'libs', 'jade', 'less', 'scripts');
+gulp.task('build', ['clean'], function () {
+    gulp.start('assets', 'libs', 'main', 'less');
 });
 
 //default task
-gulp.task('default', function() {
+gulp.task('default', function () {
     gulp.start('build', 'serve', 'watch');
 });
 
 // aws
-gulp.task('deploy', ['build'], function() {
+gulp.task('deploy', ['build'], function () {
     /*
      * AWS Configuration
      */

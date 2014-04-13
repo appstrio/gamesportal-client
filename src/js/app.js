@@ -6,7 +6,7 @@ angular.module('myApp', [
     'ui.router', 'ngSanitize', 'aio.counter', 'angularjs.media.directives', 'infinite-scroll',
     'aio.win', 'aio.leaderboard', 'aio.facebook', 'aio.config', 'aio.chrome', 'aio.common'
 ]).config(['$stateProvider', '$urlRouterProvider', '$sceDelegateProvider',
-    function($stateProvider, $urlRouterProvider, $sceDelegateProvider) {
+    function ($stateProvider, $urlRouterProvider, $sceDelegateProvider) {
         $urlRouterProvider.otherwise('/');
 
         $stateProvider
@@ -42,7 +42,7 @@ angular.module('myApp', [
 ]);
 
 //first boot angular
-angular.element(document).ready(function() {
+angular.element(document).ready(function () {
     //bootstrap
     angular.bootstrap(document, ['myApp']);
 });

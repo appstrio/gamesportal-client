@@ -27,13 +27,13 @@ var bowerPackages = [
 
 var vendorPackages = [
     //    paths.src + '/' + paths.vendor + '/jquery-ui.js',
+    './src/js/vendor/*.js'
 ];
 
 paths.origin = {
     jade: paths.src + '/jade/**/*.jade',
     less: paths.src + '/less/*.less',
     assets: paths.assets + '/**/*',
-    manifest: paths.src + '/manifest.json',
     js: [paths.src + '/js/**/*.js', '!' + paths.src + '/js/vendor/**/*.js']
 };
 

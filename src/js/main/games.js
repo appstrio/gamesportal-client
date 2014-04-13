@@ -113,7 +113,7 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
                     return $state.go('main');
                 }
                 if (game.source === 'miniclip') {
-//                    $scope.miniclipURL = 'http://www.miniclip.com/games/' + game.data_game_name + "/en/webgame.php?bodybg=1&width=" + game.width + "&height=" + game.height;
+                    //$scope.miniclipURL = 'http://www.miniclip.com/games/' + game.data_game_name + "/en/webgame.php?bodybg=1&width=" + game.width + "&height=" + game.height;
                     $scope.miniclipURL = 'http://www.miniclip.com/games/' + game.data_game_name + "/en/webgame.php?bodybg=1&width=640px&height=480px";
                 }
                 // check access
@@ -127,7 +127,6 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
                 $scope.evenMoreGames = _.shuffle(games).slice(0, 4);
             });
         };
-
 
         /**
          * check if game is premium, and if user unlocked the game
