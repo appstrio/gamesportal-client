@@ -18,6 +18,7 @@ var bowerPackages = [
     'angular/angular.min.js',
     'angular-masonry/angular-masonry.js',
     'angular-sanitize/angular-sanitize.min.js',
+    'angular-sanitize/angular-sanitize.min.js.map',
     'angular-ui-router/release/angular-ui-router.min.js',
     'angularfire/angularfire.js',
     'angularjs-media/app/lib/angularjs.media.directives.js',
