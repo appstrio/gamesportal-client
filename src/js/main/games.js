@@ -161,6 +161,10 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
             return Math.min(widthFactor,heightFactor);
         };
 
+        $scope.isWindowBigEnough = function(){
+            return window.innerWidth >= 1210;
+        };
+
         /**
          * unlock the game by paying coins
          * @param game

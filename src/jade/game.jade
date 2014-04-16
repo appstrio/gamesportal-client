@@ -1,11 +1,7 @@
 .game-wrapper
     .game-embed-container
-
-        //.header
-            .game-name(ng-bind="game.name")
-
         .main
-            .left
+            .left(ng-show='isWindowBigEnough()')
                 .header
                 .more-games-left
                     .game(ng-repeat="game in evenMoreGames | limitTo:5")
