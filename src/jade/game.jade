@@ -15,7 +15,7 @@
                 .embedding(ng-style="{zoom: getGameZoom(game)}")
                     div.loader
                     div.include(ng-include="'embed-' + game.source + '.html'", ng-if="game")
-                .game-description(ng-bind-html="game.description")
+                .game-description(ng-bind-html="game.description", ng-style='{width:getGameZoom(game)*game.width}')
             .right
                 .header
                 .right-ad-unit
