@@ -4,66 +4,46 @@ var $gulp = require('gulp-load-plugins')({
 });
 var semver = require('semver');
 var config = require('./gulp');
-
-/*
- * AWS Configuration
- */
-var awsDetails = require('./ignored/aws.json');
-var awsPublisher = $gulp.awspublish.create(awsDetails);
-var awsHeaders = {
-    'Cache-Control': 'max-age=315360000, no-transform, public'
-};
-
-//get paths from config file
 var paths = config.paths;
 var bowerPackages = config.bowerPackages;
 var vendorPackages = config.vendorPackages;
 var libs = bowerPackages.concat(vendorPackages);
 
-//to set production env use --production in command line
-//production will minify & concat scripts/libs
-var isProduction = Boolean($gulp.util.env.production);
-
 //jade -> html
-gulp.task('jade', function () {
-    return gulp.src(paths.origin.jade)
+gulp.task('main', function () {
+    //create scripts stream
+    var scripts = gulp.src(['./src/js/**/*.js', '!./src/js/{snippets,vendor}/*.js'])
+        .pipe($gulp.uglify())
+        .pipe($gulp.concat('scripts.min.js'))
+        .pipe(gulp.dest(paths.dist.js));
+
+    //process jades
+    gulp.src(paths.origin.jade)
         .pipe($gulp.flatten())
         .pipe($gulp.jade({
-            pretty: !isProduction
+            pretty: true
+        }))
+        .pipe(gulp.dest(paths.build))
+        .pipe($gulp.sitemap({
+            siteUrl: 'http://www.mojo-games.com'
         }))
         .pipe(gulp.dest(paths.build));
-});
 
-gulp.task('usemin', ['jade', 'libs'], function () {
-    if (!isProduction) {
-        gulp.start('scripts');
-        return;
-    }
-    gulp.src(['build/popup.html', 'build/background.html'])
-        .pipe($gulp.usemin({
-            jsmin: $gulp.uglify()
-        }))
-        .pipe(gulp.dest(paths.build));
+    //inject scripts to index.html
+    scripts.pipe($gulp.inject('./build/index.html', {
+        addRootSlash: false,
+        ignorePath: 'build'
+    }))
+        .pipe(gulp.dest('./build/'));
 });
 
 //less -> css
 gulp.task('less', function () {
     return gulp.src(paths.origin.less)
         .pipe($gulp.less())
+        .pipe($gulp.autoprefixer())
         .pipe($gulp.cssmin())
         .pipe(gulp.dest(paths.dist.less));
-});
-
-// copy & uglify js scripts
-gulp.task('scripts', function () {
-    if (!isProduction) {
-        return gulp.src(paths.origin.js)
-            .pipe(gulp.dest(paths.dist.js));
-    } else {
-        return gulp.src(paths.origin.js)
-            .pipe($gulp.uglify())
-            .pipe(gulp.dest(paths.dist.js));
-    }
 });
 
 gulp.task('serve', ['build'], function () {
@@ -74,7 +54,7 @@ gulp.task('serve', ['build'], function () {
     });
 });
 
-gulp.task('livereload', function () {
+gulp.task('livereload', ['build'], function () {
     $gulp.connect.reload();
 });
 
@@ -82,7 +62,8 @@ gulp.task('livereload', function () {
 gulp.task('clean', function () {
     return gulp.src(paths.build, {
         read: false
-    }).pipe($gulp.clean());
+    })
+        .pipe($gulp.clean());
 });
 
 //bump versions on package/bower/manifest
@@ -107,7 +88,8 @@ gulp.task('assets', function () {
     gulp.src('./src/assets/**/*')
         .pipe(gulp.dest('./build/assets'));
 
-    return gulp.src('./src/img/**/*')
+    //copy images
+    return gulp.src('./src/img/**/*.{ico,jpeg,jpg,gif,bmp,png,webp}')
         .pipe(gulp.dest('./build/img'));
 });
 
@@ -123,7 +105,7 @@ gulp.task('watch', function () {
 });
 
 gulp.task('build', ['clean'], function () {
-    gulp.start('assets', 'libs', 'jade', 'less', 'scripts', 'usemin');
+    gulp.start('assets', 'libs', 'main', 'less');
 });
 
 //default task
@@ -133,9 +115,17 @@ gulp.task('default', function () {
 
 // aws
 gulp.task('deploy', ['build'], function () {
-    return gulp.src('./build/**')
+    /*
+     * AWS Configuration
+     */
+    var awsDetails = require('./ignored/aws.json');
+    var awsPublisher = $gulp.awspublish.create(awsDetails);
+    var awsHeaders = {
+        'Cache-Control': 'max-age=315360000, no-transform, public'
+    };
+
+    return gulp.src('./build/**/*')
         .pipe(awsPublisher.publish(awsHeaders))
         .pipe(awsPublisher.sync()) // sync local directory with bucket
-    //.pipe(awsPublisher.cache()) // create a cache file to speed up next uploads
     .pipe($gulp.awspublish.reporter()); // print upload updates to console
 });

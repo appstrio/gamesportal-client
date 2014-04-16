@@ -113,7 +113,8 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
                     return $state.go('main');
                 }
                 if (game.source === 'miniclip') {
-                    $scope.miniclipURL = 'http://www.miniclip.com/games/' + game.data_game_name + "/en/webgame.php?bodybg=1&width=" + game.width + "&height=" + game.height;
+                    //$scope.miniclipURL = 'http://www.miniclip.com/games/' + game.data_game_name + "/en/webgame.php?bodybg=1&width=" + game.width + "&height=" + game.height;
+                    $scope.miniclipURL = 'http://www.miniclip.com/games/' + game.data_game_name + "/en/webgame.php?bodybg=1&width=640px&height=480px";
                 }
                 // check access
                 checkPremium(game);
@@ -123,6 +124,7 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
             Games.then(function (games) {
                 var howMany = 8;
                 $scope.moreGames = _.shuffle(games).slice(0, howMany);
+                $scope.evenMoreGames = _.shuffle(games).slice(0, 5);
             });
         };
 
@@ -148,6 +150,21 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
             });
         };
 
+        $scope.getGameZoom = function (game) {
+            var widthFactor=1,heightFactor=1;
+            if(game.width>640){
+                widthFactor = Math.min(1, 640 / game.width);
+            }
+            if(game.height>480) {
+                heightFactor = Math.min(1, 480 / game.height);
+            }
+            return Math.min(widthFactor,heightFactor);
+        };
+
+        $scope.isWindowBigEnough = function(){
+            return window.innerWidth >= 1210;
+        };
+
         /**
          * unlock the game by paying coins
          * @param game
@@ -166,8 +183,8 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
 
     }
 
-]).controller('EditGameCtrl', ['$scope', '$log', '$q', '$timeout', '$http', '$stateParams', '$state', 'Firebase', 'Games', 'GamesHelpers',
-
+]).controller('EditGameCtrl', ['$scope', '$log', '$q', '$timeout',
+    '$http', '$stateParams', '$state', 'Firebase', 'Games', 'GamesHelpers',
     function ($scope, $log, $q, $timeout, $http, $stateParams, $state, Firebase, Games, GamesHelpers) {
 
         /**

@@ -4,6 +4,7 @@ html
         meta(charset="utf-8")
         meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
         meta(name='google', content='notranslate')
+        link(rel="shortcut icon", href="./img/favicon.ico")
 
         //link(href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400', rel='stylesheet', type='text/css')
         link(href='//fonts.googleapis.com/css?family=Lobster', rel='stylesheet', type='text/css')
@@ -13,49 +14,39 @@ html
         //- bizigames inline install
         //- link(href='https://chrome.google.com/webstore/detail/heplncibihkggagnaaoigdhkgjmmllme', rel='chrome-webstore-item')
         //- gamestab inline install
-        link(href='https://chrome.google.com/webstore/detail/amlhfkalaoikfbpoolhpdhignhjhlhko', rel='chrome-webstore-item')
+        link(href='https://chrome.google.com/webstore/detail/fmpeljkajhongibcmcnigfcjcgaopfid', rel='chrome-webstore-item')
 
         //- load vendor
         script(src='//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js')
         script(src='//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js')
         script(src='//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js')
-        script(src='./js/vendor/angular-ui-router.js')
-        script(src='./js/vendor/angular-sanitize.js')
+        script(src='./js/vendor/angular-ui-router.min.js')
+        script(src='./js/vendor/angular-sanitize.min.js')
         script(src='./js/vendor/async.js')
         script(src='./js/vendor/masonry.pkgd.min.js')
-        script(src='./js/imageLoaded.js')
+        script(src='./js/vendor/imageLoaded.js')
         script(src='./js/vendor/angular-masonry.js')
         script(src='./js/vendor/firebase.js')
         script(src='./js/vendor/firebase-simple-login.js')
         script(src='./js/vendor/angularjs.media.directives.js')
         script(src='./js/vendor/ng-infinite-scroll.min.js')
         script(src='./js/vendor/underscore-min.js')
+        script(src='./js/vendor/ui-bootstrap-custom-tpls-0.10.0.min.js')
+        script(src='//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-534644e35a88a9ba')
+        script.
+            var addthis_config = addthis_config||{};
+            addthis_config.data_track_addressbar = false;
 
-        <!-- build:js(src) ./js/app.min.js -->
-        //- load commons
-        script(src='./js/common/analytics.js')
-        script(src='./js/settings/constants.js')
-        script(src='./js/main/counter.js')
-        script(src='./js/main/main.js')
-        script(src='./js/main/leaderboard.js')
-        script(src='./js/main/games.js')
-        script(src='./js/user/win.js')
-        script(src='./js/user/firebaseService.js')
-        script(src='./js/user/facebookService.js')
-        script(src='./js/user/chromeService.js')
-        script(src='./js/config/configModule.js')
-        script(src='./js/common/common.js')
-        script(src='./js/app.js')
-        <!-- endbuild -->
+        <!-- inject:js -->
+        <!-- endinject -->
 
-        title GamesPortal
-        //----------------
+        title Mojo-Games
     body(ng-controller="MainCtrl")
+    #fb-root(style="display:none;visibility:hidden;")
 
-    header
+    header(ng-style="{ position: fixedHeader ? 'fixed' : 'static'}")
         div.logo(ng-click="goHome()")
             img(src="./img/logo.png")
-        //- user isn't logged in.
         .coins(ng-click="goHome('WIN_COINS')")
             .coin-container
                 .top-text coins collected
@@ -64,6 +55,11 @@ html
                         img(src="./img/coins2.png")
                     span.amount-text(ng-if="!userData.user") {{10000 | number:0 }}
                     span.amount-text(ng-if="userData.user", aio-counter="{{userData.user.points}}")
+        #rays
+
+        .corner-toolbox-icons
+            span.glyphicon.glyphicon-lock(ng-click="goHome('privacy')")
+            span.glyphicon.glyphicon-envelope(ng-click="goHome('contact')")
 
         .user-info
             span.details
@@ -75,23 +71,191 @@ html
                 //- dummy picture
                 img.connect(ng-if="!userData.user.info", src="./img/anonymous.png", ng-click="login()")
 
+        .toolbar-icons(ng-class="rowOrPack()")
+            span.addthis_toolbox.addthis_default_style
+                a.addthis_button_facebook_like(fb:like:layout="button_count", addthis:url="https://www.facebook.com/pages/Mojo-Gamescom/452845291514515")
+                a.addthis_button_twitter_follow_native(tf:screen_name="DaRealMojoGames", tf:show-screen-name="false", tf:show-count="false")
+                a.addthis_button_google_plusone(g:plusone:href="https://plus.google.com/u/0/105972966277627450580/about", g:plusone:size="medium")
+
         //div.cup(ng-show="userData.user")
         //    a.cup-img(href="#", ng-click="openMainOverlay('LEADERBOARD')")
         //        img(src="./img/cup.png")
-    .banner
+    .banner(ng-class="{ 'in-game': !fixedHeader }")
         .bg-banner
             .bg-ad
+                img(src="./img/728x90.png", width="728", height="90", alt="Your ad here placeholder")
     .main(ui-view)
+    .modal-overlay-fade.contact(ng-if="overlayID=='contact'", overlay="'contact'")
+        .modal-dialog.contact
+            .close-button(ng-click="closeOverlay('contact')")
+            h1 Contact Mojo-Games
+            h4 Send us a message and we will get back to you
+            hr
+            .contact-form-wrapper
+                form.form-horizontal(method="post", action="//forms.brace.io/mojogamesportal@gmail.com")
+                    fieldset
+                        //- input(type="hidden", name="_next", value="//www.mojo-games.com")
+                        .form-group
+                            label.col-md-4.control-label(for='name-input') Name
+                            .col-md-5
+                                input.form-control.input-md(name='name-input', type='text', placeholder='Your name...')
+                        // Text input
+                        .form-group
+                            label.col-md-4.control-label(for='_replyto') Email
+                            .col-md-5
+                                input.form-control.input-md(name='_replyto', type='email', placeholder='Your email...')
+                        // Select Basic
+                        .form-group
+                            label.col-md-4.control-label(for='subject-input') Subject
+                            .col-md-5
+                                select.form-control(name='subject-input')
+                                    option(value='game') Game
+                                    option(value='advertising') Advertising
+                                    option(value='terms') Terms
+                                    option(value='question') Question
+                                    option(value='other') Other
+                        // Textarea
+                        .form-group
+                            label.col-md-4.control-label(for='message-input') Message
+                            .col-md-5
+                                textarea.form-control(name='message-input', placeholder="Your message...")
+                        // Button (Double)
+                        .form-group
+                            label.col-md-4.control-label(for='button1id')
+                            .col-md-8
+                                button#button1id.btn.btn-primary(name='button1id', type="submit") Submit
+                                button#button2id.btn.btn-default(name='button2id', type="reset") Reset
+    .modal-overlay-fade.privacy(ng-if="overlayID=='tos'", overlay="'tos'")
+        .modal-dialog.privacy
+            .close-button(ng-click="closeOverlay('tos')")
+            h1(style="font-family:sans-serif;") Terms Of Service
+            .privacy-container
+                h3 Your Acceptance:
+                p
+                    | By visiting and using this website (including all the content existing through Mojo-Games.com domain),
+                    | you signify your assent to both these Privacy policy, published at:&nbsp;
+                    a(ng-click="goHome('privacy')", href="#") Privacy Policy
+                    | &nbsp;and the Terms and conditions which are follow in this page.
+                    br
+                    br
+                    | If you do not agree to any of those, please do not use Mojo-Games.com
+                h3 Mojo-Games website:
+                p
+                    | These Terms Of Service (TOS) apply to all of Mojo-Games's users, including content contributors.
+                    br
+                    br
+                    | Mojo-Games contains links to 3rd party websites which are not owned or controlled by Mojo-Games.
+                    br
+                    br
+                    | Mojo-Games has no responsibility for content, privacy policy or any other aspect of those third party websites.
+                    br
+                    br
+                    | Mojo-Games can not edit the content of any third party website.
+                    br
+                    br
+                    | By using Mojo-Games you expressly relieve Mojo-Games from any liability arising from the use of 3rd party websites.
+                h3 Access:
+                p
+                    | A. Mojo-Games allow you to use the website only if:
+                    br
+                    br
+                    | 1. You are the original creator of the content or has distribution rights for it
+                    br
+                    br
+                    | 2. You will not modify any part of the site.
+                    br
+                    br
+                    | B. In order to access some of Mojo-Games's features you will need to have an integration with your Facebook account.
+                    br
+                    br
+                    | You may never use other people account without their permission.
+                    br
+                    br
+                    | When creating your account, you must provide accurate information.
+                    br
+                    br
+                    | You are the only responsible to your account, Mojo-Games won't be liable for your losses caused by unauthorized use of your account.
+                    br
+                    br
+                    | C. You agree not to use or launch any robot/automated system that will access Mojo-Games. Including any kind of message senders.
+                    br
+                    br
+                    | We allow search engine robots to index our site.
+                h3 Intellectual Property Rights:
+                p
+                    | The content of Mojo-Games, except the user's submissions, including without limitation the software, images, text,design,scripts, graphics,text, logo and any other relevant feature or service is subject to copyright and intellectual property rights under United States and foreign laws and international conventions.
+                    br
+                    | Content on the Website is provided to you AS IS for your information and personal use only and may not
+                    | be used, copied, reproduced, distributed, transmitted, broadcast, displayed, sold,
+                    | licensed, or otherwise exploited for any other purposes whatsoever without the
+                    | prior written consent of the respective owners.
+    .modal-overlay-fade.privacy(ng-if="overlayID=='privacy'", overlay="'privacy'")
+        .modal-dialog.privacy
+            .close-button(ng-click="closeOverlay('privacy')")
+            h1(style="font-family:sans-serif;") Privacy Policy
+            .privacy-container
+                h3 Your Safety
+                p
+                    | The internet provides some amazing experiences, but it is a largely unregulated system, and this naturally presents some issues regarding user safety. Mojo-Games is a general audience website, which appeals to users of both genders, all ages, and many nationalities. Some users (depending on age, internet experience, and other factors) will be more vulnerable than others, and it's important to know about the features (and perhaps more importantly, the absence of features) which help make Mojo-Games a safer place to play.
+                    br
+                    br
+                    | Mojo-Games very rarely communicates directly with users, but much more importantly, Mojo-Games does not facilitate communication between users. There are no forums or chat rooms on Mojo-Games, and this is instrumental in preventing inappropriate contact and bullying.
+                    br
+                    br
+                    | The games on Mojo-Games have been systematically checked to ensure that they are appropriate for the various age groups who are likely to play them. While it can't be said that none of the games feature violence (even Pac Man may be regarded as violent), we have tried to keep the content made available on Mojo-Games consistent with what would be regarded as reasonable to show on a television channel throughout a typical day. We have worked hard to ensure that players on Mojo-Games are not inappropriately exposed to bad language, overtly sexual themes or imagery, references to illegal drug use, scenarios or characters glorifying drinking, smoking, or gambling, or depictions of extreme violence and gore. Users should be aware that the games made available to users on Mojo-Games may vary according to the geo location of the user, the time of day the site is being accessed, and other factors.
+                h3 Your Privacy
+                p
+                    | The privacy of users is extremely important to us. Below you will find information detailing the types of data received and collected by Mojo-Games and other parties, and how it is used.
+                    br
+                    br
+                    | Log Files: As with all websites, Mojo-Games's servers record details of which files are accessed, along with data such as the time the request was made and the IP (Internet Protocol) address of the user. Although each computer may have a unique IP address, this identifier is never linked to any personal information such as the name or street address of the user. Log files have been used universally since the dawn of the internet and are invaluable in identifying errors with web pages and, in the case of Mojo-Games, with the games. Our servers are set to keep daily log files for a maximum of one month, after which they are permanently deleted.
+                    br
+                    br
+                    | Cookies / Flash Shared Objects: To help provide an enhanced user experience, most modern browsers allow websites to store small amounts of data on users' computers. This information is stored in the form of small text files called 'cookies' or, in the case of the interactive content on Mojo-Games, in 'Flash Shared Objects'. Examples of the information stored might include the number of games a user has played, the country the user is in (as taken from the user's IP address), and the level progress made on a game. Unless a user specifically enters personal data, no data stored is personally identifiable. You can at any time delete the cookies and Flash Shared Objects your computer holds - just check your browser's privacy settings.
+                    br
+                    br
+                    | Tracking: Sometimes our menu system and the games on Mojo-Games may send information to third-party tracking services. The information collected (while never personally identifiable) is useful, for example, in providing general insights into visitor numbers and which games are most popular.
+                    br
+                    br
+                    | Advertising Networks: Keeping a popular website up and running can be expensive, and so sometimes we show advertisements which help generate income. The ads are typically served by third party ad networks, and although we try hard to ensure that the companies advertising are reliable and honest, the reality of the internet means that our influence over the ever-changing offerings of these networks is limited. Ad networks will typically show ads based on the kind of users they expect to be playing on Mojo-Games, and as described above, may store small amounts of data on a user's computer. This information, which is never personally identifiable, may help advertisers target an individual user based on their visit to Mojo-Games and other sites and pages they have viewed in the past. This kind of advertising, which has become increasingly popular, is called retargeting. Users are now given greater control than ever over how ad networks use this data. You can opt out of the cookie / retargeting functions of many of these networks by clicking here.
+                    br
+                    br
+                    | Unless otherwise stated, all the games on Mojo-Games are copyrighted by their respective owners and / or authors. The collection of games is provided as freeware, freely distributable, public domain or open source. Although we have mostly stopped accepting submissions from new developers and publishers, those who have already successfully submitted games may continue to do so. The Mojo-Games logo, design and related indicia are copyright (c) from 2014 and beyond until end of time . Mojo-Games is a trademark relating to online games and gaming.
     .modal-overlay-fade.win-coins(ng-if="overlayID=='WIN_COINS'", ng-controller="WinCtrl", overlay="'WIN_COINS'")
         .modal-dialog
-            h1 Win Coins!
-            div
-                button.btn.btn-success(ng-click="inviteFBFriends()") Invite Friends = 50000
-            div
-                button.btn.btn-success(ng-click="installChromeApp()") Add BiziGames to Chrome = 100000
-            div
-                button.btn.btn-success Play a Game = 10000
-    .modal-overlay-fade.leaderboard(ng-if="overlayID=='LEADERBOARD'", ng-controller="LeaderboardCtrl", overlay="'WIN_COINS'")
+            .close-button(ng-click="closeOverlay('WIN_COINS')")
+            h1 Win Free Coins!
+            .win-coins-top-offer
+                .connect-with-action
+                    button.join-now(ng-click="connectNow()") Join Now
+                .connect-with-offer
+                    .top-text Sign In To Get
+                    span.coin-img
+                        img(src="./img/smaller_coins.png")
+                    span.coin-award {{ points.fbConnect | number}}
+            ul.offers
+                li.offer-box
+                    .top-offer Invite Friends
+                    .win-size Get {{ points.fbInvite | number}}
+                    span.coin-img
+                        img(src="./img/smaller_coins.png")
+                    .action
+                        button.btn.btn-success(ng-click="inviteFBFriends()") Get Coins
+                li.offer-box
+                    .top-offer Play On Chrome
+                    .win-size Get {{ points.chromeInstall | number}}
+                    span.coin-img
+                        img(src="./img/smaller_coins.png")
+                    .action
+                        button.btn.btn-success(ng-click="installChromeApp()") Get Coins
+                li.offer-box
+                    .top-offer Play Another Game
+                    .win-size Get {{ points.newGame | number }}
+                    span.coin-img
+                        img(src="./img/smaller_coins.png")
+                    .action
+                        button.btn.btn-success(ng-click="installChromeApp()") Get Coins
+    .modal-overlay-fade.leaderboard(ng-if="overlayID==='LEADERBOARD'", ng-controller="LeaderboardCtrl", overlay="'WIN_COINS'")
         .modal-dialog
             h1 Leaderboard
             table

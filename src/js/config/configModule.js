@@ -13,23 +13,22 @@ configModule.factory('Config', function () {
     };
 
     var POINTS = {
-        GIVE_AWAY: 20000,
-        FACEBOOK_INVITE: 99999,
         CHROME_APP_INSTALL: 499999,
-        PLAY_REGULAR_GAME: 499,
-        PLAY_PREMIUM_GAME: 2000,
+        FACEBOOK_CONNET: 30000,
+        FACEBOOK_INVITE: 99999,
+        GIVE_AWAY: 20000,
         PLAY_HOT_GAME: 1500,
-        PLAY_NEW_GAME: 999
+        PLAY_NEW_GAME: 999,
+        PLAY_PREMIUM_GAME: 2000,
+        PLAY_REGULAR_GAME: 499
     };
 
     var INVITE_FRIENDS_POST = function () {
         return {
-            NAME: 'Let\'s play together fun games on ' + APP_NAME,
+            NAME: 'Let\'s play fun games on ' + APP_NAME,
             CAPTION: 'Win coins, win cool prizes!',
             DESCRIPTION: (
-                'A small JavaScript library that allows you to harness ' +
-                'the power of Facebook, bringing the user\'s identity, ' +
-                'social graph and distribution power to your site.'
+                'Playing free games and collecting coins. Come and compete in our leaderboard!'
             ),
             LINK: REALM,
             PICTURE: ''
@@ -48,9 +47,13 @@ configModule.factory('Config', function () {
         REALM: REALM,
         APP_NAME: APP_NAME,
         FIREBASE_URL: 'https://bizibizi.firebaseio.com',
+        GAMES_PER_FIRSTPAGE: 50, // amount of games for the first page
+        GAMES_PER_PAGE: 50, // amount of games for load more games
         POINTS: POINTS,
-        // CHROME_APP_ID: 'heplncibihkggagnaaoigdhkgjmmllme',
-        CHROME_APP_ID: 'amlhfkalaoikfbpoolhpdhignhjhlhko',
+        // CHROME_APP_ID: 'heplncibihkggagnaaoigdhkgjmmllme', bizigames
+        // CHROME_APP_ID: 'amlhfkalaoikfbpoolhpdhignhjhlhko', gamestab
+        // mojo games
+        CHROME_APP_ID: 'fmpeljkajhongibcmcnigfcjcgaopfid',
         IS_CHROME: (typeof chrome !== 'undefined' && chrome.webstore),
         RETURN_USER: returnUser
     };
