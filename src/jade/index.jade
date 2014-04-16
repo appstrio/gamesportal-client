@@ -83,6 +83,7 @@ html
     .banner(ng-class="{ 'in-game': !fixedHeader }")
         .bg-banner
             .bg-ad
+                img(src="./img/728x90.png", width="728", height="90", alt="Your ad here placeholder")
     .main(ui-view)
     .modal-overlay-fade.contact(ng-if="overlayID=='contact'", overlay="'contact'")
         .modal-dialog.contact
