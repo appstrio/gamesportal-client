@@ -140,12 +140,12 @@ mainModule.controller('MainCtrl', [
             $scope.fixedHeader = toState.name !== 'game';
         });
 
-        $scope.rowOrPack = function(){
-            var classToReturn='toolbar-icons';
-            if(window.innerWidth<1111){
-                classToReturn='toolbar-icons-pack';
+        $scope.rowOrPack = function () {
+            var classToReturn = 'toolbar-icons';
+            if (window.innerWidth < 1111) {
+                classToReturn = 'toolbar-icons-pack';
             }
             return classToReturn;
-        }
+        };
     }
 ]);
