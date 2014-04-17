@@ -98,8 +98,12 @@ mainModule.controller('MainCtrl', [
 
         // load game
         $scope.runGame = function (game, e) {
-            e.stopPropagation();
-            e.preventDefault();
+            if (e) {
+                e.stopPropagation();
+                e.preventDefault();
+            }
+            //reset search field
+            $scope.gameSearch = '';
             //if app isn't installed, and this is a first time user
             if (!Chrome.isAppInstalled() && !Config.RETURN_USER) {
                 console.log('offer to download extension');

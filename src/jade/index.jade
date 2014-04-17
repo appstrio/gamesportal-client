@@ -74,6 +74,7 @@ html
             .input-group
                 input.form-control(type="text", placeholder="find a game", ng-model="gameSearch",
                 typeahead-template-url="searchTypeaheadTemplate.html",
+                typeahead-on-select="runGame(gameSearch)",
                 typeahead="game as game.name for game in allGames | filter:{name:$viewValue} | limitTo:8")
                 .input-group-btn
                     button.btn.btn-primary(type="button")
