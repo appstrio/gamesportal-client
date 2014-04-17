@@ -139,13 +139,5 @@ mainModule.controller('MainCtrl', [
             //header doesn't stay fixed in game state to have banner in view
             $scope.fixedHeader = toState.name !== 'game';
         });
-
-        $scope.rowOrPack = function () {
-            var classToReturn = 'toolbar-icons';
-            if (window.innerWidth < 1111) {
-                classToReturn = 'toolbar-icons-pack';
-            }
-            return classToReturn;
-        };
     }
 ]);
