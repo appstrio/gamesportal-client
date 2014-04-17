@@ -55,7 +55,7 @@ html
                 .amount
                     span.coin-img
                         img(src="./img/coins2.png")
-                    span.amount-text(ng-if="!userData.user") {{10000 | number:0 }}
+                    span.amount-text(ng-if="!userData.user") {{10000 | number }}
                     span.amount-text(ng-if="userData.user", aio-counter="{{userData.user.points}}")
         #rays
 
