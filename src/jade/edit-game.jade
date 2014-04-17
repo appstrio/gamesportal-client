@@ -39,16 +39,10 @@ div.edit-game-wrapper.container(ng-show="game")
                 b Author :
                 span  {{game.author}}
 
-
-
-
-
-
     div.row(style="text-align:center;margin:20px 0;")
         div.col-md-6.col-md-offset-2(style="text-align:center;")
             button.btn.btn-lg.btn-default(ng-click="playTheGame=true", ng-show="!playTheGame") Show Game
             button.btn.btn-lg.btn-success(ng-click="nextAndSave()") Next & Save
-
 
     div.row
         div.col-md-6
@@ -80,8 +74,6 @@ div.edit-game-wrapper.container(ng-show="game")
         div.col-md-4.col-md-offset-4
             button.btn.btn-danger(ng-click="previousGame()") Previous
             button.btn.btn-success(ng-click="nextAndSave()") Next & Save
-
-
 
     div.row
         div.col-md-12

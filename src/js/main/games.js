@@ -154,15 +154,39 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
             if (!game || !game.width) {
                 return;
             }
-            var widthFactor = 1,
-                heightFactor = 1;
-            if (game.width > 640) {
-                widthFactor = Math.min(1, 640 / game.width);
+            var widthFactor, heightFactor;
+
+            widthFactor = game.width > 640 ? 640 / game.width : 1;
+            heightFactor = game.height > 480 ? 480 / game.height : 1;
+            return Math.min(1, widthFactor, heightFactor);
+        };
+
+        $scope.rateGame = function (game, side) {
+            var field = side === 'down' ? 'voteDown' : 'voteUp';
+            console.log('Sending rating', game.name, field);
+            Firebase.changeGameRating(game, field, function (error, success, snapshot) {
+                if (error) {
+                    console.warn('problem with rating', error);
+                }
+
+                console.log('new value', field, snapshot.val());
+            });
+        };
+
+        var defaultRating = 4;
+
+        $scope.getGameRating = function (game) {
+            if (!game) {
+                return defaultRating;
             }
-            if (game.height > 480) {
-                heightFactor = Math.min(1, 480 / game.height);
+
+            if (game.voteUp > 0 || game.voteDown > 0) {
+                var up = game.voteUp || 0;
+                var down = game.voteDown || 0;
+                return (up / (up + down) * 5).toFixed(2);
             }
-            return Math.min(widthFactor, heightFactor);
+
+            return defaultRating;
         };
 
         /**
@@ -215,15 +239,12 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
                         GamesHelpers.getGameIndex(game.id).then(function (index) {
                             $scope.gameIndex = index;
                         });
-
                     }
-
                 }).
                 catch (function () {
                     alert('Cant find the game with game id' + gameId);
                 });
             }
-
         };
 
         $scope.nextAndSave = function () {
@@ -247,14 +268,14 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
         $scope.previousGame = function () {
             var game = $scope.game;
             GamesHelpers.findPreviousGameById(game.id).then(function (newGame) {
-                if (newGame)
+                if (newGame) {
                     $state.go('editGame', {
                         gameID: newGame.id
                     });
-                else
+                } else {
                     alert('cant find previous game');
+                }
             });
-
         };
 
         init();
@@ -357,6 +378,5 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
             raisePointsForGame: raisePointsForGame,
             getGameIndex: getGameIndex
         };
-
     }
 ]);

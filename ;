@@ -1,4 +1,3 @@
-/* global FirebaseSimpleLogin, Firebase */
 var firebaseModule = firebaseModule || angular.module('aio.firebase', []);
 
 firebaseModule.factory('Firebase', ['$rootScope', '$log', '$q', '$timeout', '$http', 'Config',
@@ -259,12 +258,15 @@ firebaseModule.factory('Firebase', ['$rootScope', '$log', '$q', '$timeout', '$ht
                 }
             },
 
-            changeGameRating: function (game, side, done) {
+            changeGameRating: function (game, upOrDown, done) {
                 game = angular.copy(game);
-                var tempRef = gamesRef.child(game.id).child(side);
+                var points = upOrDown === 'down' ? -1 : 1;
+                var tempRef = gamesRef.child(game.id);
                 tempRef.transaction(function (current_value) {
-                    return current_value + 1;
-                }, done);
+                    return current_value + points;
+                }, function() {
+                    done();
+                });
             },
 
             /**
@@ -291,6 +293,9 @@ firebaseModule.factory('Firebase', ['$rootScope', '$log', '$q', '$timeout', '$ht
                 var tempRef = gamesRef.child(game.id);
                 tempRef.setWithPriority(game, game.priority, done);
             }
+
         };
+
     }
+
 ]);

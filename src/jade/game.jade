@@ -12,12 +12,12 @@
             .middle
                 .header
                     h1.game-name(ng-bind="game.name")
-                    .game-rating(ng-init="rating = 4")
+                    .game-rating
                         .rating-box
-                            rating.rating-stars(title="{{'Rating: ' + rating || 'Not enough votes'}}", value="rating", max="5", readonly="true", state-on="'star-up glyphicon-star'", state-off="'star-down glyphicon-star-empty'")
-                            .thumbs-down-container(title="Rate game up")
+                            rating.rating-stars(title="{{'Rating: ' + getGameRating(game)}}", value="getGameRating(game)", max="5", readonly="true", state-on="'star-up glyphicon-star'", state-off="'star-down glyphicon-star-empty'")
+                            .thumbs-down-container(title="Rate game up", ng-click="rateGame(game, 'down')")
                                 .icon.glyphicon.glyphicon-thumbs-down
-                            .thumbs-up-container(title="Rate game down")
+                            .thumbs-up-container(title="Rate game down", ng-click="rateGame(game, 'up')")
                                 .icon.glyphicon.glyphicon-thumbs-up
                 .embedding(ng-style="{zoom: getGameZoom(game)}")
                     div.loader
