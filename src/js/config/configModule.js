@@ -1,8 +1,9 @@
 var configModule = configModule || angular.module('aio.config', []);
 
 configModule.factory('Config', function () {
-    var REALM = 'http://www.bizigames.com';
-    var APP_NAME = 'BiziGames';
+    // var REALM = 'http://play.gamestab.me';
+    var REALM = 'http://www.mojo-games.com';
+    var APP_NAME = 'Mojo Games';
 
     var isLocalStorage = function () {
         try {
@@ -50,10 +51,9 @@ configModule.factory('Config', function () {
         GAMES_PER_FIRSTPAGE: 50, // amount of games for the first page
         GAMES_PER_PAGE: 50, // amount of games for load more games
         POINTS: POINTS,
-        // CHROME_APP_ID: 'heplncibihkggagnaaoigdhkgjmmllme', bizigames
-        // CHROME_APP_ID: 'amlhfkalaoikfbpoolhpdhignhjhlhko', gamestab
-        // mojo games
-        CHROME_APP_ID: 'fmpeljkajhongibcmcnigfcjcgaopfid',
+        // CHROME_APP_ID: 'heplncibihkggagnaaoigdhkgjmmllme', // bizigames,
+        // CHROME_APP_ID: 'amlhfkalaoikfbpoolhpdhignhjhlhko', // gamestab,
+        CHROME_APP_ID: 'fmpeljkajhongibcmcnigfcjcgaopfid', // mojo games
         IS_CHROME: (typeof chrome !== 'undefined' && chrome.webstore),
         RETURN_USER: returnUser
     };
@@ -69,7 +69,8 @@ configModule.factory('Config', function () {
 
     var productionConfig = function () {
         return angular.extend(baseConfig, {
-            FACEBOOK_APP_ID: '224435141079794',
+            FACEBOOK_APP_ID: '224435141079794', // mojo games
+            // FACEBOOK_APP_ID: '1481519478732760', //Play Gamestab
             INVITE_FRIENDS_POST: INVITE_FRIENDS_POST()
         });
     };
