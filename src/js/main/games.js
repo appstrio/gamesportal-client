@@ -104,7 +104,9 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
             // get game ID
             var gameId = $stateParams.gameID;
             // check if game ID is ok
-            if (!gameId) $state.go('main');
+            if (!gameId) {
+                $state.go('main');
+            }
 
             // find game in the games DB
             GamesHelpers.findGameById(gameId).then(function (game) {
@@ -113,8 +115,8 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
                     return $state.go('main');
                 }
                 if (game.source === 'miniclip') {
-                    //$scope.miniclipURL = 'http://www.miniclip.com/games/' + game.data_game_name + "/en/webgame.php?bodybg=1&width=" + game.width + "&height=" + game.height;
-                    $scope.miniclipURL = 'http://www.miniclip.com/games/' + game.data_game_name + "/en/webgame.php?bodybg=1&width=640px&height=480px";
+                    $scope.miniclipURL = 'http://www.miniclip.com/games/' + game.data_game_name + "/en/webgame.php?bodybg=1&width=" + game.width + "&height=" + game.height;
+                    // $scope.miniclipURL = 'http://www.miniclip.com/games/' + game.data_game_name + '/en/webgame.php?bodybg=1&width=640px&height=480px';
                 }
                 // check access
                 checkPremium(game);
@@ -169,6 +171,7 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
                     console.warn('problem with rating', error);
                 }
 
+                //TODO update local game with new value
                 console.log('new value', field, snapshot.val());
             });
         };

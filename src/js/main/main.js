@@ -6,19 +6,26 @@ mainModule.controller('MainCtrl', [
     function ($scope, $log, $q, $timeout, $http, Firebase,
         Games, $state, $stateParams, Facebook, Chrome, Config, $window) {
 
-        var allGames, // hold all the games
-            page = 0, //  hold current page
+        var page = 0, //  hold current page
             loaded = false; // whether the app was already loaded
+
+        $scope.allGames = [];
 
         //header is fixed by default
         $scope.fixedHeader = true;
+        $scope.smallHeader = false;
 
+        var $header = $('header');
         //make header small
         var changeHeader = _.debounce(function () {
             if (!$scope.fixedHeader) {
                 return;
             }
-            $('header').toggleClass('smaller', $window.scrollY > 10);
+            //TODO get rid of jquery here. turn into directive.
+            $scope.$apply(function () {
+                $scope.smallHeader = $window.scrollY > 10;
+                $header.toggleClass('smaller', $scope.smallHeader);
+            });
         }, 10);
 
         angular.element($window).on('scroll', changeHeader);
@@ -26,13 +33,13 @@ mainModule.controller('MainCtrl', [
         // init - get all games from games db
         Games.then(function (games) {
 
-            allGames = _.sortBy(_.toArray(games), function (game) {
+            $scope.allGames = _.sortBy(_.toArray(games), function (game) {
                 return parseInt(game.priority);
             });
 
             var repeatLargeThumbnailsEvery = 20,
                 lastLargeThumbnailIndex = 0;
-            angular.forEach(allGames, function (game, index) {
+            angular.forEach($scope.allGames, function (game, index) {
                 //stop if thumbnail is found
                 _.some(game.thumbnails, function (thumbnail) {
                     if (thumbnail.width > 250 && thumbnail.height > 250) {
@@ -47,7 +54,7 @@ mainModule.controller('MainCtrl', [
                 });
             });
 
-            $scope.games = _.first(allGames, Config.GAMES_PER_FIRSTPAGE);
+            $scope.games = _.first($scope.allGames, Config.GAMES_PER_FIRSTPAGE);
         });
 
         // init - init user data object
@@ -76,11 +83,11 @@ mainModule.controller('MainCtrl', [
 
         // render more games
         $scope.loadMore = _.throttle(function () {
-            if (!allGames) {
+            if (!$scope.allGames) {
                 return;
             }
             ++page;
-            $scope.games = _.first(allGames, Config.GAMES_PER_FIRSTPAGE + (page * Config.GAMES_PER_PAGE));
+            $scope.games = _.first($scope.allGames, Config.GAMES_PER_FIRSTPAGE + (page * Config.GAMES_PER_PAGE));
         }, 2000);
 
         var loadGame = function (gameId) {
