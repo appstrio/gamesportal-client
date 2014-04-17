@@ -11,7 +11,14 @@
                                 div(ng-bind="game.name")
             .middle
                 .header
-                    .game-name(ng-bind="game.name")
+                    h1.game-name(ng-bind="game.name")
+                    .game-rating(ng-init="rating = 4")
+                        .rating-box
+                            rating.rating-stars(title="{{'Rating: ' + rating || 'Not enough votes'}}", value="rating", max="5", readonly="true", state-on="'star-up glyphicon-star'", state-off="'star-down glyphicon-star-empty'")
+                            .thumbs-down-container(title="Rate game up")
+                                .icon.glyphicon.glyphicon-thumbs-down
+                            .thumbs-up-container(title="Rate game down")
+                                .icon.glyphicon.glyphicon-thumbs-up
                 .embedding(ng-style="{zoom: getGameZoom(game)}")
                     div.loader
                     div.include(ng-include="'embed-' + game.source + '.html'", ng-if="game")

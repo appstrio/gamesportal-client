@@ -59,14 +59,78 @@
                     background: #395277;
                     border-top: 1px solid #084973;
                     border-bottom: 1px solid rgb(89,139,200);
+                    position: relative;
                     .game-name{
                         color: #ffea00;
-                        float:none;
-                        font-family:Lobster, cursive;
-                        font-size:29px;
-                        line-height:48px;
-                        text-align:center;
-                        text-shadow:.5px .866px 0 #000;
+                        display: block;
+                        float: left;
+                        font-family: Lobster, cursive, sans-serif;
+                        font-size: 29px;
+                        line-height: 48px;
+                        margin: 0 0 0 10px;
+                        padding: 0;
+                        text-align: left;
+                        text-shadow: .5px .866px 0 #000;
+                    }
+                    .game-rating {
+                        float: right;
+
+                        .rating-box {
+                            float: right;
+                            font-size: 25px;
+                            color: white;
+                            line-height: 45px;
+                            .thumbs-down-container {
+                                height: 45px;
+                                float: right;
+                                cursor: pointer;
+                                padding: 0px 7px;
+                                border-right: 1px solid #005e8c;
+
+                                &:hover {
+                                    background: rgba(0, 0, 0, 0.25);
+                                }
+                                .icon {
+                                    cursor: pointer;
+                                    float: left;
+                                    margin: 9px 4px;
+                                }
+                            }
+                            .thumbs-up-container {
+                                border-left: 1px solid #005e8c;
+                                border-right: 1px solid #005e8c;
+                                cursor: pointer;
+                                float: right;
+                                height: 45px;
+                                padding: 0px 7px;
+                                &:hover {
+                                    background: rgba(0, 0, 0, 0.25);
+                                }
+
+                                .icon {
+                                    cursor: pointer;
+                                    float: left;
+                                    margin: 9px 4px;
+                                }
+                            }
+
+                            .rating-stars {
+                                float: right;
+                                padding: 0 5px;
+                                vertical-align: middle;
+                                line-height: 46px;
+                                font-size: 25px;
+                                .star-up {
+                                    background: -webkit-linear-gradient(#FFEA00, #C5B71B);
+                                    -webkit-background-clip: text;
+                                    -webkit-text-fill-color: transparent;
+                                    /* color: #FFEA00; */
+                                }
+                                .star-down {
+                                    color: #979797;
+                                }
+                            }
+                        }
                     }
                 }
                 .embedding{

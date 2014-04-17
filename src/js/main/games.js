@@ -151,6 +151,9 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
         };
 
         $scope.getGameZoom = function (game) {
+            if (!game || !game.width) {
+                return;
+            }
             var widthFactor = 1,
                 heightFactor = 1;
             if (game.width > 640) {
