@@ -151,18 +151,15 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
         };
 
         $scope.getGameZoom = function (game) {
-            var widthFactor=1,heightFactor=1;
-            if(game.width>640){
+            var widthFactor = 1,
+                heightFactor = 1;
+            if (game.width > 640) {
                 widthFactor = Math.min(1, 640 / game.width);
             }
-            if(game.height>480) {
+            if (game.height > 480) {
                 heightFactor = Math.min(1, 480 / game.height);
             }
-            return Math.min(widthFactor,heightFactor);
-        };
-
-        $scope.isWindowBigEnough = function(){
-            return window.innerWidth >= 1210;
+            return Math.min(widthFactor, heightFactor);
         };
 
         /**
