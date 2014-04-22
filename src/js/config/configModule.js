@@ -5,13 +5,13 @@ configModule.factory('Config', function () {
     var REALM = 'http://www.mojo-games.com';
     var APP_NAME = 'Mojo Games';
 
-    var isLocalStorage = function () {
+    var isLocalStorage = (function () {
         try {
             return localStorage && localStorage.getItem;
         } catch (e) {
             return false;
         }
-    };
+    })();
 
     var POINTS = {
         CHROME_APP_INSTALL: 499999,
@@ -38,7 +38,7 @@ configModule.factory('Config', function () {
 
     //first time user by default
     var returnUser = false;
-    if (isLocalStorage()) {
+    if (isLocalStorage) {
         returnUser = typeof localStorage.returnUser !== 'undefined';
     } else {
         returnUser = true; //no localStorage
@@ -59,10 +59,11 @@ configModule.factory('Config', function () {
     };
 
     var developmentConfig = function () {
-        REALM = 'http://localhost:63342/gamesportal/client/build/index.html#/';
+        REALM = 'http://localhost:8080';
 
         return angular.extend(baseConfig, {
             FACEBOOK_APP_ID: '638964789507220',
+            REALM: REALM,
             INVITE_FRIENDS_POST: INVITE_FRIENDS_POST()
         });
     };
@@ -75,10 +76,7 @@ configModule.factory('Config', function () {
         });
     };
 
-    var isDevelopment = (document.URL.indexOf('localhost') > -1);
-    if (isDevelopment) {
-        return developmentConfig();
-    } else {
-        return productionConfig();
-    }
+    var isDevelopment = location.hostname === 'localhost';
+    var _config = isDevelopment ? developmentConfig() : productionConfig();
+    return _config;
 });
