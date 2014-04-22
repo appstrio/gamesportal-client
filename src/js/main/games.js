@@ -189,6 +189,10 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
         };
 
         $scope.rateGame = function (game, side) {
+            if (!game || !game.name || !game.id) {
+                console.warn('missing game info', game);
+                return;
+            }
             var field = side === 'down' ? 'voteDown' : 'voteUp';
             console.log('Sending rating', game.name, field);
             Firebase.changeGameRating(game, field, function (error, success, snapshot) {
