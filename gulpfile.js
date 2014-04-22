@@ -16,6 +16,7 @@ gulp.task('scripts', function () {
     gulp.src(['./src/js/**/*.js', '!./src/js/{snippets,vendor}/*.js'])
         .pipe($gulp.uglify())
         .pipe($gulp.concat('scripts.min.js'))
+        .pipe($gulp.rev())
         .pipe(gulp.dest(paths.dist.js))
         .pipe($gulp.size({
             showFiles: true
@@ -25,6 +26,7 @@ gulp.task('scripts', function () {
 gulp.task('vendors', function () {
     gulp.src(libs)
         .pipe($gulp.concat('vendors.min.js'))
+        .pipe($gulp.rev())
         .pipe(gulp.dest(paths.dist.libs))
         .pipe($gulp.size({
             showFiles: true
@@ -53,13 +55,18 @@ gulp.task('css', function () {
     return gulp.src(paths.origin.less)
         .pipe($gulp.less())
         .pipe($gulp.autoprefixer())
+        .pipe($gulp.concat('styles.min.css'))
+        .pipe($gulp.rev())
         .pipe($gulp.cssmin())
-        .pipe(gulp.dest(paths.dist.less));
+        .pipe(gulp.dest(paths.dist.less))
+        .pipe($gulp.size({
+            showFiles: true
+        }));
 });
 
 gulp.task('inject', ['html', 'scripts', 'vendors', 'css'], function () {
     gulp.src('./build/index.html')
-        .pipe($gulp.inject(gulp.src('build/js/**/*.js', {
+        .pipe($gulp.inject(gulp.src(['build/js/**/*.js', 'build/css/**/*.css'], {
             read: false
         }), {
             addRootSlash: false,
