@@ -7,16 +7,31 @@ var config = require('./gulp');
 var paths = config.paths;
 var bowerPackages = config.bowerPackages;
 var vendorPackages = config.vendorPackages;
+//bower packages and vendor libs scripts
 var libs = bowerPackages.concat(vendorPackages);
 
 //jade -> html
-gulp.task('main', function () {
+gulp.task('scripts', function () {
     //create scripts stream
-    var scripts = gulp.src(['./src/js/**/*.js', '!./src/js/{snippets,vendor}/*.js'])
+    gulp.src(['./src/js/**/*.js', '!./src/js/{snippets,vendor}/*.js'])
         .pipe($gulp.uglify())
         .pipe($gulp.concat('scripts.min.js'))
-        .pipe(gulp.dest(paths.dist.js));
+        .pipe(gulp.dest(paths.dist.js))
+        .pipe($gulp.size({
+            showFiles: true
+        }));
+});
 
+gulp.task('vendors', function () {
+    gulp.src(libs)
+        .pipe($gulp.concat('vendors.min.js'))
+        .pipe(gulp.dest(paths.dist.libs))
+        .pipe($gulp.size({
+            showFiles: true
+        }));
+});
+
+gulp.task('html', function () {
     //process jades
     gulp.src(paths.origin.jade)
         .pipe($gulp.flatten())
@@ -24,26 +39,39 @@ gulp.task('main', function () {
             pretty: true
         }))
         .pipe(gulp.dest(paths.build))
+        .pipe($gulp.size({
+            showFiles: true
+        }))
         .pipe($gulp.sitemap({
             siteUrl: 'http://www.mojo-games.com'
         }))
         .pipe(gulp.dest(paths.build));
-
-    //inject scripts to index.html
-    scripts.pipe($gulp.inject('./build/index.html', {
-        addRootSlash: false,
-        ignorePath: 'build'
-    }))
-        .pipe(gulp.dest('./build/'));
 });
 
 //less -> css
-gulp.task('less', function () {
+gulp.task('css', function () {
     return gulp.src(paths.origin.less)
         .pipe($gulp.less())
         .pipe($gulp.autoprefixer())
         .pipe($gulp.cssmin())
         .pipe(gulp.dest(paths.dist.less));
+});
+
+gulp.task('inject', ['html', 'scripts', 'vendors', 'css'], function () {
+    gulp.src('./build/index.html')
+        .pipe($gulp.inject(gulp.src('build/js/**/*.js', {
+            read: false
+        }), {
+            addRootSlash: false,
+            ignorePath: 'build',
+            sort: function (a) {
+                if (a.filepath.indexOf('vendors') > -1) {
+                    return -1;
+                }
+                return 1;
+            }
+        }))
+        .pipe(gulp.dest(paths.build));
 });
 
 gulp.task('serve', ['build'], function () {
@@ -93,19 +121,13 @@ gulp.task('assets', function () {
         .pipe(gulp.dest('./build/img'));
 });
 
-//copy libs
-gulp.task('libs', function () {
-    return gulp.src(libs)
-        .pipe(gulp.dest(paths.dist.libs));
-});
-
 //all tasks are watch -> bump patch version -> reload extension (globally enabled)
 gulp.task('watch', function () {
     gulp.watch('./src/**/*', ['build', 'livereload']);
 });
 
 gulp.task('build', ['clean'], function () {
-    gulp.start('assets', 'libs', 'main', 'less');
+    gulp.start('assets', 'vendors', 'css', 'html', 'scripts', 'inject');
 });
 
 //default task
