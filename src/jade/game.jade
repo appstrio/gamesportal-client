@@ -25,7 +25,9 @@
 
                     //swf game
                     .include(ng-style="{'zoom': getGameZoom(game),'-ms-zoom': getGameZoom(game),'-moz-transform':scale(getGameZoom(game))}")
-                        div(id='flashGame', ng-show="!gameLoading && game && (game.source === 'swf' || game.source === 'kongregate')", style="background:black")
+                        div(id='flashGame', ng-show="!gameLoading && game && (game.source === 'swf' || game.source === 'kongregate')")
+                            a(href="http://get.adobe.com/flashplayer/", target="_blank")
+                                img(src='./img/getFlash.png', style="cursor:pointer")
                     //iframe game
                     .include(ng-include="'embed-' + game.source + '.html'", ng-if="!gameLoading && game.source !== 'swf' && game.source !== 'kongregate'")
 
