@@ -43,16 +43,16 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
                 initting.resolve(games);
                 storeGames(games);
             }).
-            catch (function () {
-                initting.reject();
-            });
+                catch(function () {
+                    initting.reject();
+                });
         };
 
         var storeGames = function (array) {
             if (isLocalStorage()) {
                 var obj = {
                     timestamp: Date.now(),
-                    games: array
+                    games    : array
                 };
                 try {
                     var str = JSON.stringify(obj);
@@ -115,12 +115,26 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
                 if (!game) {
                     return $state.go('main');
                 }
+
                 if (game.source === 'miniclip') {
                     $scope.miniclipURL = 'http://www.miniclip.com/games/' + game.data_game_name + "/en/webgame.php?bodybg=1&width=" + game.width + "&height=" + game.height;
-                    // $scope.miniclipURL = 'http://www.miniclip.com/games/' + game.data_game_name + '/en/webgame.php?bodybg=1&width=640px&height=480px';
                 }
                 // check access
-                checkPremium(game);
+                checkPremium(game).then(function () {
+                    swfobject.embedSWF(game.swf_url, 'flashGame', String(game.width), String(game.height), '9.0.0', '', {}, {}, {}, function (e) {
+                        var waitForLoad = function (e) {
+                            if (e.ref.PercentLoaded() < 100) {
+                                $timeout(function () {
+                                    waitForLoad(e)
+                                }, 50);
+                            }
+                            else {
+                                $scope.gameLoading = false;
+                            }
+                        };
+                        waitForLoad(e);
+                    });
+                });
             });
 
             // get more games
@@ -137,7 +151,7 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
          */
         var checkPremium = function (game) {
             // check access
-            Firebase.checkAccessToGame(game).then(function (access) {
+            return Firebase.checkAccessToGame(game).then(function (access) {
                 if (access) {
                     // access granted - play game
                     $scope.game = game;
@@ -147,8 +161,7 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
                     $scope.lockedGame = game;
                     $scope.overlayUnlockGame = true;
                 }
-            }).
-            catch (function () {
+            }).catch(function () {
                 alert('Error check premium');
             });
         };
@@ -245,9 +258,9 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
                         });
                     }
                 }).
-                catch (function () {
-                    alert('Cant find the game with game id' + gameId);
-                });
+                    catch(function () {
+                        alert('Cant find the game with game id' + gameId);
+                    });
             }
         };
 
@@ -376,11 +389,11 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
         };
 
         return {
-            findGameById: findGameById,
-            findNextGameById: findNextGameById,
+            findGameById        : findGameById,
+            findNextGameById    : findNextGameById,
             findPreviousGameById: findPreviousGameById,
-            raisePointsForGame: raisePointsForGame,
-            getGameIndex: getGameIndex
+            raisePointsForGame  : raisePointsForGame,
+            getGameIndex        : getGameIndex
         };
     }
 ]);
