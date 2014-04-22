@@ -31,8 +31,8 @@ configModule.factory('Config', function () {
             DESCRIPTION: (
                 'Playing free games and collecting coins. Come and compete in our leaderboard!'
             ),
-            LINK: REALM,
-            PICTURE: ''
+            LINK: REALM
+            // PICTURE: ''
         };
     };
 

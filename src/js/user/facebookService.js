@@ -13,13 +13,13 @@ facebookModule.factory('Facebook', ['$rootScope', '$log', '$q', '$timeout', '$ht
                 cookie: true, // enable cookies to allow the server to access the session
                 xfbml: false // parse XFBML
             });
-
             FB.Event.subscribe('auth.authResponseChange', Firebase.handleFBAuth);
         });
 
         return {
-            inviteFriends: function (done) {
+            inviteFriends: function () {
                 var defer = $q.defer();
+                console.log(Config.INVITE_FRIENDS_POST);
                 FB.ui({
                         method: 'feed',
                         name: Config.INVITE_FRIENDS_POST.NAME,
