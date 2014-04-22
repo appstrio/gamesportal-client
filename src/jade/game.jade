@@ -19,9 +19,9 @@
                                 .icon.glyphicon.glyphicon-thumbs-down
                             .thumbs-up-container(title="Rate game down", ng-click="rateGame(game, 'up')")
                                 .icon.glyphicon.glyphicon-thumbs-up
-                .embedding(ng-style="{zoom: getGameZoom(game)}")
+                .embedding
                     div.loader
-                    div.include(ng-include="'embed-' + game.source + '.html'", ng-if="game")
+                    div.include(ng-include="'embed-' + game.source + '.html'", ng-if="game", ng-style="{zoom: getGameZoom(game)}")
                 .game-description(ng-bind-html="game.description", ng-style='{width:getGameZoom(game)*game.width}')
             .right
                 .header

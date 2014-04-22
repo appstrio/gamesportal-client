@@ -23,7 +23,7 @@ mainModule.controller('MainCtrl', [
             }
             //TODO get rid of jquery here. turn into directive.
             $scope.$apply(function () {
-                $scope.smallHeader = $window.scrollY > 10;
+                $scope.smallHeader = $window.scrollY > 10 || $window.pageYOffset > 10;
                 $header.toggleClass('smaller', $scope.smallHeader);
             });
         }, 10);
