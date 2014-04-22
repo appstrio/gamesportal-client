@@ -130,12 +130,17 @@ header{
         position: relative;
         margin-top: 28px;
         z-index: 2;
-        @media (max-width: 1111px) {
+        @media (min-width:920px) and (max-width: 1305px) {
             float: right;
             position: relative;
             margin: auto;
             width:65px;
             z-index: 2;
+        }
+
+        @media (max-width:920px){
+            display: none;
+            visibility: hidden;
         }
     }
     .search-box {
@@ -147,6 +152,13 @@ header{
         width: 200px;
         background-color: #044267;
         border-radius: 20px;
+
+
+        @media (max-width: 1135px){
+            display: none;
+            visibility: hidden;
+        }
+
         button {
             border-radius:35px !important;
             span {
@@ -179,9 +191,10 @@ header{
         .details{
             float: left;
             vertical-align: middle;
-            min-width: 100px;
+            width: 100px;
             height: 100%;
             text-align: right;
+            overflow: hidden;
             .username{
                 margin-top: 5px;
                 font-family: cursive, sans-serif;
