@@ -17,16 +17,10 @@ $ npm install
 
 ## Deploy
 
+After building a version, use:
+
 ```bash
-$ gulp deploy
+$ aws s3 sync build/ s3://www.mojo-games.com --acl public-read --delete --size-only
 ```
 
-This will deploy to the S3 bucket specified in the AWS config file (./ignored/aws.json)
-Thr structure of the config file should follow this schema :
-```json
-{
-    "key": "XXXX",
-    "secret": "XXXX",
-    "bucket": "XXXX"
-}
-```
+With the AWS command line tool.

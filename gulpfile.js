@@ -143,18 +143,18 @@ gulp.task('default', function () {
 });
 
 // aws
-gulp.task('deploy', ['build'], function () {
+gulp.task('deploy', ['build', 'assets', 'inject'], function () {
     /*
      * AWS Configuration
      */
-    var awsDetails = require('./ignored/aws.json');
-    var awsPublisher = $gulp.awspublish.create(awsDetails);
-    var awsHeaders = {
+    var details = require('./ignored/aws.json');
+    var publisher = $gulp.awspublish.create(details);
+    var headers = {
         'Cache-Control': 'max-age=315360000, no-transform, public'
     };
 
-    return gulp.src('./build/**/*')
-        .pipe(awsPublisher.publish(awsHeaders))
-        .pipe(awsPublisher.sync()) // sync local directory with bucket
+    return gulp.src('build/**/*')
+        .pipe(publisher.publish(headers))
+        .pipe(publisher.sync()) // sync local directory with bucket
     .pipe($gulp.awspublish.reporter()); // print upload updates to console
 });
