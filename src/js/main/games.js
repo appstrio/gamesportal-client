@@ -120,21 +120,31 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
                     $scope.miniclipURL = 'http://www.miniclip.com/games/' + game.data_game_name + "/en/webgame.php?bodybg=1&width=" + game.width + "&height=" + game.height;
                 }
                 // check access
-                checkPremium(game).then(function () {
-                    swfobject.embedSWF(game.swf_url, 'flashGame', String(game.width), String(game.height), '9.0.0', '', {}, {}, {}, function (e) {
-                        var waitForLoad = function (e) {
-                            if (e.ref.PercentLoaded() < 100) {
-                                $timeout(function () {
-                                    waitForLoad(e)
-                                }, 50);
-                            }
-                            else {
-                                $scope.gameLoading = false;
-                            }
-                        };
-                        waitForLoad(e);
+                checkPremium(game)
+                    //handle loader
+                    .then(function () {
+                        //swf game
+                        if(game.source === 'swf' || game.source === 'kongregate'){
+                            swfobject.embedSWF(game.swf_url, 'flashGame', String(game.width), String(game.height), '9.0.0', '', {}, {}, {}, function (e) {
+                                var waitForLoad = function (e) {
+                                    if (e.ref.PercentLoaded() < 100) {
+                                        $timeout(function () {
+                                            waitForLoad(e)
+                                        }, 50);
+                                    }
+                                    else {
+                                        $scope.gameLoading = false;
+                                    }
+                                };
+                                waitForLoad(e);
+                            });
+                        }
+                        //iframe game
+                        else{
+                            //TODO - when we implement such games, make sure to handle loader
+                            $scope.gameLoading = false;
+                        }
                     });
-                });
             });
 
             // get more games
