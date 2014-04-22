@@ -119,9 +119,9 @@ gulp.task('bump', function () {
 
 //handle assets
 gulp.task('assets', function () {
-    //copy regular assets
-    gulp.src('./src/assets/**/*')
-        .pipe(gulp.dest('./build/assets'));
+    // copy regular assets
+    // gulp.src('./src/assets/**/*')
+        // .pipe(gulp.dest('./build/assets'));
 
     //copy images
     return gulp.src('./src/img/**/*.{ico,jpeg,jpg,gif,bmp,png,webp}')
