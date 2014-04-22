@@ -12,21 +12,12 @@ var paths = {
 };
 
 var bowerPackages = [
-    'firebase/firebase.js',
-    'async/lib/async.js',
-    'jquery/jquery.min.js',
-    'angular/angular.min.js',
     'angular-masonry/angular-masonry.js',
     'angular-sanitize/angular-sanitize.min.js',
-    'angular-sanitize/angular-sanitize.min.js.map',
     'angular-ui-router/release/angular-ui-router.min.js',
-    'angularfire/angularfire.js',
     'angularjs-media/app/lib/angularjs.media.directives.js',
-    'firebase-simple-login/firebase-simple-login.js',
     'masonry/dist/masonry.pkgd.min.js',
-    'ng-infinite-scroller/build/ng-infinite-scroll.min.js',
-    'underscore/underscore-min.js',
-    'underscore/underscore-min.map'
+    'ng-infinite-scroller/build/ng-infinite-scroll.min.js'
 ].map(function (src) {
     return path.join(paths.bower, src);
 });
