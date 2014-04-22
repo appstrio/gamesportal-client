@@ -27,11 +27,11 @@ firebaseModule.factory('Firebase', ['$rootScope', '$log', '$q', '$timeout', '$ht
                 } else if (user) {
                     // user authenticated with Firebase
                     onLogin(user);
-                    console.debug('[FIREBASE]:login', user);
+                    console.debug('[FIREBASE]:logged in', user);
                 } else {
                     // user is logged out
                     onLogout();
-                    console.debug('[FIREBASE]:logout');
+                    console.debug('[FIREBASE]:user is not logged in.');
                 }
             });
         });
@@ -189,7 +189,11 @@ firebaseModule.factory('Firebase', ['$rootScope', '$log', '$q', '$timeout', '$ht
              */
             checkAccessToGame: function (game) {
                 return initting.promise.then(function () {
-                    return (!game.premium || data.user && data.user.info && (data.user.unlockedGames && data.user.unlockedGames.indexOf(game.id) >= 0));
+                    if (!game.premium) {
+                        return true;
+                    }
+
+                    return data.user && data.user.info && data.user.unlockedGames && _.contains(data.user.unlockedGames, game.id);
                 });
             },
 
