@@ -28,7 +28,7 @@ var vendorPackages = [
 ];
 
 paths.origin = {
-    jade: paths.src + '/jade/**/*.jade',
+    jade: paths.src + '/jade/*.jade',
     less: paths.src + '/less/*.less',
     assets: paths.assets + '/**/*',
     js: [paths.src + '/js/**/*.js', '!' + paths.src + '/js/vendor/**/*.js']

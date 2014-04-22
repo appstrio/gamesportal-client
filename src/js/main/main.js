@@ -122,6 +122,10 @@ mainModule.controller('MainCtrl', [
             $scope.overlayID = overlayID;
         };
 
+        $scope.playAnotherGame = function () {
+            $scope.runGame($scope.allGames[_.random(0, $scope.allGames.length - 1)]);
+        };
+
         // close overlay
         $scope.closeOverlay = function () {
             if ($stateParams.overlayID) {
