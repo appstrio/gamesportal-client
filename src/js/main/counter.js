@@ -10,7 +10,7 @@ counterModule.directive('aioCounter', ['$filter',
             var doCount = function (newVal, calcInterval) {
                 var subABS = Math.abs(newVal - oldVal);
                 if (calcInterval) {
-                    subAmount = 1;
+                    subAmount = 10;
                     if (subABS > 0) {
                         countingInterval = countingDuration / subABS;
                         if (countingDuration < 1) {
@@ -21,7 +21,7 @@ counterModule.directive('aioCounter', ['$filter',
                 }
 
                 if (subABS < subAmount) subAmount = subABS;
-                if (oldVal == newVal) {
+                if (oldVal === newVal) {
                     element.removeClass('counting');
                 } else if (oldVal > newVal) {
 
