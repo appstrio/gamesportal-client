@@ -177,7 +177,7 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
             });
         };
 
-        $scope.getGameZoom = function (game) {
+        $scope.getGameZoom = _.memoize(function (game) {
             if (!game || !game.width) {
                 return;
             }
@@ -186,7 +186,7 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
             widthFactor = game.width > 640 ? 640 / game.width : 1;
             heightFactor = game.height > 480 ? 480 / game.height : 1;
             return Math.min(1, widthFactor, heightFactor);
-        };
+        });
 
         $scope.rateGame = function (game, side) {
             if (!game || !game.name || !game.id) {
