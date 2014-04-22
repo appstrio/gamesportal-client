@@ -138,7 +138,7 @@
     .modal-dialog
         .close-button(ng-click="closeOverlay('WIN_COINS')")
         h1 Win Free Coins!
-        .win-coins-top-offer
+        .win-coins-top-offer(ng-if="!userData.user.info")
             .connect-with-action
                 button.join-now(ng-click="connectNow()") Join Now
             .connect-with-offer
@@ -167,7 +167,7 @@
                 span.coin-img
                     img(src="./img/smaller_coins.png")
                 .action
-                    button.btn.btn-success(ng-click="installChromeApp()") Get Coins
+                    button.btn.btn-success(ng-click="playAnotherGame()") Get Coins
 .modal-overlay-fade.leaderboard(ng-if="overlayID==='LEADERBOARD'", ng-controller="LeaderboardCtrl", overlay="'WIN_COINS'")
     .modal-dialog
         h1 Leaderboard
