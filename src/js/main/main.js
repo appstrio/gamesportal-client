@@ -1,3 +1,4 @@
+/* global ga */
 var mainModule = mainModule || angular.module('aio.main', []);
 
 mainModule.controller('MainCtrl', [
@@ -146,10 +147,20 @@ mainModule.controller('MainCtrl', [
             });
         };
 
+        ga('create', 'UA-49896275-3', 'mojo-games.com');
         $scope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
             $scope.masonryOptions.isAnimated = false;
             $scope.masonryOptions.transitionDuration = 0;
             $scope.overlayID = $stateParams.overlayID;
+
+            //report analytics on state change
+            if (toState.name !== fromState.name) {
+                ga('send', 'pageview', {
+                    page: window.location.pathname +
+                        window.location.hash
+                });
+
+            }
 
             //header doesn't stay fixed in game state to have banner in view
             $scope.fixedHeader = toState.name !== 'game';
