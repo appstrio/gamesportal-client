@@ -126,7 +126,7 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
                 .then(function () {
                     //swf game
                     if (game.source === 'swf' || game.source === 'kongregate') {
-                        swfobject.embedSWF(game.swf_url, 'flashGame', String(game.width), String(game.height), '9.0.0', '', {}, {}, {}, function (e) {
+                        swfobject.embedSWF(game.swf_url, 'flashGame', String(game.width), String(game.height), '9.0.0', './img/expressInstall.swf', {}, {}, {}, function (e) {
                             var waitForLoad = function (e) {
                                 if (e && e.ref && e.ref.PercentLoaded && e.ref.PercentLoaded() < 100) {
                                     $timeout(function () {
