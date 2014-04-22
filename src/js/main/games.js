@@ -90,6 +90,7 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
 
     function ($scope, $log, $q, $timeout, $http, $stateParams, $state, Firebase, Games, GamesHelpers) {
         var pointsPerGame = 100;
+        $scope.gameLoading = true;
 
         /**
          * initializes the service.
