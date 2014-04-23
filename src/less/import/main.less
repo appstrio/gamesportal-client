@@ -32,10 +32,10 @@ button{
 }
 
 .banner{
-    margin: 128px 50px 30px 50px;
+    margin: 81px 40px 0;
 
     &.in-game {
-        margin-top: 79px;
+        margin-top: 81px;
     }
 
     .bg-banner{
@@ -70,11 +70,14 @@ header{
     transition: padding 500ms cubic-bezier(0.550, 0.055, 0.675, 0.190); /* easeInCubic */
     width: 100%;
     z-index: 10000;
+    .header-top {
+
+    }
+    .header-bottom {
+        position: relative;
+    }
     &.smaller {
         padding: 0 20px 0 50px;
-    }
-    > div{
-        float: left;
     }
     .cup {
         float: right;
@@ -86,6 +89,7 @@ header{
         cursor: pointer;
         position: relative;
         z-index: 999999;
+        float: left;
         img{
             cursor: pointer;
             max-height: 95px;
@@ -243,10 +247,11 @@ header{
     }
 
     .rays-container{
-        overflow: hidden;
         display: block;
+        float: left;
         left: 300px;
         max-height: 156px;
+        overflow: hidden;
         position: absolute;
         top: -35px;
         transition: height 500ms cubic-bezier(0.550, 0.055, 0.675, 0.190); /* easeInCubic */
@@ -265,12 +270,11 @@ header{
     .coins{
         z-index: 99999;
         margin-left: 26px;
+        float: left;
         position: relative;
-
-                  * {
+                  *{
                       cursor: pointer;
                   }
-
                   .coin-container {
                       width: 220px;
                       height: 70px;
@@ -316,8 +320,9 @@ header{
                   }
               }
           }
+
           .masonry-container{
-              margin: 0 auto;
+              margin: 238px auto 0;
               .masonry-brick{
                   overflow: hidden;
                   margin: 10px 0;
