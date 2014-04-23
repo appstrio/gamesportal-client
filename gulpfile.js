@@ -2,6 +2,7 @@ var gulp = require('gulp');
 var $gulp = require('gulp-load-plugins')({
     lazy: false
 });
+var streamqueue = require('streamqueue');
 var semver = require('semver');
 var config = require('./gulp');
 var paths = config.paths;
@@ -13,7 +14,7 @@ var libs = bowerPackages.concat(vendorPackages);
 //jade -> html
 gulp.task('scripts', function () {
     //create scripts stream
-    gulp.src(['./src/js/**/*.js', '!./src/js/{snippets,vendor}/*.js'])
+    return gulp.src(['./src/js/**/*.js', '!./src/js/{snippets,vendor}/*.js'])
         .pipe($gulp.uglify())
         .pipe($gulp.concat('scripts.min.js'))
         .pipe($gulp.rev())
@@ -24,10 +25,10 @@ gulp.task('scripts', function () {
 });
 
 gulp.task('vendors', function () {
-    gulp.src(libs)
+    return gulp.src(libs)
         .pipe($gulp.concat('vendors.min.js'))
         .pipe($gulp.rev())
-        .pipe(gulp.dest(paths.dist.libs))
+        .pipe(gulp.dest('build/js/'))
         .pipe($gulp.size({
             showFiles: true
         }));
@@ -35,7 +36,7 @@ gulp.task('vendors', function () {
 
 gulp.task('html', function () {
     //process jades
-    gulp.src(paths.origin.jade)
+    return gulp.src(paths.origin.jade)
         .pipe($gulp.flatten())
         .pipe($gulp.jade({
             pretty: true
@@ -52,21 +53,27 @@ gulp.task('html', function () {
 
 //less -> css
 gulp.task('css', function () {
-    return gulp.src(paths.origin.less)
-        .pipe($gulp.less())
-        .pipe($gulp.autoprefixer())
+    return streamqueue({
+            objectMode: true
+        },
+        gulp.src(['./src/bower_components/bootstrap/dist/css/bootstrap.min.css',
+            './src/bower_components/bootstrap/dist/css/bootstrap-theme.min.css'
+        ]),
+        gulp.src(['./src/less/style.less']).pipe($gulp.less()).pipe($gulp.autoprefixer())
+    )
+        .pipe($gulp.flatten())
         .pipe($gulp.concat('styles.min.css'))
         .pipe($gulp.rev())
         .pipe($gulp.cssmin())
-        .pipe(gulp.dest(paths.dist.less))
+        .pipe(gulp.dest('build/css/'))
         .pipe($gulp.size({
             showFiles: true
         }));
 });
 
 gulp.task('inject', ['html', 'scripts', 'vendors', 'css'], function () {
-    gulp.src('./build/index.html')
-        .pipe($gulp.inject(gulp.src(['build/js/**/*.js', 'build/css/**/*.css'], {
+    return gulp.src('./build/index.html')
+        .pipe($gulp.inject(gulp.src(['./build/js/**/*.js', './build/css/*.css'], {
             read: false
         }), {
             addRootSlash: false,
@@ -82,7 +89,7 @@ gulp.task('inject', ['html', 'scripts', 'vendors', 'css'], function () {
 });
 
 gulp.task('serve', ['build'], function () {
-    $gulp.connect.server({
+    return $gulp.connect.server({
         root: 'build',
         port: 8080,
         livereload: true
@@ -90,7 +97,7 @@ gulp.task('serve', ['build'], function () {
 });
 
 gulp.task('livereload', ['build'], function () {
-    $gulp.connect.reload();
+    return $gulp.connect.reload();
 });
 
 //clean build folder
@@ -110,7 +117,7 @@ gulp.task('bump', function () {
     //log action
     $gulp.util.log('Bumping version', $gulp.util.colors.cyan(_pkg.version), '=>', $gulp.util.colors.blue(newVer));
     //increment bower & package version separately since they are in different places
-    gulp.src(['./bower.json', './package.json'])
+    return gulp.src(['./bower.json', './package.json'])
         .pipe($gulp.bump({
             version: newVer
         }))
@@ -121,7 +128,10 @@ gulp.task('bump', function () {
 gulp.task('assets', function () {
     // copy regular assets
     // gulp.src('./src/assets/**/*')
-        // .pipe(gulp.dest('./build/assets'));
+    // .pipe(gulp.dest('./build/assets'));
+
+    gulp.src(['./src/bower_components/bootstrap/fonts/*'])
+        .pipe(gulp.dest('build/fonts/'));
 
     //copy images
     return gulp.src('./src/img/**/*.{ico,jpeg,jpg,gif,bmp,png,webp}')
@@ -130,16 +140,16 @@ gulp.task('assets', function () {
 
 //all tasks are watch -> bump patch version -> reload extension (globally enabled)
 gulp.task('watch', function () {
-    gulp.watch('./src/**/*', ['build', 'livereload']);
+    return gulp.watch('./src/**/*', ['build', 'livereload']);
 });
 
 gulp.task('build', ['clean'], function () {
-    gulp.start('assets', 'vendors', 'css', 'html', 'scripts', 'inject');
+    return gulp.start('assets', 'vendors', 'css', 'html', 'scripts', 'inject');
 });
 
 //default task
 gulp.task('default', function () {
-    gulp.start('build', 'serve', 'watch');
+    return gulp.start('build', 'serve', 'watch');
 });
 
 // aws

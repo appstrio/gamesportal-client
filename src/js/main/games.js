@@ -39,7 +39,6 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
         };
 
         var initFirebase = function () {
-            console.log('initFirebase');
             Firebase.getGames().then(function (games) {
                 initting.resolve(games);
                 storeGames(games);
@@ -127,7 +126,7 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
                     //swf game
                     var zoom = $scope.getGameZoom(game);
                     if (game.source === 'swf' || game.source === 'kongregate') {
-                        swfobject.embedSWF(game.swf_url, 'flashGame', String(zoom*game.width), String(zoom*game.height), '9.0.0', './img/expressInstall.swf', {}, {}, {}, function (e) {
+                        swfobject.embedSWF(game.swf_url, 'flashGame', String(zoom * game.width), String(zoom * game.height), '9.0.0', './img/expressInstall.swf', {}, {}, {}, function (e) {
                             var waitForLoad = function (e) {
                                 if (e && e.ref && e.ref.PercentLoaded && e.ref.PercentLoaded() < 100) {
                                     $timeout(function () {
@@ -236,11 +235,11 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
             });
         };
 
-        $scope.getIframeSize = function (game){
+        $scope.getIframeSize = function (game) {
             var ret = {};
-            ret['-moz-transform'] = 'scale('+$scope.getGameZoom(game)+')';
-            ret['-o-transform'] = 'scale('+$scope.getGameZoom(game)+')';
-            ret['-webkit-transform'] = 'scale('+$scope.getGameZoom(game)+')';
+            ret['-moz-transform'] = 'scale(' + $scope.getGameZoom(game) + ')';
+            ret['-o-transform'] = 'scale(' + $scope.getGameZoom(game) + ')';
+            ret['-webkit-transform'] = 'scale(' + $scope.getGameZoom(game) + ')';
             return ret;
         };
 
@@ -303,7 +302,6 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
 
                 });
             });
-
         };
 
         $scope.previousGame = function () {

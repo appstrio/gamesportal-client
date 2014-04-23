@@ -40,7 +40,9 @@
     "semver": "~2.2.1",
     "gulp-inject": "^0.4.1",
     "gulp-size": "^0.3.0",
-    "gulp-rev": "^0.3.2"
+    "gulp-rev": "^0.3.2",
+    "gulp-order": "^1.0.6",
+    "streamqueue": "0.0.6"
   },
   "engines": {
     "node": ">=0.8.0"

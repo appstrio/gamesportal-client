@@ -19,7 +19,7 @@ firebaseModule.factory('Firebase', ['$rootScope', '$log', '$q', '$timeout', '$ht
             $rootScope.$apply(function () {
                 if (error) {
                     // an error occurred while attempting login
-                    console.debug('[FIREBASE]:auth error', error);
+                    console.warn('[FIREBASE]:auth error', error);
                     if (!ready) {
                         ready = true;
                         initting.reject();
@@ -27,7 +27,7 @@ firebaseModule.factory('Firebase', ['$rootScope', '$log', '$q', '$timeout', '$ht
                 } else if (user) {
                     // user authenticated with Firebase
                     onLogin(user);
-                    console.debug('[FIREBASE]:logged in', user);
+                    // console.debug('[FIREBASE]:logged in', user);
                 } else {
                     // user is logged out
                     onLogout();
