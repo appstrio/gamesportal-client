@@ -54,8 +54,10 @@
                 height: 675px;
                 background-color: #395277;
                 overflow: hidden;
+                @media (max-width: 1060px) {
+                    width:785px;
+                }
                 .header {
-                    width: 825px;
                     height: 45px;
                     background: #395277;
                     border-top: 1px solid #084973;
@@ -147,11 +149,14 @@
                     }
                     .include {
                         border: none;
-                        padding-top: 55px;
+//                        padding-top: 55px;
                         margin: 0 auto;
                         width: 100%;
                         height: 100%;
                         text-align: center;
+                        @media (max-width: 1060px) {
+                            margin-left:-20px;
+                        }
                     }
                 }
                 .game-description {
@@ -163,8 +168,11 @@
                     overflow: hidden;
                     padding: 5px;
                     position: relative;
-                    text-align: justify;
+                    text-align: center;
                     text-overflow: ellipsis;
+                    @media (max-width: 1060px) {
+                        left:-20px;
+                    }
                 }
             }
 
