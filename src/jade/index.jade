@@ -74,17 +74,17 @@ html
                 .action(ng-click="logout()", ng-if="userData.user.info") Sign Out
             span.profile-pic
                 img(ng-if="userData.user.info", ng-src="{{userData.user.info.profilePic}}")
-                //- dummy picture
                 img.connect(ng-if="!userData.user.info", src="./img/anonymous.png", ng-click="login()")
+
+        //- .cup(ng-if="userData.user.info")
+           //- button.btn.btn-link(ng-click="openMainOverlay('LEADERBOARD')")
+               //- img(src="./img/cup.png")
 
         .toolbar-icons
             span.addthis_toolbox.addthis_default_style
                 a.addthis_button_facebook_like(fb:like:layout="button_count", addthis:url="https://www.facebook.com/pages/Mojo-Gamescom/452845291514515")
                 a.addthis_button_twitter_follow_native(tf:screen_name="DaRealMojoGames", tf:show-screen-name="false", tf:show-count="false")
                 a.addthis_button_google_plusone(g:plusone:href="https://plus.google.com/u/0/105972966277627450580/about", g:plusone:size="medium")
-        //div.cup(ng-show="userData.user")
-        //    a.cup-img(href="#", ng-click="openMainOverlay('LEADERBOARD')")
-        //        img(src="./img/cup.png")
     .banner(ng-class="{'in-game': !fixedHeader}")
         .bg-banner
             .bg-ad

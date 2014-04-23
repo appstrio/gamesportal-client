@@ -1,16 +1,4 @@
-[{
-    "name": "Basketball Jam Shots",
-    "data_game_name": "basketball-jam-shots",
-    "width": 680,
-    "height": 510,
-    "source": "miniclip",
-    "thumbnail": {
-        "url": "http://e.miniclip.com/content/game-icons/medium/basketballjamshots.jpg",
-        "size": "medium"
-    },
-    "id": "basketball_jam_shots",
-    "description": "Shoot hoops in a skill showdown!"
-}, {
+[, {
     "name": "Rail Rush Worlds",
     "thumbnail": {
         "url": "http://e.miniclip.com/content/game-icons/medium/railrush.jpg",
