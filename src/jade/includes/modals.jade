@@ -138,6 +138,9 @@
     .modal-dialog
         .close-button(ng-click="closeOverlay('WIN_COINS')")
         h1 Win Free Coins!
+        .win-coins-top-offer(ng-if="userData.user.info")
+            .top-message
+                h2 Earn coins, play games and have fun!
         .win-coins-top-offer(ng-if="!userData.user.info")
             .connect-with-action
                 button.join-now(ng-click="connectNow()") Join Now
@@ -154,7 +157,7 @@
                     img(src="./img/smaller_coins.png")
                 .action
                     button.btn.btn-success(ng-click="inviteFBFriends()") Get Coins
-            li.offer-box
+            li.offer-box(ng-if="false")
                 .top-offer Play On Chrome
                 .win-size Get {{ points.chromeInstall | number}}
                 span.coin-img
