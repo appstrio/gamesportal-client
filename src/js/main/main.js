@@ -108,6 +108,8 @@ mainModule.controller('MainCtrl', [
             //if app isn't installed, and this is a first time user
             if (!Chrome.isAppInstalled() && !Config.RETURN_USER) {
                 console.log('offer to download extension');
+                return loadGame(game.id);
+                //deprecated for now due to #51
                 Chrome.installApp()['finally'](function () {
                     loadGame(game.id);
                     localStorage.returnUser = true;
