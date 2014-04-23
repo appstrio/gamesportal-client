@@ -53,14 +53,17 @@ gulp.task('html', function () {
 
 //less -> css
 gulp.task('css', function () {
-    return streamqueue({
-            objectMode: true
-        },
-        gulp.src(['./src/bower_components/bootstrap/dist/css/bootstrap.min.css',
-            './src/bower_components/bootstrap/dist/css/bootstrap-theme.min.css'
-        ]),
-        gulp.src(['./src/less/style.less']).pipe($gulp.less()).pipe($gulp.autoprefixer())
-    )
+    var stream = streamqueue({
+        objectMode: true
+    });
+    stream.queue(gulp.src(['./src/bower_components/bootstrap/dist/css/bootstrap.min.css',
+        './src/bower_components/bootstrap/dist/css/bootstrap-theme.min.css'
+    ]));
+    stream.queue(gulp.src(['./src/less/style.less'])
+        .pipe($gulp.less())
+        .pipe($gulp.autoprefixer()));
+
+    return stream.done()
         .pipe($gulp.flatten())
         .pipe($gulp.concat('styles.min.css'))
         .pipe($gulp.rev())
