@@ -25,16 +25,15 @@
                         //- a.addthis_button_twitter_follow_native(tf:screen_name="DaRealMojoGames", tf:show-screen-name="false", tf:show-count="false")
                         a.addthis_button_google_plusone(g:plusone:href="https://plus.google.com/u/0/105972966277627450580/about", g:plusone:size="medium")
                 .embedding
-                    .loader(ng-show="gameLoading")
+                    .loader(ng-if="gameLoading")
                         img(src='./img/ajax-loader-large.gif', width=100, height=100, style="margin: 250px auto; display:block;")
-
                     //swf game
-                    .include
-                        div(id='flashGame', ng-show="!gameLoading && game && (game.source === 'swf' || game.source === 'kongregate')")
+                    .include(ng-show="!gameLoading && game.source === 'swf' || game.source === 'kongregate'")
+                        #flashGame
                             a(href="http://get.adobe.com/flashplayer/", target="_blank")
                                 img(src='./img/getFlash.png', style="cursor:pointer")
                     //iframe game
-                    .include(ng-include="'embed-' + game.source + '.html'", ng-if="!gameLoading && game.source !== 'swf' && game.source !== 'kongregate'")
+                    .include(ng-if="!gameLoading && game.source !== 'swf' && game.source !== 'kongregate'", ng-include="'embed-' + game.source + '.html'")
 
                 .game-description(ng-bind-html="game.description", ng-style='{width:getGameZoom(game) * game.width}')
             .right

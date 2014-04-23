@@ -16,30 +16,14 @@ mainModule.controller('MainCtrl', [
         $scope.fixedHeader = true;
         $scope.smallHeader = false;
 
-        var $header = $('header');
-        //make header small
-        var changeHeader = _.debounce(function () {
-            if (!$scope.fixedHeader) {
-                return;
-            }
-            //TODO get rid of jquery here. turn into directive.
-            $scope.$apply(function () {
-                $scope.smallHeader = $window.scrollY > 10 || $window.pageYOffset > 10;
-                $header.toggleClass('smaller', $scope.smallHeader);
-            });
-        }, 10);
-
-        angular.element($window).on('scroll', changeHeader);
-
         // init - get all games from games db
         Games.then(function (games) {
-
-            $scope.allGames = _.sortBy(_.toArray(games), function (game) {
-                return parseInt(game.priority);
+            $scope.allGames = _.sortBy(_.toArray(games), function (i) {
+                return parseInt(i.priority);
             });
-
             var repeatLargeThumbnailsEvery = 20,
                 lastLargeThumbnailIndex = 0;
+
             angular.forEach($scope.allGames, function (game, index) {
                 //stop if thumbnail is found
                 _.some(game.thumbnails, function (thumbnail) {
