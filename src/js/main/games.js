@@ -117,9 +117,6 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
                     return $state.go('main');
                 }
 
-                var zoom = $scope.getGameZoom(game);
-                $scope.zoom = zoom;
-
                 if (game.source === 'miniclip') {
                     $scope.miniclipURL = 'http://www.miniclip.com/games/' + game.data_game_name + "/en/webgame.php?bodybg=1&width=" + game.width + "&height=" + game.height;
                 }
@@ -128,6 +125,7 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
                 //handle loader
                 .then(function () {
                     //swf game
+                    var zoom = $scope.getGameZoom(game);
                     if (game.source === 'swf' || game.source === 'kongregate') {
                         swfobject.embedSWF(game.swf_url, 'flashGame', String(zoom*game.width), String(zoom*game.height), '9.0.0', './img/expressInstall.swf', {}, {}, {}, function (e) {
                             var waitForLoad = function (e) {
@@ -236,6 +234,14 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
             }, function () {
 
             });
+        };
+
+        $scope.getIframeSize = function (game){
+            var ret = {};
+            ret['-moz-transform'] = 'scale('+$scope.getGameZoom(game)+')';
+            ret['-o-transform'] = 'scale('+$scope.getGameZoom(game)+')';
+            ret['-webkit-transform'] = 'scale('+$scope.getGameZoom(game)+')';
+            return ret;
         };
 
         init();

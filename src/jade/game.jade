@@ -34,7 +34,7 @@
                             a(href="http://get.adobe.com/flashplayer/", target="_blank")
                                 img(src='./img/getFlash.png', style="cursor:pointer")
                     //iframe game
-                    .include(ng-include="'embed-' + game.source + '.html'", ng-if="!gameLoading && game.source !== 'swf' && game.source !== 'kongregate'")
+                    .include(ng-include="'embed-' + game.source + '.html'", ng-if="!gameLoading && game.source !== 'swf' && game.source !== 'kongregate'", ng-style="getIframeSize(game)")
 
                 .game-description(ng-bind-html="game.description", ng-style='{width:getGameZoom(game) * game.width}')
             .right
