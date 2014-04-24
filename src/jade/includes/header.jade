@@ -13,12 +13,12 @@
         #rays
 
     .corner-toolbox-icons
-        img(ng-src="{{selectedNationality.flag}}", ng-mouseover="dropdownFlags=true", ng-mouseleave="dropdownFlags=false")
-        .language-box(ng-show='dropdownFlags===true', ng-mouseover="dropdownFlags=true", ng-mouseleave="dropdownFlags=false")
-            ul(ng-repeat="nationality in nationalities | filter: '!' + selectedNationality.language")
-                span(ng-click="changeLanguage(nationality)")
+        img(ng-src="{{selectedNationality.flag}}", ng-mouseenter="showLanguageMenu()")
+        .language-box(ng-show='dropdownFlags', ng-mouseenter="keepLanguageMenu()", ng-mouseleave="showLanguageMenu()")
+            ul
+                li(ng-repeat="nationality in nationalities | filter: '!' + selectedNationality.language", ng-click="changeLanguage(nationality)")
                     img(ng-src="{{nationality.flag}}")
-                    | {{nationality.language}}
+                    span {{nationality.language}}
         span.glyphicon.glyphicon-lock(ng-click="goHome('privacy')")
         span.glyphicon.glyphicon-envelope(ng-click="goHome('contact')")
 
@@ -50,8 +50,8 @@
             //- a.addthis_button_twitter_follow_native(tf:screen_name="DaRealMojoGames", tf:show-screen-name="false", tf:show-count="false")
             a.addthis_button_google_plusone(g:plusone:href="https://plus.google.com/u/0/105972966277627450580/about", g:plusone:size="medium")
 
-.header-bottom
-    .banner(ng-class="{'in-game': !fixedHeader}")
+            .header-bottom
+            .banner(ng-class="{'in-game': !fixedHeader}")
         .bg-banner
             .bg-ad
                 img(src="./img/728x90.png", width="728", height="90", alt="Your ad here placeholder")

@@ -16,11 +16,11 @@ commonModule.directive('overlay', ['$rootScope',
     function ($rootScope, $window) {
         return {
             restrict: 'A',
-            scope: {
+            scope   : {
                 isSmall: '=',
                 isFixed: '='
             },
-            link: function (scope, element, attrs) {
+            link    : function (scope, element, attrs) {
                 //make header small
                 var changeHeader = _.debounce(function () {
                     if (!scope.isFixed) {
