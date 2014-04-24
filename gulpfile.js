@@ -4,7 +4,6 @@ var $gulp = require('gulp-load-plugins')({
     lazy: false
 });
 var streamqueue = require('streamqueue');
-var semver = require('semver');
 
 var vendors = [
     'underscore/underscore-min.js',
@@ -115,17 +114,8 @@ gulp.task('clean', function () {
 
 //bump versions on package/bower/manifest
 gulp.task('bump', function () {
-    //reget package
-    var _pkg = require('package.json');
-    //increment version
-    var newVer = semver.inc(_pkg.version, 'patch');
-    //log action
-    $gulp.util.log('Bumping version', $gulp.util.colors.cyan(_pkg.version), '=>', $gulp.util.colors.blue(newVer));
-    //increment bower & package version separately since they are in different places
     return gulp.src(['./{bower,package}.json'])
-        .pipe($gulp.bump({
-            version: newVer
-        }))
+        .pipe($gulp.bump())
         .pipe(gulp.dest('./'));
 });
 
