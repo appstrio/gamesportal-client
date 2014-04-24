@@ -137,40 +137,40 @@
 .modal-overlay-fade.win-coins(ng-if="overlayID=='WIN_COINS'", ng-controller="WinCtrl", overlay="'WIN_COINS'")
     .modal-dialog
         .close-button(ng-click="closeOverlay('WIN_COINS')")
-        h1 Win Free Coins!
+        h1 {{'WIN_FREE_COINS' | translate}}
         .win-coins-top-offer(ng-if="userData.user.info")
             .top-message
                 h2 Earn coins, play games and have fun!
         .win-coins-top-offer(ng-if="!userData.user.info")
             .connect-with-action
-                button.join-now(ng-click="connectNow()") Join Now
+                button.join-now(ng-click="connectNow()") {{'JOIN_NOW' | translate}}
             .connect-with-offer
-                .top-text Sign In To Get
+                .top-text {{'SIGNIN_TO_GET' | translate}}
                 span.coin-img
                     img(src="./img/smaller_coins.png")
                 span.coin-award {{ points.fbConnect | number}}
         ul.offers
             li.offer-box
-                .top-offer Invite Friends
-                .win-size Get {{ points.fbInvite | number}}
+                .top-offer {{'INVITE_FRIENDS' | translate}}
+                .win-size {{'GET' | translate}} {{ points.fbInvite | number}}
                 span.coin-img
                     img(src="./img/smaller_coins.png")
                 .action
-                    button.btn.btn-success(ng-click="inviteFBFriends()") Get Coins
+                    button.btn.btn-success(ng-click="inviteFBFriends()") {{'GET_COINS' | translate}}
             li.offer-box(ng-if="false")
-                .top-offer Play On Chrome
-                .win-size Get {{ points.chromeInstall | number}}
+                .top-offer {{'PLAY_ON_CHROME' | translate}}
+                .win-size {{'GET' | translate}} {{ points.chromeInstall | number}}
                 span.coin-img
                     img(src="./img/smaller_coins.png")
                 .action
-                    button.btn.btn-success(ng-click="installChromeApp()") Get Coins
+                    button.btn.btn-success(ng-click="installChromeApp()") {{'GET_COINS' | translate}}
             li.offer-box
-                .top-offer Play Another Game
-                .win-size Get {{ points.newGame | number }}
+                .top-offer {{'PLAY_ANOTHER_GAME' | translate}}
+                .win-size {{'GET' | translate}} {{ points.newGame | number }}
                 span.coin-img
                     img(src="./img/smaller_coins.png")
                 .action
-                    button.btn.btn-success(ng-click="playAnotherGame()") Get Coins
+                    button.btn.btn-success(ng-click="playAnotherGame()") {{'GET_COINS' | translate}}
 .modal-overlay-fade.leaderboard(ng-if="overlayID==='LEADERBOARD'", ng-controller="LeaderboardCtrl", overlay="'WIN_COINS'")
     .modal-dialog
         h1 Leaderboard
