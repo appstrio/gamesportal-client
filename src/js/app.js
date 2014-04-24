@@ -41,111 +41,111 @@ angular.module('myApp', [
         ]);
 
         $translateProvider.translations('en', {
-            'FIND_GAME'      : 'Find A Game',
-            'COINS_COLLECTED': 'coins collected',
-            'CONNECT'        : 'Connect',
-            'SIGNOUT'        : 'Sign Out',
-            'WIN_FREE_COINS' : 'Win Free Coins!',
-            'JOIN_NOW'       : 'Join Now',
-            'SIGNIN_TO_GET'  : 'Sign In To Get',
-            'GET'            : 'Get',
-            'GETCOINS'       : 'Get Coins',
-            'INVITEFRIENDS'  : 'Invite Friends',
-            'PLAYANOTHERGAME': 'Play Another Game',
-            'PLAYONCHROME'   : 'Play On Chrome'
+            'FIND_GAME'        : 'Find A Game',
+            'COINS_COLLECTED'  : 'coins collected',
+            'CONNECT'          : 'Connect',
+            'SIGNOUT'          : 'Sign Out',
+            'WIN_FREE_COINS'   : 'Win Free Coins!',
+            'JOIN_NOW'         : 'Join Now',
+            'SIGNIN_TO_GET'    : 'Sign In To Get',
+            'GET'              : 'Get',
+            'GET_COINS'        : 'Get Coins',
+            'INVITE_FRIENDS'   : 'Invite Friends',
+            'PLAY_ANOTHER_GAME': 'Play Another Game',
+            'PLAY_ON_CHROME'   : 'Play On Chrome'
 
         });
 
         $translateProvider.translations('es', {
-            'FIND_GAME'      : 'Busca un Juego',
-            'COINS_COLLECTED': 'monedas recogidas',
-            'CONNECT'        : 'Conectar',
-            'SIGNOUT'        : 'Salir',
-            'WIN_FREE_COINS' : 'Gana monedas gratis',
-            'JOIN_NOW'       : 'Únete ahora',
-            'SIGNIN_TO_GET'  : 'Identifícate para recibir',
-            'GET'            : 'Obtener',
-            'GETCOINS'       : 'Obtén monedas',
-            'INVITEFRIENDS'  : 'Invite a los amigos',
-            'PLAYANOTHERGAME': 'Jugar a otro juego',
-            'PLAYONCHROME'   : 'Juega en el cromo'
+            'FIND_GAME'        : 'Busca un Juego',
+            'COINS_COLLECTED'  : 'monedas recogidas',
+            'CONNECT'          : 'Conectar',
+            'SIGNOUT'          : 'Salir',
+            'WIN_FREE_COINS'   : 'Gana monedas gratis!',
+            'JOIN_NOW'         : 'Únete ahora',
+            'SIGNIN_TO_GET'    : 'Identifícate para recibir',
+            'GET'              : 'Obtener',
+            'GET_COINS'        : 'Obtén monedas',
+            'INVITE_FRIENDS'   : 'Invite a los amigos',
+            'PLAY_ANOTHER_GAME': 'Jugar a otro juego',
+            'PLAY_ON_CHROME'   : 'Juega en el cromo'
         });
 
         $translateProvider.translations('he', {
-            'FIND_GAME'      : 'מצא משחק',
-            'COINS_COLLECTED': 'מטבעות שצברת',
-            'CONNECT'        : 'התחבר',
-            'SIGNOUT'        : 'התנתק',
-            'WIN_FREE_COINS' : 'קבל מטבעות בחינם',
-            'JOIN_NOW'       : 'הצטרף עכשיו',
-            'SIGNIN_TO_GET'  : 'התחבר כדי לקבל',
-            'GET'            : 'קבל',
-            'GETCOINS'       : 'קבל מטבעות',
-            'INVITEFRIENDS'  : 'הזמן חברים',
-            'PLAYANOTHERGAME': 'שחק משחק נוסף',
-            'PLAYONCHROME'   : 'שחק ב- Chrome'
+            'FIND_GAME'        : 'מצא משחק',
+            'COINS_COLLECTED'  : 'מטבעות שצברת',
+            'CONNECT'          : 'התחבר',
+            'SIGNOUT'          : 'התנתק',
+            'WIN_FREE_COINS'   : 'קבל מטבעות בחינם',
+            'JOIN_NOW'         : 'הצטרף עכשיו',
+            'SIGNIN_TO_GET'    : 'התחבר כדי לקבל',
+            'GET'              : 'קבל',
+            'GET_COINS'        : 'קבל מטבעות',
+            'INVITE_FRIENDS'   : 'הזמן חברים',
+            'PLAY_ANOTHER_GAME': 'שחק משחק נוסף',
+            'PLAY_ON_CHROME'   : 'שחק ב- Chrome'
         });
 
         $translateProvider.translations('pt', {
-            'FIND_GAME'      : 'encontrar um Jogo',
-            'COINS_COLLECTED': 'moedas coletadas',
-            'CONNECT'        : 'Conectar',
-            'SIGNOUT'        : 'Sair',
-            'WIN_FREE_COINS' : 'Ganhe moedas de livre',
-            'JOIN_NOW'       : 'Cadastre-se agora',
-            'SIGNIN_TO_GET'  : 'Entrar para obter',
-            'GET'            : 'obter',
-            'GETCOINS'       : 'Obter moedas',
-            'INVITEFRIENDS'  : 'Convidar amigos',
-            'PLAYANOTHERGAME': 'Jogue mais um jogo',
-            'PLAYONCHROME'   : 'Jogue no chrome'
+            'FIND_GAME'        : 'encontrar um Jogo',
+            'COINS_COLLECTED'  : 'moedas coletadas',
+            'CONNECT'          : 'Conectar',
+            'SIGNOUT'          : 'Sair',
+            'WIN_FREE_COINS'   : 'Ganhe moedas de livre!',
+            'JOIN_NOW'         : 'Cadastre-se agora',
+            'SIGNIN_TO_GET'    : 'Entrar para obter',
+            'GET'              : 'obter',
+            'GET_COINS'        : 'Obter moedas',
+            'INVITE_FRIENDS'   : 'Convidar amigos',
+            'PLAY_ANOTHER_GAME': 'Jogue mais um jogo',
+            'PLAY_ON_CHROME'   : 'Jogue no chrome'
 
         });
 
         $translateProvider.translations('de', {
-            'FIND_GAME'      : 'Finden Sie ein Spiel',
-            'COINS_COLLECTED': 'münzen gesammelt',
-            'CONNECT'        : 'Verbinden',
-            'SIGNOUT'        : 'austragen',
-            'WIN_FREE_COINS' : 'Gana monedas gratis',
-            'JOIN_NOW'       : 'Werden Sie jetzt Mitglied',
-            'SIGNIN_TO_GET'  : 'Anmelden, um zu erhalten',
-            'GET'            : 'Erhalten',
-            'GETCOINS'       : 'Holen Münzen',
-            'INVITEFRIENDS'  : 'Freunde einladen',
-            'PLAYANOTHERGAME': 'Ein anderes Spiel spielen',
-            'PLAYONCHROME'   : 'Spielen Sie auf chrome'
+            'FIND_GAME'        : 'Finden Sie ein Spiel',
+            'COINS_COLLECTED'  : 'münzen gesammelt',
+            'CONNECT'          : 'Verbinden',
+            'SIGNOUT'          : 'austragen',
+            'WIN_FREE_COINS'   : 'Gana monedas gratis!',
+            'JOIN_NOW'         : 'Werden Sie jetzt Mitglied',
+            'SIGNIN_TO_GET'    : 'Anmelden, um zu erhalten',
+            'GET'              : 'Erhalten',
+            'GET_COINS'        : 'Holen Münzen',
+            'INVITE_FRIENDS'   : 'Freunde einladen',
+            'PLAY_ANOTHER_GAME': 'Ein anderes Spiel spielen',
+            'PLAY_ON_CHROME'   : 'Spielen Sie auf chrome'
 
         });
 
         $translateProvider.translations('fr', {
-            'FIND_GAME'      : 'trouver un jeu',
-            'COINS_COLLECTED': 'pièces collectées',
-            'CONNECT'        : 'Relier',
-            'SIGNOUT'        : 'Déconnexion',
-            'WIN_FREE_COINS' : 'Gagner des pièces libres',
-            'JOIN_NOW'       : 'Inscris-toi maintenant',
-            'SIGNIN_TO_GET'  : 'Enregistrez-vous pour obtenir',
-            'GET'            : 'Obtenir',
-            'GETCOINS'       : 'Obtenir des pièces',
-            'INVITEFRIENDS'  : 'Invitez vos amis',
-            'PLAYANOTHERGAME': 'Jouer un autre jeu',
-            'PLAYONCHROME'   : 'Jouer sur le chrome'
+            'FIND_GAME'        : 'trouver un jeu',
+            'COINS_COLLECTED'  : 'pièces collectées',
+            'CONNECT'          : 'Relier',
+            'SIGNOUT'          : 'Déconnexion',
+            'WIN_FREE_COINS'   : 'Gagner des pièces libres!',
+            'JOIN_NOW'         : 'Inscris-toi maintenant',
+            'SIGNIN_TO_GET'    : 'Enregistrez-vous pour obtenir',
+            'GET'              : 'Obtenir',
+            'GET_COINS'        : 'Obtenir des pièces',
+            'INVITE_FRIENDS'   : 'Invitez vos amis',
+            'PLAY_ANOTHER_GAME': 'Jouer un autre jeu',
+            'PLAY_ON_CHROME'   : 'Jouer sur le chrome'
         });
 
         $translateProvider.translations('pl', {
-            'FIND_GAME'      : 'Znajdź grę',
-            'COINS_COLLECTED': 'Monety zebrane',
-            'CONNECT'        : 'Połączyć',
-            'SIGNOUT'        : 'Zaloguj się',
-            'WIN_FREE_COINS' : 'Wygraj darmowe monety',
-            'JOIN_NOW'       : 'Dołącz teraz',
-            'SIGNIN_TO_GET'  : 'Zaloguj się, aby uzyskać',
-            'GET'            : 'Dostać',
-            'GETCOINS'       : 'Zdobądź monety',
-            'INVITEFRIENDS'  : 'Zaproś przyjaciół',
-            'PLAYANOTHERGAME': 'Grać w inną grę',
-            'PLAYONCHROME'   : 'Jugar en Chrome'
+            'FIND_GAME'        : 'Znajdź grę',
+            'COINS_COLLECTED'  : 'Monety zebrane',
+            'CONNECT'          : 'Połączyć',
+            'SIGNOUT'          : 'Zaloguj się',
+            'WIN_FREE_COINS'   : 'Wygraj darmowe monety!',
+            'JOIN_NOW'         : 'Dołącz teraz',
+            'SIGNIN_TO_GET'    : 'Zaloguj się, aby uzyskać',
+            'GET'              : 'Dostać',
+            'GET_COINS'        : 'Zdobądź monety',
+            'INVITE_FRIENDS'   : 'Zaproś przyjaciół',
+            'PLAY_ANOTHER_GAME': 'Grać w inną grę',
+            'PLAY_ON_CHROME'   : 'Jugar en Chrome'
         });
 
         $translateProvider.preferredLanguage('en');
