@@ -39,7 +39,6 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
         };
 
         var initFirebase = function () {
-            console.log('initFirebase');
             Firebase.getGames().then(function (games) {
                 initting.resolve(games);
                 storeGames(games);
@@ -305,7 +304,6 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
 
                 });
             });
-
         };
 
         $scope.previousGame = function () {

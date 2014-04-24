@@ -12,7 +12,11 @@ var paths = {
 };
 
 var bowerPackages = [
+    'underscore/underscore-min.js',
+    'firebase/firebase.js',
+    'firebase-simple-login/firebase-simple-login.js',
     'angular-masonry/angular-masonry.js',
+    'bootstrap/dist/js/bootstrap.min.js',
     'angular-sanitize/angular-sanitize.min.js',
     'angular-ui-router/release/angular-ui-router.min.js',
     'angularjs-media/app/lib/angularjs.media.directives.js',
