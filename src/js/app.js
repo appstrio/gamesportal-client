@@ -40,46 +40,58 @@ angular.module('myApp', [
             'http://www.myplayyard.com/**'
         ]);
 
-
-
-
         $translateProvider.translations('en', {
-            'FIND_GAME': 'Find A Game',
+            'FIND_GAME'      : 'Find A Game',
             'COINS_COLLECTED': 'coins collected',
+            'CONNECT'        : 'Connect',
+            'SIGNOUT'        : 'Sign Out',
         });
 
         $translateProvider.translations('es', {
-            'FIND_GAME': 'Busca un Juego',
+            'FIND_GAME'      : 'Busca un Juego',
             'COINS_COLLECTED': 'monedas recogidas',
+            'CONNECT'        : 'Conectar',
+            'SIGNOUT'        : 'Salir',
         });
 
         $translateProvider.translations('he', {
-            'FIND_GAME': 'מצא משחק',
+            'FIND_GAME'      : 'מצא משחק',
             'COINS_COLLECTED': 'מטבעות שצברת',
+            'CONNECT'        : 'התחבר',
+            'SIGNOUT'        : 'התנתק',
         });
 
         $translateProvider.translations('pt', {
-            'FIND_GAME': 'encontrar um Jogo',
+            'FIND_GAME'      : 'encontrar um Jogo',
             'COINS_COLLECTED': 'moedas coletadas',
+            'CONNECT'        : 'Conectar',
+            'SIGNOUT'        : 'Sair',
+
         });
 
         $translateProvider.translations('de', {
-            'FIND_GAME': 'Finden Sie ein Spiel',
+            'FIND_GAME'      : 'Finden Sie ein Spiel',
             'COINS_COLLECTED': 'münzen gesammelt',
+            'CONNECT'        : 'Verbinden',
+            'SIGNOUT'        : 'austragen',
+
         });
 
         $translateProvider.translations('fr', {
-            'FIND_GAME': 'trouver un jeu',
+            'FIND_GAME'      : 'trouver un jeu',
             'COINS_COLLECTED': 'pièces collectées',
+            'CONNECT'        : 'Relier',
+            'SIGNOUT'        : 'Déconnexion',
         });
 
         $translateProvider.translations('pl', {
-            'FIND_GAME': 'Znajdź grę',
+            'FIND_GAME'      : 'Znajdź grę',
             'COINS_COLLECTED': 'monety zebrane',
+            'CONNECT'        : 'połączyć',
+            'SIGNOUT'        : 'zaloguj się',
         });
 
         $translateProvider.preferredLanguage('en');
-
 
     }
 ]);

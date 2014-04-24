@@ -28,8 +28,8 @@
     .user-info
         span.details
             .username(ng-if="userData.user.info") {{userData.user.info.displayName || userData.user.info.name}}
-            .username.connect(ng-if="!userData.user.info", ng-click="login()") Connect
-            .action(ng-click="logout()", ng-if="userData.user.info") Sign Out
+            .username.connect(ng-if="!userData.user.info", ng-click="login()") {{'CONNECT' | translate}}
+            .action(ng-click="logout()", ng-if="userData.user.info") {{'SIGNOUT' | translate}}
         span.profile-pic
             img(ng-if="userData.user.info", ng-src="{{userData.user.info.profilePic}}")
             img.connect(ng-if="!userData.user.info", src="./img/anonymous.png", ng-click="login()")
