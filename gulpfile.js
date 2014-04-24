@@ -1,17 +1,26 @@
+var path = require('path');
 var gulp = require('gulp');
+var streamqueue = require('streamqueue');
 var $gulp = require('gulp-load-plugins')({
     lazy: false
 });
-var streamqueue = require('streamqueue');
-var semver = require('semver');
-var config = require('./gulp');
-var paths = config.paths;
-var bowerPackages = config.bowerPackages;
-var vendorPackages = config.vendorPackages;
-//bower packages and vendor libs scripts
-var libs = bowerPackages.concat(vendorPackages);
 
-//jade -> html
+var vendors = [
+    'underscore/underscore-min.js',
+    'firebase/firebase.js',
+    'firebase-simple-login/firebase-simple-login.js',
+    'angular-masonry/angular-masonry.js',
+    'bootstrap/dist/js/bootstrap.min.js',
+    'angular-sanitize/angular-sanitize.min.js',
+    'angular-ui-router/release/angular-ui-router.min.js',
+    'angularjs-media/app/lib/angularjs.media.directives.js',
+    'masonry/dist/masonry.pkgd.min.js',
+    'ng-infinite-scroller/build/ng-infinite-scroll.min.js'
+].map(function (package) {
+    return path.join('./src/bower_components/', package);
+}).concat(['./src/js/vendor/*.js']);
+
+//build client scripts
 gulp.task('scripts', function () {
     //create scripts stream
     return gulp.src(['./src/js/**/*.js', '!./src/js/{snippets,vendor}/**/*.js'])
@@ -24,8 +33,9 @@ gulp.task('scripts', function () {
         }));
 });
 
+//build vendor scripts
 gulp.task('vendors', function () {
-    return gulp.src(libs)
+    return gulp.src(vendors)
         .pipe($gulp.concat('vendors.min.js'))
         .pipe($gulp.rev())
         .pipe(gulp.dest('./build/js/'))
@@ -34,28 +44,31 @@ gulp.task('vendors', function () {
         }));
 });
 
-gulp.task('html', function () {
-    //process jades
-    return gulp.src(paths.origin.jade)
+//build html
+gulp.task('html', ['scripts', 'vendors', 'css'], function () {
+    //process jade
+    return gulp.src('./src/jade/*.jade')
         .pipe($gulp.flatten())
         .pipe($gulp.jade({
             pretty: true
         }))
-        .pipe(gulp.dest(paths.build))
-        .pipe($gulp.size({
-            showFiles: true
-        }))
-        .pipe(gulp.dest(paths.build));
+        .pipe(gulp.dest('./build/'))
+        .pipe($gulp.filter('index.html'))
+    //inject css, vendors and scripts and maintain order
+    .pipe($gulp.inject(gulp.src(['./build/{js,css}/{vendors,scripts,styles}*'], {
+        read: false
+    }), {
+        addRootSlash: false,
+        ignorePath: 'build'
+    })).pipe(gulp.dest('./build/'));
 });
 
-//less -> css
+//compile css
 gulp.task('css', function () {
     var stream = streamqueue({
         objectMode: true
     });
-    stream.queue(gulp.src(['./src/bower_components/bootstrap/dist/css/bootstrap.min.css',
-        './src/bower_components/bootstrap/dist/css/bootstrap-theme.min.css'
-    ]));
+    stream.queue(gulp.src(['./src/bower_components/bootstrap/dist/css/bootstrap{,-theme}.min.css']));
     stream.queue(gulp.src(['./src/less/style.less'])
         .pipe($gulp.less())
         .pipe($gulp.autoprefixer()));
@@ -69,23 +82,6 @@ gulp.task('css', function () {
         .pipe($gulp.size({
             showFiles: true
         }));
-});
-
-gulp.task('inject', ['html', 'scripts', 'vendors', 'css'], function () {
-    return gulp.src('./build/index.html')
-        .pipe($gulp.inject(gulp.src(['./build/js/**/*.js', './build/css/*.css'], {
-            read: false
-        }), {
-            addRootSlash: false,
-            ignorePath: 'build',
-            sort: function (a) {
-                if (a.filepath.indexOf('vendors') > -1) {
-                    return -1;
-                }
-                return 1;
-            }
-        }))
-        .pipe(gulp.dest(paths.build));
 });
 
 gulp.task('serve', ['build'], function () {
@@ -102,7 +98,7 @@ gulp.task('livereload', ['build'], function () {
 
 //clean build folder
 gulp.task('clean', function () {
-    return gulp.src(paths.build, {
+    return gulp.src('./build/', {
         read: false
     })
         .pipe($gulp.clean());
@@ -110,17 +106,8 @@ gulp.task('clean', function () {
 
 //bump versions on package/bower/manifest
 gulp.task('bump', function () {
-    //reget package
-    var _pkg = require('package.json');
-    //increment version
-    var newVer = semver.inc(_pkg.version, 'patch');
-    //log action
-    $gulp.util.log('Bumping version', $gulp.util.colors.cyan(_pkg.version), '=>', $gulp.util.colors.blue(newVer));
-    //increment bower & package version separately since they are in different places
-    return gulp.src(['./bower.json', './package.json'])
-        .pipe($gulp.bump({
-            version: newVer
-        }))
+    return gulp.src(['./{bower,package}.json'])
+        .pipe($gulp.bump())
         .pipe(gulp.dest('./'));
 });
 
@@ -141,7 +128,7 @@ gulp.task('watch', function () {
 });
 
 gulp.task('build', ['clean'], function () {
-    return gulp.start('images', 'fonts', 'css', 'html', 'vendors', 'scripts', 'inject');
+    return gulp.start('images', 'fonts', 'css', 'vendors', 'scripts', 'html');
 });
 
 //default task
