@@ -45,18 +45,22 @@ gulp.task('vendors', function () {
 });
 
 //build html
-gulp.task('html', function () {
-    //process jades
+gulp.task('html', ['scripts', 'vendors', 'css'], function () {
+    //process jade
     return gulp.src('./src/jade/*.jade')
         .pipe($gulp.flatten())
         .pipe($gulp.jade({
             pretty: true
         }))
         .pipe(gulp.dest('./build/'))
-        .pipe($gulp.size({
-            showFiles: true
-        }))
-        .pipe(gulp.dest('./build/'));
+        .pipe($gulp.filter('index.html'))
+    //inject css, vendors and scripts and maintain order
+    .pipe($gulp.inject(gulp.src(['./build/{js,css}/{vendors,scripts,styles}*'], {
+        read: false
+    }), {
+        addRootSlash: false,
+        ignorePath: 'build'
+    })).pipe(gulp.dest('./build/'));
 });
 
 //compile css
@@ -78,18 +82,6 @@ gulp.task('css', function () {
         .pipe($gulp.size({
             showFiles: true
         }));
-});
-
-//inject css, scripts & vendors to index.html
-gulp.task('inject', ['html', 'scripts', 'vendors', 'css'], function () {
-    return gulp.src('./build/index.html')
-    //get src and organize by my desired order
-    .pipe($gulp.inject(gulp.src(['./build/{js,css}/{vendors,scripts,styles}*'], {
-        read: false
-    }), {
-        addRootSlash: false,
-        ignorePath: 'build'
-    })).pipe(gulp.dest('./build/'));
 });
 
 gulp.task('serve', ['build'], function () {
@@ -136,7 +128,7 @@ gulp.task('watch', function () {
 });
 
 gulp.task('build', ['clean'], function () {
-    return gulp.start('images', 'fonts', 'css', 'html', 'vendors', 'scripts', 'inject');
+    return gulp.start('images', 'fonts', 'css', 'vendors', 'scripts', 'html');
 });
 
 //default task
