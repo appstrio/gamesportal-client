@@ -139,7 +139,7 @@ mainModule.controller('MainCtrl', [
         };
 
         $scope.changeLanguage('he');
-        window.shlomi = function(lk){
+        window.shlomi = function (lk) {
             $scope.changeLanguage(lk);
             $scope.$apply();
         };

@@ -27,6 +27,7 @@
     "angularfire": "~0.7.1",
     "angular-sanitize": "~1.2.14",
     "angularjs-media": "*",
-    "ng-infinite-scroller": "~1.0.0"
+    "ng-infinite-scroller": "~1.0.0",
+    "angular-translate": "~2.1.0"
   }
 }
