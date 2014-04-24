@@ -39,7 +39,7 @@
                     a(ui-sref="game({gameID: game.id})")
                         img.game-thumbnail(ng-src="{{game.thumbnails[0].url}}")
                         .name(ng-bind="game.name")
-.modal-overlay-fade.premium-game-modal(ng-if="overlayUnlockGame", ng-cloak)
+.modal-overlay-fade.premium-game-modal(ng-show="overlayUnlockGame", ng-cloak)
     .modal-dialog
         .close-button(ng-click="goHome()")
         h1 Unlock Premium Game

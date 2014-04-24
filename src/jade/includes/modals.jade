@@ -1,4 +1,4 @@
-.modal-overlay-fade.contact(ng-if="overlayID=='contact'", overlay="'contact'")
+.modal-overlay-fade.contact(ng-show="overlayID=='contact'", overlay="'contact'")
     .modal-dialog.contact
         .close-button(ng-click="closeOverlay('contact')")
         h1 Contact Mojo-Games
@@ -38,7 +38,7 @@
                         .col-md-8
                             button#button1id.btn.btn-primary(name='button1id', type="submit") Submit
                             button#button2id.btn.btn-default(name='button2id', type="reset") Reset
-.modal-overlay-fade.privacy(ng-if="overlayID=='tos'", overlay="'tos'")
+.modal-overlay-fade.privacy(ng-show="overlayID=='tos'", overlay="'tos'")
     .modal-dialog.privacy
         .close-button(ng-click="closeOverlay('tos')")
         h1(style="font-family:sans-serif;") Terms Of Service
@@ -102,7 +102,7 @@
                 | be used, copied, reproduced, distributed, transmitted, broadcast, displayed, sold,
                 | licensed, or otherwise exploited for any other purposes whatsoever without the
                 | prior written consent of the respective owners.
-.modal-overlay-fade.privacy(ng-if="overlayID=='privacy'", overlay="'privacy'")
+.modal-overlay-fade.privacy(ng-show="overlayID=='privacy'", overlay="'privacy'")
     .modal-dialog.privacy
         .close-button(ng-click="closeOverlay('privacy')")
         h1(style="font-family:sans-serif;") Privacy Policy
@@ -134,7 +134,7 @@
                 br
                 br
                 | Unless otherwise stated, all the games on Mojo-Games are copyrighted by their respective owners and / or authors. The collection of games is provided as freeware, freely distributable, public domain or open source. Although we have mostly stopped accepting submissions from new developers and publishers, those who have already successfully submitted games may continue to do so. The Mojo-Games logo, design and related indicia are copyright (c) from 2014 and beyond until end of time . Mojo-Games is a trademark relating to online games and gaming.
-.modal-overlay-fade.win-coins(ng-if="overlayID=='WIN_COINS'", ng-controller="WinCtrl", overlay="'WIN_COINS'")
+.modal-overlay-fade.win-coins(ng-show="overlayID=='WIN_COINS'", ng-controller="WinCtrl", overlay="'WIN_COINS'")
     .modal-dialog
         .close-button(ng-click="closeOverlay('WIN_COINS')")
         h1 {{'WIN_FREE_COINS' | translate}}
@@ -171,7 +171,7 @@
                     img(src="./img/smaller_coins.png")
                 .action
                     button.btn.btn-success(ng-click="playAnotherGame()") {{'GET_COINS' | translate}}
-.modal-overlay-fade.leaderboard(ng-if="overlayID==='LEADERBOARD'", ng-controller="LeaderboardCtrl", overlay="'WIN_COINS'")
+.modal-overlay-fade.leaderboard(ng-show="overlayID==='LEADERBOARD'", ng-controller="LeaderboardCtrl", overlay="'WIN_COINS'")
     .modal-dialog
         h1 Leaderboard
         table
