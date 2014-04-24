@@ -14,7 +14,7 @@ var libs = bowerPackages.concat(vendorPackages);
 //jade -> html
 gulp.task('scripts', function () {
     //create scripts stream
-    return gulp.src(['./src/js/!(snippets|vendor)/*.js'])
+    return gulp.src(['./src/js/**/*.js', '!./src/js/{snippets,vendor}/**/*.js'])
         .pipe($gulp.uglify())
         .pipe($gulp.concat('scripts.min.js'))
         .pipe($gulp.rev())
