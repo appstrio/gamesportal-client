@@ -4,7 +4,7 @@ var mainModule = mainModule || angular.module('aio.main', []);
 mainModule.controller('MainCtrl', [
     '$scope', '$log', '$q', '$timeout', '$http', 'Firebase',
     'Games', '$state', '$stateParams', 'Facebook', 'Chrome', 'Config', '$translate',
-    function ($scope, $log, $q, $timeout, $http, Firebase,
+    function($scope, $log, $q, $timeout, $http, Firebase,
         Games, $state, $stateParams, Facebook, Chrome, Config, $translate) {
 
         var page = 0, //  hold current page
@@ -17,16 +17,16 @@ mainModule.controller('MainCtrl', [
         $scope.smallHeader = false;
 
         // init - get all games from games db
-        Games.then(function (games) {
-            $scope.allGames = _.sortBy(_.toArray(games), function (i) {
+        Games.then(function(games) {
+            $scope.allGames = _.sortBy(_.toArray(games), function(i) {
                 return parseInt(i.priority);
             });
             var repeatLargeThumbnailsEvery = 20,
                 lastLargeThumbnailIndex = 0;
 
-            angular.forEach($scope.allGames, function (game, index) {
+            angular.forEach($scope.allGames, function(game, index) {
                 //stop if thumbnail is found
-                _.some(game.thumbnails, function (thumbnail) {
+                _.some(game.thumbnails, function(thumbnail) {
                     if (thumbnail.width > 250 && thumbnail.height > 250) {
                         game.largeThumbnail = thumbnail;
                         if (index > 10 && (!lastLargeThumbnailIndex || (index - lastLargeThumbnailIndex) > repeatLargeThumbnailsEvery)) {
@@ -43,7 +43,7 @@ mainModule.controller('MainCtrl', [
         });
 
         // init - init user data object
-        Firebase.initting().then(function () {
+        Firebase.initting().then(function() {
             $scope.userData = Firebase.userData();
         });
 
@@ -57,17 +57,17 @@ mainModule.controller('MainCtrl', [
         loaded = true;
 
         // login user
-        $scope.login = function () {
+        $scope.login = function() {
             return Facebook.login();
         };
 
         // logout user
-        $scope.logout = function () {
+        $scope.logout = function() {
             return Firebase.logout();
         };
 
         // render more games
-        $scope.loadMore = _.throttle(function () {
+        $scope.loadMore = _.throttle(function() {
             if (!$scope.allGames) {
                 return;
             }
@@ -75,14 +75,14 @@ mainModule.controller('MainCtrl', [
             $scope.games = _.first($scope.allGames, Config.GAMES_PER_FIRSTPAGE + (page * Config.GAMES_PER_PAGE));
         }, 2000);
 
-        var loadGame = function (gameId) {
+        var loadGame = function(gameId) {
             $state.go('game', {
                 gameID: gameId
             });
         };
 
         // load game
-        $scope.runGame = function (game, e) {
+        $scope.runGame = function(game, e) {
             if (e) {
                 e.stopPropagation();
                 e.preventDefault();
@@ -94,7 +94,7 @@ mainModule.controller('MainCtrl', [
                 console.log('offer to download extension');
                 return loadGame(game.id);
                 //deprecated for now due to #51
-                Chrome.installApp()['finally'](function () {
+                Chrome.installApp()['finally'](function() {
                     loadGame(game.id);
                     localStorage.returnUser = true;
                     Config.RETURN_USER = true;
@@ -105,16 +105,16 @@ mainModule.controller('MainCtrl', [
         };
 
         //open overlay
-        $scope.openMainOverlay = function (overlayID) {
+        $scope.openMainOverlay = function(overlayID) {
             $scope.overlayID = overlayID;
         };
 
-        $scope.playAnotherGame = function () {
+        $scope.playAnotherGame = function() {
             $scope.runGame($scope.allGames[_.random(0, $scope.allGames.length - 1)]);
         };
 
         // close overlay
-        $scope.closeOverlay = function () {
+        $scope.closeOverlay = function() {
             if ($stateParams.overlayID) {
                 $state.transitionTo($state.current, {}, {
                     location: 'true',
@@ -127,7 +127,7 @@ mainModule.controller('MainCtrl', [
         };
 
         // go back home (and laod overlay)
-        $scope.goHome = function (overlayID) {
+        $scope.goHome = function(overlayID) {
             $state.go('main', {
                 overlayID: overlayID
             });
@@ -163,9 +163,8 @@ mainModule.controller('MainCtrl', [
             changeLanguage($scope.selectedNationality.langKey);
         };
 
-
         ga('create', 'UA-49896275-3', 'mojo-games.com');
-        $scope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
+        $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
             $scope.masonryOptions.isAnimated = false;
             $scope.masonryOptions.transitionDuration = 0;
             $scope.overlayID = $stateParams.overlayID;

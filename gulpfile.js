@@ -48,8 +48,7 @@ gulp.task('vendors', function () {
 //build html
 gulp.task('html', ['scripts', 'vendors', 'css'], function () {
     //process jade
-    return gulp.src('./src/jade/*.jade')
-        .pipe($gulp.flatten())
+    return gulp.src('./src/jade/{,embeds/}*.jade')
         .pipe($gulp.jade({
             pretty: true
         }))
