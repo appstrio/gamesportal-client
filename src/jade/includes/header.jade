@@ -15,10 +15,10 @@
     .corner-toolbox-icons
         img(ng-src="{{selectedNationality.flag}}", ng-mouseover="dropdownFlags=true", ng-mouseleave="dropdownFlags=false")
         .language-box(ng-show='dropdownFlags===true', ng-mouseover="dropdownFlags=true", ng-mouseleave="dropdownFlags=false")
-            ul(ng-repeat="nationality in nationalities", ng-if="nationality!=selectedNationality")
-                span(ng-click="chooseNationality($index)")
+            ul(ng-repeat="nationality in nationalities | filter: '!' + selectedNationality.language")
+                span(ng-click="changeLanguage(nationality)")
                     img(ng-src="{{nationality.flag}}")
-                    |{{nationality.language}}
+                    | {{nationality.language}}
         span.glyphicon.glyphicon-lock(ng-click="goHome('privacy')")
         span.glyphicon.glyphicon-envelope(ng-click="goHome('contact')")
 

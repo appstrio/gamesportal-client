@@ -132,18 +132,10 @@ mainModule.controller('MainCtrl', [
                 overlayID: overlayID
             });
         };
-//
-//        $scope.changeLanguage('he');
-//        window.shlomi = function (lk) {
-//            $scope.changeLanguage(lk);
-//            $scope.$apply();
-//        };
-
-
-
         // change the language of the site given the language key
-        var changeLanguage = function (langKey) {
-            $translate.use(langKey);
+        $scope.changeLanguage = function (nationality) {
+            $translate.use(nationality.language);
+            $scope.selectedNationality = nationality;
         };
 
         $scope.nationalities = [
@@ -157,11 +149,6 @@ mainModule.controller('MainCtrl', [
         ];
         //default-flag TEMP until auto select will be implemented
         $scope.selectedNationality=$scope.nationalities[0];
-
-        $scope.chooseNationality = function(index){
-            $scope.selectedNationality = $scope.nationalities[index];
-            changeLanguage($scope.selectedNationality.langKey);
-        };
 
         ga('create', 'UA-49896275-3', 'mojo-games.com');
         $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
