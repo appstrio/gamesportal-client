@@ -1,9 +1,9 @@
 var path = require('path');
 var gulp = require('gulp');
+var streamqueue = require('streamqueue');
 var $gulp = require('gulp-load-plugins')({
     lazy: false
 });
-var streamqueue = require('streamqueue');
 
 var vendors = [
     'underscore/underscore-min.js',
