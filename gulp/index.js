@@ -21,7 +21,8 @@ var bowerPackages = [
     'angular-ui-router/release/angular-ui-router.min.js',
     'angularjs-media/app/lib/angularjs.media.directives.js',
     'masonry/dist/masonry.pkgd.min.js',
-    'ng-infinite-scroller/build/ng-infinite-scroll.min.js'
+    'ng-infinite-scroller/build/ng-infinite-scroll.min.js',
+    'angular-translate/angular-translate.min.js'
 ].map(function (src) {
     return path.join(paths.bower, src);
 });
