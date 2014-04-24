@@ -44,7 +44,7 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
                 initting.resolve(games);
                 storeGames(games);
             }).
-            catch (function () {
+                catch(function () {
                 initting.reject();
             });
         };
@@ -53,7 +53,7 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
             if (isLocalStorage()) {
                 var obj = {
                     timestamp: Date.now(),
-                    games: array
+                    games    : array
                 };
                 try {
                     var str = JSON.stringify(obj);
@@ -122,31 +122,34 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
                 }
                 // check access
                 checkPremium(game)
-                //handle loader
-                .then(function () {
-                    //swf game
-                    var zoom = $scope.getGameZoom(game);
-                    if (game.source === 'swf' || game.source === 'kongregate') {
-                        swfobject.embedSWF(game.swf_url, 'flashGame', String(zoom*game.width), String(zoom*game.height), '9.0.0', './img/expressInstall.swf', {}, {}, {}, function (e) {
-                            var waitForLoad = function (e) {
-                                if (e && e.ref && e.ref.PercentLoaded && e.ref.PercentLoaded() < 100) {
-                                    $timeout(function () {
-                                        waitForLoad(e);
-                                    }, 50);
-                                } else {
-                                    $scope.gameLoading = false;
-                                }
-                            };
-                            waitForLoad(e);
-                        });
-                    }
-                    //iframe game
-                    else {
-                        //TODO - when we implement such games, make sure to handle loader
-                        $scope.gameLoading = false;
-                    }
-                });
+                    //handle loader
+                    .then(function () {
+                        //swf game
+                        var zoom = $scope.getGameZoom(game);
+                        if (game.source === 'swf' || game.source === 'kongregate') {
+                            swfobject.embedSWF(game.swf_url, 'flashGame', String(zoom * game.width), String(zoom * game.height), '9.0.0', './img/expressInstall.swf', {}, {}, {}, function (e) {
+                                var waitForLoad = function (e) {
+                                    if (e && e.ref && e.ref.PercentLoaded && e.ref.PercentLoaded() < 100) {
+                                        $timeout(function () {
+                                            waitForLoad(e);
+                                        }, 50);
+                                    } else {
+                                        $scope.gameLoading = false;
+                                    }
+                                };
+                                waitForLoad(e);
+                            });
+                        }
+                        //iframe game
+                        else {
+                            //TODO - not effective, doesn't indicate when actually loaded
+                            angular.element('#game-frame').ready(function () {
+                                $scope.gameLoading = false;
+                            });
+                        }
+                    });
             });
+
 
             // get more games
             Games.then(function (games) {
@@ -173,7 +176,7 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
                     $scope.overlayUnlockGame = true;
                 }
             }).
-            catch (function () {
+                catch(function () {
                 alert('Error check premium');
             });
         };
@@ -236,11 +239,10 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
             });
         };
 
-        $scope.getIframeSize = function (game){
+        $scope.getIframeSize = function (game) {
             var ret = {};
-            ret['-moz-transform'] = 'scale('+$scope.getGameZoom(game)+')';
-            ret['-o-transform'] = 'scale('+$scope.getGameZoom(game)+')';
-            ret['-webkit-transform'] = 'scale('+$scope.getGameZoom(game)+')';
+            var scale = 'scale(' + $scope.getGameZoom(game) + ')';
+            ret['-moz-transform'] = ret['-o-transform'] = ret['-webkit-transform'] = scale;
             return ret;
         };
 
@@ -282,7 +284,7 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
                         });
                     }
                 }).
-                catch (function () {
+                    catch(function () {
                     alert('Cant find the game with game id' + gameId);
                 });
             }
@@ -413,11 +415,11 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
         };
 
         return {
-            findGameById: findGameById,
-            findNextGameById: findNextGameById,
+            findGameById        : findGameById,
+            findNextGameById    : findNextGameById,
             findPreviousGameById: findPreviousGameById,
-            raisePointsForGame: raisePointsForGame,
-            getGameIndex: getGameIndex
+            raisePointsForGame  : raisePointsForGame,
+            getGameIndex        : getGameIndex
         };
     }
 ]);
