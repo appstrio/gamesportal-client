@@ -6,17 +6,17 @@ var $gulp = require('gulp-load-plugins')({
 });
 
 var vendors = [
-    'underscore/underscore-min.js',
-    'firebase/firebase.js',
-    'firebase-simple-login/firebase-simple-login.js',
     'angular-masonry/angular-masonry.js',
-    'bootstrap/dist/js/bootstrap.min.js',
     'angular-sanitize/angular-sanitize.min.js',
+    'angular-translate/angular-translate.min.js',
     'angular-ui-router/release/angular-ui-router.min.js',
     'angularjs-media/app/lib/angularjs.media.directives.js',
+    'bootstrap/dist/js/bootstrap.min.js',
+    'firebase-simple-login/firebase-simple-login.js',
+    'firebase/firebase.js',
     'masonry/dist/masonry.pkgd.min.js',
     'ng-infinite-scroller/build/ng-infinite-scroll.min.js',
-    'angular-translate/angular-translate.min.js'
+    'underscore/underscore-min.js'
 ].map(function (package) {
     return path.join('./src/bower_components/', package);
 }).concat(['./src/js/vendor/*.js']);
