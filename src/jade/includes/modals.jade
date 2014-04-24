@@ -171,7 +171,7 @@
                     img(src="./img/smaller_coins.png")
                 .action
                     button.btn.btn-success(ng-click="playAnotherGame()") {{'GET_COINS' | translate}}
-.modal-overlay-fade.leaderboard(ng-show="overlayID==='LEADERBOARD'", ng-controller="LeaderboardCtrl", overlay="'WIN_COINS'")
+.modal-overlay-fade.leaderboard(ng-if="overlayID==='LEADERBOARD'", ng-controller="LeaderboardCtrl", overlay="'WIN_COINS'")
     .modal-dialog
         h1 Leaderboard
         table
