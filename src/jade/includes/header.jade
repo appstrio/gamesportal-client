@@ -31,7 +31,7 @@
             .input-group-btn
                 button.btn.btn-primary(type="button")
                     span.glyphicon.glyphicon-search
-    .user-info
+    .user-info(ng-style="{'margin-right': smallHeader ? 76 : 45}")
         span.details
             .username(ng-if="userData.user.info") {{userData.user.info.displayName || userData.user.info.name}}
             .username.connect(ng-if="!userData.user.info", ng-click="login()") {{'CONNECT' | translate}}
