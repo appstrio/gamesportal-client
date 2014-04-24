@@ -14,11 +14,11 @@ var libs = bowerPackages.concat(vendorPackages);
 //jade -> html
 gulp.task('scripts', function () {
     //create scripts stream
-    return gulp.src(['./src/js/**/*.js', '!./src/js/{snippets,vendor}/*.js'])
+    return gulp.src(['./src/js/!(snippets|vendor)/*.js'])
         .pipe($gulp.uglify())
         .pipe($gulp.concat('scripts.min.js'))
         .pipe($gulp.rev())
-        .pipe(gulp.dest(paths.dist.js))
+        .pipe(gulp.dest('./build/js/'))
         .pipe($gulp.size({
             showFiles: true
         }));
@@ -28,7 +28,7 @@ gulp.task('vendors', function () {
     return gulp.src(libs)
         .pipe($gulp.concat('vendors.min.js'))
         .pipe($gulp.rev())
-        .pipe(gulp.dest('build/js/'))
+        .pipe(gulp.dest('./build/js/'))
         .pipe($gulp.size({
             showFiles: true
         }));
@@ -44,9 +44,6 @@ gulp.task('html', function () {
         .pipe(gulp.dest(paths.build))
         .pipe($gulp.size({
             showFiles: true
-        }))
-        .pipe($gulp.sitemap({
-            siteUrl: 'http://www.mojo-games.com'
         }))
         .pipe(gulp.dest(paths.build));
 });
@@ -127,16 +124,13 @@ gulp.task('bump', function () {
         .pipe(gulp.dest('./'));
 });
 
-//handle assets
-gulp.task('assets', function () {
-    // copy regular assets
-    // gulp.src('./src/assets/**/*')
-    // .pipe(gulp.dest('./build/assets'));
-
-    gulp.src(['./src/bower_components/bootstrap/fonts/*'])
+gulp.task('fonts', function () {
+    return gulp.src(['./src/bower_components/bootstrap/fonts/*'])
         .pipe(gulp.dest('build/fonts/'));
+});
 
-    //copy images
+//handle assets
+gulp.task('images', function () {
     return gulp.src('./src/img/**/*.{ico,jpeg,jpg,gif,bmp,png,webp}')
         .pipe(gulp.dest('./build/img'));
 });
@@ -147,7 +141,7 @@ gulp.task('watch', function () {
 });
 
 gulp.task('build', ['clean'], function () {
-    return gulp.start('assets', 'vendors', 'css', 'html', 'scripts', 'inject');
+    return gulp.start('images', 'fonts', 'css', 'html', 'vendors', 'scripts', 'inject');
 });
 
 //default task
