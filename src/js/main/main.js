@@ -132,16 +132,35 @@ mainModule.controller('MainCtrl', [
                 overlayID: overlayID
             });
         };
+//
+//        $scope.changeLanguage('he');
+//        window.shlomi = function (lk) {
+//            $scope.changeLanguage(lk);
+//            $scope.$apply();
+//        };
+
+
 
         // change the language of the site given the language key
-        $scope.changeLanguage = function (langKey) {
+        var changeLanguage = function (langKey) {
             $translate.use(langKey);
         };
 
-        $scope.changeLanguage('he');
-        window.shlomi = function (lk) {
-            $scope.changeLanguage(lk);
-            $scope.$apply();
+        $scope.nationalities = [
+            {langKey:'en', language: 'English', flag:'./img/flags/en.png'},
+            {langKey:'es', language: 'Español', flag:'./img/flags/es.png'},
+            {langKey:'he', language: 'עברית', flag:'./img/flags/he.png'},
+            {langKey:'pt', language: 'Português', flag:'./img/flags/pt.png'},
+            {langKey:'de', language: 'Deutsch', flag:'./img/flags/de.png'},
+            {langKey:'fr', language: 'Français', flag:'./img/flags/fr.png'},
+            {langKey:'pl', language: 'Polski', flag:'./img/flags/pl.png'}
+        ];
+        //default-flag TEMP until auto select will be implemented
+        $scope.selectedNationality=$scope.nationalities[0];
+
+        $scope.chooseNationality = function(index){
+            $scope.selectedNationality = $scope.nationalities[index];
+            changeLanguage($scope.selectedNationality.langKey);
         };
 
 
