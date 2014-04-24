@@ -138,12 +138,10 @@ mainModule.controller('MainCtrl', [
             $translate.use(langKey);
         };
 
-        $scope.changeLanguage('he');
         window.shlomi = function (lk) {
             $scope.changeLanguage(lk);
             $scope.$apply();
         };
-
 
         ga('create', 'UA-49896275-3', 'mojo-games.com');
         $scope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
