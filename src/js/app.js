@@ -4,24 +4,25 @@
 angular.module('myApp', [
     'aio.main', 'aio.settings', 'aio.analytics', 'aio.games', 'aio.firebase', 'wu.masonry',
     'ui.router', 'ngSanitize', 'aio.counter', 'angularjs.media.directives', 'infinite-scroll',
-    'aio.win', 'aio.leaderboard', 'aio.facebook', 'aio.config', 'aio.chrome', 'aio.common', 'ui.bootstrap'
-]).config(['$stateProvider', '$urlRouterProvider', '$sceDelegateProvider',
-    function ($stateProvider, $urlRouterProvider, $sceDelegateProvider) {
+    'aio.win', 'aio.leaderboard', 'aio.facebook', 'aio.config', 'aio.chrome', 'aio.common', 'ui.bootstrap',
+    'pascalprecht.translate'
+]).config(['$stateProvider', '$urlRouterProvider', '$sceDelegateProvider', '$translateProvider',
+    function ($stateProvider, $urlRouterProvider, $sceDelegateProvider, $translateProvider) {
         $urlRouterProvider.otherwise('/');
 
         $stateProvider
             .state('main', {
-                url: '/:overlayID',
+                url        : '/:overlayID',
                 templateUrl: 'main.html'
             })
             .state('game', {
-                url: '/games/:gameID',
+                url        : '/games/:gameID',
                 templateUrl: 'game.html',
-                controller: 'GameCtrl'
+                controller : 'GameCtrl'
             }).state('editGame', {
-                url: '/games/:gameID/edit',
+                url        : '/games/:gameID/edit',
                 templateUrl: 'edit-game.html',
-                controller: 'EditGameCtrl'
+                controller : 'EditGameCtrl'
             });
 
         $sceDelegateProvider.resourceUrlWhitelist([
@@ -39,6 +40,59 @@ angular.module('myApp', [
             'http://www.myplayyard.com/**'
         ]);
 
+        $translateProvider.translations('en', {
+            'FIND_GAME'      : 'Find A Game',
+            'COINS_COLLECTED': 'coins collected',
+            'CONNECT'        : 'Connect',
+            'SIGNOUT'        : 'Sign Out',
+        });
+
+        $translateProvider.translations('es', {
+            'FIND_GAME'      : 'Busca un Juego',
+            'COINS_COLLECTED': 'monedas recogidas',
+            'CONNECT'        : 'Conectar',
+            'SIGNOUT'        : 'Salir',
+        });
+
+        $translateProvider.translations('he', {
+            'FIND_GAME'      : 'מצא משחק',
+            'COINS_COLLECTED': 'מטבעות שצברת',
+            'CONNECT'        : 'התחבר',
+            'SIGNOUT'        : 'התנתק',
+        });
+
+        $translateProvider.translations('pt', {
+            'FIND_GAME'      : 'encontrar um Jogo',
+            'COINS_COLLECTED': 'moedas coletadas',
+            'CONNECT'        : 'Conectar',
+            'SIGNOUT'        : 'Sair',
+
+        });
+
+        $translateProvider.translations('de', {
+            'FIND_GAME'      : 'Finden Sie ein Spiel',
+            'COINS_COLLECTED': 'münzen gesammelt',
+            'CONNECT'        : 'Verbinden',
+            'SIGNOUT'        : 'austragen',
+
+        });
+
+        $translateProvider.translations('fr', {
+            'FIND_GAME'      : 'trouver un jeu',
+            'COINS_COLLECTED': 'pièces collectées',
+            'CONNECT'        : 'Relier',
+            'SIGNOUT'        : 'Déconnexion',
+        });
+
+        $translateProvider.translations('pl', {
+            'FIND_GAME'      : 'Znajdź grę',
+            'COINS_COLLECTED': 'monety zebrane',
+            'CONNECT'        : 'połączyć',
+            'SIGNOUT'        : 'zaloguj się',
+        });
+
+        $translateProvider.preferredLanguage('en');
+
     }
 ]);
 
@@ -54,7 +108,7 @@ angular.element(document).ready(function () {
         (i[r].q = i[r].q || []).push(arguments)
     }, i[r].l = 1 * new Date();
     a = s.createElement(o),
-    m = s.getElementsByTagName(o)[0];
+        m = s.getElementsByTagName(o)[0];
     a.async = 1;
     a.src = g;
     m.parentNode.insertBefore(a, m)

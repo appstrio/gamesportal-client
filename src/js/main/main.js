@@ -3,9 +3,9 @@ var mainModule = mainModule || angular.module('aio.main', []);
 
 mainModule.controller('MainCtrl', [
     '$scope', '$log', '$q', '$timeout', '$http', 'Firebase',
-    'Games', '$state', '$stateParams', 'Facebook', 'Chrome', 'Config', '$window',
+    'Games', '$state', '$stateParams', 'Facebook', 'Chrome', 'Config', '$translate',
     function ($scope, $log, $q, $timeout, $http, Firebase,
-        Games, $state, $stateParams, Facebook, Chrome, Config, $window) {
+        Games, $state, $stateParams, Facebook, Chrome, Config, $translate) {
 
         var page = 0, //  hold current page
             loaded = false; // whether the app was already loaded
@@ -132,6 +132,18 @@ mainModule.controller('MainCtrl', [
                 overlayID: overlayID
             });
         };
+
+        // change the language of the site given the language key
+        $scope.changeLanguage = function (langKey) {
+            $translate.use(langKey);
+        };
+
+        $scope.changeLanguage('he');
+        window.shlomi = function(lk){
+            $scope.changeLanguage(lk);
+            $scope.$apply();
+        };
+
 
         ga('create', 'UA-49896275-3', 'mojo-games.com');
         $scope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
