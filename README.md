@@ -23,10 +23,4 @@ After building a version, use:
 $ gulp deploy
 ```
 
-Or using Amazon CLI:
-
-```bash
-$ aws s3 sync build/ s3://www.mojo-games.com --acl public-read --delete --size-only
-```
-
 With the AWS command line tool.

@@ -18,8 +18,8 @@ var vendors = [
     'ng-infinite-scroller/build/ng-infinite-scroll.min.js',
     'underscore/underscore-min.js'
 ].map(function (package) {
-    return path.join('./src/bower_components/', package);
-}).concat(['./src/js/vendor/*.js']);
+        return path.join('./src/bower_components/', package);
+    }).concat(['./src/js/vendor/*.js']);
 
 //build client scripts
 gulp.task('scripts', function () {
@@ -57,14 +57,14 @@ gulp.task('html', ['scripts', 'vendors', 'css'], function () {
             read: false
         }), {
             addRootSlash: false,
-            ignorePath: 'build'
+            ignorePath  : 'build'
         }))
         .pipe(indexFilter.restore())
         .pipe($gulp.htmlmin({
-            collapseWhitespace: true,
+            collapseWhitespace       : true,
             collapseBooleanAttributes: true,
             removeRedundantAttributes: true,
-            removeComments: true
+            removeComments           : true
         }))
         .pipe(gulp.dest('./build/'));
 });
@@ -92,8 +92,8 @@ gulp.task('css', function () {
 
 gulp.task('serve', ['build'], function () {
     return $gulp.connect.server({
-        root: 'build',
-        port: 8080,
+        root      : 'build',
+        port      : 8080,
         livereload: true
     });
 });
@@ -125,8 +125,8 @@ gulp.task('fonts', function () {
 //handle assets
 gulp.task('images', function () {
     return gulp.src('./src/img/**/*.{ico,jpeg,jpg,gif,bmp,png,webp}')
-    // .pipe($gulp.imagemin())
-    .pipe(gulp.dest('./build/img'));
+        // .pipe($gulp.imagemin())
+        .pipe(gulp.dest('./build/img'));
 });
 
 //all tasks are watch -> bump patch version -> reload extension (globally enabled)
@@ -147,7 +147,12 @@ gulp.task('default', function () {
 gulp.task('deploy', function () {
     var awsDetails = require('./ignored/aws.json');
     awsDetails.bucket = 'www.mojo-games.com';
+
     var publisher = $gulp.awspublish.create(awsDetails);
+
+    var sixMonthHeaders = {
+        'Cache-Control': 'max-age=15768000,s-maxage=15768000,no-transform,public'
+    };
 
     var oneMonthHeaders = {
         'Cache-Control': 'max-age=2628000,s-maxage=2628000,no-transform,public'
@@ -158,6 +163,14 @@ gulp.task('deploy', function () {
     var noCacheHeaders = {
         'Cache-Control': 'max-age=0,no-transform,public'
     };
+
+
+//    was used to upload game images
+//    gulp.src('./**/games/*.jpg', {
+//        cwd: './src/'
+//    })
+//        .pipe(publisher.publish(sixMonthHeaders))
+//        .pipe($gulp.awspublish.reporter()); // print upload updates to console
 
     gulp.src(['./{js,css}/**/*', 'index.html'], {
         cwd: './build/'
