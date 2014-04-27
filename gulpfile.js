@@ -125,6 +125,7 @@ gulp.task('fonts', function () {
 //handle assets
 gulp.task('images', function () {
     return gulp.src('./src/img/**/*.{ico,jpeg,jpg,gif,bmp,png,webp}')
+        .pipe($gulp.imagemin())
         .pipe(gulp.dest('./build/img'));
 });
 
@@ -143,18 +144,35 @@ gulp.task('default', function () {
 });
 
 // aws
-gulp.task('deploy', ['build', 'assets', 'inject'], function () {
-    /*
-     * AWS Configuration
-     */
-    var details = require('./ignored/aws.json');
-    var publisher = $gulp.awspublish.create(details);
-    var headers = {
-        'Cache-Control': 'max-age=315360000, no-transform, public'
+gulp.task('deploy', function () {
+    var awsDetails = require('./ignored/aws.json');
+    awsDetails.bucket = 'www.mojo-games.com';
+    var publisher = $gulp.awspublish.create(awsDetails);
+
+    var oneMonthHeaders = {
+        'Last-Modified': new Date(),
+        'Cache-Control': 'max-age=2628000,s-maxage=2628000,no-transform,public'
+    };
+    var oneHourHeaders = {
+        'Last-Modified': new Date(),
+        'Cache-Control': 'max-age=600,s-maxage=900,no-transform,public'
     };
 
-    return gulp.src('build/**/*')
-        .pipe(publisher.publish(headers))
-        .pipe(publisher.sync()) // sync local directory with bucket
-    .pipe($gulp.awspublish.reporter()); // print upload updates to console
+    gulp.src('./{js,css}/**/*', {
+        cwd: './build/'
+    })
+        .pipe(publisher.publish(oneMonthHeaders))
+        .pipe($gulp.awspublish.reporter()); // print upload updates to console
+
+    gulp.src('./{fonts,img}/**/*', {
+        cwd: './build/'
+    })
+        .pipe(publisher.publish(oneHourHeaders))
+        .pipe($gulp.awspublish.reporter()); // print upload updates to console
+
+    gulp.src('./**/*.html', {
+        cwd: './build/'
+    })
+        .pipe(publisher.publish({}))
+        .pipe($gulp.awspublish.reporter()); // print upload updates to console
 });

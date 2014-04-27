@@ -4,12 +4,8 @@ html(ng-app="myApp")
         meta(charset="utf-8")
         meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
         meta(name='google', content='notranslate')
+        title Mojo-Games - Your One-Stop Games Portal
         link(rel="shortcut icon", href="./img/favicon.ico")
-
-        link(href='//fonts.googleapis.com/css?family=Lobster', rel='stylesheet', type='text/css')
-
-        <!-- inject:css -->
-        <!-- endinject -->
 
         //- bizigames inline install
         //- link(href='https://chrome.google.com/webstore/detail/heplncibihkggagnaaoigdhkgjmmllme', rel='chrome-webstore-item')
@@ -20,13 +16,16 @@ html(ng-app="myApp")
 
         script(src='//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js')
         script(src='//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js')
-        script(type="text/ng-template", id="searchTypeaheadTemplate.html").
+        script(async, type="text/ng-template", id="searchTypeaheadTemplate.html").
             <a><img ng-src="{{match.model.thumbnails[0].url}}" width="16"><span bind-html-unsafe="match.label | typeaheadHighlight:query"></span></a>
 
         <!-- inject:js -->
         <!-- endinject -->
 
-        title Mojo-Games - Your One-Stop Games Portal
+        link(href='//fonts.googleapis.com/css?family=Lobster', rel='stylesheet', type='text/css')
+        <!-- inject:css -->
+        <!-- endinject -->
+
     body(ng-controller="MainCtrl")
         #fb-root(style="display:none;visibility:hidden;")
 
@@ -37,7 +36,7 @@ html(ng-app="myApp")
         include includes/modals
 
         script(src='//connect.facebook.net/en_US/all.js')
-        script(src='//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-534644e35a88a9ba')
+        script(async, src='//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-534644e35a88a9ba')
         script.
             var addthis_config = addthis_config || {};
             addthis_config.data_track_addressbar = false;
