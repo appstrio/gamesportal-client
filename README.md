@@ -20,6 +20,12 @@ $ npm install
 After building a version, use:
 
 ```bash
+$ gulp deploy
+```
+
+Or using Amazon CLI:
+
+```bash
 $ aws s3 sync build/ s3://www.mojo-games.com --acl public-read --delete --size-only
 ```
 
