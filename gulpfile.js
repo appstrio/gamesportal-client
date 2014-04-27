@@ -150,11 +150,9 @@ gulp.task('deploy', function () {
     var publisher = $gulp.awspublish.create(awsDetails);
 
     var oneMonthHeaders = {
-        'Last-Modified': new Date(),
         'Cache-Control': 'max-age=2628000,s-maxage=2628000,no-transform,public'
     };
     var oneHourHeaders = {
-        'Last-Modified': new Date(),
         'Cache-Control': 'max-age=600,s-maxage=900,no-transform,public'
     };
 
