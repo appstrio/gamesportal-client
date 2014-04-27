@@ -152,25 +152,29 @@ gulp.task('deploy', function () {
     var oneMonthHeaders = {
         'Cache-Control': 'max-age=2628000,s-maxage=2628000,no-transform,public'
     };
-    var oneHourHeaders = {
+    var tenMinutesHeaders = {
         'Cache-Control': 'max-age=600,s-maxage=900,no-transform,public'
+    };
+    var noCacheHeaders = {
+        'Cache-Control': 'max-age=0,no-transform,public'
     };
 
     gulp.src('./{js,css}/**/*', {
         cwd: './build/'
     })
+        .pipe($gulp.awspublish.gzip())
         .pipe(publisher.publish(oneMonthHeaders))
         .pipe($gulp.awspublish.reporter()); // print upload updates to console
 
     gulp.src('./{fonts,img}/**/*', {
         cwd: './build/'
     })
-        .pipe(publisher.publish(oneHourHeaders))
+        .pipe(publisher.publish(tenMinutesHeaders))
         .pipe($gulp.awspublish.reporter()); // print upload updates to console
 
     gulp.src('./**/*.html', {
         cwd: './build/'
     })
-        .pipe(publisher.publish({}))
+        .pipe(publisher.publish(noCacheHeaders))
         .pipe($gulp.awspublish.reporter()); // print upload updates to console
 });
