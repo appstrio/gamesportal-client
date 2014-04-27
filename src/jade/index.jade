@@ -34,12 +34,13 @@ html(ng-app="myApp")
     body(ng-controller="MainCtrl")
         #fb-root(style="display:none;visibility:hidden;")
 
-        header(mojo-header, is-small="smallHeader", is-fixed="fixedHeader", ng-style="{ position: fixedHeader ? 'fixed' : 'relative'}")
+        header(ng-cloak, mojo-header, is-small="smallHeader", is-fixed="fixedHeader", ng-style="{ position: fixedHeader ? 'fixed' : 'relative'}")
             include includes/header
 
         .main(ui-view)
         include includes/modals
+
         script(src='//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-534644e35a88a9ba')
         script.
-            var addthis_config = addthis_config||{};
+            var addthis_config = addthis_config || {};
             addthis_config.data_track_addressbar = false;
