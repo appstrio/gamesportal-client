@@ -16,6 +16,23 @@ html(ng-app="myApp")
 
         script(src='//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js')
         script(src='//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js')
+
+        script(type='text/ng-template', id='main.html').
+            <div masonry="masonryOptions" load-images="false" infinite-scroll="loadMore()" class="masonry-container">
+                <div ng-repeat="game in games" ng-class="getGameClass(game, $index)" class="masonry-brick">
+                    <a ng-click="runGame(game, $event)">
+                        <div ng-if="game.hot" class="badge-overlay hot-overlay">
+                            <div class="ribbon-text">Hot</div>
+                        </div>
+                        <div ng-if="game.premium" class="badge-overlay premium-overlay">
+                            <div class="ribbon-text">Premium</div>
+                        </div>
+                        <img ng-src="{{game.largeThumbnail.url || game.thumbnails[0].url}}" class="game-thumbnail">
+                        <div ng-bind="game.name" class="name"></div>
+                    </a>
+                </div>
+            </div>
+
         script(async, type="text/ng-template", id="searchTypeaheadTemplate.html").
             <a><img ng-src="{{match.model.thumbnails[0].url}}" width="16"><span bind-html-unsafe="match.label | typeaheadHighlight:query"></span></a>
 

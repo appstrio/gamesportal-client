@@ -41,6 +41,27 @@ mainModule.controller('MainCtrl', [
             $scope.games = _.first($scope.allGames, Config.GAMES_PER_FIRSTPAGE);
         });
 
+        $scope.getGameClass = function (game, $index) {
+            var _class = {};
+            if (($index + 1) % 21 === 0) {
+                _class['rotated-right'] = true;
+            } else if (($index + 1) % 18 === 0) {
+                _class['rotated-left'] = true;
+            }
+
+            if (game.premium) {
+                _class.premium = true;
+            } else if (game.hot) {
+                _class.hot = true;
+            }
+
+            if (game.promoted && game.largeThumbnail) {
+                _class.promoted = true;
+            }
+
+            return _class;
+        };
+
         // init - init user data object
         Firebase.initting().then(function () {
             $scope.userData = Firebase.userData();
@@ -48,7 +69,7 @@ mainModule.controller('MainCtrl', [
 
         // masonry options
         $scope.masonryOptions = {
-            gutter    : 20,
+            gutter: 20,
             isFitWidth: true,
             isAnimated: false
         };
@@ -117,9 +138,9 @@ mainModule.controller('MainCtrl', [
             if ($stateParams.overlayID) {
                 $state.transitionTo($state.current, {}, {
                     location: 'true',
-                    reload  : false,
-                    inherit : false,
-                    notify  : false
+                    reload: false,
+                    inherit: false,
+                    notify: false
                 });
             }
             $scope.overlayID = null;
@@ -155,15 +176,35 @@ mainModule.controller('MainCtrl', [
             $scope.dropdownFlags = true;
         };
 
-        $scope.nationalities = [
-            {langKey: 'en', language: 'English', flag: './img/flags/en.png'},
-            {langKey: 'es', language: 'Español', flag: './img/flags/es.png'},
-            {langKey: 'he', language: 'עברית', flag: './img/flags/he.png'},
-            {langKey: 'pt', language: 'Português', flag: './img/flags/pt.png'},
-            {langKey: 'de', language: 'Deutsch', flag: './img/flags/de.png'},
-            {langKey: 'fr', language: 'Français', flag: './img/flags/fr.png'},
-            {langKey: 'pl', language: 'Polski', flag: './img/flags/pl.png'}
-        ];
+        $scope.nationalities = [{
+            langKey: 'en',
+            language: 'English',
+            flag: './img/flags/en.png'
+        }, {
+            langKey: 'es',
+            language: 'Español',
+            flag: './img/flags/es.png'
+        }, {
+            langKey: 'he',
+            language: 'עברית',
+            flag: './img/flags/he.png'
+        }, {
+            langKey: 'pt',
+            language: 'Português',
+            flag: './img/flags/pt.png'
+        }, {
+            langKey: 'de',
+            language: 'Deutsch',
+            flag: './img/flags/de.png'
+        }, {
+            langKey: 'fr',
+            language: 'Français',
+            flag: './img/flags/fr.png'
+        }, {
+            langKey: 'pl',
+            language: 'Polski',
+            flag: './img/flags/pl.png'
+        }];
         //default-flag TEMP until auto select will be implemented
         $scope.selectedNationality = $scope.nationalities[0];
 

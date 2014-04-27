@@ -125,8 +125,8 @@ gulp.task('fonts', function () {
 //handle assets
 gulp.task('images', function () {
     return gulp.src('./src/img/**/*.{ico,jpeg,jpg,gif,bmp,png,webp}')
-        // .pipe($gulp.imagemin())
-        .pipe(gulp.dest('./build/img'));
+    // .pipe($gulp.imagemin())
+    .pipe(gulp.dest('./build/img'));
 });
 
 //all tasks are watch -> bump patch version -> reload extension (globally enabled)
@@ -159,7 +159,7 @@ gulp.task('deploy', function () {
         'Cache-Control': 'max-age=0,no-transform,public'
     };
 
-    gulp.src('./{js,css}/**/*', {
+    gulp.src(['./{js,css}/**/*', 'index.html'], {
         cwd: './build/'
     })
         .pipe($gulp.awspublish.gzip())
@@ -172,7 +172,7 @@ gulp.task('deploy', function () {
         .pipe(publisher.publish(tenMinutesHeaders))
         .pipe($gulp.awspublish.reporter()); // print upload updates to console
 
-    gulp.src('./**/*.html', {
+    gulp.src(['./**/*.html', '!index.html'], {
         cwd: './build/'
     })
         .pipe(publisher.publish(noCacheHeaders))
