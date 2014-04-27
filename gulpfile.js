@@ -45,22 +45,28 @@ gulp.task('vendors', function () {
         }));
 });
 
-//build html
 gulp.task('html', ['scripts', 'vendors', 'css'], function () {
+    var indexFilter = $gulp.filter('index.html');
     //process jade
     return gulp.src('./src/jade/{,embeds/}*.jade')
         .pipe($gulp.jade({
             pretty: true
         }))
-        .pipe(gulp.dest('./build/'))
-        .pipe($gulp.filter('index.html'))
-    //inject css, vendors and scripts and maintain order
-    .pipe($gulp.inject(gulp.src(['./build/{js,css}/{vendors,scripts,styles}*'], {
-        read: false
-    }), {
-        addRootSlash: false,
-        ignorePath: 'build'
-    })).pipe(gulp.dest('./build/'));
+        .pipe(indexFilter)
+        .pipe($gulp.inject(gulp.src(['./build/{js,css}/{vendors,scripts,styles}*'], {
+            read: false
+        }), {
+            addRootSlash: false,
+            ignorePath: 'build'
+        }))
+        .pipe(indexFilter.restore())
+        .pipe($gulp.htmlmin({
+            collapseWhitespace: true,
+            collapseBooleanAttributes: true,
+            removeRedundantAttributes: true,
+            removeComments: true
+        }))
+        .pipe(gulp.dest('./build/'));
 });
 
 //compile css

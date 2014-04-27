@@ -41,7 +41,8 @@
     "gulp-rev": "^0.3.2",
     "gulp-order": "^1.0.6",
     "streamqueue": "0.0.6",
-    "gulp-manifest": "0.0.3"
+    "gulp-manifest": "0.0.3",
+    "gulp-htmlmin": "^0.1.2"
   },
   "engines": {
     "node": ">=0.8.0"

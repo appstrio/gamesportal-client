@@ -1,6 +1,6 @@
 div.edit-game-wrapper.container(ng-show="game")
-    h1 ({{gameIndex}}) Edit Game :
-        strong  {{game.name}}
+    h1 ({{gameIndex}}) Edit Game:
+        strong(ng-bind="game.name")
     div.img(ng-repeat="thumb in game.thumbnails")
         div(style="text-align:center") {{thumb.width}} x {{thumb.height}}
         div(style="text-align:center")
@@ -28,16 +28,14 @@ div.edit-game-wrapper.container(ng-show="game")
             div.form-group
                 label(for="") Priority
                 input.form-control(type="text", ng-model="game.priority")
-                span The lowest the better
-                    br
-                    | (good game < 100, bad game > 1000)
+                span Lower is better. Good game is less than 100, Bad game is more than 1000.
         div.col-md-4
             p
                 b Category :
-                span  {{game.category}}
+                span(ng-bind="game.category")
             p
                 b Author :
-                span  {{game.author}}
+                span(ng-bind="game.author")
 
     div.row(style="text-align:center;margin:20px 0;")
         div.col-md-6.col-md-offset-2(style="text-align:center;")
@@ -78,4 +76,4 @@ div.edit-game-wrapper.container(ng-show="game")
     div.row
         div.col-md-12
             p Raw Data
-            textarea.form-control(rows="8") {{game}}
+            textarea.form-control(rows="8", ng-bind="game")
