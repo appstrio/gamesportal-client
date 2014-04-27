@@ -125,7 +125,7 @@ gulp.task('fonts', function () {
 //handle assets
 gulp.task('images', function () {
     return gulp.src('./src/img/**/*.{ico,jpeg,jpg,gif,bmp,png,webp}')
-        .pipe($gulp.imagemin())
+        // .pipe($gulp.imagemin())
         .pipe(gulp.dest('./build/img'));
 });
 

@@ -9,10 +9,10 @@ firebaseModule.factory('Firebase', ['$rootScope', '$log', '$q', '$timeout', '$ht
             initting = $q.defer(), // initializing defer
             ready = false, // whether app was initialized
             ref = new Firebase(Config.FIREBASE_URL), // basic firebase ref
+            gamesRef = ref.child('games'),
             userRef, //user ref
             leaderboardRef, // leaderboard ref
-            leaderboardData = {}, // leaderboard data
-            gamesRef;
+            leaderboardData = {}; // leaderboard data
 
         // init auth ref and callback
         var auth = new FirebaseSimpleLogin(ref, function (error, user) {
@@ -278,8 +278,7 @@ firebaseModule.factory('Firebase', ['$rootScope', '$log', '$q', '$timeout', '$ht
             getGames: function () {
                 var defer = $q.defer();
 
-                gamesRef = gamesRef || ref.child('games');
-                gamesRef.once('value', function (gamesSnap) {
+                gamesRef.on('value', function (gamesSnap) {
                     $rootScope.$apply(function () {
                         defer.resolve(gamesSnap.val());
                     });
@@ -291,7 +290,6 @@ firebaseModule.factory('Firebase', ['$rootScope', '$log', '$q', '$timeout', '$ht
 
             setGameWithPriority: function (game, done) {
                 game = angular.copy(game);
-                gamesRef = gamesRef || ref.child('games');
                 var tempRef = gamesRef.child(game.id);
                 tempRef.setWithPriority(game, game.priority, done);
             }
