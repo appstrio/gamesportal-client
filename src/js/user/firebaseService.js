@@ -285,7 +285,6 @@ firebaseModule.factory('Firebase', ['$rootScope', '$log', '$q', '$timeout', '$ht
                 });
 
                 return defer.promise;
-
             },
 
             setGameWithPriority: function (game, done) {
