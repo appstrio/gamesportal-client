@@ -11,6 +11,8 @@ mainModule.controller('MainCtrl', [
 
         $scope.allGames = [];
 
+        $scope.appName = Config.APP_NAME;
+
         //header is fixed by default
         $scope.fixedHeader = true;
         $scope.smallHeader = false;
