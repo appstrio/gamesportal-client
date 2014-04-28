@@ -5,6 +5,10 @@ var $gulp = require('gulp-load-plugins')({
     lazy: false
 });
 
+var prependBowerPath = function (package) {
+    return path.join('./src/bower_components/', package);
+};
+
 var vendors = [
     'angular-masonry/angular-masonry.js',
     'angular-sanitize/angular-sanitize.min.js',
@@ -17,9 +21,7 @@ var vendors = [
     'masonry/dist/masonry.pkgd.min.js',
     'ng-infinite-scroller/build/ng-infinite-scroll.min.js',
     'underscore/underscore-min.js'
-].map(function (package) {
-    return path.join('./src/bower_components/', package);
-}).concat(['./src/js/vendor/*.js']);
+].map(prependBowerPath).concat(['./src/js/vendor/*.js']);
 
 //build client scripts
 gulp.task('scripts', function () {
@@ -124,7 +126,7 @@ gulp.task('fonts', function () {
 
 //handle assets
 gulp.task('images', function () {
-    return gulp.src('./src/img/**/*.{ico,jpeg,jpg,gif,bmp,png,webp}')
+    return gulp.src('./src/img/**/*.{ico,jpeg,jpg,gif,bmp,png,webp,swf}')
     // .pipe($gulp.imagemin())
     .pipe(gulp.dest('./build/img'));
 });
