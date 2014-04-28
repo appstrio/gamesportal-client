@@ -12,7 +12,8 @@ mainModule.controller('MainCtrl', [
         $scope.allGames = [];
 
         $scope.appName = Config.APP_NAME;
-
+        $scope.appLogo = './img/logo-' + $scope.appName.toLowerCase().replace(/ /g, '') + '.png';
+        document.title = $scope.appName;
         //header is fixed by default
         $scope.fixedHeader = true;
         $scope.smallHeader = false;

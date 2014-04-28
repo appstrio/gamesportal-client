@@ -1,6 +1,6 @@
 .header-top
     .logo(ng-click="goHome()")
-        img(src="./img/logo.png")
+        img(ng-src="{{appLogo}}")
     .coins(ng-click="goHome('WIN_COINS')")
         .coin-container
             .top-text {{'COINS_COLLECTED' | translate }}
