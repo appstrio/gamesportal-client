@@ -1,4 +1,3 @@
-/* global swfobject */
 var gamesModule = gamesModule || angular.module('aio.games', []);
 
 gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
@@ -12,11 +11,10 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
         var initLocalStorage = function () {
             try {
                 if (isLocalStorage()) {
-                    var str = localStorage.getItem(localStorageKey);
-                    var obj = JSON.parse(str);
+                    var obj = JSON.parse(localStorage[localStorageKey]);
                     if (obj.games && obj.games) {
                         if (isVeryOld(obj.timestamp)) {
-
+                            refreshFirebase();
                         } else if (isOld(obj.timestamp)) {
                             refreshFirebase();
                             return initting.resolve(obj.games);
@@ -26,8 +24,6 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
                     }
                 }
             } catch (e) {
-                console.warn('Ran into', e);
-            } finally {
                 initFirebase();
             }
         };
@@ -86,10 +82,10 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
         //        return data.data;
         //    });
     }
-]).controller('GameCtrl', ['$scope', '$log', '$q', '$timeout', '$http', '$stateParams', '$state', 'Firebase', 'Games', 'GamesHelpers',
-
+]).controller('GameCtrl', [
+    '$scope', '$log', '$q', '$timeout', '$http', '$stateParams', '$state', 'Firebase', 'Games', 'GamesHelpers',
     function ($scope, $log, $q, $timeout, $http, $stateParams, $state, Firebase, Games, GamesHelpers) {
-        var pointsPerGame = 100;
+        // var pointsPerGame = 100;
         $scope.gameLoading = true;
 
         /**
@@ -117,7 +113,10 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
                 }
 
                 if (game.source === 'miniclip') {
-                    $scope.miniclipURL = 'http://www.miniclip.com/games/' + game.data_game_name + '/en/webgame.php?bodybg=1&width=' + game.width + '&height=' + game.height;
+                    $scope.miniclipURL = 'http://www.miniclip.com/games/' +
+                        game.data_game_name +
+                        '/en/webgame.php?bodybg=1&width=' + game.width +
+                        '&height=' + game.height;
                 }
                 // check access
                 return checkPremium(game);

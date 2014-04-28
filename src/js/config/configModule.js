@@ -81,7 +81,7 @@ configModule.factory('Config', function () {
         REALM: REALM,
         APP_NAME: APP_NAME,
         FIREBASE_URL: 'https://bizibizi.firebaseio.com',
-        GAMES_PER_FIRSTPAGE: 50, // amount of games for the first page
+        GAMES_PER_FIRSTPAGE: 70, // amount of games for the first page
         GAMES_PER_PAGE: 50, // amount of games for load more games
         POINTS: POINTS,
         CHROME_APP_ID: CHROME_ID,

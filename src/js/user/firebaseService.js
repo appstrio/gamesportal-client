@@ -73,9 +73,7 @@ firebaseModule.factory('Firebase', ['$rootScope', '$log', '$q', '$timeout', '$ht
                         initting.resolve();
                     }
                 });
-
             });
-
         };
 
         /**
@@ -280,6 +278,7 @@ firebaseModule.factory('Firebase', ['$rootScope', '$log', '$q', '$timeout', '$ht
 
                 gamesRef.once('value', function (gamesSnap) {
                     $rootScope.$apply(function () {
+                        console.info('Queried form DB', _.size(gamesSnap.val()));
                         defer.resolve(gamesSnap.val());
                     });
                 });
