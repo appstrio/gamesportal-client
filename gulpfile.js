@@ -10,11 +10,9 @@ var prependBowerPath = function (package) {
 };
 
 var vendors = [
-    'angular-masonry/angular-masonry.js',
     'angular-sanitize/angular-sanitize.min.js',
     'angular-translate/angular-translate.min.js',
     'angular-ui-router/release/angular-ui-router.min.js',
-    'angularjs-media/app/lib/angularjs.media.directives.js',
     'bootstrap/dist/js/bootstrap.min.js',
     'firebase-simple-login/firebase-simple-login.js',
     'firebase/firebase.js',
