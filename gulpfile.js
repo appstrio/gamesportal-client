@@ -146,7 +146,8 @@ gulp.task('default', function () {
 // aws
 gulp.task('deploy', function () {
     var awsDetails = require('./ignored/aws.json');
-    awsDetails.bucket = 'www.mojo-games.com';
+    // awsDetails.bucket = 'www.mojo-games.com';
+    awsDetails.bucket = 'mojo-swf';
 
     var publisher = $gulp.awspublish.create(awsDetails);
 
