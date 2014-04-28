@@ -164,6 +164,13 @@
                         text-align: center;
                         max-width: 640px;
                         max-height: 550px;
+                        &.preloader {
+                            position: absolute;
+                            left: 0;
+                            right: 0;
+                            top: 2px;
+                        }
+
                         iframe, object {
                             width: 100%;
                             max-width: 640px;
@@ -171,13 +178,14 @@
                         }
 
                         @media (max-width: 1060px) {
-                            margin:0;
+                            margin: 0;
                         }
                         a {
                             img {
                                 cursor: pointer;
                             }
                         }
+
                     }
                 }
                 .game-description {

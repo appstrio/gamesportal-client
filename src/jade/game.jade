@@ -24,6 +24,20 @@
                         //- a.addthis_button_twitter_follow_native(tf:screen_name="DaRealMojoGames", tf:show-screen-name="false", tf:show-count="false")
                         a.addthis_button_google_plusone(g:plusone:href="https://plus.google.com/u/0/105972966277627450580/about", g:plusone:size="medium")
                 .embedding
+                    script.
+                        var hidePreloader = function() {
+                            $('#preloader').fadeOut('easeOutBounce', function() {
+                                $('.include.preloader').remove();
+                            });
+                        };
+                        window.removeAdSwf = function() {
+                            hidePreloader();
+                        }
+                        window.noAdsReturned = function() {
+                            hidePreloader();
+                        }
+
+                    .include.preloader(ng-cloak, ng-include="'embeds/preloader.html'")
                     .include(ng-cloak, ng-include="'embeds/embed-' + game.source + '.html'")
                         #flashGame
                             a(href="http://get.adobe.com/flashplayer/", target="_blank")
@@ -39,26 +53,3 @@
                     a(ui-sref="game({gameID: game.id})")
                         img.game-thumbnail(ng-src="{{game.thumbnails[0].url}}")
                         .name(ng-bind="game.name")
-.modal-overlay-fade.premium-game-modal(ng-show="overlayUnlockGame", ng-cloak)
-    .modal-dialog
-        .close-button(ng-click="goHome()")
-        h1 Unlock Premium Game
-        .game-to-unlock
-            h2.game-name(ng-bind="lockedGame.name")
-            .game-thumbnail
-                img(ng-src="{{lockedGame.thumbnails[0].url}}")
-        .price-wrapper
-            img(src="./img/coins2.png")
-            span.price {{lockedGame.price | number}} COINS
-        .bottom-action
-            //- unlock game
-            div(ng-if="userData.user.points >= lockedGame.price")
-                button(type="button", class="btn btn-success", ng-click="unlockGame(lockedGame)") Unlock
-            //- user isn't connected
-            div(ng-if="!userData.user")
-                h4 Please connect in order to unlock this game
-                button(type="button", class="btn btn-success", ng-click="login()") Connect
-            //- user doesn't have enough credits to unlock game
-            div(ng-if="userData.user.points < lockedGame.price")
-                h4 You don't have enough coins
-                button(type="button", class="btn btn-success", ng-click="goHome('WIN_COINS')") Win Coins

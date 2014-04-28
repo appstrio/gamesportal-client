@@ -124,7 +124,7 @@ gulp.task('fonts', function () {
 
 //handle assets
 gulp.task('images', function () {
-    return gulp.src('./src/img/**/*.{ico,jpeg,jpg,gif,bmp,png,webp}')
+    return gulp.src('./src/img/**/*.{ico,jpeg,jpg,gif,bmp,png,webp,swf}')
     // .pipe($gulp.imagemin())
     .pipe(gulp.dest('./build/img'));
 });
@@ -146,13 +146,13 @@ gulp.task('default', function () {
 // aws
 gulp.task('deploy', function () {
     var awsDetails = require('./ignored/aws.json');
-    awsDetails.bucket = 'www.mojo-games.com';
+    awsDetails.bucket = 'mojo-swf';
 
     var publisher = $gulp.awspublish.create(awsDetails);
 
-    var sixMonthHeaders = {
-        'Cache-Control': 'max-age=15768000,s-maxage=15768000,no-transform,public'
-    };
+    // var sixMonthHeaders = {
+        // 'Cache-Control': 'max-age=15768000,s-maxage=15768000,no-transform,public'
+    // };
 
     var oneMonthHeaders = {
         'Cache-Control': 'max-age=2628000,s-maxage=2628000,no-transform,public'
@@ -163,7 +163,6 @@ gulp.task('deploy', function () {
     var noCacheHeaders = {
         'Cache-Control': 'max-age=0,no-transform,public'
     };
-
 
     //    was used to upload game images
     //    gulp.src('./**/games/*.jpg', {
