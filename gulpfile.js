@@ -181,7 +181,7 @@ gulp.task('deploy', function () {
     gulp.src('./{fonts,img}/**/*', {
         cwd: './build/'
     })
-        .pipe(publisher.publish(tenMinutesHeaders))
+        .pipe(publisher.publish(oneMonthHeaders))
         .pipe($gulp.awspublish.reporter()); // print upload updates to console
 
     gulp.src(['./**/*.html', '!index.html'], {
