@@ -266,7 +266,7 @@ firebaseModule.factory('Firebase', ['$rootScope', '$log', '$q', '$timeout', '$ht
             changeGameRating: function (game, side, done) {
                 game = angular.copy(game);
                 var tempRef = gamesRef.child(game.id).child(side);
-                tempRef.transaction(function (current_value) {
+                return tempRef.transaction(function (current_value) {
                     return current_value + 1;
                 }, done);
             },
@@ -278,7 +278,7 @@ firebaseModule.factory('Firebase', ['$rootScope', '$log', '$q', '$timeout', '$ht
             getGames: function () {
                 var defer = $q.defer();
 
-                gamesRef.on('value', function (gamesSnap) {
+                gamesRef.once('value', function (gamesSnap) {
                     $rootScope.$apply(function () {
                         defer.resolve(gamesSnap.val());
                     });

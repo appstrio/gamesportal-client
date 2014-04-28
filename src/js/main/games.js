@@ -169,8 +169,12 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
                 console.warn('missing game info', game);
                 return;
             }
+            if ($scope.votingProgress) {
+                return alert('Please wait... Still not done voting');
+            }
             var field = side === 'down' ? 'voteDown' : 'voteUp';
             console.log('Sending rating', game.name, field);
+            $scope.votingProgress = true;
             Firebase.changeGameRating(game, field, function (error, success, snapshot) {
                 if (error) {
                     console.warn('problem with rating', error);
@@ -178,6 +182,10 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
 
                 //TODO update local game with new value
                 console.log('new value', field, snapshot.val());
+                $scope.$apply(function () {
+                    game[field] = snapshot.val();
+                    $scope.votingProgress = false;
+                });
             });
         };
 
