@@ -62,8 +62,6 @@ gulp.task('html', ['scripts', 'vendors', 'css'], function () {
         .pipe(indexFilter.restore())
         .pipe($gulp.htmlmin({
             collapseWhitespace: true,
-            collapseBooleanAttributes: true,
-            removeRedundantAttributes: true,
             removeComments: true
         }))
         .pipe(gulp.dest('./build/'));
