@@ -15,7 +15,7 @@ angular.module('angularjs.media.directives', [])
       },
       restrict: 'E',
       replace: true,
-      template: 
+      template:
         '<object data="{{src}}" type="application/x-shockwave-flash">'+
           '<param name="allowscriptaccess" value="always" />'+
           '<param name="allowfullscreen" value="true" />'+
@@ -42,7 +42,7 @@ angular.module('angularjs.media.directives', [])
       scope: {
         channel: '@'
       },
-      template: 
+      template:
         '<object type="application/x-shockwave-flash" '+
                 'id="live_embed_player_flash" '+
                 'data="http://www.' + configure.type + '.tv/widgets/live_embed_player.swf?channel={{channel}}">'+
