@@ -74,6 +74,8 @@ gulp.task('css', function () {
     var stream = streamqueue({
         objectMode: true
     });
+    stream.queue(gulp.src(['./src/less/fonts.less'])
+        .pipe($gulp.less()));
     stream.queue(gulp.src(['./src/bower_components/bootstrap/dist/css/bootstrap{,-theme}.min.css']));
     stream.queue(gulp.src(['./src/less/style.less'])
         .pipe($gulp.less())
