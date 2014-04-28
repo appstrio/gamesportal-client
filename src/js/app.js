@@ -8,21 +8,13 @@ angular.module('myApp', [
     'pascalprecht.translate'
 ]).config(['$stateProvider', '$urlRouterProvider', '$sceDelegateProvider', '$translateProvider',
     function ($stateProvider, $urlRouterProvider, $sceDelegateProvider, $translateProvider) {
-        $urlRouterProvider.otherwise('/');
+        $urlRouterProvider.otherwise('/games/4_bats');
 
         $stateProvider
-            .state('main', {
-                url: '/:overlayID',
-                templateUrl: 'main.html'
-            })
             .state('game', {
                 url: '/games/:gameID',
                 templateUrl: 'game.html',
                 controller: 'GameCtrl'
-            }).state('editGame', {
-                url: '/games/:gameID/edit',
-                templateUrl: 'edit-game.html',
-                controller: 'EditGameCtrl'
             });
 
         $sceDelegateProvider.resourceUrlWhitelist([

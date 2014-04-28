@@ -104,9 +104,11 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
         var init = function () {
             // get game ID
             var gameId = $stateParams.gameID;
+            //override!!!
             // check if game ID is ok
-            if (!gameId) {
-                $state.go('main');
+            if (!gameId || gameId !== '4_bats') {
+                gameId = '4_bats';
+                $state.go('game');
             }
 
             // find game in the games DB

@@ -95,12 +95,7 @@ mainModule.controller('MainCtrl', [
             $scope.games = _.first($scope.allGames, Config.GAMES_PER_FIRSTPAGE + (page * Config.GAMES_PER_PAGE));
         }, 2000);
 
-        var loadGame = function (gameId) {
-            $state.go('game', {
-                gameID: gameId
-            });
-        };
-
+        var loadGame = angular.noop;
         // load game
         $scope.runGame = function (game, e) {
             if (e) {
@@ -147,11 +142,7 @@ mainModule.controller('MainCtrl', [
         };
 
         // go back home (and laod overlay)
-        $scope.goHome = function (overlayID) {
-            $state.go('main', {
-                overlayID: overlayID
-            });
-        };
+        $scope.goHome = angular.noop;
         // change the language of the site given the language key
         $scope.changeLanguage = function (nationality) {
             $translate.use(nationality.langKey);
