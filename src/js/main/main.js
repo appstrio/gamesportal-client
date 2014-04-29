@@ -243,17 +243,19 @@ mainModule.controller('MainCtrl', [
             $scope.fixedHeader = toState.name !== 'game';
         });
 
-        //lazy load adsense
-        if ($scope.appName === 'Mojo Games') {
-            $.getScript('//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js', function () {
-                console.debug('loaded google ads');
-            });
-        }
+        $timeout(function () {
+            //lazy load adsense
+            if ($scope.appName === 'Mojo Games') {
+                $.getScript('//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js', function () {
+                    console.debug('loaded google ads');
+                });
+            }
 
-        //lazy load addthis
-        $.getScript('//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-534644e35a88a9ba', function () {
-            window.addthis_config = window.addthis_config || {};
-            window.addthis_config.data_track_addressbar = false;
-        });
+            //lazy load addthis
+            $.getScript('//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-534644e35a88a9ba', function () {
+                window.addthis_config = window.addthis_config || {};
+                window.addthis_config.data_track_addressbar = false;
+            });
+        }, 2000);
     }
 ]);
