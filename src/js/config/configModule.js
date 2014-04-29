@@ -95,7 +95,7 @@ configModule.factory('Config', function () {
         CHROME_APP_ID: _docInfo.chromeId,
         IS_CHROME: (typeof chrome !== 'undefined' && chrome.webstore),
         RETURN_USER: returnUser,
-        initialPriority: 300
+        initialPriority: 80
     };
 
     var developmentConfig = function () {
