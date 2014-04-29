@@ -211,7 +211,9 @@ mainModule.controller('MainCtrl', [
         //default-flag TEMP until auto select will be implemented
         $scope.selectedNationality = $scope.nationalities[0];
 
-        ga('create', 'UA-49896275-3', 'mojo-games.com');
+        ga('create', Config.ANALYTICS_ID, {
+            'cookieDomain': 'none'
+        });
         $scope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
             $scope.masonryOptions.isAnimated = false;
             $scope.masonryOptions.transitionDuration = 0;
