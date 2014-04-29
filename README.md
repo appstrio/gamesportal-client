@@ -17,10 +17,10 @@ $ npm install
 
 ## Analytics Ids:
 
-### www.mojo-games.com
+### http://www.mojo-games.com
 **UA-49896275-3**
 
-### play.gamestab.me
+### http://play.gamestab.me
 **UA-47928276-8**
 
 ## Deploy
