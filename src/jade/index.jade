@@ -57,4 +57,5 @@ html(ng-app="myApp")
             var addthis_config = addthis_config || {};
             addthis_config.data_track_addressbar = false;
 
-        script(ng-if="appName === 'Mojo Games'", async, src='//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js')
+        div(ng-if="appName === 'Mojo Games'", ng-cloak)
+            script(async, src='//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js')
