@@ -3,12 +3,16 @@
         .main
             .left
                 .header
-                .more-games-left
-                    .game(ng-repeat="game in evenMoreGames | limitTo:5")
-                        a(ui-sref="game({gameID: game.id})")
-                            img.game-thumbnail(ng-src="{{game.thumbnails[0].url}}")
-                            div.name
-                                div(ng-bind="game.name")
+
+                div(ng-if="appName==='Gamestab'")
+                    .more-games-left
+                        .game(ng-repeat="game in evenMoreGames | limitTo:5")
+                            a(ui-sref="game({gameID: game.id})")
+                                img.game-thumbnail(ng-src="{{game.thumbnails[0].url}}")
+                                div.name
+                                    div(ng-bind="game.name")
+                .left-ad-unit(ng-if='appName==="Mojo Games"')
+                    include includes/skyscraper-left-mojogames
             .middle
                 .header
                     h1.game-name(ng-bind="game.name")
@@ -38,7 +42,7 @@
                         include includes/skyscraper-right-gamestab
                     div(ng-if='appName==="Mojo Games"')
                         include includes/skyscraper-right-mojogames
-        .bottom
+        div(ng-class='appName==="Mojo Games" ? "bottom-mojo" : "bottom"')
             .more-games-bottom
                 .game(ng-repeat="game in moreGames")
                     a(ui-sref="game({gameID: game.id})")

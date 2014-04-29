@@ -7,12 +7,13 @@
     height: 700px;
 
     .game-embed-container {
-        width: 1177px;
+        width: 1267px;
         margin: 0 auto;
 
         .main {
             .left {
                 float: left;
+                width: 216px;
                 @media (max-width: 1210px) {
                     display: none;
                     visibility: hidden;
@@ -26,8 +27,18 @@
                     border: 1px solid #084973;
                     border-right: 1px solid rgb(89, 139, 200);
                     border-bottom: 1px solid rgb(89, 139, 200);
-                    width: 126px;
                 }
+
+                .left-ad-unit {
+                    height: 630px;
+                    background: #395277;
+                    display: block;
+                    padding-top: 2px;
+                    border-radius: 0 0 0 10px;
+                    border-right: 1px solid rgb(89, 139, 200);
+                    padding-right: 55px;
+                }
+
                 .more-games-left {
                     background: #395277;
                     display: block;
@@ -231,6 +242,17 @@
                 width: 1177px;
                 clear: both;
             }
+        }
+
+        .bottom-mojo {
+            height: 110px;
+            margin-top: 690px;
+            margin-left: 67px;
+            position: absolute;
+            @media (max-width: 1060px) {
+                margin-left:0px;
+            }
+
         }
 
         .game {
