@@ -4,41 +4,29 @@ configModule.factory('Config', function () {
 
     var getDocInfo = function () {
         //TODO - extract to external helper
-        var _appname;
-        var _realm;
-        var _chromeId;
-        var _fbId;
-        var _analyticsId;
-        var _firebaseUrl;
+        var returnObj = {};
 
         try {
             if (document.location.hostname === 'play.gamestab.me') {
-                _appname = 'Gamestab';
-                _chromeId = 'amlhfkalaoikfbpoolhpdhignhjhlhko'; // gamestab,
-                _fbId = '1481519478732760'; //Play Gamestab
-                _analyticsId = 'UA-47928276-8';
-                _firebaseUrl = 'https://gamestab.firebaseio.com';
+                returnObj.appname = 'Gamestab';
+                returnObj.chromeId = 'amlhfkalaoikfbpoolhpdhignhjhlhko'; // gamestab,
+                returnObj.fbId = '1481519478732760'; //Play Gamestab
+                returnObj.analyticsId = 'UA-47928276-8';
+                returnObj.firebaseUrl = 'https://gamestab.firebaseio.com';
             }
-            _realm = document.location.origin;
+            returnObj.realm = document.location.origin;
         } catch (e) {
             console.info('Error with doc.location', e);
         }
         //All params are mojogames defaults
-        _appname = _appname || 'Mojo Games';
-        _realm = _realm || 'http://www.mojo-games.com';
-        _chromeId = _chromeId || 'fmpeljkajhongibcmcnigfcjcgaopfid';
-        _fbId = _fbId || '224435141079794'; //mojo-games
-        _analyticsId = _analyticsId || 'UA-49896275-3';
-        _firebaseUrl = _firebaseUrl || 'https://bizibizi.firebaseio.com';
+        returnObj.appname = returnObj.appname || 'Mojo Games';
+        returnObj.realm = returnObj.realm || 'http://www.mojo-games.com';
+        returnObj.chromeId = returnObj.chromeId || 'fmpeljkajhongibcmcnigfcjcgaopfid';
+        returnObj.fbId = returnObj.fbId || '224435141079794'; //mojo-games
+        returnObj.analyticsId = returnObj.analyticsId || 'UA-49896275-3';
+        returnObj.firebaseUrl = returnObj.firebaseUrl || 'https://bizibizi.firebaseio.com';
 
-        return {
-            appName: _appname,
-            realm: _realm,
-            chromeId: _chromeId,
-            fbId: _fbId,
-            analyticsId: _analyticsId,
-            firebaseUrl: _firebaseUrl
-        };
+        return returnObj;
     };
 
     var _docInfo = getDocInfo();
