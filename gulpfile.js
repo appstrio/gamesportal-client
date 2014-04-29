@@ -9,6 +9,8 @@ var prependBowerPath = function (package) {
     return path.join('./src/bower_components/', package);
 };
 
+var bucket;
+
 var vendors = [
     'angular-sanitize/angular-sanitize.min.js',
     'angular-translate/angular-translate.min.js',
@@ -143,16 +145,27 @@ gulp.task('default', function () {
     return gulp.start('build', 'serve', 'watch');
 });
 
+gulp.task('mojo', function(){
+    bucket = 'www.mojo-games.com';
+    return gulp.start('deploy');
+});
+
+gulp.task('gamestab', function(){
+    bucket = 'play.gamestab.me';
+    return gulp.start('deploy');
+});
+
 // aws
 gulp.task('deploy', function () {
     var awsDetails = require('./ignored/aws.json');
-    awsDetails.bucket = 'www.mojo-games.com';
+    awsDetails.bucket = bucket;
+
+    if(!bucket){
+        throw 'Error: No bucket was selected';
+    }
 
     var publisher = $gulp.awspublish.create(awsDetails);
 
-    // var sixMonthHeaders = {
-    // 'Cache-Control': 'max-age=15768000,s-maxage=15768000,no-transform,public'
-    // };
 
     var oneMonthHeaders = {
         'Cache-Control': 'max-age=2628000,s-maxage=2628000,no-transform,public'
@@ -164,7 +177,10 @@ gulp.task('deploy', function () {
         'Cache-Control': 'max-age=0,no-transform,public'
     };
 
-    //    was used to upload game images
+    // was used to upload game images
+    // var sixMonthHeaders = {
+    // 'Cache-Control': 'max-age=15768000,s-maxage=15768000,no-transform,public'
+    // };
     //    gulp.src('./**/games/*.jpg', {
     //        cwd: './src/'
     //    })
