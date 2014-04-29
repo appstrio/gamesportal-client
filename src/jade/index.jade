@@ -12,7 +12,7 @@ html(ng-app="myApp")
         //- mojo-games inline install
         //- link(href='https://chrome.google.com/webstore/detail/fmpeljkajhongibcmcnigfcjcgaopfid', rel='chrome-webstore-item')
         //- gamestab inline install
-        //- link(href='https://chrome.google.com/webstore/detail/amlhfkalaoikfbpoolhpdhignhjhlhko', rel='chrome-webstore-item')
+        link(href='https://chrome.google.com/webstore/detail/amlhfkalaoikfbpoolhpdhignhjhlhko', rel='chrome-webstore-item')
 
         script(src='//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js')
         script(src='//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js')
@@ -51,11 +51,7 @@ html(ng-app="myApp")
         .main(ui-view)
         include includes/modals
 
-        //script(src='//connect.facebook.net/en_US/all.js')
         script(async, src='//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-534644e35a88a9ba')
         script.
             var addthis_config = addthis_config || {};
             addthis_config.data_track_addressbar = false;
-
-        div(ng-if="appName === 'Mojo Games'", ng-cloak)
-            script(async, src='//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js')

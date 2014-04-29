@@ -1,5 +1,5 @@
 .header-top
-    .logo(ng-click="goHome()")
+    .logo(ng-click="goHome()", ng-cloak)
         img(ng-src="{{appLogo}}")
     .coins(ng-click="goHome('WIN_COINS')")
         .coin-container

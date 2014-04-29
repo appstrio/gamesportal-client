@@ -6,14 +6,19 @@ mainModule.controller('MainCtrl', [
     'Games', '$state', '$stateParams', 'Facebook', 'Chrome', 'Config', '$translate',
     function ($scope, $log, $q, $timeout, $http, Firebase, Games, $state, $stateParams,
         Facebook, Chrome, Config, $translate) {
-
-        var page = 0, //  hold current page
-            loaded = false; // whether the app was already loaded
-
         $scope.allGames = [];
         $scope.appName = Config.APP_NAME;
         $scope.appLogo = './img/logo-' + $scope.appName.toLowerCase().replace(/ /g, '') + '.png';
         document.title = $scope.appName;
+
+        if ($scope.appName === 'Mojo Games') {
+            $.getScript('//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js', function () {
+                console.debug('loaded google ads');
+            });
+        }
+
+        var page = 0, //  hold current page
+            loaded = false; // whether the app was already loaded
 
         var rand = _.random(0, 999999999);
         $scope.topIframeAd = {
