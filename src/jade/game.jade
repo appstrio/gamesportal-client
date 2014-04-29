@@ -54,7 +54,7 @@
                 img(ng-src="{{lockedGame.thumbnails[0].url}}")
         .price-wrapper
             img(src="./img/coins2.png")
-            span.price {{lockedGame.price | number}} COINS
+            span.price {{(lockedGame.price || 1000) | number}} COINS
         .bottom-action
             //- unlock game
             div(ng-if="userData.user.points >= lockedGame.price")
