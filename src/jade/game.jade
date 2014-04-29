@@ -25,7 +25,7 @@
                         //- a.addthis_button_twitter_follow_native(tf:screen_name="DaRealMojoGames", tf:show-screen-name="false", tf:show-count="false")
                         a.addthis_button_google_plusone(g:plusone:href="https://plus.google.com/u/0/105972966277627450580/about", g:plusone:size="medium")
                 .embedding
-                    .include(ng-if="game.source", ng-cloak, ng-include="'embeds/embed-' + game.source + '.html'")
+                    .include(ng-if="game.source", ng-include="'embeds/embed-' + game.source + '.html'")
                         #flashGame
                             a(href="http://get.adobe.com/flashplayer/", target="_blank")
                                 img(src="./img/getFlash.png")
