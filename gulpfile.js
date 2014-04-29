@@ -167,10 +167,11 @@ gulp.task('deploy', function () {
     var publisher = $gulp.awspublish.create(awsDetails);
 
     var oneMonthHeaders = {
-        'Cache-Control': 'max-age=2628000,s-maxage=2628000,no-transform,public'
+        'Cache-Control': 'max-age=2628000,s-maxage=2628000,no-transform,public',
+        'Vary': 'Accept-Encoding'
     };
-    var tenMinutesHeaders = {
-        'Cache-Control': 'max-age=600,s-maxage=900,no-transform,public'
+    var fontsHeaders = {
+        'Cache-Control': 'max-age=2628000,s-maxage=2628000,no-transform,public',
     };
     var noCacheHeaders = {
         'Cache-Control': 'max-age=0,no-transform,public'
@@ -196,7 +197,7 @@ gulp.task('deploy', function () {
     gulp.src('./{fonts,img}/**/*', {
         cwd: './build/'
     })
-        .pipe(publisher.publish(oneMonthHeaders))
+        .pipe(publisher.publish(fontsHeaders))
         .pipe($gulp.awspublish.reporter()); // print upload updates to console
 
     gulp.src(['./**/*.html', '!index.html'], {

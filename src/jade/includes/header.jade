@@ -13,7 +13,7 @@
         #rays
 
     .corner-toolbox-icons
-        img(ng-src="{{selectedNationality.flag}}", ng-mouseenter="showLanguageMenu()")
+        img(ng-src="{{selectedNationality.flag}}", ng-mouseenter="showLanguageMenu()", width="48", height="48")
         .language-box(ng-cloak, ng-show='dropdownFlags', ng-mouseenter="keepLanguageMenu()", ng-mouseleave="showLanguageMenu()")
             ul
                 li(ng-repeat="nationality in nationalities | filter: '!' + selectedNationality.language", ng-click="changeLanguage(nationality)")
@@ -38,7 +38,7 @@
             .action(ng-click="logout()", ng-if="userData.user.info") {{'SIGNOUT' | translate}}
         span.profile-pic
             img(ng-if="userData.user.info", ng-src="{{userData.user.info.profilePic}}")
-            img.connect(ng-if="!userData.user.info", src="./img/anonymous.png", ng-click="login()")
+            img.connect(ng-if="!userData.user.info", width="55", height="55", src="./img/anonymous.png", ng-click="login()")
 
     //- .cup(ng-if="userData.user.info")
     //- button.btn.btn-link(ng-click="openMainOverlay('LEADERBOARD')")
