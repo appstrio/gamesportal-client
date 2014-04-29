@@ -33,7 +33,11 @@
             .right
                 .header
                 .right-ad-unit
-                    img(src="./img/160x600.png", width="160", height="600", alt="Your ad here placeholder")
+                    //img(src="./img/160x600.png", width="160", height="600", alt="Your ad here placeholder")
+                    ins.adsbygoogle(style='display: inline-block; width: 160px; height: 600px;', data-ad-client='ca-pub-3411183432281537', data-ad-slot='9736386005')
+                    script.
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+
         .bottom
             .more-games-bottom
                 .game(ng-repeat="game in moreGames")
