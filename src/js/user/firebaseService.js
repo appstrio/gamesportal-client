@@ -278,10 +278,10 @@ firebaseModule.factory('Firebase', ['$rootScope', '$log', '$q', '$timeout', '$ht
                 var gamesRefFunc = gamesRef;
 
                 if (initial && initial.getInitial) {
-                    gamesRefFunc = gamesRef.endAt(300);
+                    gamesRefFunc = gamesRef.endAt(Config.initialPriority);
                 }
                 else {
-                    gamesRefFunc = gamesRef.startAt(301);
+                    gamesRefFunc = gamesRef.startAt(Config.initialPriority + 1);
                 }
 
                 gamesRefFunc.on('value', function (gamesSnap) {

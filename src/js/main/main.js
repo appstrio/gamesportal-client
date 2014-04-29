@@ -12,17 +12,19 @@ mainModule.controller('MainCtrl', [
 
         var page = 0, //  hold current page
             loaded = false; // whether the app was already loaded
+        var repeatLargeThumbnailsEvery = 20,
+            lastLargeThumbnailIndex = 0;
 
         var rand = _.random(0, 999999999);
         $scope.topIframeAd = {
             iframe: 'http://ads.ad4game.com/www/delivery/afr.php?zoneid=39440&cb=' + rand,
-            a: 'http://ads.ad4game.com/www/delivery/dck.php?n=af1fdb1c&cb=' + rand,
-            img: 'http://ads.ad4game.com/www/delivery/avw.php?zoneid=39440&cb=' + rand + '&n=af1fdb1c'
+            a     : 'http://ads.ad4game.com/www/delivery/dck.php?n=af1fdb1c&cb=' + rand,
+            img   : 'http://ads.ad4game.com/www/delivery/avw.php?zoneid=39440&cb=' + rand + '&n=af1fdb1c'
         };
         $scope.rightSkyAd = {
             iframe: 'http://ads.ad4game.com/www/delivery/afr.php?zoneid=39438&cb=' + rand,
-            a: 'http://ads.ad4game.com/www/delivery/dck.php?n=a1a724da&cb=' + rand,
-            img: 'http://ads.ad4game.com/www/delivery/avw.php?zoneid=39438&cb=' + rand + '&n=a1a724da'
+            a     : 'http://ads.ad4game.com/www/delivery/dck.php?n=a1a724da&cb=' + rand,
+            img   : 'http://ads.ad4game.com/www/delivery/avw.php?zoneid=39438&cb=' + rand + '&n=a1a724da'
         };
 
         //header is fixed by default
@@ -34,8 +36,6 @@ mainModule.controller('MainCtrl', [
             $scope.allGames = _.sortBy(_.toArray(games), function (i) {
                 return parseInt(i.priority);
             });
-            var repeatLargeThumbnailsEvery = 20,
-                lastLargeThumbnailIndex = 0;
 
             angular.forEach($scope.allGames, function (game, index) {
                 //stop if thumbnail is found
@@ -54,14 +54,30 @@ mainModule.controller('MainCtrl', [
 
             $scope.games = _.first($scope.allGames, Config.GAMES_PER_FIRSTPAGE);
         }).then(function () {
-            if (Games.getAllGames) {
+            if (!Games.allGamesAlreadyFetched) {
                 $timeout(function () {
                     Games.getAllGames().then(function (games) {
                         var allGamesFetched = _.sortBy(_.toArray(games), function (i) {
                             return parseInt(i.priority);
                         });
 
+                        angular.forEach(allGamesFetched, function (game, index) {
+                            //stop if thumbnail is found
+                            _.some(game.thumbnails, function (thumbnail) {
+                                if (thumbnail.width > 250 && thumbnail.height > 250) {
+                                    game.largeThumbnail = thumbnail;
+                                    if (index > 10 && (!lastLargeThumbnailIndex || (index - lastLargeThumbnailIndex) > repeatLargeThumbnailsEvery)) {
+                                        lastLargeThumbnailIndex = index;
+                                        game.promoted = true;
+                                    }
+                                    return true;
+                                }
+                                return false;
+                            });
+                        });
+
                         $scope.allGames = $scope.allGames.concat(allGamesFetched);
+                        Games.storeGames($scope.allGames);
                     });
                 }, 1000);
             }
@@ -96,7 +112,7 @@ mainModule.controller('MainCtrl', [
 
         // masonry options
         $scope.masonryOptions = {
-            gutter: 20,
+            gutter    : 20,
             isFitWidth: true,
             isAnimated: false
         };
@@ -164,9 +180,9 @@ mainModule.controller('MainCtrl', [
             if ($stateParams.overlayID) {
                 $state.transitionTo($state.current, {}, {
                     location: 'true',
-                    reload: false,
-                    inherit: false,
-                    notify: false
+                    reload  : false,
+                    inherit : false,
+                    notify  : false
                 });
             }
             $scope.overlayID = null;
@@ -202,35 +218,43 @@ mainModule.controller('MainCtrl', [
             $scope.dropdownFlags = true;
         };
 
-        $scope.nationalities = [{
-            langKey: 'en',
-            language: 'English',
-            flag: './img/flags/en.png'
-        }, {
-            langKey: 'es',
-            language: 'Español',
-            flag: './img/flags/es.png'
-        }, {
-            langKey: 'he',
-            language: 'עברית',
-            flag: './img/flags/he.png'
-        }, {
-            langKey: 'pt',
-            language: 'Português',
-            flag: './img/flags/pt.png'
-        }, {
-            langKey: 'de',
-            language: 'Deutsch',
-            flag: './img/flags/de.png'
-        }, {
-            langKey: 'fr',
-            language: 'Français',
-            flag: './img/flags/fr.png'
-        }, {
-            langKey: 'pl',
-            language: 'Polski',
-            flag: './img/flags/pl.png'
-        }];
+        $scope.nationalities = [
+            {
+                langKey : 'en',
+                language: 'English',
+                flag    : './img/flags/en.png'
+            },
+            {
+                langKey : 'es',
+                language: 'Español',
+                flag    : './img/flags/es.png'
+            },
+            {
+                langKey : 'he',
+                language: 'עברית',
+                flag    : './img/flags/he.png'
+            },
+            {
+                langKey : 'pt',
+                language: 'Português',
+                flag    : './img/flags/pt.png'
+            },
+            {
+                langKey : 'de',
+                language: 'Deutsch',
+                flag    : './img/flags/de.png'
+            },
+            {
+                langKey : 'fr',
+                language: 'Français',
+                flag    : './img/flags/fr.png'
+            },
+            {
+                langKey : 'pl',
+                language: 'Polski',
+                flag    : './img/flags/pl.png'
+            }
+        ];
         //default-flag TEMP until auto select will be implemented
         $scope.selectedNationality = $scope.nationalities[0];
 

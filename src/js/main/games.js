@@ -7,6 +7,7 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
         var oldTimeout = 1000 * 3600 * 24;
         var veryOldTimeout = 1000 * 3600 * 24 * 7;
         var initting = $q.defer();
+        var allGamesAlreadyFetched = false;
 
         var refreshFirebase = function () {
             Firebase.getGames().then(function (games) {
@@ -17,7 +18,7 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
         var initFirebase = function () {
             Firebase.getGames({getInitial: true}).then(function (games) {
                 initting.resolve(games);
-                storeGames(games);
+//                storeGames(games);
             }).catch(function () {
                 initting.reject();
             });
@@ -25,16 +26,16 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
 
         var getAllGames = function () {
             return Firebase.getGames().then(function (games) {
-                storeGames(games);
                 return games;
             });
         };
 
-        var storeGames = function (array) {
+        var storeGames = function (gamesObj) {
+            gamesObj = _.sortBy(gamesObj, 'priority');
             if (isLocalStorage()) {
                 var obj = {
                     timestamp: Date.now(),
-                    games    : array
+                    games    : gamesObj
                 };
                 try {
                     var str = JSON.stringify(obj);
@@ -51,7 +52,7 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
                     var obj = JSON.parse(localStorage[localStorageKey]);
                     if (obj.games) {
                         //no need to get extra games from
-                        getAllGames = null;
+                        allGamesAlreadyFetched = true;
                         if (isVeryOld(obj.timestamp)) {
                             refreshFirebase();
                         } else if (isOld(obj.timestamp)) {
@@ -87,7 +88,9 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
 
         return {
             isReady    : initting.promise,
-            getAllGames: getAllGames
+            getAllGames: getAllGames,
+            allGamesAlreadyFetched : allGamesAlreadyFetched,
+            storeGames : storeGames
         };
 
         //    return $http.get('bizigames.json?rnd=' + Date.now()).then(function(data){
