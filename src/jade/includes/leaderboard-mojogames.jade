@@ -1,8 +1,8 @@
 //ad-unit-game
-.bg-ad(ng-if='fixedHeader')
+.bg-ad(ng-if='!fixedHeader')
     ins.adsbygoogle(style='display: inline-block; width: 728px; height: 90px;', data-ad-client='ca-pub-3411183432281537', data-ad-slot='8399253601')
 //ad-unit-home
-.bg-ad(ng-if='!fixedHeader')
+.bg-ad(ng-if='fixedHeader')
     ins.adsbygoogle(style='display: inline-block; width: 728px; height: 90px;', data-ad-client='ca-pub-3411183432281537', data-ad-slot='6922520402')
     script.
         (adsbygoogle = window.adsbygoogle || []).push({});
