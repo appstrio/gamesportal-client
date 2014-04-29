@@ -158,7 +158,7 @@
                         img(src="./img/smaller_coins.png")
                     .action
                         button.btn.btn-success(ng-click="inviteFBFriends()") {{'GET_COINS' | translate}}
-                li.offer-box(ng-if="false")
+                li.offer-box(ng-if="appName === 'Gamestab')
                     .top-offer {{'PLAY_ON_CHROME' | translate}}
                     .win-size {{'GET' | translate}} {{ points.chromeInstall | number}}
                     span.coin-img
