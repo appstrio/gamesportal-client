@@ -31,6 +31,7 @@ angular.module('myApp', [
             'http://**',
             // Allow loading from our assets domain.  Notice the difference between * and **.
             'http://cdn1.kongcdn.com/**',
+            'http://ads.ad4game.com/www/**',
             'http://e.miniclip.com/**',
             'http://external.kongregate-games.com/**',
             'http://external.kongregate-games.com/**',
