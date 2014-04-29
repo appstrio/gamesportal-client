@@ -15,7 +15,7 @@ var vendors = [
     'angular-sanitize/angular-sanitize.min.js',
     'angular-translate/angular-translate.min.js',
     'angular-ui-router/release/angular-ui-router.min.js',
-    'bootstrap/dist/js/bootstrap.min.js',
+    // 'bootstrap/dist/js/bootstrap.min.js',
     'firebase-simple-login/firebase-simple-login.js',
     'firebase/firebase.js',
     'masonry/dist/masonry.pkgd.min.js',
@@ -59,12 +59,12 @@ gulp.task('html', ['scripts', 'vendors', 'css'], function () {
             read: false
         }), {
             addRootSlash: false,
-            ignorePath  : 'build'
+            ignorePath: 'build'
         }))
         .pipe(indexFilter.restore())
         .pipe($gulp.htmlmin({
             collapseWhitespace: true,
-            removeComments    : true
+            removeComments: true
         }))
         .pipe(gulp.dest('./build/'));
 });
@@ -94,8 +94,8 @@ gulp.task('css', function () {
 
 gulp.task('serve', ['build'], function () {
     return $gulp.connect.server({
-        root      : 'build',
-        port      : 8080,
+        root: 'build',
+        port: 8080,
         livereload: true
     });
 });
@@ -127,8 +127,8 @@ gulp.task('fonts', function () {
 //handle assets
 gulp.task('images', function () {
     return gulp.src('./src/img/**/*.{ico,jpeg,jpg,gif,bmp,png,webp,swf}')
-        // .pipe($gulp.imagemin())
-        .pipe(gulp.dest('./build/img'));
+    // .pipe($gulp.imagemin())
+    .pipe(gulp.dest('./build/img'));
 });
 
 //all tasks are watch -> bump patch version -> reload extension (globally enabled)
