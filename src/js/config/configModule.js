@@ -9,13 +9,15 @@ configModule.factory('Config', function () {
         var _chromeId;
         var _fbId;
         var _analyticsId;
+        var _firebaseUrl;
 
         try {
-            if (document.location.hostname === 'play.gamestab.me') {
+            if (true || document.location.hostname === 'play.gamestab.me') {
                 _appname = 'Gamestab';
                 _chromeId = 'amlhfkalaoikfbpoolhpdhignhjhlhko'; // gamestab,
                 _fbId = '1481519478732760'; //Play Gamestab
                 _analyticsId = 'UA-47928276-8';
+                _firebaseUrl = 'https://gamestab.firebaseio.com';
             }
             _realm = document.location.origin;
         } catch (e) {
@@ -27,13 +29,15 @@ configModule.factory('Config', function () {
         _chromeId = _chromeId || 'fmpeljkajhongibcmcnigfcjcgaopfid';
         _fbId = _fbId || '224435141079794'; //mojo-games
         _analyticsId = _analyticsId || 'UA-49896275-3';
+        _firebaseUrl = _firebaseUrl || 'https://bizibizi.firebaseio.com';
 
         return {
             appName: _appname,
             realm: _realm,
             chromeId: _chromeId,
             fbId: _fbId,
-            analyticsId: _analyticsId
+            analyticsId: _analyticsId,
+            firebaseUrl: _firebaseUrl
         };
     };
 
@@ -84,7 +88,7 @@ configModule.factory('Config', function () {
         REALM: REALM,
         APP_NAME: APP_NAME,
         ANALYTICS_ID: _docInfo.analyticsId,
-        FIREBASE_URL: 'https://bizibizi.firebaseio.com',
+        FIREBASE_URL: _docInfo.firebaseUrl,
         GAMES_PER_FIRSTPAGE: 70, // amount of games for the first page
         GAMES_PER_PAGE: 50, // amount of games for load more games
         POINTS: POINTS,
