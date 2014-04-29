@@ -8,35 +8,38 @@ configModule.factory('Config', function () {
         var _realm;
         var _chromeId;
         var _fbId;
+        var _analyticsId;
 
         try {
             if (document.location.hostname === 'play.gamestab.me') {
                 _appname = 'Gamestab';
                 _chromeId = 'amlhfkalaoikfbpoolhpdhignhjhlhko'; // gamestab,
                 _fbId = '1481519478732760'; //Play Gamestab
+                _analyticsId = 'UA-47928276-8';
             }
             _realm = document.location.origin;
         } catch (e) {
             console.info('Error with doc.location', e);
         }
+        //All params are mojogames defaults
         _appname = _appname || 'Mojo Games';
         _realm = _realm || 'http://www.mojo-games.com';
-        _chromeId = _chromeId || 'fmpeljkajhongibcmcnigfcjcgaopfid'; //mojo-games
+        _chromeId = _chromeId || 'fmpeljkajhongibcmcnigfcjcgaopfid';
         _fbId = _fbId || '224435141079794'; //mojo-games
+        _analyticsId = _analyticsId || 'UA-49896275-3';
 
         return {
             appName: _appname,
             realm: _realm,
             chromeId: _chromeId,
-            fbId: _fbId
+            fbId: _fbId,
+            analyticsId: _analyticsId
         };
     };
 
     var _docInfo = getDocInfo();
     var APP_NAME = _docInfo.appName;
     var REALM = _docInfo.realm;
-    var FACEBOOK_ID = _docInfo.fbId;
-    var CHROME_ID = _docInfo.chromeId;
 
     var isLocalStorage = (function () {
         try {
@@ -80,11 +83,12 @@ configModule.factory('Config', function () {
     var baseConfig = {
         REALM: REALM,
         APP_NAME: APP_NAME,
+        ANALYTICS_ID: _docInfo.analyticsId,
         FIREBASE_URL: 'https://bizibizi.firebaseio.com',
         GAMES_PER_FIRSTPAGE: 70, // amount of games for the first page
         GAMES_PER_PAGE: 50, // amount of games for load more games
         POINTS: POINTS,
-        CHROME_APP_ID: CHROME_ID,
+        CHROME_APP_ID: _docInfo.chromeId,
         IS_CHROME: (typeof chrome !== 'undefined' && chrome.webstore),
         RETURN_USER: returnUser
     };
@@ -101,7 +105,7 @@ configModule.factory('Config', function () {
 
     var productionConfig = function () {
         return angular.extend(baseConfig, {
-            FACEBOOK_APP_ID: FACEBOOK_ID,
+            FACEBOOK_APP_ID: _docInfo.fbId,
             INVITE_FRIENDS_POST: INVITE_FRIENDS_POST()
         });
     };
