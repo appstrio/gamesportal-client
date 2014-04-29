@@ -29,7 +29,7 @@
                         //- a.addthis_button_twitter_follow_native(tf:screen_name="DaRealMojoGames", tf:show-screen-name="false", tf:show-count="false")
                         a.addthis_button_google_plusone(g:plusone:href="https://plus.google.com/u/0/105972966277627450580/about", g:plusone:size="medium")
                 .embedding
-                    .include(ng-if="game.source", ng-cloak, ng-include="'embeds/embed-' + game.source + '.html'")
+                    .include(ng-if="game.source", ng-include="'embeds/embed-' + game.source + '.html'")
                         #flashGame
                             a(href="http://get.adobe.com/flashplayer/", target="_blank")
                                 img(src="./img/getFlash.png")
@@ -58,7 +58,7 @@
                 img(ng-src="{{lockedGame.thumbnails[0].url}}")
         .price-wrapper
             img(src="./img/coins2.png")
-            span.price {{lockedGame.price | number}} COINS
+            span.price {{(lockedGame.price || 1000) | number}} COINS
         .bottom-action
             //- unlock game
             div(ng-if="userData.user.points >= lockedGame.price")

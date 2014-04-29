@@ -11,18 +11,6 @@ mainModule.controller('MainCtrl', [
         $scope.appLogo = './img/logo-' + $scope.appName.toLowerCase().replace(/ /g, '') + '.png';
         document.title = $scope.appName;
 
-        //lazy load adsense
-        if ($scope.appName === 'Mojo Games') {
-            $.getScript('//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js', function () {
-                console.debug('loaded google ads');
-            });
-        }
-        //lazy load addthis
-        $.getScript('//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-534644e35a88a9ba', function () {
-            window.addthis_config = window.addthis_config || {};
-            window.addthis_config.data_track_addressbar = false;
-        });
-
         var page = 0, //  hold current page
             loaded = false; // whether the app was already loaded
 
@@ -254,5 +242,14 @@ mainModule.controller('MainCtrl', [
             //header doesn't stay fixed in game state to have banner in view
             $scope.fixedHeader = toState.name !== 'game';
         });
+
+        $timeout(function () {
+            //lazy load adsense
+            if ($scope.appName === 'Mojo Games') {
+                $.getScript('//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js', function () {
+                    console.debug('loaded google ads');
+                });
+            }
+        }, 500);
     }
 ]);

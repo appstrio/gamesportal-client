@@ -52,7 +52,7 @@
 
 .header-bottom
     .banner(ng-class="{'in-game': !fixedHeader}")
-        .bg-banner
+        .bg-banner(ng-cloak)
             div(ng-if="appName==='Gamestab'")
                 .bg-ad
                     include leaderboard-gamestab

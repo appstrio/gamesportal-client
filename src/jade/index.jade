@@ -34,8 +34,7 @@ html(ng-app="myApp")
             </div>
 
         script(async, type="text/ng-template", id="searchTypeaheadTemplate.html").
-            <a><img ng-src="{{match.model.thumbnails[0].url}}" width="16">&nbsp;
-            <span bind-html-unsafe="match.label | typeaheadHighlight:query"></span></a>
+            <a><img ng-src="{{match.model.thumbnails[0].url}}" width="16">&nbsp;<span bind-html-unsafe="match.label | typeaheadHighlight:query"></span></a>
 
         <!-- inject:js -->
         <!-- endinject -->
@@ -51,3 +50,7 @@ html(ng-app="myApp")
 
         .main(ui-view)
         include includes/modals
+        script(async, src='//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-534644e35a88a9ba')
+        script.
+            var addthis_config = addthis_config || {};
+            addthis_config.data_track_addressbar = false;
