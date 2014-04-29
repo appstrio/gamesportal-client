@@ -55,7 +55,7 @@ firebaseModule.factory('Firebase', ['$rootScope', '$log', '$q', '$timeout', '$ht
 
                     user = {
                         points: giveAwayPoints,
-                        info: info
+                        info  : info
                     };
 
                     userRef.set(user);
@@ -93,10 +93,10 @@ firebaseModule.factory('Firebase', ['$rootScope', '$log', '$q', '$timeout', '$ht
         var infoFromLoginObject = function (loginObject) {
             var firstName = loginObject.first_name || loginObject.name.split(' ')[0];
             return {
-                id: loginObject.id,
+                id         : loginObject.id,
                 displayName: firstName,
-                name: loginObject.name,
-                profilePic: 'http://graph.facebook.com/' + loginObject.id + '/picture'
+                name       : loginObject.name,
+                profilePic : 'http://graph.facebook.com/' + loginObject.id + '/picture'
             };
         };
 
@@ -138,8 +138,8 @@ firebaseModule.factory('Firebase', ['$rootScope', '$log', '$q', '$timeout', '$ht
                     console.info('connected to fb');
                     auth.login('facebook', {
                         access_token: response.authResponse.accessToken,
-                        rememberMe: true,
-                        scope: 'email'
+                        rememberMe  : true,
+                        scope       : 'email'
                     });
                 } else if (response.status === 'not_authorized') {
                     console.warn('not authorized for fb login');
@@ -273,12 +273,20 @@ firebaseModule.factory('Firebase', ['$rootScope', '$log', '$q', '$timeout', '$ht
              * get games list
              * @returns {Function|promise|promise|promise}
              */
-            getGames: function () {
+            getGames: function (initial) {
                 var defer = $q.defer();
+                var gamesRefFunc = gamesRef;
 
-                gamesRef.once('value', function (gamesSnap) {
+                if (initial && initial.getInitial) {
+                    gamesRefFunc = gamesRef.endAt(300);
+                }
+                else {
+                    gamesRefFunc = gamesRef.startAt(301);
+                }
+
+                gamesRefFunc.on('value', function (gamesSnap) {
                     $rootScope.$apply(function () {
-                        console.info('Queried form DB', _.size(gamesSnap.val()));
+                        console.info('Queried from DB', _.size(gamesSnap.val()));
                         defer.resolve(gamesSnap.val());
                     });
                 });

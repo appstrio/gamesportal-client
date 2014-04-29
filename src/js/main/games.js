@@ -8,11 +8,50 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
         var veryOldTimeout = 1000 * 3600 * 24 * 7;
         var initting = $q.defer();
 
+        var refreshFirebase = function () {
+            Firebase.getGames().then(function (games) {
+                storeGames(games);
+            });
+        };
+
+        var initFirebase = function () {
+            Firebase.getGames({getInitial: true}).then(function (games) {
+                initting.resolve(games);
+                storeGames(games);
+            }).catch(function () {
+                initting.reject();
+            });
+        };
+
+        var getAllGames = function () {
+            return Firebase.getGames().then(function (games) {
+                storeGames(games);
+                return games;
+            });
+        };
+
+        var storeGames = function (array) {
+            if (isLocalStorage()) {
+                var obj = {
+                    timestamp: Date.now(),
+                    games    : array
+                };
+                try {
+                    var str = JSON.stringify(obj);
+                    localStorage.setItem(localStorageKey, str);
+                } catch (e) {
+                    console.error(e);
+                }
+            }
+        };
+
         var initLocalStorage = function () {
             try {
                 if (isLocalStorage()) {
                     var obj = JSON.parse(localStorage[localStorageKey]);
-                    if (obj.games && obj.games) {
+                    if (obj.games) {
+                        //no need to get extra games from
+                        getAllGames = null;
                         if (isVeryOld(obj.timestamp)) {
                             refreshFirebase();
                         } else if (isOld(obj.timestamp)) {
@@ -25,37 +64,6 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
                 }
             } catch (e) {
                 initFirebase();
-            }
-        };
-
-        var refreshFirebase = function () {
-            Firebase.getGames().then(function (games) {
-                storeGames(games);
-            });
-        };
-
-        var initFirebase = function () {
-            Firebase.getGames().then(function (games) {
-                initting.resolve(games);
-                storeGames(games);
-            }).
-            catch (function () {
-                initting.reject();
-            });
-        };
-
-        var storeGames = function (array) {
-            if (isLocalStorage()) {
-                var obj = {
-                    timestamp: Date.now(),
-                    games: array
-                };
-                try {
-                    var str = JSON.stringify(obj);
-                    localStorage.setItem(localStorageKey, str);
-                } catch (e) {
-                    console.error(e);
-                }
             }
         };
 
@@ -77,7 +85,11 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
             initFirebase();
         }
 
-        return initting.promise;
+        return {
+            isReady    : initting.promise,
+            getAllGames: getAllGames
+        };
+
         //    return $http.get('bizigames.json?rnd=' + Date.now()).then(function(data){
         //        return data.data;
         //    });
@@ -147,9 +159,9 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
                     $scope.overlayUnlockGame = true;
                 }
             }).
-            catch (function () {
-                alert('Error check premium');
-            });
+                catch(function () {
+                    alert('Error check premium');
+                });
         };
 
         $scope.getGameZoom = _.memoize(function (game) {
@@ -261,9 +273,9 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
                         });
                     }
                 }).
-                catch (function () {
-                    alert('Cant find the game with game id' + gameId);
-                });
+                    catch(function () {
+                        alert('Cant find the game with game id' + gameId);
+                    });
             }
         };
 
@@ -391,11 +403,11 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
         };
 
         return {
-            findGameById: findGameById,
-            findNextGameById: findNextGameById,
+            findGameById        : findGameById,
+            findNextGameById    : findNextGameById,
             findPreviousGameById: findPreviousGameById,
-            raisePointsForGame: raisePointsForGame,
-            getGameIndex: getGameIndex
+            raisePointsForGame  : raisePointsForGame,
+            getGameIndex        : getGameIndex
         };
     }
 ]);
