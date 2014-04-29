@@ -11,6 +11,9 @@ mainModule.controller('MainCtrl', [
             loaded = false; // whether the app was already loaded
 
         $scope.allGames = [];
+        $scope.appName = Config.APP_NAME;
+        $scope.appLogo = './img/logo-' + $scope.appName.toLowerCase().replace(/ /g, '') + '.png';
+        document.title = $scope.appName;
 
         var rand = _.random(0, 999999999);
         $scope.topIframeAd = {
@@ -24,10 +27,6 @@ mainModule.controller('MainCtrl', [
             img: 'http://ads.ad4game.com/www/delivery/avw.php?zoneid=39438&cb=' + rand + '&n=a1a724da'
         };
 
-        // $scope.appName = Config.APP_NAME;
-        // FIXME temp
-        $scope.appLogo = './img/logo-' + $scope.appName.toLowerCase().replace(/ /g, '') + '.png';
-        document.title = $scope.appName;
         //header is fixed by default
         $scope.fixedHeader = true;
         $scope.smallHeader = false;
