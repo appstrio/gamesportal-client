@@ -59,12 +59,12 @@ gulp.task('html', ['scripts', 'vendors', 'css'], function () {
             read: false
         }), {
             addRootSlash: false,
-            ignorePath: 'build'
+            ignorePath  : 'build'
         }))
         .pipe(indexFilter.restore())
         .pipe($gulp.htmlmin({
             collapseWhitespace: true,
-            removeComments: true
+            removeComments    : true
         }))
         .pipe(gulp.dest('./build/'));
 });
@@ -94,8 +94,8 @@ gulp.task('css', function () {
 
 gulp.task('serve', ['build'], function () {
     return $gulp.connect.server({
-        root: 'build',
-        port: 8080,
+        root      : 'build',
+        port      : 8080,
         livereload: true
     });
 });
@@ -127,8 +127,8 @@ gulp.task('fonts', function () {
 //handle assets
 gulp.task('images', function () {
     return gulp.src('./src/img/**/*.{ico,jpeg,jpg,gif,bmp,png,webp,swf}')
-    // .pipe($gulp.imagemin())
-    .pipe(gulp.dest('./build/img'));
+        // .pipe($gulp.imagemin())
+        .pipe(gulp.dest('./build/img'));
 });
 
 //all tasks are watch -> bump patch version -> reload extension (globally enabled)
@@ -145,12 +145,12 @@ gulp.task('default', function () {
     return gulp.start('build', 'serve', 'watch');
 });
 
-gulp.task('mojo', function(){
+gulp.task('mojo', function () {
     bucket = 'www.mojo-games.com';
     return gulp.start('deploy');
 });
 
-gulp.task('gamestab', function(){
+gulp.task('gamestab', function () {
     bucket = 'play.gamestab.me';
     return gulp.start('deploy');
 });
@@ -160,12 +160,11 @@ gulp.task('deploy', function () {
     var awsDetails = require('./ignored/aws.json');
     awsDetails.bucket = bucket;
 
-    if(!bucket){
+    if (!bucket) {
         throw 'Error: No bucket was selected';
     }
 
     var publisher = $gulp.awspublish.create(awsDetails);
-
 
     var oneMonthHeaders = {
         'Cache-Control': 'max-age=2628000,s-maxage=2628000,no-transform,public'

@@ -135,7 +135,7 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
             });
 
             // get more games
-            Games.then(function (games) {
+            Games.isReady.then(function (games) {
                 var howMany = 8;
                 var _games = _.first(_.shuffle(_.filter(games, function (i) {
                     return parseInt(i.priority) < 100;
@@ -327,7 +327,7 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
          * @returns {*}
          */
         var findGameById = function (gameID) {
-            return Games.then(function (games) {
+            return Games.isReady.then(function (games) {
                 return _.findWhere(games, {
                     id: gameID
                 });
@@ -340,7 +340,7 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
          * @returns {*}
          */
         var findNextGameById = function (gameID) {
-            return Games.then(function (games) {
+            return Games.isReady.then(function (games) {
                 gamesArr = gamesArr || _.toArray(games);
                 var current = _.findWhere(gamesArr, {
                     id: gameID
@@ -356,7 +356,7 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
          * @returns {*}
          */
         var findPreviousGameById = function (gameID) {
-            return Games.then(function (games) {
+            return Games.isReady.then(function (games) {
                 gamesArr = gamesArr || _.toArray(games);
                 var current = _.findWhere(gamesArr, {
                     id: gameID
@@ -369,7 +369,7 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
         };
 
         var getGameIndex = function (gameID) {
-            return Games.then(function (games) {
+            return Games.isReady.then(function (games) {
                 gamesArr = gamesArr || _.toArray(games);
                 var current = _.findWhere(gamesArr, {
                     id: gameID
