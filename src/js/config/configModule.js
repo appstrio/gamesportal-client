@@ -12,7 +12,7 @@ configModule.factory('Config', function () {
         var _firebaseUrl;
 
         try {
-            if (true || document.location.hostname === 'play.gamestab.me') {
+            if (document.location.hostname === 'play.gamestab.me') {
                 _appname = 'Gamestab';
                 _chromeId = 'amlhfkalaoikfbpoolhpdhignhjhlhko'; // gamestab,
                 _fbId = '1481519478732760'; //Play Gamestab
