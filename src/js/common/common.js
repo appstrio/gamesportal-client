@@ -110,4 +110,30 @@ commonModule.directive('overlay', ['$rootScope',
             }
         };
     }
+]).directive('skyLeftAd', [
+
+    function () {
+        return {
+            restrict: 'E',
+            replace: true,
+            scope: {
+                adSenseLoaded: '='
+            },
+            template: '<ins class="adsbygoogle" style="display: inline-block; width: 160px; height:600px;" data-ad-client="ca-pub-3411183432281537" data-ad-slot="6643318803"></ins>',
+            link: function (scope, element) {
+                var id = '6643318803';
+                window.unitLoaded = window.unitLoaded || {};
+                scope.$watch('adSenseLoaded', function () {
+                    if (scope.adSenseLoaded) {
+                        if (!window.unitLoaded[id]) {
+                            (adsbygoogle = window.adsbygoogle || []).push({});
+                            window.unitLoaded[id] = angular.element(element);
+                        } else {
+                            angular.element(element).replaceWith(window.unitLoaded[id]);
+                        }
+                    }
+                });
+            }
+        };
+    }
 ]);

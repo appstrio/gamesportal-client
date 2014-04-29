@@ -9,7 +9,7 @@
                             img.game-thumbnail(ng-src="{{game.thumbnails[0].url}}")
                             div.name(ng-bind="game.name")
                 .left-ad-unit(ng-if='appName==="Mojo Games"')
-                    include includes/skyscraper-left-mojogames
+                    sky-left-ad(ad-sense-loaded="adSenseLoaded")
             .middle
                 .header
                     h1.game-name(ng-bind="game.name")
