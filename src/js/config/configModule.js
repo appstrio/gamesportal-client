@@ -8,7 +8,7 @@ configModule.factory('Config', function () {
 
         try {
             if (document.location.hostname === 'play.gamestab.me') {
-                returnObj.appname = 'Gamestab';
+                returnObj.appName = 'Gamestab';
                 returnObj.chromeId = 'amlhfkalaoikfbpoolhpdhignhjhlhko'; // gamestab,
                 returnObj.fbId = '1481519478732760'; //Play Gamestab
                 returnObj.analyticsId = 'UA-47928276-8';
@@ -19,7 +19,7 @@ configModule.factory('Config', function () {
             console.info('Error with doc.location', e);
         }
         //All params are mojogames defaults
-        returnObj.appname = returnObj.appname || 'Mojo Games';
+        returnObj.appName = returnObj.appName || 'Mojo Games';
         returnObj.realm = returnObj.realm || 'http://www.mojo-games.com';
         returnObj.chromeId = returnObj.chromeId || 'fmpeljkajhongibcmcnigfcjcgaopfid';
         returnObj.fbId = returnObj.fbId || '224435141079794'; //mojo-games
