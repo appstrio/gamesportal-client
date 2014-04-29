@@ -12,6 +12,8 @@ mainModule.controller('MainCtrl', [
 
         var page = 0, //  hold current page
             loaded = false; // whether the app was already loaded
+        var repeatLargeThumbnailsEvery = 20,
+            lastLargeThumbnailIndex = 0;
 
         var rand = _.random(0, 999999999);
         $scope.topIframeAd = {
@@ -34,8 +36,6 @@ mainModule.controller('MainCtrl', [
             $scope.allGames = _.sortBy(_.toArray(games), function (i) {
                 return parseInt(i.priority);
             });
-            var repeatLargeThumbnailsEvery = 20,
-                lastLargeThumbnailIndex = 0;
 
             angular.forEach($scope.allGames, function (game, index) {
                 //stop if thumbnail is found
@@ -54,14 +54,30 @@ mainModule.controller('MainCtrl', [
 
             $scope.games = _.first($scope.allGames, Config.GAMES_PER_FIRSTPAGE);
         }).then(function () {
-            if(Games.getAllGames){
+            if (!Games.allGamesAlreadyFetched) {
                 $timeout(function () {
                     Games.getAllGames().then(function (games) {
                         var allGamesFetched = _.sortBy(_.toArray(games), function (i) {
                             return parseInt(i.priority);
                         });
 
+                        angular.forEach(allGamesFetched, function (game, index) {
+                            //stop if thumbnail is found
+                            _.some(game.thumbnails, function (thumbnail) {
+                                if (thumbnail.width > 250 && thumbnail.height > 250) {
+                                    game.largeThumbnail = thumbnail;
+                                    if (index > 10 && (!lastLargeThumbnailIndex || (index - lastLargeThumbnailIndex) > repeatLargeThumbnailsEvery)) {
+                                        lastLargeThumbnailIndex = index;
+                                        game.promoted = true;
+                                    }
+                                    return true;
+                                }
+                                return false;
+                            });
+                        });
+
                         $scope.allGames = $scope.allGames.concat(allGamesFetched);
+                        Games.storeGames($scope.allGames);
                     });
                 }, 1000);
             }

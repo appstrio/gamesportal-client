@@ -90,7 +90,8 @@ configModule.factory('Config', function () {
         POINTS: POINTS,
         CHROME_APP_ID: _docInfo.chromeId,
         IS_CHROME: (typeof chrome !== 'undefined' && chrome.webstore),
-        RETURN_USER: returnUser
+        RETURN_USER: returnUser,
+        initialPriority: 300
     };
 
     var developmentConfig = function () {
