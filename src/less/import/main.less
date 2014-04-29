@@ -35,7 +35,7 @@ button {
 }
 
 .banner {
-    margin: 81px 40px 0;
+    margin: 81px 32px 0 0;
 
     &.in-game {
         margin-top: 81px;
@@ -68,7 +68,7 @@ header {
     margin: 0;
     opacity: 1;
     padding: 30px 20px 14px 50px;
-    position: fixed;
+    position: relative;
     top: 0;
     transition: padding 500ms cubic-bezier(0.550, 0.055, 0.675, 0.190); /* easeInCubic */
     width: 100%;
@@ -296,6 +296,7 @@ header {
         display: block;
         float: left;
         left: 300px;
+        height: 113px;
         max-height: 156px;
         overflow: hidden;
         position: absolute;
@@ -318,206 +319,206 @@ header {
         margin-left: 26px;
         float: left;
         position: relative;
-        * {
-            cursor: pointer;
-        }
-        .coin-container {
-            width: 220px;
-            height: 70px;
-            position: relative;
-            .top-text {
-                font-size: 15px;
-                font-family: 'Lobster', sans-serif;
-                color: white;
-                position: absolute;
-                top: -3px;
-                left: 101px;
-            }
-            .amount {
-                background: rgba(0, 0, 0, 0.2);
-                position: absolute;
-                top: 15px;
-                width: 220px;
-                height: 50px;
-                border-radius: 10px;
-                border: 2px solid rgba(0, 0, 0, 0.05);
-                text-align: center;
-                font-family: 'Lobster', sans-serif;
+                  * {
+                      cursor: pointer;
+                  }
+                  .coin-container {
+                      width: 220px;
+                      height: 70px;
+                      position: relative;
+                      .top-text {
+                          font-size: 15px;
+                          font-family: 'Lobster', sans-serif;
+                          color: white;
+                          position: absolute;
+                          top: -3px;
+                          left: 101px;
+                      }
+                      .amount {
+                          background: rgba(0, 0, 0, 0.2);
+                          position: absolute;
+                          top: 15px;
+                          width: 220px;
+                          height: 50px;
+                          border-radius: 10px;
+                          border: 2px solid rgba(0, 0, 0, 0.05);
+                          text-align: center;
+                          font-family: 'Lobster', sans-serif;
 
-                .coin-img {
-                    position: absolute;
-                    left: -20px;
-                    top: -15px;
+                          .coin-img {
+                              position: absolute;
+                              left: -20px;
+                              top: -15px;
 
-                    img {
-                        height: 75px;
-                    }
-                }
-                .amount-text {
-                    color: white;
-                    font-family: 'Lobster', sans-serif;
-                    font-size: 35px;
-                    padding-left: 75px;
-                    line-height: 1.25;
-                    -moz-transform: matrix(3.13804168285631, 0, 0, 3.13982968011084, 0, 0);
-                    -webkit-transform: matrix(3.13804168285631, 0, 0, 3.13982968011084, 0, 0);
-                }
-            }
-        }
-    }
-}
+                              img {
+                                  height: 75px;
+                              }
+                          }
+                          .amount-text {
+                              color: white;
+                              font-family: 'Lobster', sans-serif;
+                              font-size: 35px;
+                              padding-left: 75px;
+                              line-height: 1.25;
+                              -moz-transform: matrix(3.13804168285631, 0, 0, 3.13982968011084, 0, 0);
+                              -webkit-transform: matrix(3.13804168285631, 0, 0, 3.13982968011084, 0, 0);
+                          }
+                      }
+                  }
+              }
+          }
 
-.masonry-container {
-    margin: 238px auto 0;
-    .masonry-brick {
-        overflow: hidden;
-        margin: 10px 0;
-        cursor: pointer;
-        box-shadow: -1px 1px 12px -2px #000000;
-        -webkit-backface-visibility: hidden;
+          .masonry-container {
+              margin: 10px auto 0;
+              .masonry-brick {
+                  overflow: hidden;
+                  margin: 10px 0;
+                  cursor: pointer;
+                  box-shadow: -1px 1px 12px -2px #000000;
+                  -webkit-backface-visibility: hidden;
 
-        &.rotated-right {
-            transform: rotate(4deg);
-        }
-        &.rotated-left {
-            transform: rotate(-4deg);
-        }
+                  &.rotated-right {
+                      transform: rotate(4deg);
+                  }
+                  &.rotated-left {
+                      transform: rotate(-4deg);
+                  }
 
-        a {
-            .badge-overlay {
-                position: absolute;
-                top: 0;
-                left: 0;
-                background-size: contain;
-                cursor: pointer;
-                color: red;
-                display: none;
-            }
-            img.game-thumbnail {
-                width: 120px;
-                height: 120px;
-                cursor: pointer;
-                border: 3px solid #F7FFFF;
-            }
-            .name {
-                -webkit-transition: bottom 0.5s ease;
-                background: rgba(0, 0, 0, 0.75);
-                text-shadow: 1px 1px 4px rgba(255, 237, 105, 0.61);
-                bottom: -100px;
-                color: white;
-                font-size: 15px;
-                max-height: 70px;
-                padding: 2px;
-                position: absolute;
-                text-align: center;
-                text-transform: uppercase;
-                width: 100%;
-            }
-            &:hover {
-                .name {
-                    bottom: 0;
-                    cursor: pointer;
-                }
-            }
-        }
-        &.premium {
-            .premium-overlay {
-                background-color: #C7CF00;
-                .ribbon-mixin();
+                  a {
+                      .badge-overlay {
+                          position: absolute;
+                          top: 0;
+                          left: 0;
+                          background-size: contain;
+                          cursor: pointer;
+                          color: red;
+                          display: none;
+                      }
+                      img.game-thumbnail {
+                          width: 120px;
+                          height: 120px;
+                          cursor: pointer;
+                          border: 3px solid #F7FFFF;
+                      }
+                      .name {
+                          -webkit-transition: bottom 0.5s ease;
+                          background: rgba(0, 0, 0, 0.75);
+                          text-shadow: 1px 1px 4px rgba(255, 237, 105, 0.61);
+                          bottom: -100px;
+                          color: white;
+                          font-size: 15px;
+                          max-height: 70px;
+                          padding: 2px;
+                          position: absolute;
+                          text-align: center;
+                          text-transform: uppercase;
+                          width: 100%;
+                      }
+                      &:hover {
+                          .name {
+                              bottom: 0;
+                              cursor: pointer;
+                          }
+                      }
+                  }
+                  &.premium {
+                      .premium-overlay {
+                          background-color: #C7CF00;
+                          .ribbon-mixin();
 
-                .ribbon-text {
-                    border: 1px solid #F5FF00;
-                    color: #fff;
-                    display: block;
-                    font-weight: 400;
-                    margin: 1px 0;
-                    padding: 0 30px;
-                    text-align: center;
-                    text-decoration: none;
-                    text-shadow: 0 0 5px #444;
-                }
-            }
-        }
-        &.new {
-            .new-overlay {
-                display: block;
-                top: 40px;
-            }
-        }
-        &.hot {
-            .hot-overlay {
-                .ribbon-mixin();
-                background-color: #a00;
+                          .ribbon-text {
+                              border: 1px solid #F5FF00;
+                              color: #fff;
+                              display: block;
+                              font-weight: 400;
+                              margin: 1px 0;
+                              padding: 0 30px;
+                              text-align: center;
+                              text-decoration: none;
+                              text-shadow: 0 0 5px #444;
+                          }
+                      }
+                  }
+                  &.new {
+                      .new-overlay {
+                          display: block;
+                          top: 40px;
+                      }
+                  }
+                  &.hot {
+                      .hot-overlay {
+                          .ribbon-mixin();
+                          background-color: #a00;
 
-                .ribbon-text {
-                    border: 1px solid #faa;
-                    color: #fff;
-                    display: block;
-                    font-weight: 400;
-                    margin: 1px 0;
-                    padding: 0 37px;
-                    text-align: center;
-                    text-decoration: none;
-                    text-shadow: 0 0 5px #444;
-                    /* background: url(../img/hot200x200.png); */
-                }
-            }
-        }
-        &.promoted {
-            img.game-thumbnail {
-                width: 260px;
-                height: 260px;
-            }
-            .name {
-                font-size: 18px;
-            }
-            &.premium {
-                .premium-overlay {
-                    /* background: red; */
-                    display: block;
-                    /* background: url(../img/premium200x200.png); */
-                }
-            }
-            &.new {
-                .new-overlay {
-                    display: block;
-                    /* background: url(../img/new200x200.png); */
-                }
-            }
-            &.hot {
-                .hot-overlay {
-                    display: block;
-                    .ribbon-text {
-                        display: block;
-                    }
-                }
-            }
-        }
-    }
-}
+                          .ribbon-text {
+                              border: 1px solid #faa;
+                              color: #fff;
+                              display: block;
+                              font-weight: 400;
+                              margin: 1px 0;
+                              padding: 0 37px;
+                              text-align: center;
+                              text-decoration: none;
+                              text-shadow: 0 0 5px #444;
+                              /* background: url(../img/hot200x200.png); */
+                          }
+                      }
+                  }
+                  &.promoted {
+                      img.game-thumbnail {
+                          width: 260px;
+                          height: 260px;
+                      }
+                      .name {
+                          font-size: 18px;
+                      }
+                      &.premium {
+                          .premium-overlay {
+                              /* background: red; */
+                              display: block;
+                              /* background: url(../img/premium200x200.png); */
+                          }
+                      }
+                      &.new {
+                          .new-overlay {
+                              display: block;
+                              /* background: url(../img/new200x200.png); */
+                          }
+                      }
+                      &.hot {
+                          .hot-overlay {
+                              display: block;
+                              .ribbon-text {
+                                  display: block;
+                              }
+                          }
+                      }
+                  }
+              }
+          }
 
-/* Chrome, Safari, Opera */
-@-webkit-keyframes counting {
-    0% {
-        color: white;
-    }
-    50% {
-        color: #ffd11e;
-    }
-    100% {
-        color: white;
-    }
-}
+          /* Chrome, Safari, Opera */
+          @-webkit-keyframes counting {
+              0% {
+                  color: white;
+              }
+              50% {
+                  color: #ffd11e;
+              }
+              100% {
+                  color: white;
+              }
+          }
 
-/* Standard syntax */
-@keyframes counting {
-    0% {
-        color: white;
-    }
-    50% {
-        color: #ffd11e;
-    }
-    100% {
-        color: white;
-    }
-}
+          /* Standard syntax */
+          @keyframes counting {
+              0% {
+                  color: white;
+              }
+              50% {
+                  color: #ffd11e;
+              }
+              100% {
+                  color: white;
+              }
+          }

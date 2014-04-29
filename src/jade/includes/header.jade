@@ -9,7 +9,7 @@
                     img(src="./img/coins2.png")
                 span.amount-text(ng-if="!userData.user") {{10000 | number }}
                 span.amount-text(ng-if="userData.user", aio-counter="{{userData.user.points}}")
-    .rays-container(ng-style="{height: smallHeader ? 113 : 156}")
+    .rays-container
         #rays
 
     .corner-toolbox-icons
@@ -50,7 +50,7 @@
             //- a.addthis_button_twitter_follow_native(tf:screen_name="DaRealMojoGames", tf:show-screen-name="false", tf:show-count="false")
             a.addthis_button_google_plusone(g:plusone:href="https://plus.google.com/u/0/105972966277627450580/about", g:plusone:size="medium")
 
-.header-bottom
+.header-bottom.smaller
     .banner(ng-class="{'in-game': !fixedHeader}")
         .bg-banner(ng-cloak)
             div(ng-if="appName==='Gamestab'")
