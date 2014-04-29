@@ -137,14 +137,13 @@ mainModule.controller('MainCtrl', [
             //reset search field
             $scope.gameSearch = '';
             //if app isn't installed, and this is a first time user
-            if (!Chrome.isAppInstalled() && !Config.RETURN_USER) {
+            if (!Chrome.isAppInstalled() && !Config.RETURN_USER && $scope.appName === 'Gamestab') {
                 console.log('offer to download extension');
-                return loadGame(game.id);
                 //deprecated for now due to #51
                 Chrome.installApp()['finally'](function () {
-                    loadGame(game.id);
                     localStorage.returnUser = true;
                     Config.RETURN_USER = true;
+                    loadGame(game.id);
                 });
             } else {
                 loadGame(game.id);
