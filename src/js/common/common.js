@@ -16,11 +16,11 @@ commonModule.directive('overlay', ['$rootScope',
     function ($rootScope, $window) {
         return {
             restrict: 'A',
-            scope   : {
+            scope: {
                 isSmall: '=',
                 isFixed: '='
             },
-            link    : function (scope, element, attrs) {
+            link: function (scope, element, attrs) {
                 //make header small
                 var changeHeader = _.debounce(function () {
                     if (!scope.isFixed) {
@@ -32,6 +32,39 @@ commonModule.directive('overlay', ['$rootScope',
                     });
                 }, 10);
                 angular.element($window).on('scroll', changeHeader);
+            }
+        };
+    }
+]).directive('headerMainAd', [
+
+    function () {
+        return {
+            restrict: 'E',
+            replace: true,
+            template: '<ins class="adsbygoogle" style="display: inline-block; width: 728px; height: 90px;" data-ad-client="ca-pub-3411183432281537" data-ad-slot="6922520402"></ins>',
+            compile: function () {
+                return {
+                    pre: function () {},
+                    post: function () {
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    }
+                };
+            }
+        };
+    }
+]).directive('headerGameAd', [
+    function () {
+        return {
+            restrict: 'E',
+            replace: true,
+            template: '<ins class="adsbygoogle" style="display: inline-block; width: 728px; height: 90px;" data-ad-client="ca-pub-3411183432281537" data-ad-slot="8399253601"></ins>',
+            compile: function () {
+                return {
+                    pre: function () {},
+                    post: function () {
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    }
+                };
             }
         };
     }
