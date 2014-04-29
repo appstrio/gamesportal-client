@@ -250,12 +250,6 @@ mainModule.controller('MainCtrl', [
                     console.debug('loaded google ads');
                 });
             }
-
-            //lazy load addthis
-            $.getScript('//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-534644e35a88a9ba', function () {
-                window.addthis_config = window.addthis_config || {};
-                window.addthis_config.data_track_addressbar = false;
-            });
-        }, 2000);
+        }, 500);
     }
 ]);

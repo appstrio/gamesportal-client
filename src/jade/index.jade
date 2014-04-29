@@ -50,3 +50,7 @@ html(ng-app="myApp")
 
         .main(ui-view)
         include includes/modals
+        script(async, src='//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-534644e35a88a9ba')
+        script.
+            addthis_config = addthis_config || {};
+            addthis_config.data_track_addressbar = false;
