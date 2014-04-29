@@ -10,6 +10,8 @@ mainModule.controller('MainCtrl', [
             loaded = false; // whether the app was already loaded
 
         $scope.allGames = [];
+        $scope.randTopId = _.random(0, 99999999);
+        $scope.randId = _.random(0, 9999999);
 
         $scope.appName = Config.APP_NAME;
         $scope.appLogo = './img/logo-' + $scope.appName.toLowerCase().replace(/ /g, '') + '.png';

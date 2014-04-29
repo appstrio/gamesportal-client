@@ -33,6 +33,9 @@
             .right
                 .header
                 .right-ad-unit
+                    //* Ad4Game iFrame Tag */
+                    div(ng-if="appName==='Gamestab'")
+                        include includes/skyscraper-right-gamestab
                     div(ng-if='appName==="Mojo Games"')
                         include includes/skyscraper-right-mojogames
         .bottom

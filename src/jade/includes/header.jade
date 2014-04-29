@@ -53,5 +53,7 @@
 .header-bottom
     .banner(ng-class="{'in-game': !fixedHeader}")
         .bg-banner
+            div(ng-if="appName==='Gamestab'")
+                include leaderboard-gamestab
             div(ng-if='appName==="Mojo Games"')
                 include leaderboard-mojogames
