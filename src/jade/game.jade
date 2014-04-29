@@ -33,12 +33,8 @@
             .right
                 .header
                 .right-ad-unit
-                    //img(src="./img/160x600.png", width="160", height="600", alt="Your ad here placeholder")
-                    div(ng-show='appName==="Mojo Games"')
-                        ins.adsbygoogle(style='display: inline-block; width: 160px; height: 600px;', data-ad-client='ca-pub-3411183432281537', data-ad-slot='9736386005')
-                        script.
-                            (adsbygoogle = window.adsbygoogle || []).push({});
-
+                    //div(ng-if='appName==="Mojo Games"')
+                        include includes/skyscraper-right-mojogames
         .bottom
             .more-games-bottom
                 .game(ng-repeat="game in moreGames")
