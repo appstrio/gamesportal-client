@@ -37,7 +37,7 @@
                     div(ng-if="appName==='Gamestab'")
                         include includes/skyscraper-right-gamestab
                     div(ng-if='appName==="Mojo Games"')
-                        include includes/skyscraper-right-mojogames
+                        sky-right-ad(ad-sense-loaded="adSenseLoaded")
         .bottom
             .more-games-bottom
                 .game(ng-repeat="game in moreGames")

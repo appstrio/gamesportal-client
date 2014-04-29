@@ -41,30 +41,72 @@ commonModule.directive('overlay', ['$rootScope',
         return {
             restrict: 'E',
             replace: true,
+            scope: {
+                adSenseLoaded: '='
+            },
             template: '<ins class="adsbygoogle" style="display: inline-block; width: 728px; height: 90px;" data-ad-client="ca-pub-3411183432281537" data-ad-slot="6922520402"></ins>',
-            compile: function () {
-                return {
-                    pre: function () {},
-                    post: function () {
-                        (adsbygoogle = window.adsbygoogle || []).push({});
+            link: function (scope) {
+                var id = '6922520402';
+                window.unitLoaded = window.unitLoaded || {};
+                scope.$watch('adSenseLoaded', function () {
+                    if (scope.adSenseLoaded) {
+                        if (!window.unitLoaded[id]) {
+                            (adsbygoogle = window.adsbygoogle || []).push({});
+                            window.unitLoaded[id] = true;
+                        }
                     }
-                };
+                });
+
             }
         };
     }
 ]).directive('headerGameAd', [
+
     function () {
         return {
             restrict: 'E',
             replace: true,
+            scope: {
+                adSenseLoaded: '='
+            },
             template: '<ins class="adsbygoogle" style="display: inline-block; width: 728px; height: 90px;" data-ad-client="ca-pub-3411183432281537" data-ad-slot="8399253601"></ins>',
-            compile: function () {
-                return {
-                    pre: function () {},
-                    post: function () {
-                        (adsbygoogle = window.adsbygoogle || []).push({});
+            link: function (scope) {
+                var id = '8399253601';
+                window.unitLoaded = window.unitLoaded || {};
+                scope.$watch('adSenseLoaded', function () {
+                    if (scope.adSenseLoaded) {
+                        if (!window.unitLoaded[id]) {
+                            (adsbygoogle = window.adsbygoogle || []).push({});
+                            window.unitLoaded[id] = true;
+                        }
                     }
-                };
+                });
+            }
+        };
+    }
+]).directive('skyRightAd', [
+
+    function () {
+        return {
+            restrict: 'E',
+            replace: true,
+            scope: {
+                adSenseLoaded: '='
+            },
+            template: '<ins class="adsbygoogle" style="display: inline-block; width: 160px; height:600px;" data-ad-client="ca-pub-3411183432281537" data-ad-slot="9736386005"></ins>',
+            link: function (scope, element) {
+                var id = '9736386005';
+                window.unitLoaded = window.unitLoaded || {};
+                scope.$watch('adSenseLoaded', function () {
+                    if (scope.adSenseLoaded) {
+                        if (!window.unitLoaded[id]) {
+                            (adsbygoogle = window.adsbygoogle || []).push({});
+                            window.unitLoaded[id] = angular.element(element);
+                        } else {
+                            angular.element(element).replaceWith(window.unitLoaded[id]);
+                        }
+                    }
+                });
             }
         };
     }

@@ -236,7 +236,6 @@ mainModule.controller('MainCtrl', [
                     page: window.location.pathname +
                         window.location.hash
                 });
-
             }
 
             //header doesn't stay fixed in game state to have banner in view
@@ -248,6 +247,9 @@ mainModule.controller('MainCtrl', [
             if ($scope.appName === 'Mojo Games') {
                 $.getScript('//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js', function () {
                     console.debug('loaded google ads');
+                    $scope.$apply(function () {
+                        $scope.adSenseLoaded = true;
+                    });
                 });
             }
         }, 500);

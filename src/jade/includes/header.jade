@@ -57,4 +57,7 @@
                 .bg-ad
                     include leaderboard-gamestab
             div(ng-if='appName==="Mojo Games"')
-                include leaderboard-mojogames
+                .bg-ad(ng-show='!fixedHeader')
+                    header-game-ad(ad-sense-loaded="adSenseLoaded")
+                .bg-ad(ng-show='fixedHeader')
+                    header-main-ad(ad-sense-loaded="adSenseLoaded")
