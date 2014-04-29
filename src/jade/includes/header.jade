@@ -53,5 +53,14 @@
 .header-bottom
     .banner(ng-class="{'in-game': !fixedHeader}")
         .bg-banner
-            .bg-ad
+            //.bg-ad
                 img(src="./img/728x90.png", width="728", height="90", alt="Your ad here placeholder")
+            .bg-ad(ng-show='!fixedHeader')
+                ins.adsbygoogle(style='display: inline-block; width: 728px; height: 90px;', data-ad-client='ca-pub-3411183432281537', data-ad-slot='6922520402')
+                script.
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+            .bg-ad(ng-show='fixedHeader')
+                ins.adsbygoogle(style='display: inline-block; width: 728px; height: 90px;', data-ad-client='ca-pub-3411183432281537', data-ad-slot='8399253601')
+                script.
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+
