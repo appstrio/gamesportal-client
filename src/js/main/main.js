@@ -4,16 +4,28 @@ var mainModule = mainModule || angular.module('aio.main', []);
 mainModule.controller('MainCtrl', [
     '$scope', '$log', '$q', '$timeout', '$http', 'Firebase',
     'Games', '$state', '$stateParams', 'Facebook', 'Chrome', 'Config', '$translate',
-    function ($scope, $log, $q, $timeout, $http, Firebase, Games, $state, $stateParams, Facebook, Chrome, Config, $translate) {
+    function ($scope, $log, $q, $timeout, $http, Firebase, Games, $state, $stateParams,
+        Facebook, Chrome, Config, $translate) {
 
         var page = 0, //  hold current page
             loaded = false; // whether the app was already loaded
 
         $scope.allGames = [];
-        $scope.randTopId = _.random(0, 99999999);
-        $scope.randId = _.random(0, 9999999);
 
-        $scope.appName = Config.APP_NAME;
+        var rand = _.random(0, 999999999);
+        $scope.topIframeAd = {
+            iframe: 'http://ads.ad4game.com/www/delivery/afr.php?zoneid=39440&cb=' + rand,
+            a: 'http://ads.ad4game.com/www/delivery/dck.php?n=af1fdb1c&cb=' + rand,
+            img: 'http://ads.ad4game.com/www/delivery/avw.php?zoneid=39440&cb=' + rand + '&n=af1fdb1c'
+        };
+        $scope.rightSkyAd = {
+            iframe: 'http://ads.ad4game.com/www/delivery/afr.php?zoneid=39438&cb=' + rand,
+            a: 'http://ads.ad4game.com/www/delivery/dck.php?n=a1a724da&cb=' + rand,
+            img: 'http://ads.ad4game.com/www/delivery/avw.php?zoneid=39438&cb=' + rand + '&n=a1a724da'
+        };
+
+        // $scope.appName = Config.APP_NAME;
+        // FIXME temp
         $scope.appLogo = './img/logo-' + $scope.appName.toLowerCase().replace(/ /g, '') + '.png';
         document.title = $scope.appName;
         //header is fixed by default
