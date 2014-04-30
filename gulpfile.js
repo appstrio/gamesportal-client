@@ -39,8 +39,8 @@ gulp.task('scripts', function () {
 //build vendor scripts
 gulp.task('vendors', function () {
     return gulp.src(vendors)
-        .pipe($gulp.uglify())
         .pipe($gulp.concat('vendors.min.js'))
+        .pipe($gulp.uglify())
         .pipe($gulp.rev())
         .pipe(gulp.dest('./build/js/'))
         .pipe($gulp.size({
