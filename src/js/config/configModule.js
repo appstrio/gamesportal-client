@@ -2,6 +2,17 @@ var configModule = configModule || angular.module('aio.config', []);
 
 configModule.factory('Config', function () {
 
+    var isLocalStorage = (function () {
+        try {
+            return localStorage && localStorage.getItem;
+        } catch (e) {
+            return false;
+        }
+    })();
+
+    //first time user by default
+    var returnUser = isLocalStorage && typeof localStorage.returnUser !== 'undefined';
+
     var getDocInfo = function () {
         //TODO - extract to external helper
         var returnObj = {};
@@ -18,28 +29,19 @@ configModule.factory('Config', function () {
         } catch (e) {
             console.info('Error with doc.location', e);
         }
-        //All params are mojogames defaults
-        returnObj.appName = returnObj.appName || 'Mojo Games';
-        returnObj.realm = returnObj.realm || 'http://www.mojo-games.com';
-        returnObj.chromeId = returnObj.chromeId || 'fmpeljkajhongibcmcnigfcjcgaopfid';
-        returnObj.fbId = returnObj.fbId || '224435141079794'; //mojo-games
-        returnObj.analyticsId = returnObj.analyticsId || 'UA-49896275-3';
-        returnObj.firebaseUrl = returnObj.firebaseUrl || 'https://bizibizi.firebaseio.com';
-
-        return returnObj;
+        //fill all undefined properties with defaults
+        return _.defaults(returnObj, {
+            appName: 'Mojo Games',
+            realm: 'http://www.mojo-games.com',
+            chromeId: 'fmpeljkajhongibcmcnigfcjcgaopfid',
+            fbId: '224435141079794', //mojo-games
+            analyticsId: 'UA-49896275-3',
+            firebaseUrl: 'https://bizibizi.firebaseio.com'
+        });
     };
 
     var _docInfo = getDocInfo();
-    var APP_NAME = _docInfo.appName;
     var REALM = _docInfo.realm;
-
-    var isLocalStorage = (function () {
-        try {
-            return localStorage && localStorage.getItem;
-        } catch (e) {
-            return false;
-        }
-    })();
 
     var POINTS = {
         CHROME_APP_INSTALL: 499999,
@@ -54,7 +56,7 @@ configModule.factory('Config', function () {
 
     var INVITE_FRIENDS_POST = function () {
         return {
-            NAME: 'Let\'s play fun games on ' + APP_NAME,
+            NAME: 'Let\'s play fun games on ' + _docInfo.appName,
             CAPTION: 'Win coins, win cool prizes!',
             DESCRIPTION: (
                 'Playing free games and collecting coins. Come and compete in our leaderboard!'
@@ -64,17 +66,9 @@ configModule.factory('Config', function () {
         };
     };
 
-    //first time user by default
-    var returnUser = false;
-    if (isLocalStorage) {
-        returnUser = typeof localStorage.returnUser !== 'undefined';
-    } else {
-        returnUser = true; //no localStorage
-    }
-
     var baseConfig = {
         REALM: REALM,
-        APP_NAME: APP_NAME,
+        APP_NAME: _docInfo.appName,
         ANALYTICS_ID: _docInfo.analyticsId,
         FIREBASE_URL: _docInfo.firebaseUrl,
         GAMES_PER_FIRSTPAGE: 70, // amount of games for the first page
