@@ -92,9 +92,21 @@ mainModule.controller('MainCtrl', [
             });
         };
 
+        var shuffleSecondHalf = function (arr) {
+            /* Randomize 2nd half of initial games */
+            var len = Math.floor(arr.length / 2);
+            var firstHalf = arr.slice(0, len + 1);
+            var secondHalf = arr.slice(-len);
+            arr = firstHalf.concat(_.shuffle(secondHalf));
+            return arr;
+        };
+
         var setInitialGames = function (games) {
-            $scope.allGames = sortArrByPriority(games);
+            //sort by priority, then shuffle the second half
+            $scope.allGames = shuffleSecondHalf(sortArrByPriority(games));
+            //process and choose large thumbnails
             processThumbnails($scope.allGames);
+            //display only some of the first games
             $scope.games = _.first($scope.allGames, Config.GAMES_PER_FIRSTPAGE);
         };
 
@@ -292,6 +304,10 @@ mainModule.controller('MainCtrl', [
                             });
                         });
                     }
+
+                    $.getScript('//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-534644e35a88a9ba', angular.noop);
+                    window.addthis_config = window.addthis_config || {};
+                    window.addthis_config.data_track_addressbar = false;
                 }, 500);
             });
     }
