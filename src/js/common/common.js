@@ -35,104 +35,42 @@ commonModule.directive('overlay', ['$rootScope',
             }
         };
     }
-]).directive('headerMainAd', [
+]).directive('adsenseAd', ['$compile',
 
-    function () {
+    function ($compile) {
+        var $elm = _.template('<ins class="adsbygoogle" style="display: inline-block; width: <%= width %>px; height: <%= height %>px;" data-ad-client="ca-pub-3411183432281537" data-ad-slot="<%= id %>"></ins>');
         return {
             restrict: 'E',
             replace: true,
             scope: {
-                adSenseLoaded: '='
+                adSenseLoaded: '=',
+                adSlotId: '@',
+                adWidth: '@',
+                adHeight: '@'
             },
-            template: '<ins class="adsbygoogle" style="display: inline-block; width: 728px; height: 90px;" data-ad-client="ca-pub-3411183432281537" data-ad-slot="6922520402"></ins>',
-            link: function (scope) {
-                var id = '6922520402';
-                window.unitLoaded = window.unitLoaded || {};
-                scope.$watch('adSenseLoaded', function () {
-                    if (scope.adSenseLoaded) {
-                        if (!window.unitLoaded[id]) {
-                            (adsbygoogle = window.adsbygoogle || []).push({});
-                            window.unitLoaded[id] = true;
-                        }
-                    }
-                });
-
-            }
-        };
-    }
-]).directive('headerGameAd', [
-
-    function () {
-        return {
-            restrict: 'E',
-            replace: true,
-            scope: {
-                adSenseLoaded: '='
-            },
-            template: '<ins class="adsbygoogle" style="display: inline-block; width: 728px; height: 90px;" data-ad-client="ca-pub-3411183432281537" data-ad-slot="8399253601"></ins>',
-            link: function (scope) {
-                var id = '8399253601';
-                window.unitLoaded = window.unitLoaded || {};
-                scope.$watch('adSenseLoaded', function () {
-                    if (scope.adSenseLoaded) {
-                        if (!window.unitLoaded[id]) {
-                            (adsbygoogle = window.adsbygoogle || []).push({});
-                            window.unitLoaded[id] = true;
-                        }
-                    }
-                });
-            }
-        };
-    }
-]).directive('skyRightAd', [
-
-    function () {
-        return {
-            restrict: 'E',
-            replace: true,
-            scope: {
-                adSenseLoaded: '='
-            },
-            template: '<ins class="adsbygoogle" style="display: inline-block; width: 160px; height:600px;" data-ad-client="ca-pub-3411183432281537" data-ad-slot="9736386005"></ins>',
             link: function (scope, element) {
-                var id = '9736386005';
                 window.unitLoaded = window.unitLoaded || {};
                 scope.$watch('adSenseLoaded', function () {
                     if (scope.adSenseLoaded) {
-                        if (!window.unitLoaded[id]) {
+                        if (!window.unitLoaded[scope.adSlotId]) {
+                            //create element html string
+                            var _elm = $elm({
+                                id: scope.adSlotId,
+                                width: scope.adWidth || 728,
+                                height: scope.adHeight || 90
+                            });
+                            //insert html to element
+                            element.html(_elm);
+                            //compile element and store it
+                            window.unitLoaded[scope.adSlotId] = $compile(element.contents())(scope);
+                            //only run this code once per banner
                             (adsbygoogle = window.adsbygoogle || []).push({});
-                            window.unitLoaded[id] = angular.element(element);
                         } else {
-                            angular.element(element).replaceWith(window.unitLoaded[id]);
+                            element.replaceWith(window.unitLoaded[scope.adSlotId]);
                         }
                     }
                 });
-            }
-        };
-    }
-]).directive('skyLeftAd', [
 
-    function () {
-        return {
-            restrict: 'E',
-            replace: true,
-            scope: {
-                adSenseLoaded: '='
-            },
-            template: '<ins class="adsbygoogle" style="display: inline-block; width: 160px; height:600px;" data-ad-client="ca-pub-3411183432281537" data-ad-slot="6643318803"></ins>',
-            link: function (scope, element) {
-                var id = '6643318803';
-                window.unitLoaded = window.unitLoaded || {};
-                scope.$watch('adSenseLoaded', function () {
-                    if (scope.adSenseLoaded) {
-                        if (!window.unitLoaded[id]) {
-                            (adsbygoogle = window.adsbygoogle || []).push({});
-                            window.unitLoaded[id] = angular.element(element);
-                        } else {
-                            angular.element(element).replaceWith(window.unitLoaded[id]);
-                        }
-                    }
-                });
             }
         };
     }
