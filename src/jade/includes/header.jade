@@ -1,23 +1,23 @@
 .header-top
     .logo(ng-click="goHome()")
-        img(ng-src="{{appLogo}}")
+        img(ng-src="{{appLogo}}", width='320')
     .coins(ng-click="goHome('WIN_COINS')")
         .coin-container
             .top-text {{'COINS_COLLECTED' | translate }}
             .amount
                 span.coin-img
-                    img(src="./img/coins2.png")
+                    img(src="./img/coins2.png", height='75', width='125')
                 span.amount-text(ng-if="!userData.user") {{10000 | number }}
                 span.amount-text(ng-if="userData.user", aio-counter="{{userData.user.points}}")
     .rays-container
         #rays
 
     .corner-toolbox-icons
-        img(ng-src="{{selectedNationality.flag}}", ng-mouseenter="showLanguageMenu()", width="48", height="48")
+        img(ng-src="{{selectedNationality.flag}}", ng-mouseenter="showLanguageMenu()", width='20', height='20')
         .language-box(ng-cloak, ng-show='dropdownFlags', ng-mouseenter="keepLanguageMenu()", ng-mouseleave="showLanguageMenu()")
             ul
                 li(ng-repeat="nationality in nationalities | filter: '!' + selectedNationality.language", ng-click="changeLanguage(nationality)")
-                    img(ng-src="{{nationality.flag}}")
+                    img(ng-src="{{nationality.flag}}", width='20', height='20')
                     span {{nationality.language}}
         span.glyphicon.glyphicon-lock(ng-click="goHome('privacy')")
         span.glyphicon.glyphicon-envelope(ng-click="goHome('contact')")

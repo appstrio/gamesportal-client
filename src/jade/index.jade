@@ -27,7 +27,7 @@ html(ng-app="myApp")
                         <div ng-if="game.premium" class="badge-overlay premium-overlay">
                             <div class="ribbon-text">Premium</div>
                         </div>
-                        <img ng-src="{{game.largeThumbnail.url || game.thumbnails[0].url}}" class="game-thumbnail">
+                        <img ng-src="{{game.largeThumbnail.url || game.thumbnails[0].url}}" class="game-thumbnail" width='120' height='120'>
                         <div ng-bind="game.name" class="name"></div>
                     </a>
                 </div>
