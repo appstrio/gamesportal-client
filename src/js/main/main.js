@@ -10,6 +10,7 @@ mainModule.controller('MainCtrl', [
         $scope.appLogo = './img/logo-' + $scope.appName.toLowerCase().replace(/ /g, '') + '.png';
         document.title = $scope.appName;
 
+        var languageTimeout;
         var page = 0, //  hold current page
             loaded = false; // whether the app was already loaded
         var repeatLargeThumbnailsEvery = 20,
@@ -27,9 +28,46 @@ mainModule.controller('MainCtrl', [
             img: 'http://ads.ad4game.com/www/delivery/avw.php?zoneid=39438&cb=' + rand + '&n=a1a724da'
         };
 
+        $scope.nationalities = [{
+            langKey: 'en',
+            language: 'English',
+            flag: './img/flags/en.png'
+        }, {
+            langKey: 'es',
+            language: 'Español',
+            flag: './img/flags/es.png'
+        }, {
+            langKey: 'he',
+            language: 'עברית',
+            flag: './img/flags/he.png'
+        }, {
+            langKey: 'pt',
+            language: 'Português',
+            flag: './img/flags/pt.png'
+        }, {
+            langKey: 'de',
+            language: 'Deutsch',
+            flag: './img/flags/de.png'
+        }, {
+            langKey: 'fr',
+            language: 'Français',
+            flag: './img/flags/fr.png'
+        }, {
+            langKey: 'pl',
+            language: 'Polski',
+            flag: './img/flags/pl.png'
+        }];
+        //default-flag TEMP until auto select will be implemented
+        $scope.selectedNationality = $scope.nationalities[0];
+
         //header is fixed by default
         $scope.fixedHeader = true;
         $scope.smallHeader = false;
+        loaded = true;
+
+        ga('create', Config.ANALYTICS_ID, {
+            'cookieDomain': 'none'
+        });
 
         var processThumbnails = function (arr) {
             angular.forEach(arr, function (game, index) {
@@ -37,7 +75,7 @@ mainModule.controller('MainCtrl', [
                 _.some(game.thumbnails, function (thumbnail) {
                     if (thumbnail.width > 250 && thumbnail.height > 250) {
                         game.largeThumbnail = thumbnail;
-                        if (index > 10 && (!lastLargeThumbnailIndex || (index - lastLargeThumbnailIndex) > repeatLargeThumbnailsEvery)) {
+                        if (index > 10 && (index - lastLargeThumbnailIndex > repeatLargeThumbnailsEvery)) {
                             lastLargeThumbnailIndex = index;
                             game.promoted = true;
                         }
@@ -88,46 +126,6 @@ mainModule.controller('MainCtrl', [
                 }, 1000);
             }
         };
-
-        // init - get all games from games db
-        Games.isReady
-            .then(setInitialGames)
-            .then(setAllGames);
-
-        $scope.getGameClass = function (game, $index) {
-            var _class = {};
-            if (($index + 1) % 21 === 0) {
-                _class['rotated-right'] = true;
-            } else if (($index + 1) % 18 === 0) {
-                _class['rotated-left'] = true;
-            }
-
-            if (game.premium) {
-                _class.premium = true;
-            } else if (game.hot) {
-                _class.hot = true;
-            }
-
-            if (game.promoted && game.largeThumbnail) {
-                _class.promoted = true;
-            }
-
-            return _class;
-        };
-
-        // init - init user data object
-        Firebase.initting().then(function () {
-            $scope.userData = Firebase.userData();
-        });
-
-        // masonry options
-        $scope.masonryOptions = {
-            gutter: 20,
-            isFitWidth: true,
-            isAnimated: false
-        };
-
-        loaded = true;
 
         // login user
         $scope.login = function () {
@@ -218,7 +216,6 @@ mainModule.controller('MainCtrl', [
             });
         }, 10);
 
-        var languageTimeout;
         $scope.showLanguageMenu = function () {
             $scope.dropdownFlags = true;
             clearTimeout(languageTimeout);
@@ -230,42 +227,39 @@ mainModule.controller('MainCtrl', [
             $scope.dropdownFlags = true;
         };
 
-        $scope.nationalities = [{
-            langKey: 'en',
-            language: 'English',
-            flag: './img/flags/en.png'
-        }, {
-            langKey: 'es',
-            language: 'Español',
-            flag: './img/flags/es.png'
-        }, {
-            langKey: 'he',
-            language: 'עברית',
-            flag: './img/flags/he.png'
-        }, {
-            langKey: 'pt',
-            language: 'Português',
-            flag: './img/flags/pt.png'
-        }, {
-            langKey: 'de',
-            language: 'Deutsch',
-            flag: './img/flags/de.png'
-        }, {
-            langKey: 'fr',
-            language: 'Français',
-            flag: './img/flags/fr.png'
-        }, {
-            langKey: 'pl',
-            language: 'Polski',
-            flag: './img/flags/pl.png'
-        }];
-        //default-flag TEMP until auto select will be implemented
-        $scope.selectedNationality = $scope.nationalities[0];
+        var getUserData = function () {
+            $scope.userData = Firebase.userData();
+        };
 
-        ga('create', Config.ANALYTICS_ID, {
-            'cookieDomain': 'none'
-        });
-        $scope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
+        $scope.getGameClass = function (game, $index) {
+            var _class = {};
+            if (($index + 1) % 21 === 0) {
+                _class['rotated-right'] = true;
+            } else if (($index + 1) % 18 === 0) {
+                _class['rotated-left'] = true;
+            }
+
+            if (game.premium) {
+                _class.premium = true;
+            } else if (game.hot) {
+                _class.hot = true;
+            }
+
+            if (game.promoted && game.largeThumbnail) {
+                _class.promoted = true;
+            }
+
+            return _class;
+        };
+
+        // masonry options
+        $scope.masonryOptions = {
+            gutter: 20,
+            isFitWidth: true,
+            isAnimated: false
+        };
+
+        $scope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState) {
             $scope.masonryOptions.isAnimated = false;
             $scope.masonryOptions.transitionDuration = 0;
             $scope.overlayID = $stateParams.overlayID;
@@ -282,16 +276,23 @@ mainModule.controller('MainCtrl', [
             $scope.fixedHeader = toState.name !== 'game';
         });
 
-        $timeout(function () {
-            //lazy load adsense
-            if ($scope.appName === 'Mojo Games') {
-                $.getScript('//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js', function () {
-                    console.debug('loaded google ads');
-                    $scope.$apply(function () {
-                        $scope.adSenseLoaded = true;
-                    });
-                });
-            }
-        }, 500);
+        // init - get all games from games db
+        Games.isReady
+            .then(setInitialGames)
+            .then(Firebase.initting)
+            .then(getUserData)
+            .then(setAllGames)
+            .then(function () {
+                $timeout(function () {
+                    //lazy load adsense
+                    if ($scope.appName === 'Mojo Games') {
+                        $.getScript('//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js', function () {
+                            $scope.$apply(function () {
+                                $scope.adSenseLoaded = true;
+                            });
+                        });
+                    }
+                }, 500);
+            });
     }
 ]);
