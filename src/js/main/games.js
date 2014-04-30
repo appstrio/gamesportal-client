@@ -16,7 +16,7 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase', 'Ga
         };
 
         var getInitialGames = function () {
-            //get games from memroy DB
+            //get games from memory DB
             return initting.resolve(GamesDB);
         };
 

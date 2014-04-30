@@ -19,7 +19,7 @@ html(ng-app="myApp")
 
         script(type='text/ng-template', id='main.html').
             <div masonry="masonryOptions" load-images="false" infinite-scroll="loadMore()" class="masonry-container">
-                <div ng-repeat="game in games" ng-class="getGameClass(game, $index)" class="masonry-brick">
+                <div ng-repeat="game in games track by $index" ng-class="getGameClass(game, $index)" class="masonry-brick">
                     <a ng-click="runGame(game, $event)">
                         <div ng-if="game.hot" class="badge-overlay hot-overlay">
                             <div class="ribbon-text">Hot</div>
