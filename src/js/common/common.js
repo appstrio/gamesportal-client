@@ -70,7 +70,6 @@ commonModule.directive('overlay', ['$rootScope',
                         }
                     }
                 });
-
             }
         };
     }

@@ -3,8 +3,8 @@ var mainModule = mainModule || angular.module('aio.main', []);
 
 mainModule.controller('MainCtrl', [
     '$scope', '$log', '$q', '$timeout', '$http', 'Firebase',
-    'Games', '$state', '$stateParams', 'Facebook', 'Chrome', 'Config', '$translate', 'geoLocation',
-    function ($scope, $log, $q, $timeout, $http, Firebase, Games, $state, $stateParams, Facebook, Chrome, Config, $translate, geoLocation) {
+    'Games', '$state', '$stateParams', 'Facebook', 'Chrome', 'Config', '$translate',
+    function ($scope, $log, $q, $timeout, $http, Firebase, Games, $state, $stateParams, Facebook, Chrome, Config, $translate) {
         $scope.allGames = [];
         $scope.appName = Config.APP_NAME;
         $scope.appLogo = './img/logo-' + $scope.appName.toLowerCase().replace(/ /g, '') + '.png';
@@ -40,7 +40,6 @@ mainModule.controller('MainCtrl', [
         }, {
             langKey: 'he',
             language: 'עברית',
-            countries: ['IL'],
             flag: './img/flags/he.png'
         }, {
             langKey: 'pt',
@@ -315,22 +314,21 @@ mainModule.controller('MainCtrl', [
             }
         };
 
-        var getLocation = function () {
+        var setUserLanguage = function () {
             //used only to auto-detect language
-            geoLocation.geolocate().then(function (result) {
-                languageLoaded = true;
-                if (result && result.countryCode) {
-                    var _lang = _.find($scope.nationalities, function (i) {
-                        return _.contains(i.countries, result.countryCode);
-                    });
-                    if (_lang) {
-                        $scope.changeLanguage(_lang);
-                    } else {
-                        //set his current language (default) to storage
-                        $scope.changeLanguage($scope.selectedNationality);
-                    }
-                }
+            languageLoaded = true;
+            var lang = window.navigator.language || window.navigator.userLanguage || 'en';
+            lang = lang.slice(0, 2).toLowerCase();
+            var _lang = _.findWhere($scope.nationalities, {
+                langKey: lang
             });
+
+            if (_lang) {
+                $scope.changeLanguage(_lang);
+            } else {
+                //set his current language (default) to storage
+                $scope.changeLanguage($scope.selectedNationality);
+            }
         };
 
         setInitialLanguage();
@@ -356,7 +354,7 @@ mainModule.controller('MainCtrl', [
                     $.getScript('//s7.addthis.com/js/300/addthis_widget.js#domready=1', angular.noop);
 
                     if (!languageLoaded) {
-                        getLocation();
+                        setUserLanguage();
                     }
                 }, 700);
             });
