@@ -103,7 +103,8 @@ mainModule.controller('MainCtrl', [
 
         var setInitialGames = function (games) {
             //sort by priority, then shuffle the second half
-            $scope.allGames = shuffleSecondHalf(sortArrByPriority(games));
+            $scope.allGames = sortArrByPriority(games);
+            // $scope.allGames = shuffleSecondHalf($scope.allGames);
             //process and choose large thumbnails
             processThumbnails($scope.allGames);
             //display only some of the first games
@@ -304,7 +305,6 @@ mainModule.controller('MainCtrl', [
                             });
                         });
                     }
-
                     $.getScript('//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-534644e35a88a9ba', angular.noop);
                     window.addthis_config = window.addthis_config || {};
                     window.addthis_config.data_track_addressbar = false;
