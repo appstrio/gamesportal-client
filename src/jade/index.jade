@@ -49,8 +49,19 @@ html(ng-app="myApp")
             include includes/header
 
         .main(ui-view)
-        include includes/modals
-        script(async, src='//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-534644e35a88a9ba')
+        //include includes/modals
+        //script(async, src='//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-534644e35a88a9ba')
+
+
+        //script(src='//s7.addthis.com/js/300/addthis_widget.js#async=1', type='text/javascript')
         script.
-            var addthis_config = addthis_config || {};
-            addthis_config.data_track_addressbar = false;
+            setTimeout(function(){
+                var addthisScript = document.createElement('script');
+                addthisScript.setAttribute('src', '//s7.addthis.com/js/300/addthis_widget.js#domready=1');
+                document.body.appendChild(addthisScript);
+
+                var addthis_config = addthis_config || {};
+                addthis_config.pubid= 'ra-534644e35a88a9ba';
+                addthis_config.data_track_addressbar = false;
+
+            }, 2000);
