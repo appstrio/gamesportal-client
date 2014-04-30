@@ -196,10 +196,10 @@ gulp.task('deploy', function () {
         .pipe($gulp.awspublish.reporter()); // print upload updates to console
 
     // gulp.src('./{fonts,img}/**/*', {
-        // cwd: './build/'
+    // cwd: './build/'
     // })
-        // .pipe(publisher.publish(fontsHeaders))
-        // .pipe($gulp.awspublish.reporter()); // print upload updates to console
+    // .pipe(publisher.publish(fontsHeaders))
+    // .pipe($gulp.awspublish.reporter()); // print upload updates to console
 
     gulp.src(['./**/*.html', '!index.html'], {
         cwd: './build/'
