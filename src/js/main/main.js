@@ -54,12 +54,13 @@ mainModule.controller('MainCtrl', [
             });
         };
 
-        // init - get all games from games db
-        Games.isReady.then(function (games) {
+        var setInitialGames = function (games) {
             $scope.allGames = sortArrByPriority(games);
             processThumbnails($scope.allGames);
             $scope.games = _.first($scope.allGames, Config.GAMES_PER_FIRSTPAGE);
-        }).then(function () {
+        };
+
+        var setAllGames = function () {
             if (!Games.allGamesAlreadyFetched) {
                 $timeout(function () {
                     Games.getAllGames().then(function (games) {
@@ -70,7 +71,12 @@ mainModule.controller('MainCtrl', [
                     });
                 }, 1000);
             }
-        });
+        };
+
+        // init - get all games from games db
+        Games.isReady
+            .then(setInitialGames)
+            .then(setAllGames);
 
         $scope.getGameClass = function (game, $index) {
             var _class = {};
