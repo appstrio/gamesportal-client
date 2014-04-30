@@ -40,7 +40,9 @@ angular.module('myApp', [
             'http://www.miniclip.com/**',
             'http://www.myplayyard.com/**'
         ]);
-
+    }
+]).config(['$translateProvider',
+    function ($translateProvider) {
         $translateProvider.translations('en', {
             'FIND_GAME': 'Find A Game',
             'COINS_COLLECTED': 'coins collected',
@@ -54,10 +56,7 @@ angular.module('myApp', [
             'INVITE_FRIENDS': 'Invite Friends',
             'PLAY_ANOTHER_GAME': 'Play Another Game',
             'PLAY_ON_CHROME': 'Play On Chrome'
-
-        });
-
-        $translateProvider.translations('es', {
+        }).translations('es', {
             'FIND_GAME': 'Busca un Juego',
             'COINS_COLLECTED': 'monedas recogidas',
             'CONNECT': 'Conectar',
@@ -70,9 +69,7 @@ angular.module('myApp', [
             'INVITE_FRIENDS': 'Invite a los amigos',
             'PLAY_ANOTHER_GAME': 'Jugar a otro juego',
             'PLAY_ON_CHROME': 'Juega en el cromo'
-        });
-
-        $translateProvider.translations('he', {
+        }).translations('he', {
             'FIND_GAME': 'מצא משחק',
             'COINS_COLLECTED': 'מטבעות שצברת',
             'CONNECT': 'התחבר',
@@ -85,9 +82,7 @@ angular.module('myApp', [
             'INVITE_FRIENDS': 'הזמן חברים',
             'PLAY_ANOTHER_GAME': 'שחק משחק נוסף',
             'PLAY_ON_CHROME': 'שחק ב- Chrome'
-        });
-
-        $translateProvider.translations('pt', {
+        }).translations('pt', {
             'FIND_GAME': 'encontrar um Jogo',
             'COINS_COLLECTED': 'moedas coletadas',
             'CONNECT': 'Conectar',
@@ -100,10 +95,7 @@ angular.module('myApp', [
             'INVITE_FRIENDS': 'Convidar amigos',
             'PLAY_ANOTHER_GAME': 'Jogue mais um jogo',
             'PLAY_ON_CHROME': 'Jogue no chrome'
-
-        });
-
-        $translateProvider.translations('de', {
+        }).translations('de', {
             'FIND_GAME': 'Finden Sie ein Spiel',
             'COINS_COLLECTED': 'münzen gesammelt',
             'CONNECT': 'Verbinden',
@@ -116,10 +108,7 @@ angular.module('myApp', [
             'INVITE_FRIENDS': 'Freunde einladen',
             'PLAY_ANOTHER_GAME': 'Ein anderes Spiel spielen',
             'PLAY_ON_CHROME': 'Spielen Sie auf chrome'
-
-        });
-
-        $translateProvider.translations('fr', {
+        }).translations('fr', {
             'FIND_GAME': 'trouver un jeu',
             'COINS_COLLECTED': 'pièces collectées',
             'CONNECT': 'Relier',
@@ -132,9 +121,7 @@ angular.module('myApp', [
             'INVITE_FRIENDS': 'Invitez vos amis',
             'PLAY_ANOTHER_GAME': 'Jouer un autre jeu',
             'PLAY_ON_CHROME': 'Jouer sur le chrome'
-        });
-
-        $translateProvider.translations('pl', {
+        }).translations('pl', {
             'FIND_GAME': 'Znajdź grę',
             'COINS_COLLECTED': 'Monety zebrane',
             'CONNECT': 'Połączyć',
@@ -147,10 +134,7 @@ angular.module('myApp', [
             'INVITE_FRIENDS': 'Zaproś przyjaciół',
             'PLAY_ANOTHER_GAME': 'Grać w inną grę',
             'PLAY_ON_CHROME': 'Jugar en Chrome'
-        });
-
-        $translateProvider.preferredLanguage('en');
-
+        }).preferredLanguage('en');
     }
 ]);
 
