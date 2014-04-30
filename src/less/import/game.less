@@ -152,21 +152,21 @@
                         }
                     }
                 }
-                .embedding {
-                    background-color: #395277;
-                    position: relative;
-                    .loader {
-                        width: 100%;
-                        height: 630px;
-                        background: #000;
-                        position: absolute;
-                        z-index: 100;
-                        opacity: 0.8;
-                        img {
-                            margin: 250px auto;
-                            display: block;
-                        }
+
+                .loader{
+                    position: absolute;
+                    left:300px;
+                    top:280px;
+                    z-index:1;
+                    h1{
+                        color:  rgb(190, 190, 190);
                     }
+                }
+
+                .embedding {
+//                    background-color: #395277;
+                    position: relative;
+                    z-index:2;
                     .include {
                         border: none;
                         margin: 0 auto;
