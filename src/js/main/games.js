@@ -139,7 +139,7 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase', 'Ga
             Games.isReady.then(function (games) {
                 var howMany = 8;
                 var _games = _.first(_.shuffle(_.filter(games, function (i) {
-                    return parseInt(i.priority) < 100;
+                    return parseInt(i.priority) < 500;
                 })), howMany + 5);
                 $scope.moreGames = _games.slice(0, howMany);
                 $scope.evenMoreGames = _games.slice(howMany, _games.length);
