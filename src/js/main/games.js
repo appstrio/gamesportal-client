@@ -1509,7 +1509,7 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase', 'Ga
                 "source": "swf",
                 "description": "Utilise the special abilities of clones and control them all simultaneously to reach the exit flag in each level.",
                 "thumbnails": [{
-                    "url": "http://s3.amazonaws.com/www.mojo-games.com/games/enoughplumbers2/enoughplumbers2-thumb-175x80.gif",
+                    "url": "//s3.amazonaws.com/www.mojo-games.com/games/enoughplumbers2/enoughplumbers2-thumb-175x80.png",
                     "height": 120,
                     "width": 120
                 }],
