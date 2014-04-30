@@ -104,7 +104,7 @@ mainModule.controller('MainCtrl', [
         var setInitialGames = function (games) {
             //sort by priority, then shuffle the second half
             $scope.allGames = sortArrByPriority(games);
-            // $scope.allGames = shuffleSecondHalf($scope.allGames);
+            $scope.allGames = shuffleSecondHalf($scope.allGames);
             //process and choose large thumbnails
             processThumbnails($scope.allGames);
             //display only some of the first games
