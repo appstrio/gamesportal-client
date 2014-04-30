@@ -89,6 +89,7 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase', 'Ga
 
         return {
             isReady: initting.promise,
+            isLocalStorage: isLocalStorage,
             getAllGames: getAllGames,
             allGamesAlreadyFetched: allGamesAlreadyFetched,
             storeGames: storeGames

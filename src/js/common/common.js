@@ -74,4 +74,34 @@ commonModule.directive('overlay', ['$rootScope',
             }
         };
     }
+]).service('geoLocation', ['$http', '$q',
+    function ($http, $q) {
+        var geolocation = function () {
+            var GEOLOCATION_SERVICE_URL = 'http://ip-api.com/json';
+            var deferred = $q.defer();
+
+            function handleGeolocationRequest(result) {
+                if (result.data.status === 'success') {
+                    deferred.resolve(result.data);
+                } else {
+                    deferred.reject('status not success');
+                }
+            }
+
+            $http.get(GEOLOCATION_SERVICE_URL)
+                .then(handleGeolocationRequest).
+            catch (function () {
+                deferred.reject('no response');
+            });
+
+            return deferred.promise;
+        };
+
+        /**
+         * Initialize module
+         */
+        return {
+            geolocate: geolocation,
+        };
+    }
 ]);

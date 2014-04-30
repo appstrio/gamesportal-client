@@ -3,14 +3,15 @@ var mainModule = mainModule || angular.module('aio.main', []);
 
 mainModule.controller('MainCtrl', [
     '$scope', '$log', '$q', '$timeout', '$http', 'Firebase',
-    'Games', '$state', '$stateParams', 'Facebook', 'Chrome', 'Config', '$translate',
-    function ($scope, $log, $q, $timeout, $http, Firebase, Games, $state, $stateParams, Facebook, Chrome, Config, $translate) {
+    'Games', '$state', '$stateParams', 'Facebook', 'Chrome', 'Config', '$translate', 'geoLocation',
+    function ($scope, $log, $q, $timeout, $http, Firebase, Games, $state, $stateParams, Facebook, Chrome, Config, $translate, geoLocation) {
         $scope.allGames = [];
         $scope.appName = Config.APP_NAME;
         $scope.appLogo = './img/logo-' + $scope.appName.toLowerCase().replace(/ /g, '') + '.png';
         document.title = $scope.appName;
 
         var languageTimeout;
+        var languageLoaded = false; //whether we have his language settings
         var page = 0, //  hold current page
             loaded = false; // whether the app was already loaded
         var repeatLargeThumbnailsEvery = 20,
@@ -39,6 +40,7 @@ mainModule.controller('MainCtrl', [
         }, {
             langKey: 'he',
             language: 'עברית',
+            countries: ['IL'],
             flag: './img/flags/he.png'
         }, {
             langKey: 'pt',
@@ -57,8 +59,6 @@ mainModule.controller('MainCtrl', [
             language: 'Polski',
             flag: './img/flags/pl.png'
         }];
-        //default-flag TEMP until auto select will be implemented
-        $scope.selectedNationality = $scope.nationalities[0];
 
         //header is fixed by default
         $scope.fixedHeader = true;
@@ -222,7 +222,9 @@ mainModule.controller('MainCtrl', [
             $translate.use(nationality.langKey);
             $scope.selectedNationality = nationality;
             $scope.dropdownFlags = false;
+            storageLang(nationality);
         };
+
         var hideFlag = _.debounce(function () {
             $scope.$apply(function () {
                 $scope.dropdownFlags = false;
@@ -289,6 +291,49 @@ mainModule.controller('MainCtrl', [
             $scope.fixedHeader = toState.name !== 'game';
         });
 
+        var storageLang = function (lang) {
+            if (Games.isLocalStorage) {
+                localStorage.langKey = lang.langKey;
+            }
+        };
+
+        var setInitialLanguage = function () {
+            //if localstorage works
+            if (Games.isLocalStorage && localStorage.langKey) {
+                var lang = localStorage.langKey;
+                var _lang = _.findWhere($scope.nationalities, {
+                    langKey: lang
+                });
+
+                if (_lang) {
+                    $scope.changeLanguage(_lang);
+                    languageLoaded = true;
+                }
+            } else {
+                $scope.selectedNationality = $scope.nationalities[0];
+                $translate.use($scope.selectedNationality.langKey);
+            }
+        };
+
+        var getLocation = function () {
+            //used only to auto-detect language
+            geoLocation.geolocate().then(function (result) {
+                languageLoaded = true;
+                if (result && result.countryCode) {
+                    var _lang = _.find($scope.nationalities, function (i) {
+                        return _.contains(i.countries, result.countryCode);
+                    });
+                    if (_lang) {
+                        $scope.changeLanguage(_lang);
+                    } else {
+                        //set his current language (default) to storage
+                        $scope.changeLanguage($scope.selectedNationality);
+                    }
+                }
+            });
+        };
+
+        setInitialLanguage();
         // init - get all games from games db
         Games.isReady
             .then(setInitialGames)
@@ -309,6 +354,10 @@ mainModule.controller('MainCtrl', [
                     window.addthis_config.pubid = 'ra-534644e35a88a9ba';
                     window.addthis_config.data_track_addressbar = false;
                     $.getScript('//s7.addthis.com/js/300/addthis_widget.js#domready=1', angular.noop);
+
+                    if (!languageLoaded) {
+                        getLocation();
+                    }
                 }, 700);
             });
     }
