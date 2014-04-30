@@ -60,13 +60,29 @@ mainModule.controller('MainCtrl', [
             $scope.games = _.first($scope.allGames, Config.GAMES_PER_FIRSTPAGE);
         };
 
+        var extendGames = function (original, newGames) {
+            var _newArr = _.compact(_.map(newGames, function (i) {
+                var _oldGame = _.findWhere(original, {
+                    id: i.id
+                });
+                if (_oldGame) {
+                    _oldGame = angular.extend(_oldGame, i);
+                    return null;
+                }
+
+                return i;
+            }));
+
+            return original.concat(_newArr);
+        };
+
         var setAllGames = function () {
             if (!Games.allGamesAlreadyFetched) {
                 $timeout(function () {
                     Games.getAllGames().then(function (games) {
                         var allGamesFetched = sortArrByPriority(games);
                         processThumbnails(allGamesFetched);
-                        $scope.allGames = $scope.allGames.concat(allGamesFetched);
+                        $scope.allGames = extendGames($scope.allGames, allGamesFetched);
                         Games.storeGames($scope.allGames);
                     });
                 }, 1000);

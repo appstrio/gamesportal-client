@@ -1,7 +1,7 @@
 var gamesModule = gamesModule || angular.module('aio.games', []);
 
-gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
-    function ($log, $q, $timeout, $http, Firebase) {
+gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase', 'GamesDB',
+    function ($log, $q, $timeout, $http, Firebase, GamesDB) {
 
         var localStorageKey = 'games';
         var oldTimeout = 1000 * 3600 * 24;
@@ -15,16 +15,9 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
             });
         };
 
-        var initFirebase = function () {
-            Firebase.getGames({
-                getInitial: true
-            }).then(function (games) {
-                initting.resolve(games);
-                //                storeGames(games);
-            }).
-            catch (function () {
-                initting.reject();
-            });
+        var getInitialGames = function () {
+            //get games from memroy DB
+            return initting.resolve(GamesDB);
         };
 
         var getAllGames = function () {
@@ -67,12 +60,17 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
                     }
                 }
             } catch (e) {
-                initFirebase();
+                getInitialGames();
             }
         };
 
         var isLocalStorage = function () {
-            return localStorage && localStorage.getItem;
+            try {
+                return localStorage && localStorage.getItem;
+            } catch (e) {
+                console.info('no localstorage');
+            }
+            return false;
         };
 
         var isOld = function (timestamp) {
@@ -86,7 +84,7 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
         if (isLocalStorage()) {
             initLocalStorage();
         } else {
-            initFirebase();
+            getInitialGames();
         }
 
         return {
@@ -95,10 +93,6 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase',
             allGamesAlreadyFetched: allGamesAlreadyFetched,
             storeGames: storeGames
         };
-
-        //    return $http.get('bizigames.json?rnd=' + Date.now()).then(function(data){
-        //        return data.data;
-        //    });
     }
 ]).controller('GameCtrl', [
     '$scope', '$log', '$q', '$timeout', '$http', '$stateParams', '$state', 'Firebase', 'Games', 'GamesHelpers',
