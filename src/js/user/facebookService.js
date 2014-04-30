@@ -5,15 +5,17 @@ facebookModule.factory('Facebook', ['$rootScope', '$log', '$q', '$timeout', '$ht
     function ($rootScope, $log, $q, $timeout, $http, Firebase, Config) {
 
         if (typeof FB === 'undefined' || !FB.init) {
-            $.getScript('//connect.facebook.net/en_US/all.js', function () {
-                FB.init({
-                    appId: Config.FACEBOOK_APP_ID,
-                    status: false, // check login status
-                    cookie: true, // enable cookies to allow the server to access the session
-                    xfbml: false // parse XFBML
+            $timeout(function () {
+                $.getScript('//connect.facebook.net/en_US/all.js', function () {
+                    FB.init({
+                        appId: Config.FACEBOOK_APP_ID,
+                        status: false, // check login status
+                        cookie: true, // enable cookies to allow the server to access the session
+                        xfbml: false // parse XFBML
+                    });
+                    FB.Event.subscribe('auth.authResponseChange', Firebase.handleFBAuth);
                 });
-                FB.Event.subscribe('auth.authResponseChange', Firebase.handleFBAuth);
-            });
+            }, 500);
         }
         return {
             inviteFriends: function () {
