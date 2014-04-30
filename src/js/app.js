@@ -6,8 +6,8 @@ angular.module('myApp', [
     'ui.router', 'ngSanitize', 'aio.counter', 'angularjs.media.directives', 'infinite-scroll',
     'aio.win', 'aio.leaderboard', 'aio.facebook', 'aio.config', 'aio.chrome', 'aio.common', 'ui.bootstrap',
     'pascalprecht.translate'
-]).config(['$stateProvider', '$urlRouterProvider', '$sceDelegateProvider', '$translateProvider',
-    function ($stateProvider, $urlRouterProvider, $sceDelegateProvider, $translateProvider) {
+]).config(['$stateProvider', '$urlRouterProvider', '$sceDelegateProvider',
+    function ($stateProvider, $urlRouterProvider, $sceDelegateProvider) {
         $urlRouterProvider.otherwise('/');
 
         $stateProvider
