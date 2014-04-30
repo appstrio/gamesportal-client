@@ -305,9 +305,6 @@ mainModule.controller('MainCtrl', [
                             });
                         });
                     }
-                    $.getScript('//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-534644e35a88a9ba', angular.noop);
-                    window.addthis_config = window.addthis_config || {};
-                    window.addthis_config.data_track_addressbar = false;
                 }, 500);
             });
     }
