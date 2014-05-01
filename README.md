@@ -25,10 +25,16 @@ $ npm install
 
 ## Deploy
 
-After building a version, use:
+You can deploy to either the amazon s3 bucket of Gamestab (play.gamestab.me) with:
 
 ```bash
-$ gulp deploy
+$ gulp gamestab
 ```
 
-With the AWS command line tool.
+Or deploy to the s3 bucket of Mojo-Games (www.mojo-games.com):
+
+```bash
+$ gulp mojo
+```
+
+**Notice that the images & fonts from the build dir aren't copied, since they mostly stay the same. To deploy them as well - uncomment that section in the gulp task of `deploy`**
