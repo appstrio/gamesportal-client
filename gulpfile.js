@@ -70,6 +70,13 @@ gulp.task('html', ['scripts', 'vendors', 'css'], function () {
         .pipe(gulp.dest('./build/'));
 });
 
+//copy asstes to build directory
+gulp.task('assets' , function () {
+    //create scripts stream
+    return gulp.src('./src/assets/*.json')
+        .pipe(gulp.dest('./build/assets/'));
+});
+
 //compile css
 gulp.task('css', function () {
     var stream = streamqueue({
@@ -138,7 +145,7 @@ gulp.task('watch', function () {
 });
 
 gulp.task('build', ['clean'], function () {
-    return gulp.start('images', 'fonts', 'css', 'vendors', 'scripts', 'html');
+    return gulp.start('images', 'fonts', 'css', 'vendors', 'scripts', 'html', 'assets');
 });
 
 //default task
@@ -206,4 +213,10 @@ gulp.task('deploy', function () {
     })
         .pipe(publisher.publish(noCacheHeaders))
         .pipe($gulp.awspublish.reporter()); // print upload updates to console
+
+    gulp.src('./build/assets/*.json')
+        .pipe($gulp.awspublish.gzip())
+        .pipe(publisher.publish(oneMonthHeaders))
+        .pipe($gulp.awspublish.reporter()); // print upload updates to console
+
 });
