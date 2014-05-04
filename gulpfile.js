@@ -178,6 +178,10 @@ gulp.task('deploy', function () {
         'Cache-Control': 'max-age=2628000,s-maxage=2628000,no-transform,public',
         'Vary': 'Accept-Encoding'
     };
+    var oneDayHeaders = {
+        'Cache-Control': 'max-age=86400,s-maxage=86400,no-transform,public',
+        'Vary': 'Accept-Encoding'
+    };
     var fontsHeaders = {
         'Cache-Control': 'max-age=2628000,s-maxage=2628000,no-transform,public',
     };
@@ -214,9 +218,11 @@ gulp.task('deploy', function () {
         .pipe(publisher.publish(noCacheHeaders))
         .pipe($gulp.awspublish.reporter()); // print upload updates to console
 
-    gulp.src('./build/assets/*.json')
+    gulp.src(['./**/*.json'], {
+        cwd: './build/'
+    })
         .pipe($gulp.awspublish.gzip())
-        .pipe(publisher.publish(oneMonthHeaders))
+        .pipe(publisher.publish(oneDayHeaders))
         .pipe($gulp.awspublish.reporter()); // print upload updates to console
 
 });
