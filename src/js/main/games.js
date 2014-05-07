@@ -428,7 +428,7 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase', 'Ga
         return {
             "2048"                             : {
                 "hot"        : true,
-                "voteDown"   : 17,
+                "voteDown"   : 0,
                 "source"     : "swf",
                 "description": "Get the highest score on this amazing puzzle game",
                 "thumbnails" : [
@@ -907,7 +907,7 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase', 'Ga
             "gang_blast_2_"                    : {
                 "voteUp"     : 13,
                 "hot"        : false,
-                "voteDown"   : 4,
+                "voteDown"   : 2,
                 "source"     : "swf",
                 "thumbnails" : [
                     {
@@ -1296,7 +1296,7 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase', 'Ga
             "angry_gran_run:_christmas_village": {
                 "price"     : "150",
                 "voteUp"    : 11,
-                "voteDown"  : 8,
+                "voteDown"  : 5,
                 "source"    : "swf",
                 "thumbnails": [
                     {

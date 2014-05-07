@@ -22,9 +22,9 @@
                                 .icon.glyphicon.glyphicon-thumbs-up
                             span(style="font-size:13px;", ng-show="votingProgress") Sending Vote...
                     .addthis_toolbox.addthis_default_style(style="float:right;margin-top:12px;")
-                        a.addthis_button_facebook_like(style='margin-right:35px; width:49px !important;height:20px !important;', fb:like:layout="button_count", addthis:url="https://www.facebook.com/pages/Mojo-Gamescom/452845291514515")
+                        a.addthis_button_facebook_like(style='margin-right:35px; width:49px !important;height:20px !important;', fb:like:layout="button_count", addthis:url="/games/{{game.id}} ")
                         //- a.addthis_button_twitter_follow_native(tf:screen_name="DaRealMojoGames", tf:show-screen-name="false", tf:show-count="false")
-                        a.addthis_button_google_plusone(style='margin-right:35px; width:30px !important;height:18px !important;',g:plusone:href="https://plus.google.com/u/0/105972966277627450580/about", g:plusone:size="medium")
+                        a.addthis_button_google_plusone(style='margin-right:35px; width:30px !important;height:18px !important;',g:plusone:href="/games/{{game.id}}", g:plusone:size="medium")
                 .embedding
                     .include(ng-if="game.source", ng-include="'embeds/embed-' + game.source + '.html'")
                         #flashGame
