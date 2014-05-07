@@ -281,6 +281,8 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase', 'Ga
                         $scope.game = game;
                         GamesHelpers.getGameIndex(game.id).then(function (index) {
                             $scope.gameIndex = index;
+                            //reload addthis script for specific game like
+                            $.getScript('//s7.addthis.com/js/300/addthis_widget.js#domready=1', angular.noop);
                         });
                     }
                 }).
