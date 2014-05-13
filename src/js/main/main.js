@@ -1,10 +1,10 @@
 /* global ga */
-var mainModule = mainModule || angular.module('aio.main', []);
+var mainModule = mainModule || angular.module('aio.main', ['ngRoute']);
 
 mainModule.controller('MainCtrl', [
-    '$scope', '$log', '$q', '$timeout', '$http', 'Firebase',
+    '$scope', '$log', '$q', '$timeout', '$route', '$http', 'Firebase',
     'Games', '$state', '$stateParams', 'Facebook', 'Chrome', 'Config', '$translate',
-    function ($scope, $log, $q, $timeout, $http, Firebase, Games, $state, $stateParams, Facebook, Chrome, Config, $translate) {
+    function ($scope, $log, $q, $timeout, $route, $http, Firebase, Games, $state, $stateParams, Facebook, Chrome, Config, $translate) {
         $scope.allGames = [];
         $scope.appName = Config.APP_NAME;
         $scope.appLogo = './img/logo-' + $scope.appName.toLowerCase().replace(/ /g, '') + '.png';
@@ -27,6 +27,11 @@ mainModule.controller('MainCtrl', [
             iframe: 'http://ads.ad4game.com/www/delivery/afr.php?zoneid=39438&cb=' + rand,
             a: 'http://ads.ad4game.com/www/delivery/dck.php?n=a1a724da&cb=' + rand,
             img: 'http://ads.ad4game.com/www/delivery/avw.php?zoneid=39438&cb=' + rand + '&n=a1a724da'
+        };
+
+        $scope.socialBtns = {
+            facebookPage: Config.FACEBOOK_PAGE,
+            googlePage: Config.GOOGLE_PAGE
         };
 
         $scope.nationalities = [{

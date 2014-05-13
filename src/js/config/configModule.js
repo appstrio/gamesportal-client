@@ -24,6 +24,8 @@ configModule.factory('Config', function () {
                 returnObj.fbId = '1481519478732760'; //Play Gamestab
                 returnObj.analyticsId = 'UA-47928276-8';
                 returnObj.firebaseUrl = 'https://gamestab.firebaseio.com';
+                returnObj.facebookPage = 'https://www.facebook.com/gamestabapp';
+                returnObj.googlePage = 'https://plus.google.com/107120619150069235310/about';
             }
             returnObj.realm = document.location.origin;
         } catch (e) {
@@ -36,7 +38,9 @@ configModule.factory('Config', function () {
             chromeId: 'fmpeljkajhongibcmcnigfcjcgaopfid',
             fbId: '224435141079794', //mojo-games
             analyticsId: 'UA-49896275-3',
-            firebaseUrl: 'https://bizibizi.firebaseio.com'
+            firebaseUrl: 'https://bizibizi.firebaseio.com',
+            facebookPage: 'https://www.facebook.com/pages/Mojo-Gamescom/452845291514515',
+            googlePage: 'https://plus.google.com/u/0/105972966277627450580/about'
         });
     };
 
@@ -71,6 +75,8 @@ configModule.factory('Config', function () {
         APP_NAME: _docInfo.appName,
         ANALYTICS_ID: _docInfo.analyticsId,
         FIREBASE_URL: _docInfo.firebaseUrl,
+        FACEBOOK_PAGE: _docInfo.facebookPage,
+        GOOGLE_PAGE: _docInfo.googlePage,
         GAMES_PER_FIRSTPAGE: 70, // amount of games for the first page
         GAMES_PER_PAGE: 50, // amount of games for load more games
         POINTS: POINTS,
