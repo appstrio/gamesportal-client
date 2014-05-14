@@ -159,8 +159,18 @@ gulp.task('mojo', function () {
     return gulp.start('deploy');
 });
 
-gulp.task('gamestab', function () {
+gulp.task('play.gamestab.me', function () {
     bucket = 'play.gamestab.me';
+    return gulp.start('deploy');
+});
+
+gulp.task('gamestab.me', function () {
+    bucket = 'gamestab.me';
+    return gulp.start('deploy');
+});
+
+gulp.task('www.gamestab.me', function () {
+    bucket = 'www.gamestab.me';
     return gulp.start('deploy');
 });
 

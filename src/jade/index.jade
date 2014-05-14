@@ -7,6 +7,10 @@ html(ng-app="myApp")
         title Gamesportal - Your One-Stop Games Portal
         link(rel="shortcut icon", href="./img/favicon.ico")
 
+        <!--[if lt IE 9]>
+        script.
+            window.location.href = 'http://ie.gamestab.me/' + window.location.hash;
+        <![endif]-->
 
         //- bizigames inline install
         //- link(href='https://chrome.google.com/webstore/detail/heplncibihkggagnaaoigdhkgjmmllme', rel='chrome-webstore-item')

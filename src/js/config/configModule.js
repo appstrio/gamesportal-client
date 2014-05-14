@@ -18,7 +18,7 @@ configModule.factory('Config', function () {
         var returnObj = {};
 
         try {
-            if (document.location.hostname.indexOf('.gamestab.me') > 0) {
+            if (document.location.hostname.indexOf('gamestab.me') >= 0) {
                 returnObj.appName = 'Gamestab';
                 returnObj.chromeId = 'amlhfkalaoikfbpoolhpdhignhjhlhko'; // gamestab,
                 returnObj.fbId = '1481519478732760'; //Play Gamestab
