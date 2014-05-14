@@ -9,7 +9,10 @@
   },
   "bugs": "",
   "private": true,
-  "dependencies": {},
+  "dependencies": {
+    "lodash._objecttypes": "~2.4.1",
+    "lodash._htmlescapes": "~2.4.1"
+  },
   "devDependencies": {
     "connect": "^2.14.5",
     "gulp": "^3.6.2",
