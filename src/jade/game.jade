@@ -39,9 +39,10 @@
                 .right-ad-unit
                     //* Ad4Game iFrame Tag */
                     div(ng-if="appName==='Gamestab'")
-                        include includes/skyscraper-right-gamestab
+                        //- include includes/skyscraper-right-gamestab
+                        adsense-ad-async(ad-sense-loaded="adSenseLoaded", ad-kind="skyscrapers", pub-id="4340706792144528", ad-slot-id="5348395892", ad-width="160", ad-height="600")
                     div(ng-if='appName==="Mojo Games"')
-                        adsense-ad(ad-sense-loaded="adSenseLoaded", ad-slot-id="9736386005", ad-width="160", ad-height="600")
+                        adsense-ad(ad-sense-loaded="adSenseLoaded", pub-id="3411183432281537", ad-slot-id="9736386005", ad-width="160", ad-height="600")
         div(ng-class='appName==="Mojo Games" ? "bottom-mojo" : "bottom"')
             .more-games-bottom
                 .game(ng-repeat="game in moreGames")
