@@ -2,9 +2,9 @@
 var mainModule = mainModule || angular.module('aio.main', ['ngRoute']);
 
 mainModule.controller('MainCtrl', [
-    '$scope', '$log', '$q', '$timeout', '$route', '$http', 'Firebase',
+    '$scope', '$log', '$q', '$timeout', '$route', '$http', 'Firebase', '$location',
     'Games', '$state', '$stateParams', 'Facebook', 'Chrome', 'Config', '$translate',
-    function ($scope, $log, $q, $timeout, $route, $http, Firebase, Games, $state, $stateParams, Facebook, Chrome, Config, $translate) {
+    function ($scope, $log, $q, $timeout, $route, $http, Firebase, $location, Games, $state, $stateParams, Facebook, Chrome, Config, $translate) {
         $scope.allGames = [];
         $scope.appName = Config.APP_NAME;
         $scope.appLogo = './img/logo-' + $scope.appName.toLowerCase().replace(/ /g, '') + '.png';
@@ -68,6 +68,8 @@ mainModule.controller('MainCtrl', [
         $scope.fixedHeader = true;
         $scope.smallHeader = false;
         loaded = true;
+
+        $scope.browser = (navigator.appVersion.indexOf('MSIE') !== -1) ? 'IE' : 'OTHER';
 
         ga('create', Config.ANALYTICS_ID, {
             'cookieDomain': 'none'
@@ -282,7 +284,6 @@ mainModule.controller('MainCtrl', [
             $scope.masonryOptions.isAnimated = false;
             $scope.masonryOptions.transitionDuration = 0;
             $scope.overlayID = $stateParams.overlayID;
-
             //report analytics on state change
             if (toState.name !== fromState.name) {
                 ga('send', 'pageview', {

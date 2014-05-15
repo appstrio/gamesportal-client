@@ -39,8 +39,8 @@
                 .right-ad-unit
                     //* Ad4Game iFrame Tag */
                     div(ng-if="appName==='Gamestab'")
-                        //- include includes/skyscraper-right-gamestab
-                        adsense-ad-async(ad-sense-loaded="adSenseLoaded", ad-kind="skyscrapers", pub-id="4340706792144528", ad-slot-id="5348395892", ad-width="160", ad-height="600")
+                        include includes/skyscraper-right-gamestab
+                        //adsense-ad-async(ad-sense-loaded="adSenseLoaded", ad-kind="skyscrapers", pub-id="4340706792144528", ad-slot-id="5348395892", ad-width="160", ad-height="600")
                     div(ng-if='appName==="Mojo Games"')
                         adsense-ad(ad-sense-loaded="adSenseLoaded", pub-id="3411183432281537", ad-slot-id="9736386005", ad-width="160", ad-height="600")
         div(ng-class='appName==="Mojo Games" ? "bottom-mojo" : "bottom"')
@@ -49,6 +49,8 @@
                     a(ui-sref="game({gameID: game.id})")
                         img.game-thumbnail(ng-src="{{game.thumbnails[0].url}}")
                         .name(ng-bind="game.name")
+            div(class="fb-comments" ,data-href="{{currentUrl}}", data-numposts="5", data-colorscheme="light")
+
 .modal-overlay-fade.premium-game-modal(ng-show="overlayUnlockGame", ng-cloak)
     .modal-dialog
         .close-button(ng-click="goHome()")
@@ -71,4 +73,15 @@
             //- user doesn't have enough credits to unlock game
             div(ng-if="userData.user.points < lockedGame.price")
                 h4 You don't have enough coins
-                button(type="button", class="btn btn-success", ng-click="goHome('WIN_COINS')") Win Coins
+            button(type="button", class="btn btn-success", ng-click="goHome('WIN_COINS')") Win Coins
+//- CPM STAR CODE
+//script.
+//    (function(i,w,d,p,c,e,o,a,s,t){
+//        p.poolid = 57653; //Pool ID assigned by CPMStar
+//    c.background = null; //URL of background image to override default image
+//    c.close = null; //URL of start game/video button to override default image
+//    c.type = 'game'; //Use built in "Start Video" or "Start Game" button (video|game, default: game)
+//    o.select = '.embedding'; // holder of the game
+//        t=d.getElementsByTagName('script');if(!w[i]){w[i]={ads:[]};s=d.createElement('script');s.src=(d.location.protocol=='https:'?'//server':'//cdn')+'.cpmstar.com/cached/js/global_v100.pack.js?poolid='+p.poolid;s.type='text/javascript';s.async='';t[0].parentNode.insertBefore(s,t[0]);}w[i].ads.push(a={params:p,config:c,events:e,overlay:o,placeholder:t[t.length-1]});})('cpmstar',window,document,{},{},{},{});
+//
+

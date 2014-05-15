@@ -20,7 +20,8 @@
                     img(ng-src="{{nationality.flag}}", width='20', height='20')
                     span {{nationality.language}}
         span.glyphicon.glyphicon-lock(ng-click="goHome('privacy')")
-        span.glyphicon.glyphicon-envelope(ng-click="goHome('contact')")
+        a(href="mailto:gamestabportal@gmail.com")
+            span.glyphicon.glyphicon-envelope
 
     .search-box(ng-cloak)
         .input-group
@@ -54,12 +55,12 @@
     .banner(ng-class="{'in-game': !fixedHeader}")
         .bg-banner(ng-cloak)
             div(ng-if="appName==='Gamestab'")
-                //.bg-ad
-                //    include leaderboard-gamestab
-                .bg-ad(ng-show='!fixedHeader')
-                    adsense-ad-async(ad-sense-loaded="adSenseLoaded", ad-kind="Homepage", pub-id="4340706792144528", ad-slot-id="3871662693", ad-width="728", ad-height="90")
-                .bg-ad(ng-show='fixedHeader')
-                    adsense-ad-async(ad-sense-loaded="adSenseLoaded", ad-kind="Homepage", pub-id="4340706792144528", ad-slot-id="2394929491", ad-width="728", ad-height="90")
+                .bg-ad
+                    include leaderboard-gamestab
+                //.bg-ad(ng-show='!fixedHeader')
+                //    adsense-ad-async(ad-sense-loaded="adSenseLoaded", ad-kind="Homepage", pub-id="4340706792144528", ad-slot-id="3871662693", ad-width="728", ad-height="90")
+                //.bg-ad(ng-show='fixedHeader')
+                //    adsense-ad-async(ad-sense-loaded="adSenseLoaded", ad-kind="Homepage", pub-id="4340706792144528", ad-slot-id="2394929491", ad-width="728", ad-height="90")
             div(ng-if='appName==="Mojo Games"')
                 .bg-ad(ng-show='!fixedHeader')
                     adsense-ad(ad-sense-loaded="adSenseLoaded", pub-id="3411183432281537", ad-slot-id="8399253601")
