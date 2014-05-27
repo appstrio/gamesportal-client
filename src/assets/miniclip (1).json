@@ -1,4 +1,4 @@
-[, {
+[ {
     "name": "Rail Rush Worlds",
     "thumbnail": {
         "url": "http://e.miniclip.com/content/game-icons/medium/railrush.jpg",
@@ -13,7 +13,7 @@
 }, {
     "name": "Hot Rod Racers",
     "thumbnail": {
-        "url": "http://e.miniclip.com/content/game-icons/medium/Hot_Rod_largeicon_150x110.png",
+        "url": "http://e.miniclitdp.com/content/game-icons/medium/Hot_Rod_largeicon_150x110.png",
         "size": "medium"
     },
     "id": "hot_rod_racers",
