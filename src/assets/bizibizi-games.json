@@ -1,4 +1,141 @@
 {
+    "2048"                                      : {
+        "voteUp"     : 29,
+        "hot"        : true,
+        "voteDown"   : 33,
+        "languages"  : [ "en" ],
+        "source"     : "swf",
+        "description": "Get the highest score on this amazing puzzle game",
+        "thumbnails" : [
+            {
+                "url"   : "img/2048.png",
+                "height": 252,
+                "width" : 252
+            }
+        ],
+        "category"   : "Puzzle",
+        "name"       : "2048",
+        "priority"   : 1,
+        "height"     : 600,
+        "swf_url"    : "http://medias.yepifrivkizi.net/flash-2014/2048-flash.swf",
+        "width"      : 480,
+        "id"         : "2048",
+        "metascore"  : 0
+    },
+    "panda_play_pad"                            : {
+        ".priority"   : 1234.0,
+        "instructions": "Mouse to play, click the blocks.",
+        "languages"   : [ "en" ],
+        "source"      : "swf",
+        "thumbnails"  : [
+            {
+                "url"   : "//s3.amazonaws.com/www.mojo-games.com/img/games/e7e23670481ac78b3c4122a99ba60573.jpg",
+                "height": 135,
+                "width" : 180
+            }
+        ],
+        "description" : "A panda is playing on his pad, a fun puzzle game. Combine as many of the same fruit blocks to score points (match 3 minimum). Special blocks will appear to help you. Unlimited levels, just do not let the blocks reach the top. A challenging and addictive game for all ages. ",
+        "game_url"    : "http://games.gamedistribution.com/Panda-Play-Pad",
+        "category"    : "Skill",
+        "name"        : "Panda Play Pad",
+        "timestamp"   : 1395850481000,
+        "priority"    : 1234,
+        "height"      : 480,
+        "author"      : "Nowgamez.com",
+        "swf_url"     : "http://swf.gamedistribution.com/e7e23670481ac78b3c4122a99ba60573.swf",
+        "width"       : 720,
+        "tags"        : [ "skill", "fun", "puzzle", "panda", "addicting", "free", "english", "match", "match 3" ],
+        "uuid"        : "dec9023674193d879fd8740448997915",
+        "id"          : "panda_play_pad",
+        "metascore"   : 0
+    },
+    "ninja_panda_couple"                        : {
+        ".priority"   : 1000.0,
+        "instructions": "Use arrow keys and asdw to move",
+        "languages"   : [ "en" ],
+        "source"      : "swf",
+        "thumbnails"  : [
+            {
+                "url"   : "//s3.amazonaws.com/www.mojo-games.com/img/games/1211358512272.jpg",
+                "height": 135,
+                "width" : 180
+            }
+        ],
+        "description" : "Can you beat this training course and become a full fledged ninja panda either on 1 player or on a 2 player mode with your panda wife Addictive, fun platformer everyone can enjoy.",
+        "game_url"    : "http://games.gamedistribution.com/Ninja-Panda-Couple",
+        "category"    : "1 Player",
+        "name"        : "Ninja Panda Couple",
+        "timestamp"   : 1395850624352,
+        "priority"    : 1000,
+        "height"      : 480,
+        "author"      : "5games.com",
+        "swf_url"     : "http://swf.gamedistribution.com/1211358512272.swf",
+        "width"       : 640,
+        "tags"        : [ "1 player", "2 player", "multiplayer", "couple", "two player  platformer", "8-bit", "skill", "multiplayer" ],
+        "uuid"        : "872b34e97e6f265303760b8f76653eb0",
+        "id"          : "ninja_panda_couple",
+        "metascore"   : 0
+    },
+    "3_pandas_brazil"                           : {
+        ".priority"   : 10.0,
+        "price"       : "20000",
+        "hot"         : false,
+        "instructions": "Use the mouse to move the pandas through each level.",
+        "source"      : "swf",
+        "languages"   : [ "en" ],
+        "thumbnails"  : [
+            {
+                "url"   : "//s3.amazonaws.com/www.mojo-games.com/img/games/98e6f17209029f4ae6dc9d88ec8eac2c.jpg",
+                "height": 135,
+                "width" : 180
+            }
+        ],
+        "description" : "The crazy 3 pandas are back and making their escape once again! They were captured by a poacher but escaped his trap and landed in Brazil!! They love Brazil but have never been there so it is all new fun for them. These adventurous Pandas are in for a lots of fun new tricks and new obstacles!",
+        "game_url"    : "http://games.gamedistribution.com/3-Pandas-Brazil",
+        "category"    : "Adventure",
+        "name"        : "3 Pandas Brazil",
+        "timestamp"   : 1395850467456,
+        "priority"    : 10,
+        "height"      : 500,
+        "author"      : "Slix media",
+        "swf_url"     : "http://swf.gamedistribution.com/98e6f17209029f4ae6dc9d88ec8eac2c.swf",
+        "width"       : 650,
+        "new"         : true,
+        "premium"     : true,
+        "tags"        : [ "pandas", "adventure", "brazil", "strategy", "puzzle" ],
+        "uuid"        : "3df2b6fce6948d956776b7f18d82097e",
+        "id"          : "3_pandas_brazil",
+        "metascore"   : 0
+    },
+    "fancy_pandas"                              : {
+        ".priority"   : 2.0,
+        "voteUp"      : 2,
+        "voteDown"    : 2,
+        "instructions": "Mouse",
+        "languages"   : [ "en" ],
+        "source"      : "swf",
+        "thumbnails"  : [
+            {
+                "url"   : "//s3.amazonaws.com/www.mojo-games.com/img/games/281347632864.jpg",
+                "height": 150,
+                "width" : 200
+            }
+        ],
+        "description" : "Pandas need to stick together. Try to gather them in this clever physics game and use the objects wisely to do so.<br/>Have Fun!",
+        "game_url"    : "http://games.gamedistribution.com/Fancy-Pandas",
+        "category"    : "Puzzle",
+        "name"        : "Fancy Pandas",
+        "timestamp"   : 1395850645007,
+        "priority"    : 2,
+        "height"      : 500,
+        "author"      : "Kaiser-Games-GmbH",
+        "swf_url"     : "http://swf.gamedistribution.com/281347632864.swf",
+        "width"       : 600,
+        "tags"        : [ "Puzzle", "Physics" ],
+        "uuid"        : "47f7ef64a032c32a48a6659b62af216c",
+        "id"          : "fancy_pandas",
+        "metascore"   : 0
+    },
     "unperfect"                                 : {
         ".priority"   : 500.0,
         "hot"         : false,
