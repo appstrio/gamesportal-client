@@ -109,7 +109,7 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase', 'Ga
             $scope.gameLoading = true;
             $scope.currentUrl = $location.$$absUrl;
             $scope.currentUrlEncoded = encodeURIComponent($scope.currentUrl);
-            $scope.showPreRoll = !($location.$$search && $location.$$search.nopre) && $scope.appName === "Mojo Games";
+            $scope.showPreRoll = $location.$$search && $location.$$search.pre && $scope.appName === "Mojo Games";
 
 
             if($scope.showPreRoll) {
