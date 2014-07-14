@@ -108,6 +108,28 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase', 'Ga
             // var pointsPerGame = 100;
             $scope.gameLoading = true;
             $scope.currentUrl = $location.$$absUrl;
+            $scope.currentUrlEncoded = encodeURIComponent($scope.currentUrl);
+            $scope.showPreRoll = !($location.$$search && $location.$$search.nopre) && $scope.appName === "Mojo Games";
+
+
+            if($scope.showPreRoll) {
+                $scope.gameContainerStyle = {display:'none'};
+            } else {
+                $scope.gameContainerStyle = {display:'block'};
+            }
+
+            var hidePreloader = function () {
+                $('#preloader').fadeOut('easeOutBounce', function () {
+                    $('object.game').show();
+                    $('#gameContainer').show();
+                });
+            };
+            window.removeAdSwf = function () {
+                hidePreloader();
+            };
+            window.noAdsReturned = function () {
+                hidePreloader();
+            };
             /**
              * initializes the service.
              * extract the game ID from the url params
