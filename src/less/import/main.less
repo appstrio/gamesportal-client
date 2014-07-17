@@ -185,6 +185,8 @@ header {
             float: right;
             position: relative;
             margin: auto;
+            top:18px;
+            left: -30px;
             width: 65px;
             z-index: 2;
         }
@@ -269,6 +271,7 @@ header {
             }
         }
         .profile-pic {
+            display: block;
             margin-top: 2px;
             float: right;
             img {
@@ -279,7 +282,9 @@ header {
                     cursor: pointer;
                 }
             }
-
+        }
+        @media (max-width: 900px) {
+            display: none;
         }
     }
 
@@ -319,6 +324,9 @@ header {
         margin-left: 26px;
         float: left;
         position: relative;
+        @media (max-width: 700px) {
+          display: none;
+        }
                   * {
                       cursor: pointer;
                   }
