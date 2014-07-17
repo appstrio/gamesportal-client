@@ -272,6 +272,37 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase', 'Ga
 
             init();
         }
+    ]).directive('preLoader' ,['$compile',
+        function ($compile) {
+            var $elm = _.template('<object id="preloader" classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" '+
+                'codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=10,0,0,0" '+
+                'width="640" height="550" align="middle">' +
+                '<param name="allowScriptAccess" value="always">' +
+                '<param name="allowFullScreen" value="false">' +
+                '<param name="movie" value="ima3_preloader_1.5.swf">' +
+                '<param name="quality" value="high">' +
+                '<param name="bgcolor" value="#ffffff">' +
+                '<param name="flashvars" value="<%= flashVars %>">' +
+                '<embed src="img/ima3_preloader_1.5.swf" quality="high" bgcolor="#000000" width="640" '+
+                'height="550" name="preloader" align="middle" allowscriptaccess="always" allowfullscreen '+
+                'type="application/x-shockwave-flash" flashvars="<%= flashVars %>" '+
+                'pluginspage="http://www.adobe.com/go/getflashplayer"> </embed></object>');
+
+            return {
+                restrict: 'E',
+                replace : true,
+                scope   : {
+                    flashVars: '='
+                },
+                link    : function (scope, element) {
+                    var _elm = $elm({
+                        flashVars    : scope.flashVars
+                    });
+                    //insert html to element
+                    element.html(_elm);
+                }
+            };
+        }
     ]).controller('EditGameCtrl', ['$scope', '$log', '$q', '$timeout',
         '$http', '$stateParams', '$state', 'Firebase', 'Games', 'GamesHelpers',
         function ($scope, $log, $q, $timeout, $http, $stateParams, $state, Firebase, Games, GamesHelpers) {
