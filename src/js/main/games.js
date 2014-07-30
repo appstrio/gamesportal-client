@@ -58,6 +58,7 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase', 'Ga
                             allGamesAlreadyFetched = true;
                             if (isVeryOld(obj.timestamp)) {
                                 refreshFirebase();
+                                return initting.resolve(obj.games);
                             } else if (isOld(obj.timestamp)) {
                                 refreshFirebase();
                                 return initting.resolve(obj.games);
@@ -2386,7 +2387,7 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase', 'Ga
                     "swf_url"    : "http://swf.gamedistribution.com/8d420fa35754d1f1c19969c88780314d.swf",
                     "width"      : 720,
                     "premium"    : false,
-                    "id"         : "battlefield_medic",
+                    "id"         : "battlefield_medic"
                 }
             };
         }
