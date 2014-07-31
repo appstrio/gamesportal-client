@@ -69,7 +69,7 @@ mainModule.controller('MainCtrl', [
         $scope.smallHeader = false;
         loaded = true;
 
-        $scope.browser = (navigator.appVersion.indexOf('MSIE') !== -1) ? 'IE' : 'OTHER';
+        $scope.browser = ((navigator.appVersion.indexOf('MSIE') !== -1) || (navigator.appVersion.indexOf('rv:11.0') !== -1)) ? 'IE' : 'OTHER';
 
         ga('create', Config.ANALYTICS_ID, {
             'cookieDomain': 'none'
