@@ -90,7 +90,8 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase', 'Ga
             };
 
             if (isLocalStorage()) {
-                initLocalStorage();
+                getInitialGames();
+//                initLocalStorage();
             } else {
                 getInitialGames();
             }
@@ -111,12 +112,12 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase', 'Ga
             $scope.currentUrl = $location.$$absUrl;
             $scope.currentUrlEncoded = encodeURIComponent($scope.currentUrl);
             $scope.showPreRoll = $location.$$search && $location.$$search.pre && $scope.appName === "Mojo Games";
-            $scope.flashVars = "adTagUrl=http%3A%2F%2Fgoogleads.g.doubleclick.net%2Fpagead%2Fads%3Fad_type%3Dvideo_image_text_flash%26client%3Dca-games-pub-3411183432281537%26videoad_start_delay%3D0%26description_url%3D"+ $scope.currentUrlEncoded +"%26max_ad_duration%3D40000%26hl%3Den";
+            $scope.flashVars = "adTagUrl=http%3A%2F%2Fgoogleads.g.doubleclick.net%2Fpagead%2Fads%3Fad_type%3Dvideo_image_text_flash%26client%3Dca-games-pub-3411183432281537%26videoad_start_delay%3D0%26description_url%3D" + $scope.currentUrlEncoded + "%26max_ad_duration%3D40000%26hl%3Den";
 
-            if($scope.showPreRoll) {
-                $scope.gameContainerStyle = {display:'none'};
+            if ($scope.showPreRoll) {
+                $scope.gameContainerStyle = {display: 'none'};
             } else {
-                $scope.gameContainerStyle = {display:'block'};
+                $scope.gameContainerStyle = {display: 'block'};
             }
 
             var hidePreloader = function () {
@@ -273,10 +274,10 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase', 'Ga
 
             init();
         }
-    ]).directive('preLoader' ,['$compile',
+    ]).directive('preLoader', ['$compile',
         function ($compile) {
-            var $elm = _.template('<object id="preloader" classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" '+
-                'codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=10,0,0,0" '+
+            var $elm = _.template('<object id="preloader" classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" ' +
+                'codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=10,0,0,0" ' +
                 'width="640" height="550" align="middle">' +
                 '<param name="allowScriptAccess" value="always">' +
                 '<param name="allowFullScreen" value="false">' +
@@ -284,9 +285,9 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase', 'Ga
                 '<param name="quality" value="high">' +
                 '<param name="bgcolor" value="#ffffff">' +
                 '<param name="flashvars" value="<%= flashVars %>">' +
-                '<embed src="img/ima3_preloader_1.5.swf" quality="high" bgcolor="#000000" width="640" '+
-                'height="550" name="preloader" align="middle" allowscriptaccess="always" allowfullscreen '+
-                'type="application/x-shockwave-flash" flashvars="<%= flashVars %>" '+
+                '<embed src="img/ima3_preloader_1.5.swf" quality="high" bgcolor="#000000" width="640" ' +
+                'height="550" name="preloader" align="middle" allowscriptaccess="always" allowfullscreen ' +
+                'type="application/x-shockwave-flash" flashvars="<%= flashVars %>" ' +
                 'pluginspage="http://www.adobe.com/go/getflashplayer"> </embed></object>');
 
             return {
@@ -297,7 +298,7 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase', 'Ga
                 },
                 link    : function (scope, element) {
                     var _elm = $elm({
-                        flashVars    : scope.flashVars
+                        flashVars: scope.flashVars
                     });
                     //insert html to element
                     element.html(_elm);
@@ -522,7 +523,7 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase', 'Ga
                     "swf_url"    : "http://swf.gamedistribution.com/2cd4e8a2ce081c3d7c32c3cde4312ef7.swf",
                     "width"      : 640,
                     "premium"    : false,
-                    "id"         : "can_fighters",
+                    "id"         : "can_fighters"
                 },
                 "bank_robbers"                     : {
                     "price"      : "5000",
@@ -543,7 +544,7 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase', 'Ga
                     "swf_url"    : "http://swf.gamedistribution.com/dc40b7120e77741d191c0d2b82cea7be.swf",
                     "width"      : 800,
                     "premium"    : true,
-                    "id"         : "bank_robbers",
+                    "id"         : "bank_robbers"
                 },
                 "monster_truck_taxi"               : {
                     "price"      : "750",
@@ -2365,7 +2366,7 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase', 'Ga
                     "height"     : 500,
                     "swf_url"    : "http://swf.gamedistribution.com/6a81681a7af700c6385d36577ebec359.swf",
                     "width"      : 700,
-                    "id"         : "robot_go_home",
+                    "id"         : "robot_go_home"
                 },
                 "battlefield_medic"                : {
                     "price"      : "700",
@@ -2388,6 +2389,1036 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase', 'Ga
                     "width"      : 720,
                     "premium"    : false,
                     "id"         : "battlefield_medic"
+                },
+                "popeyes_spinach_tortellini"       : {
+                    "instructions": "Use the mouse.",
+                    "languages"   : [ "en" ],
+                    "source"      : "swf",
+                    "thumbnails"  : [
+                        {
+                            "url"   : "//s3.amazonaws.com/www.mojo-games.com/img/games/a588a6199feff5ba48402883d9b72700.jpg",
+                            "height": 135,
+                            "width" : 180
+                        }
+                    ],
+                    "description" : "In our brand new game you will be learning how to prepare a brand new and exciting recipe. This recipe is called Popeyes Spinach Tortellini and the reason why Popeye will teach you how to how to prepare this delicious recipe in particular is because it is his favorite recipe in the whole world. Everybody will adore this fantastic recipe, but especially you, who will be joining Popeye in his kitchen. Have fun!",
+                    "game_url"    : "http://games.gamedistribution.com/Popeyes-Spinach-Tortellini",
+                    "category"    : "Cooking",
+                    "name"        : "Popeyes Spinach Tortellini",
+                    "timestamp"   : 1395850512803,
+                    "priority"    : 1234,
+                    "height"      : 600,
+                    "author"      : "CuteZee",
+                    "swf_url"     : "http://swf.gamedistribution.com/a588a6199feff5ba48402883d9b72700.swf",
+                    "width"       : 800,
+                    "tags"        : [ "popeye", "spinach", "tortellini", "recipe", "ingredients", "popeye the sailor man" ],
+                    "uuid"        : "2be456395376f4a57bd59790e6e30368",
+                    "id"          : "popeyes_spinach_tortellini",
+                    "metascore"   : 0
+                },
+                "speed_city_3d"                    : {
+                    "instructions": "Arrow keys to drive. Switch camera angle with 1,2,3,4 keys or by clicking the video icon.",
+                    "languages"   : [ "en" ],
+                    "source"      : "swf",
+                    "thumbnails"  : [
+                        {
+                            "url"   : "//s3.amazonaws.com/www.mojo-games.com/img/games/24f0d2c90473b2bc949ad962e61d9bcb.jpg",
+                            "height": 135,
+                            "width" : 180
+                        }
+                    ],
+                    "description" : "A funny racing game. Race through the city with different vehicles like a: Ambulance, Police, Taxi and Bus. Unlock new tracks and vehicles. A funny high speed 3D racing game. Drift through the city!",
+                    "game_url"    : "http://games.gamedistribution.com/Speed-City-3D",
+                    "category"    : "Racing",
+                    "name"        : "Speed City 3D",
+                    "timestamp"   : 1395850481000,
+                    "priority"    : 1000,
+                    "height"      : 450,
+                    "author"      : "Nowgamez.com",
+                    "swf_url"     : "http://swf.gamedistribution.com/24f0d2c90473b2bc949ad962e61d9bcb.swf",
+                    "width"       : 580,
+                    "tags"        : [ "speed city", "racing", "driving", "3d", "fun", "racing games", "police", "drift", "speed" ],
+                    "uuid"        : "dcd18c0d22c773659212fa0b11a470b5",
+                    "id"          : "speed_city_3d",
+                    "metascore"   : 0
+                },
+                "adorable_dog_coloring"            : {
+                    "instructions": "Click on the colors and drop them on the picture. Click <br/>next icon to go to the next picture and click finish icon<br/>to complete the game. <br/>",
+                    "languages"   : [ "en" ],
+                    "source"      : "swf",
+                    "thumbnails"  : [
+                        {
+                            "url"   : "//s3.amazonaws.com/www.mojo-games.com/img/games/48c3ec5c3a93a9e294a8a6392ccedeb4.jpg",
+                            "height": 250,
+                            "width" : 300
+                        }
+                    ],
+                    "description" : "Dogs are lovable and fun and besides cuddling them you <br/>could add energy to your moments by splashing your favorite<br/>colors on them.<br/>",
+                    "game_url"    : "http://games.gamedistribution.com/Adorable-Dog-Coloring",
+                    "category"    : "Skill",
+                    "name"        : "Adorable Dog Coloring",
+                    "timestamp"   : 1395850441166,
+                    "priority"    : 1000,
+                    "height"      : 500,
+                    "author"      : "Fabsys",
+                    "swf_url"     : "http://swf.gamedistribution.com/48c3ec5c3a93a9e294a8a6392ccedeb4.swf",
+                    "width"       : 600,
+                    "tags"        : [ "Coloring" ],
+                    "uuid"        : "8eeab67431165eb7bed90c394e2ff4f3",
+                    "id"          : "adorable_dog_coloring",
+                    "metascore"   : 0
+                },
+                "hop_on_hop_off_mania"             : {
+                    "instructions": "Use your arrow keys to drive and your space bar to brake.",
+                    "languages"   : [ "en" ],
+                    "source"      : "swf",
+                    "thumbnails"  : [
+                        {
+                            "url"   : "//s3.amazonaws.com/www.mojo-games.com/img/games/1021365600028.jpg",
+                            "height": 200,
+                            "width" : 250
+                        }
+                    ],
+                    "description" : "Try an awesome combination of a racing and parking game, by driving a Hop On Hop Off type of bus, which tourists love. Try to get safely at the end of each level, before the time expires, but you will have to stop in the bus stations along the way and pick up the tourists that want to get in. Be careful not to crash or kill tourists and pick up power ups that will improve your health, protect you with a shield or give you a speed boost. Complete all eight levels with the highest score and have an amazing time!",
+                    "game_url"    : "http://games.gamedistribution.com/Hop-On-Hop-Off-Mania",
+                    "category"    : "Car",
+                    "name"        : "Hop On Hop Off Mania",
+                    "timestamp"   : 1395850581875,
+                    "priority"    : 1000,
+                    "height"      : 600,
+                    "author"      : "Idea Studios",
+                    "swf_url"     : "http://swf.gamedistribution.com/1021365600028.swf",
+                    "width"       : 800,
+                    "tags"        : [ "Bus", "Tourists", "Driving", "Parking" ],
+                    "uuid"        : "b557ef9d029d01e06ca21d4caced222c",
+                    "id"          : "hop_on_hop_off_mania",
+                    "metascore"   : 0
+                },
+                "cute_outfits"                     : {
+                    "instructions": "Use the mouse to choose the best outfits for this girl. <br/>",
+                    "languages"   : [ "en" ],
+                    "source"      : "swf",
+                    "thumbnails"  : [
+                        {
+                            "url"   : "//s3.amazonaws.com/www.mojo-games.com/img/games/97416ac0f58056947e2eb5d5d253d4f2.jpg",
+                            "height": 135,
+                            "width" : 180
+                        }
+                    ],
+                    "description" : "Feeling like putting a comfy, cute outfit on This game brings you a range of uber-cute clothing items that you can use to create the perfect outfit for a walk. Have fun!",
+                    "game_url"    : "http://games.gamedistribution.com/Cute-Outfits",
+                    "category"    : "Dress Up",
+                    "name"        : "Cute Outfits",
+                    "timestamp"   : 1395850455426,
+                    "priority"    : 1234,
+                    "height"      : 550,
+                    "author"      : "Gameskiff",
+                    "swf_url"     : "http://swf.gamedistribution.com/97416ac0f58056947e2eb5d5d253d4f2.swf",
+                    "width"       : 750,
+                    "tags"        : [ "cute", "outfits", "dressup" ],
+                    "uuid"        : "93c6f41daac2dabc37915f66c9f03971",
+                    "id"          : "cute_outfits",
+                    "metascore"   : 0
+                },
+                "fugitive_frenzy"                  : {
+                    "instructions": "Use your arrow keys to move, your space bar to brake, your enter key to get in the car.",
+                    "languages"   : [ "en" ],
+                    "source"      : "swf",
+                    "thumbnails"  : [
+                        {
+                            "url"   : "//s3.amazonaws.com/www.mojo-games.com/img/games/69d1fc78dbda242c43ad6590368912d4.jpg",
+                            "height": 130,
+                            "width" : 175
+                        }
+                    ],
+                    "description" : "Getting away from the cops usually requires a good plan and a great execution. We can help you with the plan: drive your car without crashing it, park it right near the highway, get out and cross the highway on foot, take another car from the other side and drive it away. Park once more in front of your hiding spot. And you have to do everything before the time runs out. Enjoy this fun parking game with a minigame included in it in eight intense levels. Have an amazing time!",
+                    "game_url"    : "http://games.gamedistribution.com/Fugitive-Frenzy",
+                    "category"    : "Car",
+                    "name"        : "Fugitive Frenzy",
+                    "timestamp"   : 1395850497104,
+                    "priority"    : 1000,
+                    "height"      : 600,
+                    "author"      : "Idea Studios",
+                    "swf_url"     : "http://swf.gamedistribution.com/69d1fc78dbda242c43ad6590368912d4.swf",
+                    "width"       : 800,
+                    "tags"        : [ "Fugitive", "Car", "Parking", "Highway" ],
+                    "uuid"        : "dca833ae066fb706c3ad3a28906ca6a9",
+                    "id"          : "fugitive_frenzy",
+                    "metascore"   : 0
+                },
+                "gung_ho_pirates"                  : {
+                    "instructions": "Instructions are in the game",
+                    "languages"   : [ "en" ],
+                    "source"      : "swf",
+                    "thumbnails"  : [
+                        {
+                            "url"   : "//s3.amazonaws.com/www.mojo-games.com/img/games/1641370442524.jpg",
+                            "height": 135,
+                            "width" : 180
+                        }
+                    ],
+                    "description" : "The pirates out at sea are at war! Take out the Gung Ho Pirates in as fewer shots as possible.",
+                    "game_url"    : "http://games.gamedistribution.com/Gung-Ho-Pirates",
+                    "category"    : "Puzzle",
+                    "name"        : "Gung Ho Pirates",
+                    "timestamp"   : 1395850566163,
+                    "priority"    : 1000,
+                    "height"      : 500,
+                    "author"      : "Box10.com",
+                    "swf_url"     : "http://swf.gamedistribution.com/1641370442521.swf",
+                    "width"       : 700,
+                    "tags"        : [ "Puzzle", "Skill", "Pirates", "Accuracy", "Aiming", "Shooting", "" ],
+                    "uuid"        : "4797501a9d0188eb52fa20361ca53b31",
+                    "id"          : "gung_ho_pirates",
+                    "metascore"   : 0
+                },
+                "8_bits_3d_racing"                 : {
+                    "instructions": "Arrow keys to drive. Z for drift, X for nitro.",
+                    "languages"   : [ "en" ],
+                    "source"      : "swf",
+                    "thumbnails"  : [
+                        {
+                            "url"   : "//s3.amazonaws.com/www.mojo-games.com/img/games/4ae67a7dd7e491f8fb6f9ea0cf25dfdb.jpg",
+                            "height": 135,
+                            "width" : 180
+                        }
+                    ],
+                    "description" : "Race with 8 Bits cars on various tracks. Beat the computer players in the championship mode. Drift using the Z key and use the nitro boost with the X key.",
+                    "game_url"    : "http://games.gamedistribution.com/8-Bits-3D-Racing",
+                    "category"    : "3D",
+                    "name"        : "8 Bits 3D Racing",
+                    "timestamp"   : 1395850467460,
+                    "priority"    : 1000,
+                    "height"      : 400,
+                    "author"      : "Nowgamez.com",
+                    "swf_url"     : "http://swf.gamedistribution.com/4ae67a7dd7e491f8fb6f9ea0cf25dfdb.swf",
+                    "width"       : 550,
+                    "tags"        : [ "racing", "race", "driving", "3d", "3d racing", "racing games", "8 bits", "new", "free", "drift", "championship" ],
+                    "uuid"        : "96287a52bed4b9b1b751d6ac7c310ff2",
+                    "id"          : "8_bits_3d_racing",
+                    "metascore"   : 0
+                },
+                "tow_truck_parking_madness"        : {
+                    "instructions": "Use the arrow keys to move and space bar to brake.",
+                    "languages"   : [ "en" ],
+                    "source"      : "swf",
+                    "thumbnails"  : [
+                        {
+                            "url"   : "//s3.amazonaws.com/www.mojo-games.com/img/games/1021352901413.jpg",
+                            "height": 130,
+                            "width" : 175
+                        }
+                    ],
+                    "description" : "The police has decided to take some measures about all the illegally parked cars out there, so you have the mission to drive a tow truck and pull all of them to the police station parking lot. Use your arrow keys to drive the truck and the space bar to brake. The cars will attach themselves once you park correctly. Follow the arrow which will indicate the right direction and try to finish all twelve levels in the time given without damaging your truck. Have fun!",
+                    "game_url"    : "http://games.gamedistribution.com/Tow-Truck-Parking-Madness",
+                    "category"    : "Car",
+                    "name"        : "Tow Truck Parking Madness",
+                    "timestamp"   : 1395850644997,
+                    "priority"    : 1000,
+                    "height"      : 600,
+                    "author"      : "Idea Studios",
+                    "swf_url"     : "http://swf.gamedistribution.com/1021352901413.swf",
+                    "width"       : 800,
+                    "tags"        : [ "Truck", "Car", "Parking", "Driving", "Towing" ],
+                    "uuid"        : "f2b77d69e7e93f64737d4a742416f5dc",
+                    "id"          : "tow_truck_parking_madness",
+                    "metascore"   : 0
+                },
+                "monster_high_cake"                : {
+                    ".priority"   : 1234.0,
+                    "instructions": "This game is played with mouse only.",
+                    "languages"   : [ "en" ],
+                    "source"      : "swf",
+                    "thumbnails"  : [
+                        {
+                            "url"   : "//s3.amazonaws.com/www.mojo-games.com/img/games/1991365591587.jpg",
+                            "height": 100,
+                            "width" : 120
+                        }
+                    ],
+                    "description" : "Dont know how to cook a yummy Monster High Cake Well here is one of your friends from Monster High, and she is going to show you how to prepare the ingredients you need, how to combine them and make the best Birthday cake that your friend has ever had!",
+                    "game_url"    : "http://games.gamedistribution.com/Monster-High-Cake",
+                    "category"    : "Cooking",
+                    "name"        : "Monster High Cake",
+                    "timestamp"   : 1395850581878,
+                    "priority"    : 1234,
+                    "height"      : 600,
+                    "author"      : "Smileycooking",
+                    "swf_url"     : "http://swf.gamedistribution.com/1991365591587.swf",
+                    "width"       : 800,
+                    "tags"        : [ "Games with Monster High", "Monster High online games" ],
+                    "uuid"        : "c1aa28f4ce63f7cd2974926d041cdb63",
+                    "id"          : "monster_high_cake",
+                    "metascore"   : 0
+                },
+                "stellar_operations"               : {
+                    ".priority"   : 1234.0,
+                    "price"       : "360",
+                    "instructions": "mouse control",
+                    "source"      : "swf",
+                    "languages"   : [ "en" ],
+                    "thumbnails"  : [
+                        {
+                            "url"   : "//s3.amazonaws.com/www.mojo-games.com/img/games/f5c3dd7514bf620a1b85450d2ae374b1.jpg",
+                            "height": 200,
+                            "width" : 250
+                        }
+                    ],
+                    "description" : "We introduce the Stellar Operations, new logic game which will help your kids to learn math. There is easy with +- operations and to the hard with */ . Help your kids to learn math while playing interesting game they will learn add, minus, divide and multiple operations.",
+                    "game_url"    : "http://games.gamedistribution.com/Stellar-Operations",
+                    "category"    : "2 Player",
+                    "name"        : "Stellar Operations",
+                    "timestamp"   : 1395850497106,
+                    "priority"    : 1234,
+                    "height"      : 550,
+                    "author"      : "BOKGames",
+                    "swf_url"     : "http://swf.gamedistribution.com/f5c3dd7514bf620a1b85450d2ae374b1.swf",
+                    "width"       : 700,
+                    "premium"     : false,
+                    "tags"        : [ "puzzle game", "math game", "thinking game" ],
+                    "uuid"        : "1120c506f1e37c96c2a1b27a1bb15247",
+                    "id"          : "stellar_operations",
+                    "metascore"   : 0
+                },
+                "apocalypse_racer"                 : {
+                    ".priority"   : 1000.0,
+                    "instructions": "Use your arrow keys to drive, your Z key to stop and your X key to activate NoS.",
+                    "languages"   : [ "en" ],
+                    "source"      : "swf",
+                    "thumbnails"  : [
+                        {
+                            "url"   : "//s3.amazonaws.com/www.mojo-games.com/img/games/add217938e07bb1fd8796e0315b88c10.jpg",
+                            "height": 130,
+                            "width" : 175
+                        }
+                    ],
+                    "description" : "Join this intense race between scary creatures in their apocaliptic vehicles and try to be the first one to cross the finish line. You have to take a lot of things into consideration: your health bar which will drop if you hit the other cars, your NoS power that can give you a speed boost, your time and collected number of coins which can give you bonus points to your score and your fuel level which you always have to keep up, otherwise your car will stop in the middle of the track. Have a lot of fun!",
+                    "game_url"    : "http://games.gamedistribution.com/Apocalypse-Racer",
+                    "category"    : "Racing",
+                    "name"        : "Apocalypse Racer",
+                    "timestamp"   : 1395850455428,
+                    "priority"    : 1000,
+                    "height"      : 600,
+                    "author"      : "Idea Studios",
+                    "swf_url"     : "http://swf.gamedistribution.com/add217938e07bb1fd8796e0315b88c10.swf",
+                    "width"       : 800,
+                    "tags"        : [ "Apocalypse", "Racing", "Car", "Zombie" ],
+                    "uuid"        : "a24048e46ad4a3846e7a998503413af3",
+                    "id"          : "apocalypse_racer",
+                    "metascore"   : 0
+                },
+                "beaver_trouble_typing"            : {
+                    ".priority"   : 1000.0,
+                    "instructions": "Typing Game, Use keyboard.",
+                    "languages"   : [ "en" ],
+                    "source"      : "swf",
+                    "thumbnails"  : [
+                        {
+                            "url"   : "//s3.amazonaws.com/www.mojo-games.com/img/games/1511362142890.jpg",
+                            "height": 190,
+                            "width" : 210
+                        }
+                    ],
+                    "description" : "Someone is in trouble my friends! Indeed! A baby beaver got lost and now his parents are searching for him. Will you be kind enough to help this lovely family If so, choose your character and start rushing towards the baby! But there is one condition in this game and that condition is to type hastily! Perhaps you have doubts, but we know you can do it! The positive thing in this game is that will help you improve your typing skills and you will have the chance to find the baby! How cool is that Rush now and be the reason for the happy faces of the family’s reunion.",
+                    "game_url"    : "http://games.gamedistribution.com/Beaver-Trouble-Typing",
+                    "category"    : "Typing",
+                    "name"        : "Beaver Trouble Typing",
+                    "timestamp"   : 1395850600009,
+                    "priority"    : 1000,
+                    "height"      : 480,
+                    "author"      : "BOKGames",
+                    "swf_url"     : "http://swf.gamedistribution.com/1511362142890.swf",
+                    "width"       : 640,
+                    "tags"        : [ "beaver", "trouble", "typing", "kids", "skill", "educational", "learning", "keyboard", "baby", "save", "jump" ],
+                    "uuid"        : "fb937ae79a154ed238a7fcbfcdaac4b4",
+                    "id"          : "beaver_trouble_typing",
+                    "metascore"   : 0
+                },
+                "bobeedia"                         : {
+                    ".priority"   : 1234.0,
+                    "instructions": "Mouse, see tutorial",
+                    "languages"   : [ "en" ],
+                    "source"      : "swf",
+                    "thumbnails"  : [
+                        {
+                            "url"   : "//s3.amazonaws.com/www.mojo-games.com/img/games/421366139219.jpg",
+                            "height": 135,
+                            "width" : 180
+                        }
+                    ],
+                    "description" : "A strategy fighting game where you need to create an army of robots and creatures to fight hostile creatures from Bobeedia. There are 31 levels to beat. Follow the tutorial for more information how to play.",
+                    "game_url"    : "http://games.gamedistribution.com/Bobeedia",
+                    "category"    : "Fighting",
+                    "name"        : "Bobeedia",
+                    "timestamp"   : 1395850581874,
+                    "priority"    : 1234,
+                    "height"      : 480,
+                    "author"      : "Nowgamez.com",
+                    "swf_url"     : "http://swf.gamedistribution.com/421366139219.swf",
+                    "width"       : 640,
+                    "tags"        : [ "action", "fighting", "strategy", "robots", "creatures", "skill", "fight" ],
+                    "uuid"        : "a4ebcd35fe74c33a5003d8f07f090874",
+                    "id"          : "bobeedia",
+                    "metascore"   : 0
+                },
+                "ben10_halloween_race"             : {
+                    ".priority"   : 1000.0,
+                    "instructions": "Use the arrow keys to play this game.",
+                    "languages"   : [ "en" ],
+                    "source"      : "swf",
+                    "thumbnails"  : [
+                        {
+                            "url"   : "//s3.amazonaws.com/www.mojo-games.com/img/games/1991365590071.jpg",
+                            "height": 100,
+                            "width" : 120
+                        }
+                    ],
+                    "description" : "This Halloween you can have a lot of fun in a new adventure with Ben 10. Now you will have to help him drive his motocross over all obstacles and other dangerous things that may come in his way. You can win the race only if you collect many points and avoid crashing!",
+                    "game_url"    : "http://games.gamedistribution.com/Ben10-Halloween-Race",
+                    "category"    : "Racing",
+                    "name"        : "Ben10 Halloween Race",
+                    "timestamp"   : 1395850581878,
+                    "priority"    : 1000,
+                    "height"      : 600,
+                    "author"      : "Smileycooking",
+                    "swf_url"     : "http://swf.gamedistribution.com/1991365590071.swf",
+                    "width"       : 800,
+                    "tags"        : [ "Halloween games", "Ben 10 games", "Racing" ],
+                    "uuid"        : "c52ba828a66268b6c7dbfb525e59f4b7",
+                    "id"          : "ben10_halloween_race",
+                    "metascore"   : 0
+                },
+                "subs_away"                        : {
+                    ".priority"   : 1000.0,
+                    "instructions": "WASD/Arrow Keys - Directions<br/>Mouse - Aim/Shoot ",
+                    "languages"   : [ "en" ],
+                    "source"      : "swf",
+                    "thumbnails"  : [
+                        {
+                            "url"   : "//s3.amazonaws.com/www.mojo-games.com/img/games/1641362581070.jpg",
+                            "height": 135,
+                            "width" : 180
+                        }
+                    ],
+                    "description" : "Dive into the deep ocean and fight off any swarm of angry attacking fish.",
+                    "game_url"    : "http://games.gamedistribution.com/Subs-Away",
+                    "category"    : "Shooting",
+                    "name"        : "Subs Away",
+                    "timestamp"   : 1395850600007,
+                    "priority"    : 1000,
+                    "height"      : 640,
+                    "author"      : "Box10.com",
+                    "swf_url"     : "http://swf.gamedistribution.com/1641362581070.swf",
+                    "width"       : 480,
+                    "tags"        : [ "Skill", "Action", "Shooting", "Boat", "Upgrade", "" ],
+                    "uuid"        : "9feca0f90f014973fc5e18b3ee4b01be",
+                    "id"          : "subs_away",
+                    "metascore"   : 0
+                },
+                "_party_at_the_zoo"                : {
+                    ".priority"   : 1234.0,
+                    "hot"         : false,
+                    "instructions": "Use your mouse to interact!",
+                    "source"      : "swf",
+                    "languages"   : [ "en" ],
+                    "thumbnails"  : [
+                        {
+                            "url"   : "//s3.amazonaws.com/www.mojo-games.com/img/games/6403675579f6114559c90de0014cd3d6.jpg",
+                            "height": 135,
+                            "width" : 180
+                        }
+                    ],
+                    "description" : "Those cute animals at the zoo are planning a cool find the difference themed party today and youre their guest of honor! You wont decline their invitation, will you, and you will do your best to be the life and soul of this party, impressing them all with your great skills as a detective, spotting all those differences hidden in each ones cage in no time, right",
+                    "game_url"    : "http://games.gamedistribution.com/-Party-at-the-Zoo",
+                    "category"    : "Difference",
+                    "name"        : " Party at the Zoo",
+                    "timestamp"   : 1395850441164,
+                    "priority"    : 1234,
+                    "height"      : 480,
+                    "author"      : "Rainbowdressup",
+                    "swf_url"     : "http://swf.gamedistribution.com/6403675579f6114559c90de0014cd3d6.swf",
+                    "width"       : 800,
+                    "premium"     : false,
+                    "tags"        : [ "difference differences party skill skills animals girls games zoo" ],
+                    "uuid"        : "516698d4f180437e85fc87462b07c033",
+                    "id"          : "_party_at_the_zoo",
+                    "metascore"   : 0
+                },
+                "feed_them_all"                    : {
+                    ".priority"   : 1000.0,
+                    "instructions": "Mouse to play, click to drop the meat. Scroll through the level with the mouse too.",
+                    "languages"   : [ "en" ],
+                    "source"      : "swf",
+                    "thumbnails"  : [
+                        {
+                            "url"   : "//s3.amazonaws.com/www.mojo-games.com/img/games/421376048074.jpg",
+                            "height": 135,
+                            "width" : 180
+                        }
+                    ],
+                    "description" : "Defend your sheep in Feed Them All. A funny defense game in which hungry monsters are coming to eat your sheep. The only way to stop them is to throw pieces of meat in front of them, so they will be fed and go away. If you will overfeed the monsters (by throwing multiple pieces of meat at them) it makes them blow up and you gain some sweet cash that was hidden in their entrails. There are 5 different upgrade-able types of meat you can buy, each will have a different effect on the monsters. There are 20 challenging levels. Buy upgrades and stop them now.",
+                    "game_url"    : "http://games.gamedistribution.com/Feed-Them-All",
+                    "category"    : "Action",
+                    "name"        : "Feed Them All",
+                    "timestamp"   : 1395850526622,
+                    "priority"    : 1000,
+                    "height"      : 480,
+                    "author"      : "Nowgamez.com",
+                    "swf_url"     : "http://swf.gamedistribution.com/421376048067.swf",
+                    "width"       : 640,
+                    "tags"        : [ "action", "defense", "fun", "funny", "boys", "tower defense", "defence", "sheep", "upgrades" ],
+                    "uuid"        : "1b1ad683c025a51dd0ec6ca8bd417afa",
+                    "id"          : "feed_them_all",
+                    "metascore"   : 0
+                },
+                "alvins_chipmunk_goody_bars"       : {
+                    ".priority"   : 1000.0,
+                    "instructions": "Use your mouse",
+                    "languages"   : [ "en" ],
+                    "source"      : "swf",
+                    "thumbnails"  : [
+                        {
+                            "url"   : "//s3.amazonaws.com/www.mojo-games.com/img/games/365d17770080c807a0e47ae9118d8641.jpg",
+                            "height": 135,
+                            "width" : 180
+                        }
+                    ],
+                    "description" : "Hello ladies! Its time for another one of our exciting cooking games! In todays lesson we are going to meet the famous chef Alvin, which is going to teach us how to prepare his favorite recipe in the whole world. This delicious recipe is called Nut Goody Bars, and Alvin the chipmunk is an expert in its preparation. In order to get started on the preparation, you will firstly have to make sure that you do have all the necessary ingredients. Then, in this fun cooking game called Alvins Chipmunk Nut Goody Bars, you will start the preparation itself. Have fun!",
+                    "game_url"    : "http://games.gamedistribution.com/Alvins-Chipmunk-Goody-bars",
+                    "category"    : "Cooking",
+                    "name"        : "Alvins Chipmunk Goody bars",
+                    "timestamp"   : 1395850512795,
+                    "priority"    : 1000,
+                    "height"      : 600,
+                    "author"      : "CuteZee",
+                    "swf_url"     : "http://swf.gamedistribution.com/365d17770080c807a0e47ae9118d8641.swf",
+                    "width"       : 800,
+                    "tags"        : [ "alvin", "chipmunk", "goody", "bars", "recipe", "desert", "sweets" ],
+                    "uuid"        : "3c25dcbac06cd7809331eb6efa507b86",
+                    "id"          : "alvins_chipmunk_goody_bars",
+                    "metascore"   : 0
+                },
+                "minivan_parking_madness"          : {
+                    ".priority"   : 111.0,
+                    "instructions": "Use arrow keys to control the car and Space bar to brake.",
+                    "languages"   : [ "en" ],
+                    "source"      : "swf",
+                    "thumbnails"  : [
+                        {
+                            "url"   : "//s3.amazonaws.com/www.mojo-games.com/img/games/1021350468675.jpg",
+                            "height": 130,
+                            "width" : 175
+                        }
+                    ],
+                    "description" : "Try your parking skills by controlling a minivan! You can choose to use your arrow keys to control it, or you have the option of using your mouse. You can brake using the space bar. Do not crash into anything because your vehicle will get damaged and also make sure to park your minivan before the time expires. Try to complete all twelve amazing levels and have a lot of fun!",
+                    "game_url"    : "http://games.gamedistribution.com/Minivan-Parking-Madness",
+                    "category"    : "Parking",
+                    "name"        : "Minivan Parking Madness",
+                    "timestamp"   : 1395850645004,
+                    "priority"    : 111,
+                    "height"      : 600,
+                    "author"      : "Idea Studios",
+                    "swf_url"     : "http://swf.gamedistribution.com/1021350468675.swf",
+                    "width"       : 800,
+                    "tags"        : [ "Driving", "Parking", "Car", "Street" ],
+                    "uuid"        : "d7b1d969b0001564b0d5dc9c741e7be0",
+                    "id"          : "minivan_parking_madness",
+                    "metascore"   : 0
+                },
+                "f22_raptor_parking"               : {
+                    ".priority"   : 1000.0,
+                    "instructions": "Use arrow keys to drive the car and space bar to brake.",
+                    "languages"   : [ "en" ],
+                    "source"      : "swf",
+                    "thumbnails"  : [
+                        {
+                            "url"   : "//s3.amazonaws.com/www.mojo-games.com/img/games/1021352383402.jpg",
+                            "height": 130,
+                            "width" : 175
+                        }
+                    ],
+                    "description" : "Have fun playing a different type of parking game with a F22 Raptor plane! Try to maintain the health of your plane and do not hit pedestrians. Park it on the right spot of the ship in the time available. Use your arrow keys to control the plane and the space bar to brake. Unlock all twelve levels and try to get into the high scores. Have a blast!",
+                    "game_url"    : "http://games.gamedistribution.com/F22-Raptor-Parking",
+                    "category"    : "Parking",
+                    "name"        : "F22 Raptor Parking",
+                    "timestamp"   : 1395850644998,
+                    "priority"    : 1000,
+                    "height"      : 600,
+                    "author"      : "Idea Studios",
+                    "swf_url"     : "http://swf.gamedistribution.com/1021352383402.swf",
+                    "width"       : 800,
+                    "tags"        : [ "Parking", "Driving", "Aircraft", "War" ],
+                    "uuid"        : "723d834a2ecec9eefe6d2e964b2111f2",
+                    "id"          : "f22_raptor_parking",
+                    "metascore"   : 0
+                },
+                "skyfighters"                      : {
+                    ".priority"   : 1000.0,
+                    "instructions": "Mouse - Aim/Shoot<br/>1,2,3,4,5 - Air Support<br/>Z,X,C - Special Attacks",
+                    "languages"   : [ "en" ],
+                    "source"      : "swf",
+                    "thumbnails"  : [
+                        {
+                            "url"   : "//s3.amazonaws.com/www.mojo-games.com/img/games/1641363185229.jpg",
+                            "height": 135,
+                            "width" : 180
+                        }
+                    ],
+                    "description" : "Take down the enemy planes to protect yourself. Upgrade your defences to succeed in this fast past aviation shoot out",
+                    "game_url"    : "http://games.gamedistribution.com/Skyfighters",
+                    "category"    : "Action",
+                    "name"        : "Skyfighters",
+                    "timestamp"   : 1395850600004,
+                    "priority"    : 1000,
+                    "height"      : 450,
+                    "author"      : "Box10.com",
+                    "swf_url"     : "http://swf.gamedistribution.com/1641363185229.swf",
+                    "width"       : 650,
+                    "tags"        : [ "Flying", "Shooting", "War", "Aiming", "Action", "" ],
+                    "uuid"        : "5c12162865a22a094d890d184be93323",
+                    "id"          : "skyfighters",
+                    "metascore"   : 0
+                },
+                "angry_birds_3"                    : {
+                    ".priority"     : 1000.0,
+                    "voteUp"        : 1,
+                    "hot"           : true,
+                    "voteDown"      : 1,
+                    "instructions"  : "Use mouse",
+                    "source"        : "swf",
+                    "languages"     : [ "en" ],
+                    "thumbnails"    : [
+                        {
+                            "url"   : "//s3.amazonaws.com/www.mojo-games.com/img/games/11342558581.jpg",
+                            "height": 476,
+                            "width" : 632
+                        }
+                    ],
+                    "promoted"      : true,
+                    "description"   : "Launch the Angry Birds with the cannon and get rid of the hidden monsters. Each bird has a different skill. Pick which one you want to launch according to the obstacle you need to bring down. Use your mouse. ",
+                    "game_url"      : "http://games.gamedistribution.com/Angry-Birds-3",
+                    "category"      : "Arcade",
+                    "name"          : "Angry Birds 3",
+                    "timestamp"     : 1395850663393,
+                    "priority"      : 1000,
+                    "height"        : 480,
+                    "author"        : "Flash Game Submitter",
+                    "swf_url"       : "http://swf.gamedistribution.com/11342558581.swf",
+                    "largeThumbnail": {
+                        "url"   : "//s3.amazonaws.com/www.mojo-games.com/img/games/11342558581.jpg",
+                        "height": 476,
+                        "width" : 632
+                    },
+                    "width"         : 640,
+                    "tags"          : [ "angry birds" ],
+                    "uuid"          : "b64b78d5e02eb6b2a109611a88d988ce",
+                    "id"            : "angry_birds_3",
+                    "metascore"     : 0
+                },
+                "dora_safari_race"                 : {
+                    ".priority"   : 1234.0,
+                    "instructions": "Use the arrow keys to play this game.",
+                    "languages"   : [ "en" ],
+                    "source"      : "swf",
+                    "thumbnails"  : [
+                        {
+                            "url"   : "//s3.amazonaws.com/www.mojo-games.com/img/games/1991365584012.jpg",
+                            "height": 100,
+                            "width" : 100
+                        }
+                    ],
+                    "description" : "Dora is going on Vacation in Safari, place where she will find lots of animals, plants and many other interesting things and places. Also Dora isnt here just to explore she will have to collect points, and drive as good as she can in order to pass all the levels and get to the final destination. Dont forget to use the map, so you wont get lost in the jungle.",
+                    "game_url"    : "http://games.gamedistribution.com/Dora-Safari-Race",
+                    "category"    : "Racing",
+                    "name"        : "Dora Safari Race",
+                    "timestamp"   : 1395850581881,
+                    "priority"    : 1234,
+                    "height"      : 600,
+                    "author"      : "Smileycooking",
+                    "swf_url"     : "http://swf.gamedistribution.com/1991365584012.swf",
+                    "width"       : 800,
+                    "tags"        : [ "Dora", "Dora games", "Safari games", "Driving" ],
+                    "uuid"        : "e8eda0b1b4513b1d124c945c9fa12036",
+                    "id"          : "dora_safari_race",
+                    "metascore"   : 0
+                },
+                "3d_bugatti_racing"                : {
+                    ".priority"   : 1000.0,
+                    "instructions": "Arrow keys to drive.",
+                    "languages"   : [ "en" ],
+                    "source"      : "swf",
+                    "thumbnails"  : [
+                        {
+                            "url"   : "//s3.amazonaws.com/www.mojo-games.com/img/games/421369397841.jpg",
+                            "height": 135,
+                            "width" : 180
+                        }
+                    ],
+                    "description" : "Drive fast Bugatti sportscars in this 3D race game. Use the Z key to drift and the X key for extra nitro boost. Be the fastest racer on the track.",
+                    "game_url"    : "http://games.gamedistribution.com/3D-Bugatti-Racing",
+                    "category"    : "Racing",
+                    "name"        : "3D Bugatti Racing",
+                    "timestamp"   : 1395850566166,
+                    "priority"    : 1000,
+                    "height"      : 400,
+                    "author"      : "Nowgamez.com",
+                    "swf_url"     : "http://swf.gamedistribution.com/421369397878.swf",
+                    "width"       : 550,
+                    "tags"        : [ "3d", "racing", "race", "driving", "racing games", "driving games", "race games", "kids", "boys", "3d racing", "3d driving", "3d race", "drift", "drifting", "nitro", "boost", "new", "online", "games", "free", "cool", "english", "eng", "3d game", "3d games", "3d race games", "car", "cars", "car games", "car racing", "racing cars", "sports car", "sports cars" ],
+                    "uuid"        : "8ca812a7556843a06734d785e9f147ad",
+                    "id"          : "3d_bugatti_racing",
+                    "metascore"   : 0
+                },
+                "fancy_up_my_luxury_car"           : {
+                    ".priority"   : 1000.0,
+                    "instructions": "left mouse click to select, up arrow to drive the car ",
+                    "languages"   : [ "en" ],
+                    "source"      : "swf",
+                    "thumbnails"  : [
+                        {
+                            "url"   : "//s3.amazonaws.com/www.mojo-games.com/img/games/891369905851.jpg",
+                            "height": 100,
+                            "width" : 100
+                        }
+                    ],
+                    "description" : "You are the mechanic in the Luxury Cars Tuning Shop and will fix and tune the cars of lovely girls, but make sure you choose the right upgrades cause you need much positive attitude from the girls to get to the next one. ",
+                    "game_url"    : "http://games.gamedistribution.com/Fancy-up-My-Luxury-Car",
+                    "category"    : "Car",
+                    "name"        : "Fancy up My Luxury Car",
+                    "timestamp"   : 1395850566164,
+                    "priority"    : 1000,
+                    "height"      : 525,
+                    "author"      : "SportGamesArena",
+                    "swf_url"     : "http://swf.gamedistribution.com/891369905870.swf",
+                    "width"       : 700,
+                    "tags"        : [ "tuning car driving" ],
+                    "uuid"        : "b4149538e0a37dc79eaa2fbad8d284f3",
+                    "id"          : "fancy_up_my_luxury_car",
+                    "metascore"   : 0
+                },
+                "lonely_penguin"                   : {
+                    ".priority"   : 1000.0,
+                    "instructions": "Use your arrow keys to play.",
+                    "languages"   : [ "en" ],
+                    "source"      : "swf",
+                    "thumbnails"  : [
+                        {
+                            "url"   : "//s3.amazonaws.com/www.mojo-games.com/img/games/1141356349800.jpg",
+                            "height": 135,
+                            "width" : 180
+                        }
+                    ],
+                    "description" : "A puzzle platformer about penguin who travels through different levels to reach his love. Do not touch pink penguin until you have touched white block to cool down. Score points for each level you complete, the faster you are the more points. When you retry a level you will loose points.",
+                    "game_url"    : "http://games.gamedistribution.com/Lonely-Penguin",
+                    "category"    : "Skill",
+                    "name"        : "Lonely Penguin",
+                    "timestamp"   : 1395850624359,
+                    "priority"    : 1000,
+                    "height"      : 550,
+                    "author"      : "NowGamez",
+                    "swf_url"     : "http://swf.gamedistribution.com/1141356349800.swf",
+                    "width"       : 700,
+                    "tags"        : [ "penguin", "skill", "platformer", "puzzle", "kids", "fun", "addicting" ],
+                    "uuid"        : "84ebef0ece331cc9a73efe0bf88465d0",
+                    "id"          : "lonely_penguin",
+                    "metascore"   : 0
+                },
+                "car_thieves_mania"                : {
+                    ".priority"   : 1000.0,
+                    "instructions": "Use your arrow keys to drive, your space bar to brake, your Enter to get in and out of the car, your Shift key to sprint, your mouse and space bar to play the mini game.<br/>",
+                    "languages"   : [ "en" ],
+                    "source"      : "swf",
+                    "thumbnails"  : [
+                        {
+                            "url"   : "//s3.amazonaws.com/www.mojo-games.com/img/games/ea6b2efbdd4255a9f1b3bbc6399b58f4.jpg",
+                            "height": 130,
+                            "width" : 175
+                        }
+                    ],
+                    "description" : "There are so many amazing cars in the world, that you just must have them! But being a car thief requires perfect skills and technique. Drive and park your car without crashing into anything and steal the cars by playing a mini-game where you will have to move fast and be precise. Try not to get caught by completing each level before the time runs out. There are eight intense levels to play. Use your mini-map to get directions. Have a wonderful time!",
+                    "game_url"    : "http://games.gamedistribution.com/Car-Thieves-Mania",
+                    "category"    : "Parking",
+                    "name"        : "Car Thieves Mania",
+                    "timestamp"   : 1395850481006,
+                    "priority"    : 1000,
+                    "height"      : 600,
+                    "author"      : "Idea Studios",
+                    "swf_url"     : "http://swf.gamedistribution.com/ea6b2efbdd4255a9f1b3bbc6399b58f4.swf",
+                    "width"       : 800,
+                    "tags"        : [ "Thief", "Stealing", "Car", "Parking" ],
+                    "uuid"        : "c8b1433e9dfb7a72b058fb1262a7881a",
+                    "id"          : "car_thieves_mania",
+                    "metascore"   : 0
+                },
+                "dirt_bike_masters"                : {
+                    ".priority"   : 95.0,
+                    "instructions": "Use the up and down arrow for going forward and backwards and lateral arrows  for leaning forwards and backwards to maintain balance",
+                    "languages"   : [ "en" ],
+                    "source"      : "swf",
+                    "thumbnails"  : [
+                        {
+                            "url"   : "//s3.amazonaws.com/www.mojo-games.com/img/games/c8cbd669cfb2f016574e9d147092b5bb.jpg",
+                            "height": 100,
+                            "width" : 100
+                        }
+                    ],
+                    "description" : "Try out your skills with this new dirt bike games online and show you   are a real moto master. If you like fast braking and sharp turns but also want speed   than try your bike handling capabilities in this adrenaline filled adventure where   mud is at every corner.",
+                    "game_url"    : "http://games.gamedistribution.com/Dirt-Bike-Masters",
+                    "category"    : "Motorbike",
+                    "name"        : "Dirt Bike Masters",
+                    "timestamp"   : 1395850512794,
+                    "priority"    : 95,
+                    "height"      : 480,
+                    "author"      : "SportGamesArena",
+                    "swf_url"     : "http://swf.gamedistribution.com/c8cbd669cfb2f016574e9d147092b5bb.swf",
+                    "width"       : 800,
+                    "tags"        : [ "bike driving racing" ],
+                    "uuid"        : "311f4c0fb1b4ded634b8b4abef91ed76",
+                    "id"          : "dirt_bike_masters",
+                    "metascore"   : 0
+                },
+                "slab_the_bunny"                   : {
+                    ".priority"   : 1234.0,
+                    "price"       : "800",
+                    "instructions": "Click on the bunnies when they peep from the<br/>burrows and smash them all before your time dissolves to <br/>zero. Reward yourself with more burrows in each level and <br/>have infinite fun through the numerous levels.<br/>",
+                    "source"      : "swf",
+                    "languages"   : [ "en" ],
+                    "thumbnails"  : [
+                        {
+                            "url"   : "//s3.amazonaws.com/www.mojo-games.com/img/games/c3a690be93aa602ee2dc0ccab5b7b67e.jpg",
+                            "height": 250,
+                            "width" : 300
+                        }
+                    ],
+                    "description" : "Bunnies could be real fun and exciting as <br/>pets, but not when they hamper the carrots in your garden <br/>and steal them all. Now that they are getting on your nerves<br/>just hammer them all if they ever dare to peep from their<br/>burrows.<br/>",
+                    "game_url"    : "http://games.gamedistribution.com/Slab-The-Bunny",
+                    "category"    : "Skill",
+                    "name"        : "Slab The Bunny",
+                    "timestamp"   : 1395850441167,
+                    "priority"    : 1234,
+                    "height"      : 500,
+                    "author"      : "Fabsys",
+                    "swf_url"     : "http://swf.gamedistribution.com/c3a690be93aa602ee2dc0ccab5b7b67e.swf",
+                    "width"       : 600,
+                    "premium"     : false,
+                    "tags"        : [ "Skill", "Whack" ],
+                    "uuid"        : "6aa14e044878daacd18f69852a2465bb",
+                    "id"          : "slab_the_bunny",
+                    "metascore"   : 0
+                },
+                "fishing_for_nemo"                 : {
+                    ".priority"   : 1000.0,
+                    "instructions": "Use the mouse to interact",
+                    "languages"   : [ "en" ],
+                    "source"      : "swf",
+                    "thumbnails"  : [
+                        {
+                            "url"   : "//s3.amazonaws.com/www.mojo-games.com/img/games/901363247338.jpg",
+                            "height": 90,
+                            "width" : 120
+                        }
+                    ],
+                    "description" : "Cast your fishing rob and wait for the marine creature to take the bait and then pull you fishing stick out of the water to capture it. Fishing for Nemo is not an easy task, especially because he hides so well. ",
+                    "game_url"    : "http://games.gamedistribution.com/Fishing-For-Nemo",
+                    "category"    : "Sports",
+                    "name"        : "Fishing For Nemo",
+                    "timestamp"   : 1395850600003,
+                    "priority"    : 1000,
+                    "height"      : 500,
+                    "author"      : "101CarGames",
+                    "swf_url"     : "http://swf.gamedistribution.com/901363247338.swf",
+                    "width"       : 750,
+                    "tags"        : [ "fishing nemo sports" ],
+                    "uuid"        : "7b981a41bff7f214cff459da57127542",
+                    "id"          : "fishing_for_nemo",
+                    "metascore"   : 0
+                },
+                "desktop_racing_2"                 : {
+                    "hot"         : true,
+                    "instructions": "Arrows to drive, X/Z for boost and Space to jump.",
+                    "languages"   : [ "en" ],
+                    "source"      : "swf",
+                    "thumbnails"  : [
+                        {
+                            "url"   : "//s3.amazonaws.com/www.mojo-games.com/img/games/551363361822.jpg",
+                            "height": 100,
+                            "width" : 120
+                        }
+                    ],
+                    "description" : "The second racing game is back! Race with more cars, more upgrades and lots more fun!",
+                    "game_url"    : "http://games.gamedistribution.com/Desktop-Racing-2",
+                    "category"    : "Racing",
+                    "name"        : "Desktop Racing 2",
+                    "timestamp"   : 1395850600003,
+                    "priority"    : 1000,
+                    "height"      : 480,
+                    "author"      : "Yepi.com",
+                    "swf_url"     : "http://swf.gamedistribution.com/551363361822.swf",
+                    "width"       : 640,
+                    "tags"        : [ "racing games", "car game" ],
+                    "uuid"        : "747182094156ebbe648eb2032313990d",
+                    "id"          : "desktop_racing_2",
+                    "metascore"   : 0
+                },
+                "zoo_parking"                      : {
+                    "instructions": "Use the up and down arrow keys to drive, and ctrl to attach the trailer or load the animal",
+                    "languages"   : [ "en" ],
+                    "source"      : "swf",
+                    "thumbnails"  : [
+                        {
+                            "url"   : "//s3.amazonaws.com/www.mojo-games.com/img/games/95192c98732387165bf8e396c0f2dad2.jpg",
+                            "height": 100,
+                            "width" : 100
+                        }
+                    ],
+                    "description" : "Zoo parking is the best of two worlds. Its a animal game and a car parking game. Transport the zoos exotic animals to the zoo vet for checkups. The zoo lanes are narrow and driving with a trailer on them is not a easy task.",
+                    "game_url"    : "http://games.gamedistribution.com/Zoo-Parking",
+                    "category"    : "Parking",
+                    "name"        : "Zoo Parking",
+                    "timestamp"   : 1395850481006,
+                    "priority"    : 1000,
+                    "height"      : 480,
+                    "author"      : "SportGamesArena",
+                    "swf_url"     : "http://swf.gamedistribution.com/95192c98732387165bf8e396c0f2dad2.swf",
+                    "width"       : 800,
+                    "tags"        : [ "parking cars" ],
+                    "uuid"        : "75ea00085fefedb005f8cdb566958d4b",
+                    "id"          : "zoo_parking",
+                    "metascore"   : 0
+                },
+                "3_pandas_brazil"                  : {
+                    "price"       : "20000",
+                    "hot"         : false,
+                    "instructions": "Use the mouse to move the pandas through each level.",
+                    "source"      : "swf",
+                    "languages"   : [ "en" ],
+                    "thumbnails"  : [
+                        {
+                            "url"   : "//s3.amazonaws.com/www.mojo-games.com/img/games/98e6f17209029f4ae6dc9d88ec8eac2c.jpg",
+                            "height": 135,
+                            "width" : 180
+                        }
+                    ],
+                    "description" : "The crazy 3 pandas are back and making their escape once again! They were captured by a poacher but escaped his trap and landed in Brazil!! They love Brazil but have never been there so it is all new fun for them. These adventurous Pandas are in for a lots of fun new tricks and new obstacles!",
+                    "game_url"    : "http://games.gamedistribution.com/3-Pandas-Brazil",
+                    "category"    : "Adventure",
+                    "name"        : "3 Pandas Brazil",
+                    "timestamp"   : 1395850467456,
+                    "priority"    : 10,
+                    "height"      : 500,
+                    "author"      : "Slix media",
+                    "swf_url"     : "http://swf.gamedistribution.com/98e6f17209029f4ae6dc9d88ec8eac2c.swf",
+                    "width"       : 650,
+                    "new"         : true,
+                    "premium"     : true,
+                    "tags"        : [ "pandas", "adventure", "brazil", "strategy", "puzzle" ],
+                    "uuid"        : "3df2b6fce6948d956776b7f18d82097e",
+                    "id"          : "3_pandas_brazil",
+                    "metascore"   : 0
+                },
+                "lapd_parking"                     : {
+                    "instructions": "Use your arrow keys to drive, your space bar to brake, and the mouse to eat all the donuts!",
+                    "languages"   : [ "en" ],
+                    "source"      : "swf",
+                    "thumbnails"  : [
+                        {
+                            "url"   : "//s3.amazonaws.com/www.mojo-games.com/img/games/f670ef5d2d6bdf8f29450a970494dd64.jpg",
+                            "height": 135,
+                            "width" : 180
+                        }
+                    ],
+                    "description" : "Who said that being a police officer is an easy task They have to keep LA clean from criminals, make sure everything goes smoothly around there, and stay away from trouble, even though it is always behind them. To make their life a little bit easier, in this exciting parking game called LAPD Parking, you are going to have the assignment of helping the police officers park their car. Have fun!",
+                    "game_url"    : "http://games.gamedistribution.com/LAPD-Parking",
+                    "category"    : "Cars",
+                    "name"        : "LAPD Parking",
+                    "timestamp"   : 1395850512806,
+                    "priority"    : 40,
+                    "height"      : 600,
+                    "author"      : "Idea Studios",
+                    "swf_url"     : "http://swf.gamedistribution.com/f670ef5d2d6bdf8f29450a970494dd64.swf",
+                    "width"       : 800,
+                    "tags"        : [ "LAPD", "Parking", "Police", "Car", "Donuts" ],
+                    "uuid"        : "bf8cd9f4ee7b04a2ece91fa5e328e09b",
+                    "id"          : "lapd_parking",
+                    "metascore"   : 0
+                },
+                "the_math_teacher"                 : {
+                    "instructions": "Use your mouse to interact!",
+                    "languages"   : [ "en" ],
+                    "source"      : "swf",
+                    "thumbnails"  : [
+                        {
+                            "url"   : "//s3.amazonaws.com/www.mojo-games.com/img/games/ad4cc1fb9b068faecfb70914acc63395.jpg",
+                            "height": 135,
+                            "width" : 180
+                        }
+                    ],
+                    "description" : "The bell is about to ring and our lovely math teacher here is yet not ready to enter the classroom! She still needs to make up her mind whether a stylish ladylike frock or a chic silk blouse paired with an elegant skirt would help her impress all the little ones in her class today, whether some classy elegant heels or rather some stylish boots and some business chic eyeglasses would get her that polished, pulled together and so very chic look to boost up her self-confidence with before her first class today!",
+                    "game_url"    : "http://games.gamedistribution.com/The-Math-Teacher",
+                    "category"    : "Dress Up",
+                    "name"        : "The Math Teacher",
+                    "timestamp"   : 1395850497101,
+                    "priority"    : 1234,
+                    "height"      : 500,
+                    "author"      : "Rainbowdressup",
+                    "swf_url"     : "http://swf.gamedistribution.com/ad4cc1fb9b068faecfb70914acc63395.swf",
+                    "width"       : 700,
+                    "tags"        : [ "school teacher dressup dress-up game games girl play free online" ],
+                    "uuid"        : "9afc2a8215cd2b5e54fcfc9992ca9f61",
+                    "id"          : "the_math_teacher",
+                    "metascore"   : 0
+                },
+                "super_shogun_ninja"               : {
+                    "instructions": "Arrow keys to run, use the weapon with the A button. Press the S to throw ninja stars.",
+                    "languages"   : [ "en" ],
+                    "source"      : "swf",
+                    "thumbnails"  : [
+                        {
+                            "url"   : "//s3.amazonaws.com/www.mojo-games.com/img/games/3a0844cee4fcf57de0c71e9ad3035478.jpg",
+                            "height": 135,
+                            "width" : 180
+                        }
+                    ],
+                    "description" : "An action packed ninja game. Inspired by 2 famous hit games and combined the best of those into this ninja game. The goal is to reach as many floors as possible to get to the final boss. Take down the enemies to open the door to the next floor. Select one of the weapons to use for the attacks.",
+                    "game_url"    : "http://games.gamedistribution.com/Super-Shogun-Ninja",
+                    "category"    : "Action",
+                    "name"        : "Super Shogun Ninja",
+                    "timestamp"   : 1395850441156,
+                    "priority"    : 1000,
+                    "height"      : 480,
+                    "author"      : "Nowgamez.com",
+                    "swf_url"     : "http://swf.gamedistribution.com/3a0844cee4fcf57de0c71e9ad3035478.swf",
+                    "width"       : 640,
+                    "tags"        : [ "ninja", "action", "ninjas", "skill", "adventure", "kids", "boys", "new", "cool" ],
+                    "uuid"        : "b54aced006cc6b99997ce0bd1cdb8846",
+                    "id"          : "super_shogun_ninja",
+                    "metascore"   : 0
+                },
+                "ugi_the_time_traveler_2"          : {
+                    "instructions": "Use your mouse to draw lines.",
+                    "languages"   : [ "en" ],
+                    "source"      : "swf",
+                    "thumbnails"  : [
+                        {
+                            "url"   : "//s3.amazonaws.com/www.mojo-games.com/img/games/1021376319681.jpg",
+                            "height": 135,
+                            "width" : 180
+                        }
+                    ],
+                    "description" : "Time Travel along our friend Ugi through four different ages in this fun physics game! Use some cool paint to draw lines that will make your friend Ugi roll through the time portal. You will have to use as little paint as possible if you want to get a higher rating. You will have to avoid falling into water and make use of extra items like teleporters, mammoths or rockets. For each age there are twenty exciting levels to play. Have a great time!",
+                    "game_url"    : "http://games.gamedistribution.com/Ugi-The-Time-Traveler-2",
+                    "category"    : "Physics",
+                    "name"        : "Ugi The Time Traveler 2",
+                    "timestamp"   : 1395850526621,
+                    "priority"    : 1000,
+                    "height"      : 600,
+                    "author"      : "Idea Studios",
+                    "swf_url"     : "http://swf.gamedistribution.com/1021376319707.swf",
+                    "width"       : 800,
+                    "tags"        : [ "Time", "Travel", "Draw", "Portal" ],
+                    "uuid"        : "9a62c2c3ed8cf288f5470bdab1e59410",
+                    "id"          : "ugi_the_time_traveler_2",
+                    "metascore"   : 0
                 }
             };
         }
