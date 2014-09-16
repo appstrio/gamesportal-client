@@ -4,21 +4,12 @@ html(ng-app="myApp")
         meta(charset="utf-8")
         meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
         meta(name='google', content='notranslate')
-        title Gamesportal - Your One-Stop Games Portal
+        title {{title}}
         link(rel="shortcut icon", href="./img/favicon.ico")
 
-        <!--[if lt IE 9]>
-        script.
-            window.location.href = 'http://ie.gamestab.me/' + window.location.hash;
-        <![endif]-->
-
-        //- bizigames inline install
-        //- link(href='https://chrome.google.com/webstore/detail/heplncibihkggagnaaoigdhkgjmmllme', rel='chrome-webstore-item')
-        //- mojo-games inline install
-        //- link(href='https://chrome.google.com/webstore/detail/fmpeljkajhongibcmcnigfcjcgaopfid', rel='chrome-webstore-item')
-        //- gamestab inline install
         link(href='https://chrome.google.com/webstore/detail/amlhfkalaoikfbpoolhpdhignhjhlhko', rel='chrome-webstore-item')
 
+        script(src='/js/config.js')
         script(src='//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js')
         script(src='//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js')
 
@@ -49,23 +40,11 @@ html(ng-app="myApp")
 
     body(ng-controller="MainCtrl")
         #fb-root
-        script(ng-if="appName==='Gamestab'").
-            (function(d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            var src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=1481519478732760&version=v2.0";
-            if (d.getElementById(id)) {
-                d.getElementById(id).src = src;
-                return;
-            }
-            js = d.createElement(s); js.id = id;
-            js.src = src;
-            fjs.parentNode.insertBefore(js, fjs);
-            }(document, 'script', 'facebook-jssdk'));
 
-        script(ng-if="appName==='Mojo Games'").
+        script.
            (function(d, s, id) {
             var js, fjs = d.getElementsByTagName(s)[0];
-            var src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=224435141079794&version=v2.0";
+            var src = {{fbSRC}};
             if (d.getElementById(id)) {
                 d.getElementById(id).src = src;
                 return;

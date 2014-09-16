@@ -111,8 +111,8 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase', 'Ga
             $scope.gameLoading = true;
             $scope.currentUrl = $location.$$absUrl;
             $scope.currentUrlEncoded = encodeURIComponent($scope.currentUrl);
-            $scope.showPreRoll = $location.$$search && $location.$$search.pre && $scope.appName === "Mojo Games";
-            $scope.flashVars = "adTagUrl=http%3A%2F%2Fgoogleads.g.doubleclick.net%2Fpagead%2Fads%3Fad_type%3Dvideo_image_text_flash%26client%3Dca-games-pub-3411183432281537%26videoad_start_delay%3D0%26description_url%3D" + $scope.currentUrlEncoded + "%26max_ad_duration%3D40000%26hl%3Den";
+            $scope.showPreRoll = SHOW_PREROLL;
+            $scope.flashVars = PRELOADER_FLASH_VARS;
 
             if (!$scope.showPreRoll) {
                 $scope.gameContainerStyle = {display: 'none'};

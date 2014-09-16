@@ -10,10 +10,10 @@
   "bugs": "",
   "private": true,
   "dependencies": {
-    "lodash._objecttypes": "~2.4.1",
-    "lodash._htmlescapes": "~2.4.1"
+
   },
   "devDependencies": {
+    "clone-stats": "0.0.1",
     "connect": "^2.14.5",
     "gulp": "^3.6.2",
     "gulp-autoprefixer": "0.0.7",
@@ -25,26 +25,27 @@
     "gulp-cssmin": "~0.1.1",
     "gulp-filter": "^0.4.1",
     "gulp-flatten": "0.0.2",
+    "gulp-htmlmin": "^0.1.2",
+    "gulp-imagemin": "^0.5.0",
+    "gulp-inject": "^0.4.1",
     "gulp-jade": "^0.5.0",
     "gulp-jsvalidate": "~0.1.1",
     "gulp-less": "~1.2.1",
     "gulp-load-plugins": "^0.5.0",
+    "gulp-manifest": "0.0.3",
     "gulp-open": "~0.2.8",
+    "gulp-order": "^1.0.6",
+    "gulp-rev": "^0.3.2",
     "gulp-sitemap": "^0.2.1",
+    "gulp-size": "^0.3.0",
     "gulp-uglify": "~0.2.1",
     "gulp-usemin": "^0.3.3",
     "gulp-using": "0.0.1",
-    "gulp-util": "~2.2.14",
+    "gulp-util": "~3.0.0",
     "gulp-zip": "^0.3.4",
+    "lodash": "^2.4.1",
     "mocha": "^1.18.2",
-    "gulp-inject": "^0.4.1",
-    "gulp-size": "^0.3.0",
-    "gulp-rev": "^0.3.2",
-    "gulp-order": "^1.0.6",
-    "streamqueue": "0.0.7",
-    "gulp-manifest": "0.0.3",
-    "gulp-htmlmin": "^0.1.2",
-    "gulp-imagemin": "^0.5.0"
+    "streamqueue": "0.0.7"
   },
   "engines": {
     "node": ">=0.8.0"

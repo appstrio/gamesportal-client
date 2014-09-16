@@ -20,7 +20,7 @@ var vendors = [
     'firebase-simple-login/firebase-simple-login.js',
     'firebase/firebase.js',
     'masonry/dist/masonry.pkgd.min.js',
-    'ng-infinite-scroller/build/ng-infinite-scroll.min.js',
+    'ngInfiniteScroll/build/ng-infinite-scroll.js',
     'underscore/underscore-min.js'
 ].map(prependBowerPath).concat(['./src/js/vendor/*.js']);
 
@@ -150,36 +150,17 @@ gulp.task('build', ['clean'], function () {
 });
 
 //default task
-gulp.task('default', function () {
+gulp.task('default',['clean'], function () {
     return gulp.start('build', 'serve', 'watch');
 });
 
-gulp.task('mojo', function () {
-    bucket = 'www.mojo-games.com';
-    return gulp.start('deploy');
-});
 
-gulp.task('play.gamestab.me', function () {
-    bucket = 'play.gamestab.me';
-    return gulp.start('deploy');
-});
-
-gulp.task('gamestab.me', function () {
-    bucket = 'gamestab.me';
-    return gulp.start('deploy');
-});
-
-gulp.task('www.gamestab.me', function () {
-    bucket = 'www.gamestab.me';
-    return gulp.start('deploy');
-});
 
 // aws
 gulp.task('deploy', function () {
     var awsDetails = require('./ignored/aws.json');
-    awsDetails.bucket = bucket;
 
-    if (!bucket) {
+    if (!awsDetails.bucket) {
         throw 'Error: No bucket was selected';
     }
 

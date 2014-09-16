@@ -5,6 +5,9 @@ mainModule.controller('MainCtrl', [
     '$scope', '$log', '$q', '$timeout', '$route', '$http', 'Firebase', '$location',
     'Games', '$state', '$stateParams', 'Facebook', 'Chrome', 'Config', '$translate',
     function ($scope, $log, $q, $timeout, $route, $http, Firebase, $location, Games, $state, $stateParams, Facebook, Chrome, Config, $translate) {
+        $scope.title = TITLE;
+        $scope.mailAddress = MAIL_ADDRESS;
+        $scope.fbSRC = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId="+FB_APP_ID+"&version=v2.0";
         $scope.allGames = [];
         $scope.appName = Config.APP_NAME;
         $scope.appLogo = './img/logo-' + $scope.appName.toLowerCase().replace(/ /g, '') + '.png';
@@ -18,16 +21,6 @@ mainModule.controller('MainCtrl', [
             lastLargeThumbnailIndex = 0;
 
         var rand = _.random(0, 999999999);
-        $scope.topIframeAd = {
-            iframe: 'http://ads.ad4game.com/www/delivery/afr.php?zoneid=39440&cb=' + rand,
-            a: 'http://ads.ad4game.com/www/delivery/dck.php?n=af1fdb1c&cb=' + rand,
-            img: 'http://ads.ad4game.com/www/delivery/avw.php?zoneid=39440&cb=' + rand + '&n=af1fdb1c'
-        };
-        $scope.rightSkyAd = {
-            iframe: 'http://ads.ad4game.com/www/delivery/afr.php?zoneid=39438&cb=' + rand,
-            a: 'http://ads.ad4game.com/www/delivery/dck.php?n=a1a724da&cb=' + rand,
-            img: 'http://ads.ad4game.com/www/delivery/avw.php?zoneid=39438&cb=' + rand + '&n=a1a724da'
-        };
 
         $scope.socialBtns = {
             facebookPage: Config.FACEBOOK_PAGE,
@@ -345,24 +338,7 @@ mainModule.controller('MainCtrl', [
             .then(getUserData)
             .then(setAllGames)
             .then(function () {
-                $timeout(function () {
-                    //lazy load adsense
-                    if ($scope.appName === 'Mojo Games') {
-                        $.getScript('//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js', function () {
-                            $scope.$apply(function () {
-                                $scope.adSenseLoaded = true;
-                            });
-                        });
-                    }
-                    window.addthis_config = window.addthis_config || {};
-                    window.addthis_config.pubid = 'ra-534644e35a88a9ba';
-                    window.addthis_config.data_track_addressbar = false;
-                    $.getScript('//s7.addthis.com/js/300/addthis_widget.js#domready=1', angular.noop);
-
-                    if (!languageLoaded) {
-                        setUserLanguage();
-                    }
-                }, 700);
+                // load ads
             });
     }
 ]);

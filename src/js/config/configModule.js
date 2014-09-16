@@ -14,34 +14,15 @@ configModule.factory('Config', function () {
     var returnUser = isLocalStorage && typeof localStorage.returnUser !== 'undefined';
 
     var getDocInfo = function () {
-        //TODO - extract to external helper
-        var returnObj = {};
-
-        try {
-            if (document.location.hostname.indexOf('gamestab.me') >= 0) {
-                returnObj.appName = 'Gamestab';
-                returnObj.chromeId = 'amlhfkalaoikfbpoolhpdhignhjhlhko'; // gamestab,
-                returnObj.fbId = '1481519478732760'; //Play Gamestab
-                returnObj.analyticsId = 'UA-47928276-8';
-                returnObj.firebaseUrl = 'https://gamestab.firebaseio.com';
-                returnObj.facebookPage = 'https://www.facebook.com/gamestabapp';
-                returnObj.googlePage = 'https://plus.google.com/107120619150069235310/about';
-            }
-            returnObj.realm = document.location.origin;
-        } catch (e) {
-            console.info('Error with doc.location', e);
-        }
-        //fill all undefined properties with defaults
-        return _.defaults(returnObj, {
-            appName: 'Mojo Games',
-            realm: 'http://www.mojo-games.com',
-            chromeId: 'fmpeljkajhongibcmcnigfcjcgaopfid',
-            fbId: '224435141079794', //mojo-games
-            analyticsId: 'UA-49896275-3',
-            firebaseUrl: 'https://bizibizi.firebaseio.com',
-            facebookPage: 'https://www.facebook.com/pages/Mojo-Gamescom/452845291514515',
-            googlePage: 'https://plus.google.com/u/0/105972966277627450580/about'
-        });
+        return {
+            appName: APP_NAME,
+            realm: REALM,
+            fbId: FB_APP_ID,
+            analyticsId: ANAYTICS_ID,
+            firebaseUrl: FIREBASEURL,
+            facebookPage: FB_PAGE_URL,
+            googlePage: GPLUS_URL
+        };
     };
 
     var _docInfo = getDocInfo();
@@ -90,7 +71,7 @@ configModule.factory('Config', function () {
         REALM = 'http://localhost:8080';
 
         return angular.extend(baseConfig, {
-            FACEBOOK_APP_ID: '638964789507220',
+            FACEBOOK_APP_ID: _docInfo.fbId,
             REALM: REALM,
             INVITE_FRIENDS_POST: INVITE_FRIENDS_POST()
         });
