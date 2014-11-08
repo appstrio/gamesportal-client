@@ -112,13 +112,19 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase', 'Ga
             $scope.currentUrl = $location.$$absUrl;
             $scope.currentUrlEncoded = encodeURIComponent($scope.currentUrl);
             $scope.showPreRoll = $location.$$search && $location.$$search.pre && $scope.appName === "Mojo Games";
-            $scope.flashVars = "adTagUrl=http%3A%2F%2Fgoogleads.g.doubleclick.net%2Fpagead%2Fads%3Fad_type%3Dvideo_image_text_flash%26client%3Dca-games-pub-3411183432281537%26videoad_start_delay%3D0%26description_url%3D" + $scope.currentUrlEncoded + "%26max_ad_duration%3D40000%26hl%3Den";
+            $scope.adType = 'video_image_text_flash';
 
             if (!$scope.showPreRoll) {
                 $scope.gameContainerStyle = {display: 'none'};
+                $scope.adType = 'video_image_text_flash';
+                //console.log('show');
             } else {
-                $scope.gameContainerStyle = {display: 'block'};
+                $scope.gameContainerStyle = {display: 'none'};
+                $scope.adType = 'image_flash_text';
+                //console.log('dont show');
             }
+            $scope.flashVars = "adTagUrl=http%3A%2F%2Fgoogleads.g.doubleclick.net%2Fpagead%2Fads%3Fad_type%3D" + $scope.adType + "%26client%3Dca-games-pub-3411183432281537%26videoad_start_delay%3D0%26description_url%3D" + $scope.currentUrlEncoded + "%26max_ad_duration%3D40000%26hl%3Den";
+
 
             var hidePreloader = function () {
                 $('#preloader').fadeOut('easeOutBounce', function () {
@@ -183,20 +189,21 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase', 'Ga
              */
             var checkPremium = function (game) {
                 // check access
-                return Firebase.checkAccessToGame(game).then(function (access) {
-                    if (access) {
-                        // access granted - play game
-                        $scope.game = game;
-                        GamesHelpers.raisePointsForGame(game);
-                    } else {
-                        // no access - show overlay
-                        $scope.lockedGame = game;
-                        $scope.overlayUnlockGame = true;
-                    }
-                }).
-                    catch(function () {
-                        alert('Error check premium');
-                    });
+                //return Firebase.checkAccessToGame(game).then(function (access) {
+                // Check if game is premium - 10 percent
+                if (Math.random() < 1) {
+                    // access granted - play game
+                    $scope.game = game;
+                    GamesHelpers.raisePointsForGame(game);
+                } else {
+                    // no access - show overlay
+                    $scope.lockedGame = game;
+                    $scope.overlayUnlockGame = true;
+                }
+                //}).
+//                    catch(function () {
+//                        alert('Error check premium');
+//                    });
             };
 
             $scope.getGameZoom = _.memoize(function (game) {
@@ -245,7 +252,8 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase', 'Ga
                 if (game.voteUp > 0 || game.voteDown > 0) {
                     var up = game.voteUp || 0;
                     var down = game.voteDown || 0;
-                    return (up / (up + down) * 5).toFixed(2);
+                    var tempRating = (up / (up + down) * 5).toFixed(2)
+                    return tempRating < defaultRating ? defaultRating : tempRating;
                 }
 
                 return defaultRating;
