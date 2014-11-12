@@ -119,7 +119,7 @@ gamesModule.service('Games', ['$log', '$q', '$timeout', '$http', 'Firebase', 'Ga
                 $scope.adType = 'video_image_text_flash';
                 //console.log('show');
             } else {
-                $scope.gameContainerStyle = {display: 'block'};
+                $scope.gameContainerStyle = {display: 'none'};
                 $scope.adType = 'image_flash_text';
                 //console.log('dont show');
             }

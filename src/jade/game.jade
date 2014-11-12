@@ -27,7 +27,7 @@
                         a.addthis_button_google_plusone(style='margin-right:35px; width:30px !important;height:18px !important;z-index:999999;overflow:visible;',g:plusone:href="/#/games/{{game.id}}", g:plusone:size="medium")
 
                 .embedding
-                    .include(ng-if="!showPreRoll", ng-cloak="ng-cloak",ng-include="'embeds/preloader.html'",class="include preloader")
+                    .include(ng-cloak="ng-cloak",ng-include="'embeds/preloader.html'",class="include preloader")
                     .include(ng-if="game.source",ng-include="'embeds/embed-' + game.source + '.html'", id="gameContainer", ng-style="gameContainerStyle")
                         #flashGame
                             a(href="http://get.adobe.com/flashplayer/", target="_blank")
